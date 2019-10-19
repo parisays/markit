@@ -11,7 +11,7 @@ class UserCreationForm(forms.ModelForm):
     lastName = forms.CharField(label='Last Name')
     email = forms.EmailField(label='Email', widget=forms.EmailInput)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Password Confirmation', widget=forms.PasswordInput)
 
     class Meta:
         model = User

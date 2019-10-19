@@ -48,15 +48,17 @@ class User(AbstractBaseUser):
     username = None
     firstName = models.CharField('First Name', max_length=50)
     lastName = models.CharField('Last Name', max_length=50)
-    verified = models.BooleanField('Verified', default=True,
-        help_text=('Designates whether this user has completed the '
-                    'email verification process to allow login.'))
+    
     profileImage = StdImageField(verbose_name='Profile Picture', editable=True, blank=True,  upload_to='profileImage',
         default='/static/profile.jpg', variations={'thumbnail': {"width": 100, "height": 100, "crop": True}})
     is_staff = models.BooleanField('Staff', default=False,
         help_text=('Designates whether the user can log into this admin '
                     'site.'))
     is_admin = models.BooleanField('Admin', default=False)
+    is_active = models.BooleanField('Active', default=True,
+        help_text=('Designates whether this user should be treated as '
+                    'active. Unselect this instead of deleting accounts.'))
+    
 
     def __unicode__(self):
         return "{0}".format(self.profileImage)
