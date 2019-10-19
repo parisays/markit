@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate
 from .models import User
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
-
+from Calendar.models import Calendar
+from Calendar.serializers import CalendarSerializer
 
 class CustomRegisterSerializer(RegisterSerializer):
     email = serializers.EmailField(required=True)
@@ -21,7 +22,7 @@ class CustomRegisterSerializer(RegisterSerializer):
             }
 
 class CustomUserDetailsSerializer(serializers.ModelSerializer):
-
+        # calendars = CalendarSerializer(many=True, read_only=True)
         class Meta:
             model = User
             fields = ('email','firstName','lastName')

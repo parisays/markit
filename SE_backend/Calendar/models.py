@@ -3,7 +3,7 @@ from users.models import User
 
 class Calendar(models.Model):
     name = models.CharField(max_length=100)
-    users = models.ManyToManyField(User, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User, related_name='calendars')
 
     def __str__(self):
         return self.name

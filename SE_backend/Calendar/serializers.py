@@ -2,22 +2,26 @@ from Calendar.models import Calendar, Post
 from users.models import User
 from rest_framework import serializers
 
+class PostSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Post
+        fields = ('id', 'name', 'text')
+
 class CalendarSerializer(serializers.ModelSerializer):
     posts = PostSerializer(many=True)
 
     class Meta:
         model = Calendar
-        fields = ['id', 'name', 'posts']
+        fields = ('id', 'name', 'posts')
 
     def create(self, validated_data):
         posts_data = validated_data.pop('posts')
         current_calendar = Calendar.objects.create(**validated_data)
-
         # for post in posts_data:
         #     post, created = Post.objects.get_or_create(name=post['name'])
         #     calendar.posts.add(post)
         # return calendar
-
         for post in posts_data:
             Post.objects.create(calendar=current_calendar, **post)
         return current_calendar
@@ -47,8 +51,4 @@ class CalendarSerializer(serializers.ModelSerializer):
             p.save()
         return instance
 
-class PostSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Post
-        fields = ['id', 'name', 'text']
