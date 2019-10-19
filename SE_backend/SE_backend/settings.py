@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users',
+    'Calendar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'allauth',
 ]
 
 AUTH_EMAIL_VERIFICATION = True
@@ -51,8 +53,10 @@ AUTH_EMAIL_VERIFICATION = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+    ) ,
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
     )
-    
 }
 
 SITE_ID = 1
@@ -125,7 +129,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sedb',
-        'USER': 'postgres',
+        'USER': 'se',
         'PASSWORD': 'sebackendfall19',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -172,7 +176,7 @@ CORS_ORIGIN_WHITELIST = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'fundea/static')
+    os.path.join(BASE_DIR, 'SE_backend/static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
