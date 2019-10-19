@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'allauth',
 ]
 
 AUTH_EMAIL_VERIFICATION = True
@@ -125,7 +126,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sedb',
-        'USER': 'postgres',
+        'USER': 'se',
         'PASSWORD': 'sebackendfall19',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -172,7 +173,7 @@ CORS_ORIGIN_WHITELIST = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'fundea/static')
+    os.path.join(BASE_DIR, 'SE_backend/static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

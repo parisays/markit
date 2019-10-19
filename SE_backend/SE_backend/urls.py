@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
 from allauth.account.views import confirm_email as allauthemailconfirmation
+from Calendar.views import *
 
 urlpatterns  = [
   url(r'^api/rest-auth/account-confirm-email/(?P<key>[-:\w]+)/$',allauthemailconfirmation,
     name='account_confirm_email'),
   path('admin/', admin.site.urls),
+  url(r'^api/calendar/$', CalendarListView.as_view()),
+  url(r'^api/calendar/(?P<pk>\d+)/$', CalendarView.as_view()),
+  url(r'^api/post/$', PostListView.as_view()),
+  url(r'^api/post/(?P<pk>\d+)/$', PostView.as_view()),
 ]
