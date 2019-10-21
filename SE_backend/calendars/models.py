@@ -3,7 +3,7 @@ from users.models import User
 
 class Calendar(models.Model):
     name = models.CharField(max_length=100)
-    users = models.ManyToManyField(User, related_name='calendars')
+    user = models.ManyToManyField(User, related_name='calendars')
 
     def __str__(self):
         return self.name
@@ -14,4 +14,4 @@ class Post(models.Model):
     text = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.name + ' | ' + self.calendar.name

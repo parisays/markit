@@ -1,4 +1,4 @@
-from Calendar.models import Calendar, Post
+from calendars.models import Calendar, Post
 from users.models import User
 from rest_framework import serializers
 
@@ -7,13 +7,15 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'name', 'text')
+        read_only_fields = ('id', )
 
 class CalendarSerializer(serializers.ModelSerializer):
-    posts = PostSerializer(many=True)
+    posts = PostSerializer(many=True, read_only=False)
 
     class Meta:
         model = Calendar
         fields = ('id', 'name', 'posts')
+        read_only_fields = ('id', )
 
     def create(self, validated_data):
         posts_data = validated_data.pop('posts')
@@ -50,5 +52,4 @@ class CalendarSerializer(serializers.ModelSerializer):
             p.text = post.get('text', p.text)
             p.save()
         return instance
-
 
