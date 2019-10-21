@@ -78,9 +78,9 @@ MAILER_EMAIL_BACKEND = EMAIL_BACKEND
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'fundeateam@gmail.com'
-EMAIL_HOST_PASSWORD = 'fundea2019'
-EMAIL_HOST_USERNAME ='fundeateam'
+EMAIL_HOST_USER = 'markitteamservice@gmail.com'
+EMAIL_HOST_PASSWORD = 'markitteam2019'
+EMAIL_HOST_USERNAME ='markitteamservice'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Account settings
