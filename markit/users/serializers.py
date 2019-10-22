@@ -21,7 +21,21 @@ class AccountRegistrationSerializer(RegisterSerializer):
         }
 
 class CustomAccountDetailsSerializer(serializers.ModelSerializer):
-    calendars = CalendarSerializer(many=True)
+    calendars = CalendarSerializer(many=True, read_only=False)
     class Meta:
         model = User
-        fields = ('email', 'firstName', 'lastName')
+        fields = ('email', 'firstName', 'lastName', 'calendars')
+    
+    def update(self, instance, validated_data):
+        calendars_data = validated_data.pop('calendars')
+        current_calendars = (instance.calendars).all()
+        current_calendars = list(current_calendars)
+        instance.firstName = validated_data.get('fistName', instance.firstName)
+        instance.lastName = validated_data.get('lastName', instance.lastName)
+        instance.save()
+
+        for cal in calendars_data:
+            c = current_calendars.pop(0)
+            c.name = cal.get('name', c.name)
+            p.save()
+        return instance
