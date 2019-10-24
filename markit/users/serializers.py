@@ -24,4 +24,4 @@ class CustomAccountDetailsSerializer(serializers.ModelSerializer):
     calendars = CalendarSerializer(many=True)
     class Meta:
         model = User
-        fields = ('email', 'firstName', 'lastName')
+        fields = ('email', 'firstName', 'lastName', 'calendars')
