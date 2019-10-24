@@ -95,7 +95,10 @@ ACCOUNT_LOGOUT_ON_GET = True
 AUTH_USER_MODEL = 'users.User'
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_ADAPTER = 'users.adapter.CustomAccountAdapter'
-REST_USE_JWT = True
+REST_USE_JWT = False
+
+# Twitter App
+TWITTER_APP_KEY = 1
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

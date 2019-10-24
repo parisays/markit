@@ -5,7 +5,7 @@ from django.conf import settings
 from django.urls import path, re_path
 from rest_auth.registration.views import VerifyEmailView, RegisterView, SocialLoginView
 from rest_auth.views import PasswordChangeView, PasswordResetConfirmView, PasswordResetView
-from .views import TwitterConnect
+from .views import TwitterConnect, TwitterAppAuth
 
 
 urlpatterns = [
@@ -17,4 +17,6 @@ urlpatterns = [
     url(r'^rest-auth/registration/account-confirm-email/(?P<key>.+)/$', VerifyEmailView.as_view()),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
+    url(r'^twitter-app/(?P<pk>\d+)/$', TwitterAppAuth.as_view()),
+    
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
