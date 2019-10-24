@@ -1,0 +1,35 @@
+<body style="background: #fdfdfd">
+<div  class="mat-elevation-z5">
+    <nav style="height: 60px; background: #feffff; width: 70%; margin: auto">
+        <label style="font-size: 40px; color: #354b45; margin: auto;">
+            <mat-icon>
+                bookmark
+            </mat-icon>
+            Markit
+        </label>
+        <button mat-mini-fab style="background: #47bb98; margin: 10px; float: right;">
+            <mat-icon>
+                person_pin
+            </mat-icon>
+        </button>
+        <button style="margin: 10px; float: right;" mat-button>Logout</button>
+    </nav>
+</div>
+<div class="calendar-list mat-elevation-z5">
+    <mat-action-list dense>
+        <h3 matHeader style="margin-left: 10px"> 
+            <mat-icon matPrefix>date_range</mat-icon>
+            Calendars
+        </h3>
+        <div *ngFor="let name of calendarNames">
+            <button class="calendar-listitems" mat-list-item (click)="showPosts()"> {{name}} </button>
+        </div>
+    </mat-action-list>
+    <div style="justify-content: flex-end;
+    display: flex; margin: 5px;">
+        <button mat-mini-fab color="primary" (click)="addCalendar()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
+</body>
