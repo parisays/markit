@@ -12,15 +12,12 @@ class CalendarListView(generics.ListCreateAPIView):
     queryset = Calendar.objects.all()
     serializer_class = CalendarSerializer
 
-    def get_queryset(self):
-        calendar_id = self.kwargs['calendar_id']
-        calendar = generics.get_object_or_404(Calendar, id=calendar_id)
-
-        return Calendar.objects.filter(calendar=calendar)
-
     def list(self, request):
         user = self.request.user
-        return Calendar.objects.filter(user=user)
+        # print(user)
+        calendar_list = Calendar.objects.filter(user=user)
+        serializer = self.get_serializer(calendar_list, many=True)
+        return Response(serializer.data)
 
 class CalendarView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
@@ -36,12 +33,16 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
 
 class PostListView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
-
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
 
     def list(self, request):
-        user = self.request.user
-        return Post.objects.filter(user=user)
+        calendar_id = self.request.query_params.get('calendar_id')
+        # print("calendar id is : " , calendar_id)
+        calendar = Calendar.objects.get(id=calendar_id)
+        post_list = Post.objects.filter(calendar=calendar)
+        serializer = self.get_serializer(post_list, many=True)
+        return Response(serializer.data)
 
 
 class PostView(generics.RetrieveUpdateDestroyAPIView):
