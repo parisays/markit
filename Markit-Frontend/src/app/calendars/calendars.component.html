@@ -1,0 +1,9 @@
+<button (click)="createCalendar(title)">
+  New
+</button>
+
+<ul>
+  <li *ngFor="let calendar of calendars">
+    {{ calendar.title }}
+  </li>
+</ul>
