@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewCalendarFormComponent } from './new-calendar-form/new-calendar-form.component';
 import { NewTwitterPostFormComponent } from './new-twitter-post-form/new-twitter-post-form.component';
+import { PostListComponent } from './post-list/post-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NewTwitterPostFormComponent } from './new-twitter-post-form/new-twitter
     SignupComponent,
     DashboardComponent,
     NewCalendarFormComponent,
-    NewTwitterPostFormComponent
+    NewTwitterPostFormComponent,
+    PostListComponent
   ],
   imports: [
     BrowserModule,
