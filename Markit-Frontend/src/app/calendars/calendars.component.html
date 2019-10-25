@@ -5,5 +5,8 @@
 <ul>
   <li *ngFor="let calendar of calendars">
       {{ calendar.title }}
+      <a routerLink="calendars/:id">  <!--todo-->
+        Create New Post
+      </a>
   </li>
 </ul>
