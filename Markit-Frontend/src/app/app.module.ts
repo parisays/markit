@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CalendarsComponent } from './calendars/calendars.component';
+import { NewCalendarComponent } from './new-calendar/new-calendar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    CalendarsComponent,
+    NewCalendarComponent
   ],
   imports: [
     BrowserModule,
