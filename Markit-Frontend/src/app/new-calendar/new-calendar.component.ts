@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {CalendarService} from '../services/calendar.service';
+import {CalendarService} from '@services';
 import {Calendar} from '@models';
 
 @Component({
@@ -24,7 +24,7 @@ export class NewCalendarComponent implements OnInit {
       response => {
         // calendar['id'] = response.json().id;
         console.log('new calendar has been added!');
-        this.calendars.splice(0, 0, calendar);
+        // this.calendars.splice(0, 0, calendar); // todo add this new calendar to calendars list in calendars component html
       }
     );
   }

@@ -1,21 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+
 import {environment} from '@environments/environment';
-import {User} from '@models';
 
 @Injectable({providedIn: 'root'})
 export class CalendarService {
-  private calendarEndpoint = `${environment.apiUrl}/calendars/`;
-
+  private createCalendarEndpoint = `${environment.apiUrl}/createCalendar/`;
+  private listCalendarsEndpoint = `${environment.apiUrl}/listCalendars/`;
 
   constructor(private http: HttpClient) {
   }
 
   getCalendars() {
-    return this.http.get(calendarEndpoint);
+    return this.http.get(this.listCalendarsEndpoint);
   }
 
   createCalendar(calendar) {
-    return this.http.post(calendarEndpoint, JSON.stringify((calendar)));
+    return this.http.post(this.createCalendarEndpoint, JSON.stringify((calendar)));
   }
 }

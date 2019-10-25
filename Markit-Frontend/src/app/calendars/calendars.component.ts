@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {CalendarService} from '../services/calendar.service';
+import {CalendarService} from '@services';
 import {ActivatedRoute} from '@angular/router';
 import {Calendar} from '@models';
 
