@@ -17,6 +17,11 @@ export class NewTwitterPostFormComponent implements OnInit {
   {
     return this.form.get('title');
   }
+  
+  get content()
+  {
+    return this.form.get('content');
+  }
   constructor() { }
 
   ngOnInit() {

@@ -12,7 +12,7 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Content</mat-label>
-            <textarea style="height: 200px" formControlName="content" matInput placeholder="Enter new calendar title" autofocus></textarea>
+            <textarea style="height: 200px" formControlName="content" matInput placeholder="Enter new calendar title"></textarea>
             <mat-icon matSuffix>edit</mat-icon>
             <mat-error *ngIf="title.touched && title.value == ''">content is required!</mat-error>
         </mat-form-field>
