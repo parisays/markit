@@ -1,9 +1,9 @@
-<button (click)="createCalendar(title)">
-  New
-</button>
-
+<h2>Calendars Page</h2>
+<a routerLink="/calendars/create/">
+  Create New Calendar
+</a>
 <ul>
   <li *ngFor="let calendar of calendars">
-    {{ calendar.title }}
+      {{ calendar.title }}
   </li>
 </ul>

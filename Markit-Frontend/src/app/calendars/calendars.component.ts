@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CalendarService} from '../services/calendar.service';
+import {ActivatedRoute} from '@angular/router';
+import {Calendar} from '@models';
 
 @Component({
   selector: 'app-calendars',
@@ -8,9 +10,9 @@ import {CalendarService} from '../services/calendar.service';
   styleUrls: ['./calendars.component.scss']
 })
 export class CalendarsComponent implements OnInit {
-  public calendars: any[]; // todo type should be calendar component
+  public calendars: Calendar[];
 
-  constructor(private  service: CalendarService) {
+  constructor(private service: CalendarService) {
   }
 
   ngOnInit() {
@@ -18,19 +20,4 @@ export class CalendarsComponent implements OnInit {
       // this.calendars = response.json();//todo
     });
   }
-
-  createCalendar(input: HTMLInputElement) {
-    let calendar = {title: input.value};
-    input.value = '';
-
-    this.service.createCalendar(calendar).subscribe(
-      response => {
-        // calendar['id'] = response.json().id;
-        console.log('new calendar has been added!');
-        this.calendars.splice(0, 0, calendar);
-      }
-    );
-
-  }
-
 }
