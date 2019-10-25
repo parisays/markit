@@ -81,7 +81,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'markitteamservice@gmail.com'
 EMAIL_HOST_PASSWORD = 'markitteam2019'
-EMAIL_HOST_USERNAME ='markitteamservice'
+EMAIL_HOST_USERNAME = 'markitteamservice'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Account settings
@@ -95,7 +95,10 @@ ACCOUNT_LOGOUT_ON_GET = True
 AUTH_USER_MODEL = 'users.User'
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_ADAPTER = 'users.adapter.CustomAccountAdapter'
+REST_USE_JWT = False
 
+# Twitter App
+CALLBACK_URL = 'http://127.0.0.1:8000/admin/'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -136,7 +139,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'markitdb',
-        'USER': 'se',
+        'USER': 'postgres',
         'PASSWORD': 'sebackendfall19',
         'HOST': 'localhost',
         'PORT': '5432',
