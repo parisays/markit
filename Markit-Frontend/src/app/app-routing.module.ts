@@ -12,13 +12,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: SignupComponent },
   { path: 'calendars', component: CalendarsComponent},
-  { path: 'calendars/create/', component: NewCalendarComponent},
-  // { path: 'calendars/:id۰', component: PostsComponent}
-  // { path: 'calendars/:id/create', component: NewPostComponent}
+  { path: 'calendars/create', component: NewCalendarComponent},
+  { path: 'calendars/:id', component: PostsComponent},
+  { path: 'calendars/:id/create', component: NewPostComponent},
 
   // { path: 'no-access', component: }
 
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' }// redirect to not found??
 ];
 
 @NgModule({
