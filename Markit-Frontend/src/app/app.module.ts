@@ -10,6 +10,7 @@ import { MdComponentsModule } from './md-components/md-components.module';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewCalendarFormComponent } from './new-calendar-form/new-calendar-form.component';
+import { NewTwitterPostFormComponent } from './new-twitter-post-form/new-twitter-post-form.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NewCalendarFormComponent } from './new-calendar-form/new-calendar-form.
     LoginComponent,
     SignupComponent,
     DashboardComponent,
-    NewCalendarFormComponent
+    NewCalendarFormComponent,
+    NewTwitterPostFormComponent
   ],
   imports: [
     BrowserModule,

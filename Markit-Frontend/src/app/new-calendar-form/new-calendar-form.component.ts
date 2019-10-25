@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 })
 export class NewCalendarFormComponent implements OnInit {
 
+  
   form = new FormGroup({
     'title': new FormControl('', Validators.required)
   });
