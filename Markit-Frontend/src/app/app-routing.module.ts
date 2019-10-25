@@ -5,6 +5,8 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import {CalendarsComponent} from '@app/calendars/calendars.component';
 import {NewCalendarComponent} from '@app/new-calendar/new-calendar.component';
+import {PostsComponent} from '@app/posts/posts.component';
+import {NewPostComponent} from '@app/new-post/new-post.component';
 
 
 const routes: Routes = [

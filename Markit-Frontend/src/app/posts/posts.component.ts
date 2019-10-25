@@ -16,7 +16,7 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getCalendars().subscribe(response => {
+    this.service.getPosts().subscribe(response => {
       // this.calendars = response.json();//todo
     });
   }
