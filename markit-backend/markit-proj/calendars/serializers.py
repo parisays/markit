@@ -14,7 +14,7 @@ class CalendarSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Calendar
-        fields = ('name', 'posts')
+        fields = ('name', 'posts', 'user')
         read_only_fields = ('id', )
 
     def create(self, validated_data):

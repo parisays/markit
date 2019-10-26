@@ -11,10 +11,17 @@ class CalendarListView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Calendar.objects.all()
     serializer_class = CalendarSerializer
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
-        user = self.request.user
-        # print(user)
+        user = User.objects.get(email=self.request.user)
+        print(user.firstName)
         calendar_list = Calendar.objects.filter(user=user)
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)
