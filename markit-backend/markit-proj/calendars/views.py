@@ -12,7 +12,7 @@ class CalendarListView(generics.ListCreateAPIView):
     queryset = Calendar.objects.all()
     serializer_class = CalendarSerializer
 
-    def list(self, request):
+    def list(self, request, *args, **kwargs):
         user = self.request.user
         # print(user)
         calendar_list = Calendar.objects.filter(user=user)
@@ -36,7 +36,14 @@ class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    def list(self, request):
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def list(self, request, *args, **kwargs):
         calendar_id = self.request.query_params.get('calendar_id')
         # print("calendar id is : " , calendar_id)
         calendar = Calendar.objects.get(id=calendar_id)
