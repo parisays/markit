@@ -6,14 +6,14 @@ import {environment} from '@environments/environment';
   providedIn: 'root'
 })
 export class PostService {
-  private createPostEndpoint = `${environment.apiUrl}/createPost/`;
-  private listPostsEndpoint = `${environment.apiUrl}/listPosts/`;
+  private createPostEndpoint = `${environment.apiUrl}/calendar/post/`;
+  private listPostsEndpoint = `${environment.apiUrl}/calendar/post/?calendar_id=/`;
 
   constructor(private http: HttpClient) {
   }
 
-  getPosts() {
-    return this.http.get(this.listPostsEndpoint);
+  getPosts(calendarId: number) {
+    return this.http.get(this.listPostsEndpoint + calendarId.toString());//todo give calendar id in the url
   }
 
   createPost(post) {

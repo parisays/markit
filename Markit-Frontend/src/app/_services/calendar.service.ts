@@ -5,17 +5,16 @@ import {environment} from '@environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class CalendarService {
-  private createCalendarEndpoint = `${environment.apiUrl}/createCalendar/`;
-  private listCalendarsEndpoint = `${environment.apiUrl}/listCalendars/`;
+  private calendarEndpoint = `${environment.apiUrl}/calendar/`;
 
   constructor(private http: HttpClient) {
   }
 
   getCalendars() {
-    return this.http.get(this.listCalendarsEndpoint);
+    return this.http.get(this.calendarEndpoint);
   }
 
   createCalendar(calendar) {
-    return this.http.post(this.createCalendarEndpoint, JSON.stringify((calendar)));
+    return this.http.post(this.calendarEndpoint, JSON.stringify((calendar)));
   }
 }
