@@ -13,11 +13,11 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: SignupComponent },
-  { path: 'calendars', component: CalendarsComponent},
+  { path: 'calendars/:id/create', component: NewPostComponent},
   { path: 'calendars/create', component: NewCalendarComponent},
   { path: 'calendars/:id', component: PostsComponent},
-  { path: 'calendars/:id/create', component: NewPostComponent},
-
+  { path: 'calendars', component: CalendarsComponent},
+// todo pathMatch:  'full'
   // { path: 'no-access', component: }
 
   { path: '**', redirectTo: '' }// redirect to not found??
