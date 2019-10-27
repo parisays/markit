@@ -8,6 +8,7 @@ import {NewCalendarComponent} from '@app/new-calendar/new-calendar.component';
 import {PostsComponent} from '@app/posts/posts.component';
 import {NewPostComponent} from '@app/new-post/new-post.component';
 import {AuthGuard} from '@app/_helpers/auth.guard';
+import {TwitterAuthComponent} from '@app/twitter-auth/twitter-auth.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'calendars', component: CalendarsComponent},
   // todo pathMatch:  'full'
   // todo canActivate: [AuthGuard]
+  { path: 'twitter-auth', component: TwitterAuthComponent },
   // { path: 'no-access', component: }
 
   { path: '**', redirectTo: '' }// redirect to not found??
