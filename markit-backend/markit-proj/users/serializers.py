@@ -1,11 +1,14 @@
-from .models import User
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
-from calendars.models import Calendar
-from calendars.serializers import CalendarSerializer
 from allauth.socialaccount.models import SocialApp, SocialToken
+from calendars.serializers import CalendarSerializer
+from .models import User
+
 
 class AccountRegistrationSerializer(RegisterSerializer):
+    """
+    Account registration serializer.
+    """
     email = serializers.EmailField(required=True)
     password1 = serializers.CharField(write_only=True)
     firstName = serializers.CharField(required=True)
@@ -29,19 +32,6 @@ class CustomAccountDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'firstName', 'lastName', 'calendars')
-    # def update(self, instance, validated_data):
-    #     calendars_data = validated_data.pop('calendars')
-    #     current_calendars = (instance.calendars).all()
-    #     current_calendars = list(current_calendars)
-    #     instance.firstName = validated_data.get('fistName', instance.firstName)
-    #     instance.lastName = validated_data.get('lastName', instance.lastName)
-    #     instance.save()
-
-    #     for cal in calendars_data:
-    #         c = current_calendars.pop(0)
-    #         c.name = cal.get('name', c.name)
-    #         p.save()
-    #     return instance
 
 class SocialAppSerializer(serializers.ModelSerializer):
     """

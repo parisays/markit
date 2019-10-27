@@ -1,13 +1,10 @@
-from django.contrib.contenttypes.models import ContentType
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.models import SocialApp, SocialToken, SocialAccount
 from rest_auth.registration.views import SocialConnectView
 from rest_auth.social_serializers import TwitterConnectSerializer
-from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.renderers import JSONRenderer
 import tweepy
 from markit import settings
 from .serializers import SocialAppSerializer, SocialTokenSerializer
@@ -61,7 +58,7 @@ class TwitterOAuth(APIView):
         Get method.
         """
         twitter_app = SocialApp.objects.get(provider=self.provider)
-        twitter_auth = tweepy.OAuthHandler(twitter_app.client_id, twitter_app.secret, settings.CALLBACK_URL)
+        twitter_auth = tweepy.OAuthHandler(twitter_app.client_id, twitter_app.secret,
+                                           settings.CALLBACK_URL)
         twitter_oauth = twitter_auth.get_authorization_url()
         return Response({'url' : twitter_oauth})
-
