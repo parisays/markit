@@ -8,35 +8,35 @@ class UserManager(BaseUserManager):
     """
     use_in_migrations = True
 
-    def create_user(self, email, first_name, last_name, password=None,
-                    profile_image=None, is_staff=False):
+    def create_user(self, email, firstName, lastName, password=None,
+                    profileImage=None, is_staff=False):
         user = self.model(
             email=self.normalize_email(email),
-            first_name=first_name,
-            last_name=last_name,
-            profile_image=profile_image,
+            firstName=firstName,
+            lastName=lastName,
+            profileImage=profileImage,
             is_staff=is_staff,
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_staffuser(self, email, first_name, last_name, password):
+    def create_staffuser(self, email, firstName, lastName, password):
         user = self.create_user(
             email=self.normalize_email(email),
-            first_name=first_name,
-            last_name=last_name,
+            firstName=firstName,
+            lastName=lastName,
             password=password,
         )
         user.is_staff = True
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, last_name, password):
+    def create_superuser(self, email, firstName, lastName, password):
         user = self.create_user(
             email=self.normalize_email(email),
-            first_name=first_name,
-            last_name=last_name,
+            firstName=firstName,
+            lastName=lastName,
             password=password,
         )
         user.is_staff = True
