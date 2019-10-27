@@ -10,6 +10,8 @@ import {Calendar} from '@models';
   styleUrls: ['./new-calendar.component.scss']
 })
 export class NewCalendarComponent implements OnInit {
+  loading = false;
+
   constructor(private service: CalendarService, private route: ActivatedRoute) {
   }
 
