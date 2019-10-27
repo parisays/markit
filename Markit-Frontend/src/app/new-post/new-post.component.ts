@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {PostService} from '@services';
@@ -11,14 +11,23 @@ import {Post} from '@models';
 })
 export class NewPostComponent implements OnInit {
   // @Output post todo to return a new post to posts component
+  /* @Input()*/ calendarId: number;
+  loading = false;
+
   constructor(private service: PostService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.calendarId = +params.get('id');
+      // service.getposts(id)
+    });
   }
 
-  createPost(input: HTMLInputElement) {
-    let post = {title: input.value};
-    input.value = '';
+  createPost(title, content) {
+    let calId = this.calendarId;
+    let post = {title, content, calId};
+    title.value = '';
+    content.value = '';
 
     this.service.createPost(post).subscribe(
       response => {
