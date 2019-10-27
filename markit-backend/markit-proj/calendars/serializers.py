@@ -1,15 +1,19 @@
-from calendars.models import Calendar, Post
-from users.models import User
 from rest_framework import serializers
+from .models import Calendar, Post
 
 class PostSerializer(serializers.ModelSerializer):
-
+    """
+    Post serializer.
+    """
     class Meta:
         model = Post
         fields = ('calendar', 'name', 'text')
         read_only_fields = ('id', )
 
 class CalendarSerializer(serializers.ModelSerializer):
+    """
+    Calendar serializer.
+    """
     posts = PostSerializer(many=True, read_only=False)
 
     class Meta:
@@ -37,4 +41,3 @@ class CalendarSerializer(serializers.ModelSerializer):
             p.text = post.get('text', p.text)
             p.save()
         return instance
-
