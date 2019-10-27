@@ -8,13 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   constructor() { }
-
-  calendarNames = [
-    'first',
-    'second',
-    'third'
-  ];
-  
   ngOnInit() {
   }
 

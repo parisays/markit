@@ -15,21 +15,5 @@
             <button style="margin: 10px; float: right;" mat-button>Logout</button>
         </nav>
     </div>
-    <div class="calendar-list mat-elevation-z5">
-        <mat-action-list dense>
-            <h3 matHeader style="margin-left: 10px"> 
-                <mat-icon matPrefix>date_range</mat-icon>
-                Calendars
-            </h3>
-            <div *ngFor="let name of calendarNames">
-                <button class="calendar-listitems" mat-list-item (click)="showPosts()"> {{name}} </button>
-            </div>
-        </mat-action-list>
-        <div style="justify-content: flex-end;
-        display: flex; margin: 5px;">
-            <button mat-mini-fab color="primary" (click)="addCalendar()">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
-    </div>
+    <app-calendars></app-calendars>
 </body>

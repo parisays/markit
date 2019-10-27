@@ -14,7 +14,6 @@ import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, M
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewCalendarFormComponent } from './new-calendar-form/new-calendar-form.component';
-import { NewTwitterPostFormComponent } from './new-twitter-post-form/new-twitter-post-form.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { NewCalendarComponent } from './new-calendar/new-calendar.component';
 import { PostsComponent } from './posts/posts.component';
@@ -27,7 +26,6 @@ import { NewPostComponent } from './new-post/new-post.component';
     SignupComponent,
     DashboardComponent,
     NewCalendarFormComponent,
-    NewTwitterPostFormComponent,
     HomeComponent,
     DashboardComponent,
     CalendarsComponent,

@@ -19,7 +19,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class PostsComponent implements OnInit {
   /*@Input()*/
-  isTwitterConnected = false;
+  isTwitterConnected = true;
 
   dataSource: Post[]; //data source is posts // public posts: Post[];
   // dataSource = this.ELEMENT_DATA;
