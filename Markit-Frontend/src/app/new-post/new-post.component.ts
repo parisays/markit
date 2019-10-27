@@ -1,8 +1,8 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
 import {PostService} from '@services';
 import {Post} from '@models';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-new-post',
@@ -16,6 +16,21 @@ export class NewPostComponent implements OnInit {
 
   constructor(private service: PostService, private route: ActivatedRoute) { }
 
+  form = new FormGroup({
+    'title': new FormControl('', Validators.required),
+    'content': new FormControl('', Validators.required)
+  });
+
+  get title()
+  {
+    return this.form.get('title');
+  }
+  
+  get content()
+  {
+    return this.form.get('content');
+  }
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('id');
@@ -23,11 +38,13 @@ export class NewPostComponent implements OnInit {
     });
   }
 
-  createPost(title, content) {
-    let calId = this.calendarId;
-    let post = {title, content, calId};
-    title.value = '';
-    content.value = '';
+  createPost() {
+    // let calId = this.calendarId;
+    // let s=this.title
+    let post = new Post(this.title.value, this.content.value, this.calendarId);
+    
+    // this.title.value = '';
+    // this.content.value = '';
 
     this.service.createPost(post).subscribe(
       response => {
