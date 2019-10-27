@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {environment} from '@environments/environment';
+import {Post} from '@models';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class PostService {
   }
 
   getPosts(calendarId: number) {
-    return this.http.get(this.listPostsEndpoint + calendarId.toString());//todo give calendar id in the url
+    return this.http.get<Post[]>(this.listPostsEndpoint + calendarId.toString());//todo give calendar id in the url
   }
 
   createPost(post) {

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {environment} from '@environments/environment';
+import {Calendar} from '@models';
 
 @Injectable({providedIn: 'root'})
 export class CalendarService {
@@ -11,10 +12,10 @@ export class CalendarService {
   }
 
   getCalendars() {
-    return this.http.get(this.calendarEndpoint);
+    return this.http.get<Calendar[]>(this.calendarEndpoint);
   }
 
   createCalendar(calendar) {
-    return this.http.post(this.calendarEndpoint, JSON.stringify((calendar)));
+    return this.http.post<Calendar>(this.calendarEndpoint, JSON.stringify((calendar)));
   }
 }
