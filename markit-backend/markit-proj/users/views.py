@@ -62,3 +62,23 @@ class TwitterOAuth(APIView):
                                            settings.CALLBACK_URL)
         twitter_oauth = twitter_auth.get_authorization_url()
         return Response({'url' : twitter_oauth})
+
+class TwitterVerification(APIView):
+    """
+    Get twitter authorization tokens.
+    """
+    permission_classes = (IsAuthenticated,)
+    provider = 'twitter'
+    def get(self, request, oauth_token, oauth_verifier):
+        """
+        Get method.
+        """
+        twitter_app = SocialApp.objects.get(provider=self.provider)
+        twitter_auth = tweepy.OAuthHandler(twitter_app.client_id, twitter_app.secret,
+                                           settings.CALLBACK_URL)
+        twitter_auth.request_token = {'oauth_token' : oauth_token,
+                                      'oauth_token_secret' : oauth_verifier}
+        twitter_auth.get_access_token(oauth_verifier)
+        
+        return Response({"access_token": twitter_auth.access_token,
+                         "token_secret": twitter_auth.access_token_secret})

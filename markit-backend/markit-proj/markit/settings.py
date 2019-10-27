@@ -98,7 +98,7 @@ ACCOUNT_ADAPTER = 'users.adapter.CustomAccountAdapter'
 REST_USE_JWT = False
 
 # Twitter App
-CALLBACK_URL = 'http://127.0.0.1:8000/admin/'
+CALLBACK_URL = 'http://127.0.0.1:4200/twitter-auth/'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

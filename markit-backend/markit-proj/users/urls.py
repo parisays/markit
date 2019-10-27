@@ -13,6 +13,7 @@ from .views import (
     TwitterAppCredential,
     TwitterAccountCredential,
     TwitterOAuth,
+    TwitterVerification,
 )
 
 
@@ -31,4 +32,6 @@ urlpatterns = [
         SocialAccountDisconnectView.as_view(), name='social_account_disconnect'),
     url(r'^user-twitter/$', TwitterAccountCredential.as_view(), name='user-social-account-tokens'),
     url(r'^twitter/oauth$', TwitterOAuth.as_view(), name='twitter-account-oauth'),
+    url(r'^twitter/verify/(?P<oauth_token>[0-9A-Za-z]+)/(?P<oauth_verifier>[0-9A-Za-z]+)/$', TwitterVerification.as_view(),
+        name='twitter-account-verify'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
