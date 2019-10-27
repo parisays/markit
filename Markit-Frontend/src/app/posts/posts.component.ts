@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PostService} from '@services';
 import {ActivatedRoute} from '@angular/router';
@@ -10,14 +10,20 @@ import {Post} from '@models';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
+  /*@Input()*/
+  calendarId: number;
+
   public posts: Post[];
 
-  constructor(private service: PostService) {
+  constructor(private service: PostService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.service.getPosts().subscribe(response => {
-      // this.calendars = response.json();//todo
+    this.route.paramMap.subscribe(params => {
+      this.calendarId = +params.get('id');
+      this.service.getPosts(this.calendarId).subscribe(response => {
+        // this.calendars = response.json();//todo get lists
+      });
     });
   }
 
