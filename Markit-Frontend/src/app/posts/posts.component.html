@@ -1,0 +1,10 @@
+<h2>Posts Page</h2>
+<a routerLink="calendars/:id/create" > <!--todo-->
+  Create New Post
+</a>
+<ul>
+  <li *ngFor="let post of posts">
+    {{ post.title }}
+    {{ post.content }}
+  </li>
+</ul>
