@@ -5,20 +5,24 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import {CalendarsComponent} from '@app/calendars/calendars.component';
 import {NewCalendarComponent} from '@app/new-calendar/new-calendar.component';
+import {PostsComponent} from '@app/posts/posts.component';
+import {NewPostComponent} from '@app/new-post/new-post.component';
+import {AuthGuard} from '@app/_helpers/auth.guard';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: SignupComponent },
+  { path: 'calendars/:id/create', component: NewPostComponent},
+  { path: 'calendars/create', component: NewCalendarComponent},
+  { path: 'calendars/:id', component: PostsComponent},
   { path: 'calendars', component: CalendarsComponent},
-  { path: 'calendars/create/', component: NewCalendarComponent},
-  // { path: 'calendars/:id۰', component: PostsComponent}
-  // { path: 'calendars/:id/create', component: NewPostComponent}
-
+  // todo pathMatch:  'full'
+  // todo canActivate: [AuthGuard]
   // { path: 'no-access', component: }
 
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' }// redirect to not found??
 ];
 
 @NgModule({

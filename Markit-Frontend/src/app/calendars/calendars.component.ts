@@ -10,7 +10,8 @@ import {Calendar} from '@models';
   styleUrls: ['./calendars.component.scss']
 })
 export class CalendarsComponent implements OnInit {
-  public calendars: Calendar[];
+  calendars: Calendar[];
+  loading = false;
 
   constructor(private service: CalendarService) {
   }

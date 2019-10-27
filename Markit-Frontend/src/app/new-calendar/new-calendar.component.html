@@ -1,5 +1,6 @@
 <h2>New Calendar Form</h2>
 <input type="text" name="" id="" #title>
-<button (click)="createCalendar(title)">
+<button *ngIf="!loading" type="submit" (click)="createCalendar(title)" routerLink="/calendars"><!--todo check if correct-->
   Create
 </button>
+<mat-spinner *ngIf="loading" color="primary"></mat-spinner>
