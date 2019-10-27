@@ -10,6 +10,13 @@
             <mat-icon matSuffix>edit</mat-icon>
             <mat-error *ngIf="title.touched && title.value == ''">title is required!</mat-error>
         </mat-form-field>
-        <button [disabled]="!form.valid" mat-raised-button color="primary">Create Calendar</button>
+        <button *ngIf="!loading" type="submit" 
+            (click)="createCalendar(title)" 
+            routerLink="/calendars"
+            [disabled]="!form.valid" 
+            mat-raised-button color="primary">
+                Create Calendar
+        </button>
+        <mat-spinner *ngIf="loading" color="primary"></mat-spinner>
     </form>
 </div>

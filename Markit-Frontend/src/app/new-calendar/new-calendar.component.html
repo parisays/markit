@@ -1,6 +1,22 @@
-<h2>New Calendar Form</h2>
-<input type="text" name="" id="" #title>
-<button *ngIf="!loading" type="submit" (click)="createCalendar(title)" routerLink="/calendars"><!--todo check if correct-->
-  Create
-</button>
-<mat-spinner *ngIf="loading" color="primary"></mat-spinner>
+<div class="container-style mat-elevation-z4">
+  <H1>
+      <mat-icon>date_range</mat-icon>
+      New Calendar
+  </H1>
+  <form class="form-style" [formGroup]="form">
+      <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input formControlName="title" matInput placeholder="Enter new calendar title" autofocus>
+          <mat-icon matSuffix>edit</mat-icon>
+          <mat-error *ngIf="title.touched && title.value == ''">title is required!</mat-error>
+      </mat-form-field>
+      <button *ngIf="!loading" type="submit" 
+          (click)="createCalendar(title)" 
+          routerLink="/calendars"
+          [disabled]="!form.valid" 
+          mat-raised-button color="primary">
+              Create Calendar
+      </button>
+      <mat-spinner *ngIf="loading" color="primary"></mat-spinner>
+  </form>
+</div>
