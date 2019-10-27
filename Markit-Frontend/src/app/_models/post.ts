@@ -1,5 +1,6 @@
 export class Post {
+  id: number;
   title: string;
   content?: string;
-  // calendar: Calendar
+  calendarId: number;
 }
