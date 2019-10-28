@@ -1,6 +1,0 @@
-<mat-toolbar color="primary">
-    <a mat-button *ngIf="!authService.isLoggedIn()" routerLink="/register">Sign Up</a>
-    <a mat-button *ngIf="!authService.isLoggedIn()" routerLink="/login">Log In</a>
-    <a mat-button *ngIf="authService.isLoggedIn()" (click)="authService.logout()">Logout</a>
-</mat-toolbar>
-

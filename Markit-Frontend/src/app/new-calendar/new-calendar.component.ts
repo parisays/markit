@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {CalendarService} from '@services';
 import {Calendar} from '@models';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-new-calendar',
@@ -12,15 +13,25 @@ import {Calendar} from '@models';
 export class NewCalendarComponent implements OnInit {
   loading = false;
 
+
+  form = new FormGroup({
+    'title': new FormControl('', Validators.required)
+  });
+
+  get title()
+  {
+    return this.form.get('title');
+  }
+
   constructor(private service: CalendarService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
   }
 
-  createCalendar(input: HTMLInputElement) {
-    let calendar = {title: input.value};
-    input.value = '';
+  createCalendar() {
+    let calendar = new Calendar (this.title.value);
+    // input.value = '';
 
     this.service.createCalendar(calendar).subscribe(
       response => {

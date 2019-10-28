@@ -1,12 +1,12 @@
 export class Post {
   id: number;
-  title: string;
-  content: string;
-  calendarId: number;
+  name: string;
+  text: string;
+  calendar: number;
 
-  constructor(title: string, content: string, calendarId: number) {
-    this.title = title;
-    this.content = content;
-    this.calendarId = calendarId;
+  constructor(name: string, text: string, calendar: number) {
+    this.name = name;
+    this.text = text;
+    this.calendar = calendar;
   }
 }
