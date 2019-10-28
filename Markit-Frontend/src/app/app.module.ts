@@ -9,7 +9,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MdComponentsModule } from './md-components/md-components.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SignupComponent } from './signup/signup.component';
-import { HomeComponent } from './home/home.component';
 import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -19,6 +18,7 @@ import { NewCalendarComponent } from './new-calendar/new-calendar.component';
 import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
     SignupComponent,
     DashboardComponent,
     NewCalendarFormComponent,
-    HomeComponent,
+    HeaderComponent,
     DashboardComponent,
     CalendarsComponent,
     NewCalendarComponent,
