@@ -10,7 +10,7 @@ import {AuthenticationService} from '@app/_services/auth.service';
 })
 export class PostService {
   private createPostEndpoint = `${environment.apiUrl}/api/v1.0/calendar/post/`;
-  private listPostsEndpoint = `${environment.apiUrl}/api/v1.0/calendar/post/?calendar_id=/`;
+  private listPostsEndpoint = `${environment.apiUrl}/api/v1.0/calendar/post/?calendar_id=`;
 
   constructor(private http: HttpClient, private  authService: AuthenticationService) {
   }
