@@ -15,10 +15,10 @@ const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: SignupComponent },
-  { path: 'calendars/:id/create', component: NewPostComponent},
-  { path: 'calendars/create', component: NewCalendarComponent},
-  { path: 'calendars/:id', component: PostsComponent},
-  { path: 'calendars', component: CalendarsComponent},
+  { path: 'calendars/:id/create', component: NewPostComponent, canActivate: [AuthGuard]},
+  { path: 'calendars/create', component: NewCalendarComponent, canActivate: [AuthGuard]},
+  { path: 'calendars/:id', component: PostsComponent, canActivate: [AuthGuard]},
+  { path: 'calendars', component: CalendarsComponent, canActivate: [AuthGuard]},
   // todo pathMatch:  'full'
   // todo canActivate: [AuthGuard]
   { path: 'twitter-auth', component: TwitterAuthComponent },
