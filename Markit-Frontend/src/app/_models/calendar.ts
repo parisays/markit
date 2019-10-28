@@ -1,11 +1,14 @@
+import {Post} from '@app/_models/post';
+import {User} from '@app/_models/user';
+
 export class Calendar {
   id: number;
-  title: string;
+  name: string;
   // description?: string;
-  // user: User
-  // posts?: Post[]
+  user: number[];
+  posts: Post[];
 
-  constructor(title: string) {
-    this.title = title;
+  constructor(name: string) {
+    this.name = name;
   }
 }
