@@ -29,7 +29,6 @@ class CalendarListView(generics.ListCreateAPIView):
 
     def list(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
-        print(user.firstName)
         calendar_list = Calendar.objects.filter(user=user)
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)

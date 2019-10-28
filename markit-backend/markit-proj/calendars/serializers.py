@@ -7,7 +7,7 @@ class PostSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Post
-        fields = ('calendar', 'name', 'text')
+        fields = ('id', 'calendar', 'name', 'text')
         read_only_fields = ('id', )
 
 class CalendarSerializer(serializers.ModelSerializer):
@@ -15,7 +15,7 @@ class CalendarSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Calendar
-        fields = ('name', 'user')
+        fields = ('id' , 'name', 'user')
         read_only_fields = ('id', )
 
     # def create(self, validated_data):
