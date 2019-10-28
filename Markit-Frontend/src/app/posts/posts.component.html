@@ -1,8 +1,9 @@
 <app-home></app-home>
 <div *ngIf="isTwitterConnected">
   <mat-toolbar style="margin-top: 5%; margin-left: 10%; width: 80%;" >
-    <a mat-button [routerLink]="[['/calendas', calendarId, '/create']]">New Post</a>
-    <!--todo check if correct-->
+    <a mat-button [routerLink]="[['/calendas', calendarId, '/create']]">
+      New Post
+    </a>
   </mat-toolbar>
 
   <table mat-table

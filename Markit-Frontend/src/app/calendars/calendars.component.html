@@ -1,13 +1,13 @@
 <div class="calendar-list mat-elevation-z5">
   <mat-action-list dense>
-      <h3 matHeader style="margin-left: 10px"> 
+      <h3 matHeader style="margin-left: 10px">
           <mat-icon matPrefix>date_range</mat-icon>
           Calendars
       </h3>
       <div *ngFor="let calendar of calendars">
-          <button class="calendar-listitems" 
+          <button class="calendar-listitems"
                   mat-list-item [routerLink]="['/calendars',calendar.id] ">
-                   {{calendar.title}} 
+                   {{calendar.name}}
           </button>
       </div>
   </mat-action-list>
