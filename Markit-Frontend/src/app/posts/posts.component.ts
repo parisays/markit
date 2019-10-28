@@ -46,22 +46,22 @@ export class PostsComponent implements OnInit {
   ELEMENT_DATA: Post[] = [
     {
       id: 1,
-      calendarId: 11,
-      title: 'Hydrogen',
-      content: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
+      calendar: 11,
+      name: 'Hydrogen',
+      text: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
         atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`
     }, {
       id: 2,
-      calendarId: 11,
-      title: 'Helium',
-      content: `Helium is a chemical element with symbol He and atomic number 2. It is a
+      calendar: 11,
+      name: 'Helium',
+      text: `Helium is a chemical element with symbol He and atomic number 2. It is a
         colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
         group in the periodic table. Its boiling point is the lowest among all the elements.`
     }, {
       id: 3,
-      calendarId: 11,
-      title: 'Lithium',
-      content: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
+      calendar: 11,
+      name: 'Lithium',
+      text: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
         silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
         lightest solid element.`
     },
