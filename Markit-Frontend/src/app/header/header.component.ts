@@ -8,11 +8,11 @@ import {Observable, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HeaderComponent implements OnInit {
   private twitterAppData: { client_id: string, secret: string };
 
   constructor(

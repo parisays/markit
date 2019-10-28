@@ -19,7 +19,12 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class PostsComponent implements OnInit {
   /*@Input()*/
-  isTwitterConnected = true;
+  get isTwitterConnected() {
+    let twitterLinkedStorage = localStorage.getItem('twitterLinked');
+    if (twitterLinkedStorage)
+      return twitterLinkedStorage == 'true'
+    else return false
+  }
 
   dataSource: Post[]; //data source is posts // public posts: Post[];
   // dataSource = this.ELEMENT_DATA;
