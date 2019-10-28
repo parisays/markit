@@ -1,17 +1,18 @@
-from django.shortcuts import render
-from calendars.models import *
-from calendars.serializers import *
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from calendars.models import *
+from calendars.serializers import *
 
 class CalendarListView(generics.ListCreateAPIView):
+    """
+    Create and list calendars view.
+    """
     permission_classes = (IsAuthenticated,)
     queryset = Calendar.objects.all()
     serializer_class = CalendarSerializer
-    
+
     def create(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
         request.data.update({'user' : [user.id]})
@@ -29,6 +30,9 @@ class CalendarListView(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 class CalendarView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve calendar view.
+    """
     permission_classes = (IsAuthenticated,)
 
     serializer_class = CalendarSerializer
@@ -41,6 +45,9 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class PostListView(generics.ListCreateAPIView):
+    """
+    Create and list posts view.
+    """
     permission_classes = (IsAuthenticated,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
@@ -54,7 +61,6 @@ class PostListView(generics.ListCreateAPIView):
 
     def list(self, request, *args, **kwargs):
         calendar_id = self.request.query_params.get('calendar_id')
-        # print("calendar id is : " , calendar_id)
         calendar = Calendar.objects.get(id=calendar_id)
         post_list = Post.objects.filter(calendar=calendar)
         serializer = self.get_serializer(post_list, many=True)
@@ -62,8 +68,10 @@ class PostListView(generics.ListCreateAPIView):
 
 
 class PostView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve post view.
+    """
     permission_classes = (IsAuthenticated,)
 
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-

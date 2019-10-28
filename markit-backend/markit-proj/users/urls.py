@@ -19,7 +19,7 @@ from .views import (
 urlpatterns = [
     url(r'^rest-auth/password_reset/$', PasswordResetView.as_view()),
     re_path(r'^rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+            PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     url(r'^rest-auth/twitter/connect/$', TwitterConnect.as_view(), name='twitter_connect'),
     path('rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/account-confirm-email/(?P<key>.+)/$', VerifyEmailView.as_view()),
@@ -27,7 +27,8 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     url(r'^twitter/$', TwitterAppCredential.as_view()),
     url(r'^socialaccounts/$', SocialAccountListView.as_view(), name='social_account_list'),
-    url(r'^socialaccounts/(?P<pk>\d+)/disconnect/$', SocialAccountDisconnectView.as_view(), name='social_account_disconnect'),
+    url(r'^socialaccounts/(?P<pk>\d+)/disconnect/$',
+        SocialAccountDisconnectView.as_view(), name='social_account_disconnect'),
     url(r'^user-twitter/$', TwitterAccountCredential.as_view(), name='user-social-account-tokens'),
     url(r'^twitter/oauth$', TwitterOAuth.as_view(), name='twitter-account-oauth'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,9 +1,10 @@
-from calendars.models import Calendar, Post
-from users.models import User
 from rest_framework import serializers
+from .models import Calendar, Post
 
 class PostSerializer(serializers.ModelSerializer):
-
+    """
+    Post serializer.
+    """
     class Meta:
         model = Post
         fields = ('calendar', 'name', 'text')
