@@ -1,14 +1,14 @@
 export class Post {
   id: number;
-  title: string;
-  content: string;
-  calendarId: number;
+  name: string;
+  text: string;
+  calendar: number;
 
   published ? = false;
 
   constructor(title: string, content: string, calendarId: number) {
-    this.title = title;
-    this.content = content;
-    this.calendarId = calendarId;
+    this.name = title;
+    this.text = content;
+    this.calendar = calendarId;
   }
 }

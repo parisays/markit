@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div *ngIf="isTwitterConnected">
   <mat-toolbar style="margin-top: 5%; margin-left: 10%; width: 80%;" >
     <a mat-button [routerLink]="[['/calendas', calendarId, '/create']]">
@@ -19,7 +18,7 @@
         <div class="example-element-detail"
             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="example-element-description">
-            {{element.content}}
+            {{element.text}}
           </div>
           <button mat-button *ngIf="!element.published" (click)="publishOnTweeter(element)">Tweet</button>
           <mat-icon *ngIf="element.published" style="float: right">check</mat-icon>
@@ -39,7 +38,7 @@
 
 <div *ngIf="!isTwitterConnected" style="margin: 20%; text-align: center;">
   <h2 >You are not connected to any twitter account!</h2>
-  <a mat-button color ="primary" style="font-size: 20px;">
+  <a mat-button color ="primary" style="font-size: 20px;" (click)="onTwitterAuth()">
       <mat-icon color ="primary">arrow_forward</mat-icon>
       Connect to your twitter account!
       <mat-icon color ="primary">arrow_back</mat-icon>

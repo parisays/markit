@@ -14,7 +14,7 @@ export class CalendarService {
   }
 
   getCalendars() {
-    return this.http.get<Calendar[]>(this.calendarEndpoint, {
+    return this.http.get<any>(this.calendarEndpoint, {
       headers: new HttpHeaders({
         Authorization: `Token ${this.authService.currentUserValue.key}`
       })

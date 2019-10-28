@@ -18,10 +18,12 @@ export class CalendarsComponent implements OnInit {
 
   ngOnInit() {
     console.log('calendars component running');
-    this.service.getCalendars().subscribe((response: Calendar[]) => {
+    this.service.getCalendars().subscribe((response: any) => {
       console.log(response);
       this.calendars = response;
       // = response.json();//todo
+    }, err => {
+      console.log(err);
     });
   }
 }
