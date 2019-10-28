@@ -4,7 +4,7 @@ import { PostService } from '@services';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '@models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import {TwitterService} from '@app/_services/twitter.service';
+import {TwitterService} from '@services';
 import {map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 import {MatSnackBar} from '@angular/material';
