@@ -13,7 +13,6 @@ import { HomeComponent } from './home/home.component';
 import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NewCalendarFormComponent } from './new-calendar-form/new-calendar-form.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { NewCalendarComponent } from './new-calendar/new-calendar.component';
 import { PostsComponent } from './posts/posts.component';
@@ -26,7 +25,6 @@ import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
     LoginComponent,
     SignupComponent,
     DashboardComponent,
-    NewCalendarFormComponent,
     HomeComponent,
     DashboardComponent,
     CalendarsComponent,

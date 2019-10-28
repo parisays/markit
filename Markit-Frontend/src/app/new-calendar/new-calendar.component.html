@@ -10,10 +10,10 @@
           <mat-icon matSuffix>edit</mat-icon>
           <mat-error *ngIf="title.touched && title.value == ''">title is required!</mat-error>
       </mat-form-field>
-      <button *ngIf="!loading" type="submit" 
-          (click)="createCalendar(title)" 
+      <button *ngIf="!loading" type="submit"
+          (click)="createCalendar()"
           routerLink="/calendars"
-          [disabled]="!form.valid" 
+          [disabled]="!form.valid"
           mat-raised-button color="primary">
               Create Calendar
       </button>
