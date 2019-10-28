@@ -20,6 +20,8 @@
           <div class="example-element-description">
             {{element.content}}
           </div>
+          <button mat-button *ngIf="!element.published" (click)="publishOnTweeter(element)">Tweet</button>
+          <mat-icon *ngIf="element.published" style="float: right">check</mat-icon>
         </div>
       </td>
     </ng-container>

@@ -4,6 +4,10 @@ import { PostService } from '@services';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '@models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {TwitterService} from '@app/_services/twitter.service';
+import {map} from 'rxjs/operators';
+import {throwError} from 'rxjs';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-posts',
@@ -18,30 +22,23 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ],
 })
 export class PostsComponent implements OnInit {
+
+
+  constructor(private service: PostService,
+              private route: ActivatedRoute,
+              private twitter: TwitterService,
+              private snackBar: MatSnackBar) {
+    this.dataSource = this.ELEMENT_DATA;
+  }
   /*@Input()*/
   isTwitterConnected = true;
 
-  dataSource: Post[]; //data source is posts // public posts: Post[];
+  dataSource: Post[]; // data source is posts // public posts: Post[];
   // dataSource = this.ELEMENT_DATA;
   columnsToDisplay = ['title'];
   expandedElement: Post | null;
 
   calendarId: number;
-
-
-  constructor(private service: PostService, private route: ActivatedRoute) {
-    this.dataSource = this.ELEMENT_DATA;
-  }
-
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.calendarId = +params.get('id');
-      this.service.getPosts(this.calendarId).subscribe(response => {
-        // this.dataSource = response.json();//todo get lists
-      });
-    });
-  }
-
 
   ELEMENT_DATA: Post[] = [
     {
@@ -66,5 +63,36 @@ export class PostsComponent implements OnInit {
         lightest solid element.`
     },
   ];
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.calendarId = +params.get('id');
+      this.service.getPosts(this.calendarId).subscribe(response => {
+        // this.dataSource = response.json();//todo get lists
+      });
+    });
+  }
+
+  publishOnTweeter(post: Post) {
+    console.log(post);
+    this.twitter.publishTweet(post.id)
+      .pipe(map(
+        (res: string) => {
+          if (res === 'true') {
+            return 1;
+          }
+          return throwError('twitter failed to publish');
+        }
+      )).subscribe(res => {
+          console.log(`twitter published ${res}`);
+          post.published = true;
+        }, error => {
+          console.log(error);
+          this.snackBar.open('Failed to publish the post on twitter', 'Dismiss', {
+            duration: 3000
+          });
+        }
+      );
+  }
 
 }
