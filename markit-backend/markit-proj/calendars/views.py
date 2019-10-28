@@ -13,6 +13,8 @@ class CalendarListView(generics.ListCreateAPIView):
     serializer_class = CalendarSerializer
     
     def create(self, request, *args, **kwargs):
+        user = User.objects.get(email=self.request.user)
+        request.data.update({'user' : [user.id]})
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
