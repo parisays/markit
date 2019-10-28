@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/$', CalendarView.as_view(), name='detail-calendar'),
     url(r'^post/$', PostListView.as_view(), name='create-list-post'),
     url(r'^post/(?P<pk>\d+)/$', PostView.as_view(), name='detail-post'),
+    url(r'^tweet/(?P<pk>\d+)/$', TweetView.as_view(), name='tweet-post'),
 ]
