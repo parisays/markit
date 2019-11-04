@@ -5,9 +5,11 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 import tweepy
-from calendars.models import *
-from calendars.serializers import *
-from users.views import TwitterAppCredential
+from calendars.models import Calendar
+from calendars.serializers import CalendarSerializer
+from users.models import User
+from posts.models import Post
+from posts.serializers import PostSerializer
 
 
 class CalendarListView(generics.ListCreateAPIView):
@@ -29,7 +31,6 @@ class CalendarListView(generics.ListCreateAPIView):
 
     def list(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
-        print(user.firstName)
         calendar_list = Calendar.objects.filter(user=user)
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)
@@ -48,39 +49,6 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
-
-class PostListView(generics.ListCreateAPIView):
-    """
-    Create and list posts view.
-    """
-    permission_classes = (IsAuthenticated,)
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    def list(self, request, *args, **kwargs):
-        calendar_id = self.request.query_params.get('calendar_id')
-        calendar = Calendar.objects.get(id=calendar_id)
-        post_list = Post.objects.filter(calendar=calendar)
-        serializer = self.get_serializer(post_list, many=True)
-        return Response(serializer.data)
-
-
-class PostView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    Retrieve post view.
-    """
-    permission_classes = (IsAuthenticated,)
-
-    serializer_class = PostSerializer
-    queryset = Post.objects.all()
-
 class TweetView(APIView):
     """
     Tweet on user twitter account.
@@ -89,10 +57,8 @@ class TweetView(APIView):
 
     serializer_class = PostSerializer
     provider = 'twitter'
+
     def get(self, request, pk):
-        """
-        Post method.
-        """
         post = Post.objects.get(pk=pk)
         twitter_app = SocialApp.objects.get(provider=self.provider)
         user = User.objects.get(email=request.user)
