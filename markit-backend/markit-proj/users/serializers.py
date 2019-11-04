@@ -33,14 +33,6 @@ class CustomAccountDetailsSerializer(serializers.ModelSerializer):
         model = User
         fields = ('email', 'firstName', 'lastName', 'calendars')
 
-class CustomAccountUpdateSerializer(serializers.ModelSerializer):
-    """
-    Custom account update serializer.
-    """
-    class Meta:
-        model = User
-        fields = ('email', 'firstName', 'lastName')
-
 class SocialAppSerializer(serializers.ModelSerializer):
     """
     Social app serializer.
