@@ -16,7 +16,7 @@ class CalendarListView(generics.ListCreateAPIView):
     """
     permission_classes = (IsAuthenticated,)
     queryset = Calendar.objects.all()
-    serializer_class = CalendarSerializer
+    serializer_class = NestedCalendarSerializer
 
     def create(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
@@ -39,7 +39,7 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
     """
     permission_classes = (IsAuthenticated,)
 
-    serializer_class = CalendarSerializer
+    serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
 
     def retrieve(self, request, *args, **kwargs):
