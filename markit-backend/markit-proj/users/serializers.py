@@ -28,10 +28,18 @@ class CustomAccountDetailsSerializer(serializers.ModelSerializer):
     """
     Custom account detail serializer.
     """
-    calendars = CalendarSerializer(many=True, read_only=False)
+    calendars = CalendarSerializer(many=True, read_only=True)
     class Meta:
         model = User
         fields = ('email', 'firstName', 'lastName', 'calendars')
+
+class CustomAccountUpdateSerializer(serializers.ModelSerializer):
+    """
+    Custom account update serializer.
+    """
+    class Meta:
+        model = User
+        fields = ('email', 'firstName', 'lastName')
 
 class SocialAppSerializer(serializers.ModelSerializer):
     """
