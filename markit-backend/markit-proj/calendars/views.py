@@ -5,22 +5,48 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 import tweepy
-from calendars.models import *
-from calendars.serializers import *
-from users.views import TwitterAppCredential
+from calendars.models import Calendar
+from calendars.serializers import CalendarSerializer
+from users.models import User
 from posts.models import Post
+from posts.serializers import PostSerializer
 
 
-class CalendarView(APIView):
+class CalendarListView(generics.ListCreateAPIView):
     """
-    Get Calendar details.
+    Create and list calendars view.
     """
     permission_classes = (IsAuthenticated,)
+    queryset = Calendar.objects.all()
     serializer_class = CalendarSerializer
 
-    def get(self, request, pk):
-        calendar = Calendar.objects.get(id=pk)
-        serializer = self.serializer_class(calendar)
+    def create(self, request, *args, **kwargs):
+        user = User.objects.get(email=self.request.user)
+        request.data.update({'user' : [user.id]})
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def list(self, request, *args, **kwargs):
+        user = User.objects.get(email=self.request.user)
+        calendar_list = Calendar.objects.filter(user=user)
+        serializer = self.get_serializer(calendar_list, many=True)
+        return Response(serializer.data)
+
+class CalendarView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve calendar view.
+    """
+    permission_classes = (IsAuthenticated,)
+
+    serializer_class = CalendarSerializer
+    queryset = Calendar.objects.all()
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
 class TweetView(APIView):
@@ -31,10 +57,8 @@ class TweetView(APIView):
 
     serializer_class = PostSerializer
     provider = 'twitter'
+
     def get(self, request, pk):
-        """
-        Post method.
-        """
         post = Post.objects.get(pk=pk)
         twitter_app = SocialApp.objects.get(provider=self.provider)
         user = User.objects.get(email=request.user)
