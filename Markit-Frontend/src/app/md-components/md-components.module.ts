@@ -14,7 +14,7 @@ import {MatTableModule} from '@angular/material/table';
     MatInputModule,
     MatButtonModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
   ]
 })
 export class MdComponentsModule { }
