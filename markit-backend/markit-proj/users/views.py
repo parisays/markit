@@ -1,14 +1,28 @@
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.models import SocialApp, SocialToken, SocialAccount
-from rest_auth.registration.views import SocialConnectView, RegisterView
+from rest_auth.registration.views import SocialConnectView, RegisterView, LoginView
 from rest_auth.social_serializers import TwitterConnectSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 import tweepy
 from markit import settings
-from .serializers import SocialAppSerializer, SocialTokenSerializer, CustomAccountDetailsSerializer, AccountRegistrationSerializer
+from .serializers import (
+    SocialAppSerializer, SocialTokenSerializer,
+     CustomAccountDetailsSerializer, AccountRegistrationSerializer
+)
 from .models import User
+
+class CustomLoginView(LoginView):
+    """
+    Custom login view.
+    """
+    def get_response(self):
+        response = super().get_response()
+        user = User.objects.get(email=self.request.user)
+        user_data = CustomAccountDetailsSerializer(user).data
+        response.data.update(user_data)
+        return response
 
 class CustomRegistrationView(RegisterView):
     """
