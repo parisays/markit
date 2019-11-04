@@ -9,7 +9,8 @@ import tweepy
 from markit import settings
 from .serializers import (
     SocialAppSerializer, SocialTokenSerializer,
-     CustomAccountDetailsSerializer, AccountRegistrationSerializer
+    CustomAccountDetailsSerializer, AccountRegistrationSerializer,
+    CustomAccountUpdateSerializer,
 )
 from .models import User
 
@@ -23,6 +24,9 @@ class CustomLoginView(LoginView):
         user_data = CustomAccountDetailsSerializer(user).data
         response.data.update(user_data)
         return response
+    
+    def put(self):
+        serializer_class = CustomAccountUpdateSerializer
 
 class CustomRegistrationView(RegisterView):
     """
