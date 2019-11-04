@@ -14,6 +14,7 @@ from .views import (
     TwitterAccountCredential,
     TwitterOAuth,
     TwitterVerification,
+    CustomRegistrationView,
 )
 
 
@@ -23,6 +24,7 @@ urlpatterns = [
             PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     url(r'^rest-auth/twitter/connect/$', TwitterConnect.as_view(), name='twitter_connect'),
     path('rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/$', CustomRegistrationView.as_view()),
     url(r'^rest-auth/registration/account-confirm-email/(?P<key>.+)/$', VerifyEmailView.as_view()),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('accounts/', include('allauth.urls')),
