@@ -5,9 +5,16 @@ class Post(models.Model):
     """
     Post model.
     """
-    name = models.CharField(max_length=100)
+    Draft = 'Draft'
+    Published = 'Published'
+    STATUS_CHOICES = [
+        (Draft, 'Draft'),
+        (Published, 'Published'),
+    ]
+    subject = models.CharField(max_length=100)
     calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE, related_name='posts')
     text = models.TextField()
+    status = models.CharField(max_length=9, choices=STATUS_CHOICES, default=Draft)
 
     def __str__(self):
-        return self.name + ' | ' + self.calendar.name
+        return self.subject + ' | ' + self.calendar.name
