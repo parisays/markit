@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthenticationService, PostService} from '@services';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Post } from '@models';
+import {Post, PostStatus} from '@models';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {TwitterService} from '@services';
 import {map} from 'rxjs/operators';
@@ -138,7 +138,8 @@ export class PostsComponent implements OnInit {
         }
       )).subscribe(res => {
           console.log(`twitter published ${res}`);
-          post.published = true;
+          post.status = PostStatus.PUBLISHED;
+          // post.published = true;
         }, error => {
           console.log(error);
           this.snackBar.open('Failed to publish the post on twitter', 'Dismiss', {
