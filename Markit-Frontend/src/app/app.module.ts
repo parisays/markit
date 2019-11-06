@@ -20,6 +20,7 @@ import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
 import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
 import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
+import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SocialAccountsConnectionComponent } from './social-accounts-connection/
     NewPostComponent,
     TwitterAuthComponent,
     CalendarDetailsFormComponent,
-    SocialAccountsConnectionComponent
+    SocialAccountsConnectionComponent,
+    CalendarWizardComponent
   ],
   imports: [
     BrowserModule,
