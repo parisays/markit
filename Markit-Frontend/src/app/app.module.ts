@@ -18,6 +18,7 @@ import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
+import { PostDetailsFormComponent } from './post-details-form/post-details-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HeaderComponent } from './header/header.component';
     NewCalendarComponent,
     PostsComponent,
     NewPostComponent,
-    TwitterAuthComponent
+    TwitterAuthComponent,
+    PostDetailsFormComponent
   ],
   imports: [
     BrowserModule,
