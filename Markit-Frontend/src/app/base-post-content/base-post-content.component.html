@@ -1,0 +1,24 @@
+<body style="display: flex;">
+    <div style="margin: auto; display: flex; flex-direction: column;">
+        <mat-form-field style="width: 500px" appearance="outline">
+            <mat-label>Content</mat-label>
+            <textarea cols="80" rows="10" formControlName="content" matInput placeholder="Your post content." autofocus></textarea>
+            <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field>
+        <div>
+            <input style="display: none" type="file" #fileInput>
+            <button mat-button (click)="fileInput.click()">
+                <mat-icon>image</mat-icon>
+            </button>
+            <button mat-button disabled>
+                <mat-icon>videocam</mat-icon>
+            </button>
+            <button mat-button disabled>
+                <mat-icon>save_alt</mat-icon>
+            </button>
+            <button mat-button disabled>
+                <mat-icon color="gray">library_books</mat-icon>
+            </button>
+        </div>
+    </div>
+</body>

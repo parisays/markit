@@ -26,6 +26,7 @@ import { SocialAccountsConnectionComponent } from './social-accounts-connection/
 import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
 import { PostIdeasComponent } from './post-ideas/post-ideas.component';
 import { SocialChannelsSelectionComponent } from './social-channels-selection/social-channels-selection.component';
+import { BasePostContentComponent } from './base-post-content/base-post-content.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SocialChannelsSelectionComponent } from './social-channels-selection/so
     SocialAccountsConnectionComponent,
     CalendarWizardComponent,
     PostIdeasComponent,
-    SocialChannelsSelectionComponent
+    SocialChannelsSelectionComponent,
+    BasePostContentComponent
   ],
   imports: [
     BrowserModule,
