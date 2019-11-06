@@ -8,8 +8,11 @@ class CalendarForm(forms.ModelForm):
     Admin page calendar form.
     """
     name = forms.CharField(label="Name")
-    collaborators = forms.ModelMultipleChoiceField(label='Collaborators', queryset=User.objects.all(),
-                                          widget=forms.CheckboxSelectMultiple)
+    owner = forms.ModelChoiceField(queryset=User.objects.all(), empty_label=None)
+    collaborators = forms.ModelMultipleChoiceField(label='Collaborators',
+                                                   queryset=User.objects.all(),
+                                                   widget=forms.CheckboxSelectMultiple)
+
 
     class Meta:
         model = Calendar
@@ -21,20 +24,20 @@ class CalendarAdmin(admin.ModelAdmin):
     """
     change_form = CalendarForm
     add_form = CalendarForm
-    list_display = ('id', 'name',)
-    list_display_links = ('id',)
-    ordering = ('id', 'name',)
-    list_filter = ('id', 'name')
+    list_display = ('id', 'name', 'owner')
+    list_display_links = ('id', 'owner')
+    ordering = ('id', 'owner', 'name', 'collaborators')
+    list_filter = ('id', 'name', 'owner', 'collaborators')
     search_fields = ('owner', 'name')
     filter_horizontal = ('collaborators',)
 
     fieldsets = (
-        (None, {'fields': ('name', 'owner',)}),
+        (None, {'fields': ('name', 'owner', 'collaborators',)}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('name', 'collaborators',)}
+            'fields': ('name', 'owner', 'collaborators',)}
         ),
     )
 
