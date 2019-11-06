@@ -25,6 +25,7 @@ import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-d
 import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
 import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
 import { PostIdeasComponent } from './post-ideas/post-ideas.component';
+import { SocialChannelsSelectionComponent } from './social-channels-selection/social-channels-selection.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { PostIdeasComponent } from './post-ideas/post-ideas.component';
     CalendarDetailsFormComponent,
     SocialAccountsConnectionComponent,
     CalendarWizardComponent,
-    PostIdeasComponent
+    PostIdeasComponent,
+    SocialChannelsSelectionComponent
   ],
   imports: [
     BrowserModule,
