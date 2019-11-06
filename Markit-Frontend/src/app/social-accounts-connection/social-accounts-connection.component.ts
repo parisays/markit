@@ -11,7 +11,15 @@ export class SocialAccountsConnectionComponent implements OnInit {
   socialAccounts = [
     {
       image: '../assets/images/twitter-icon-logo.png',
-      name: 'twitter'
+      name: 'Twitter'
+    },
+    {
+      image: '../assets/images/Facebook-logo.png',
+      name: 'Facebook'
+    },
+    {
+      image: '../assets/images/Pinterest-logo.png',
+      name: 'Pinterest'
     }
   ];
 
