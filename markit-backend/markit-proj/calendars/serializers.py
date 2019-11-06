@@ -9,7 +9,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     posts = PostSerializer(many=True, read_only=True)
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'collaborators', 'posts')
+        fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connected_platforms')
         read_only_fields = ('id', )
 
 class NestedCalendarSerializer(serializers.ModelSerializer):
@@ -19,7 +19,7 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
     posts = PostSerializer(many=True, read_only=True)
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'collaborators', 'posts')
+        fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connected_platforms')
         read_only_fields = ('id', )
 
     def create(self, validated_data):
@@ -35,6 +35,7 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
         current_posts = list(current_posts)
         instance.name = validated_data.get('name', instance.name)
         instance.collaborators = validated_data.get('collaborators', instance.collaborators)
+        instance.connected_platforms = validated_data.get('connected_platforms', instance.connected_platforms)
         instance.save()
 
         for post in posts_data:
