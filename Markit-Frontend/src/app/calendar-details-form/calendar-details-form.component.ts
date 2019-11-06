@@ -17,8 +17,7 @@ export class CalendarDetailsFormComponent implements OnInit {
     title: new FormControl('', Validators.required)
   });
 
-  get title()
-  {
+  get title() {
     return this.form.get('title');
   }
 
@@ -29,7 +28,7 @@ export class CalendarDetailsFormComponent implements OnInit {
   }
 
   createCalendar() {
-    let calendar = new Calendar (this.title.value);
+    let calendar = new Calendar();
     // input.value = '';
 
     this.service.createCalendar(calendar).subscribe(

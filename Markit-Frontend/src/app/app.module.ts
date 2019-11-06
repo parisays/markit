@@ -24,6 +24,7 @@ import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-
 import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
 import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
 import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
+import { PostIdeasComponent } from './post-ideas/post-ideas.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.compo
     UnauthorizedHeaderComponent,
     CalendarDetailsFormComponent,
     SocialAccountsConnectionComponent,
-    CalendarWizardComponent
+    CalendarWizardComponent,
+    PostIdeasComponent
   ],
   imports: [
     BrowserModule,
