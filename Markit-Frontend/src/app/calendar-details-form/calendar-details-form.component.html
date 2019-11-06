@@ -1,0 +1,22 @@
+<div class="container-style">
+<form class="form-style" [formGroup]="form">
+    <input style="display: none" type="file" #fileInput>
+    <button mat-fab color="accent" style="height: 100px; width: 100px;" (click)="fileInput.click()">
+        <span>Logo Image</span>
+    </button>
+    <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput placeholder="Enter new calendar title" autofocus>
+        <mat-icon matSuffix>edit</mat-icon>
+        <mat-error *ngIf="title.touched && title.value == ''">title is required!</mat-error>
+    </mat-form-field>
+    <button *ngIf="!loading" type="submit"
+        (click)="createCalendar()"
+        routerLink="/calendars"
+        [disabled]="!form.valid"
+        mat-raised-button color="primary">
+            Create Calendar
+    </button>
+    <mat-spinner *ngIf="loading" color="primary"></mat-spinner>
+</form>
+</div>

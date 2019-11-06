@@ -30,7 +30,13 @@ export class NewCalendarComponent implements OnInit {
   }
 
   createCalendar() {
-    let calendar = new Calendar (this.title.value);
+    // let calendar = new Calendar (this.title.value);
+    const calendar = {
+      name: this.title.value,
+      collaborators: [],
+      connectedPlatforms: '',
+      posts: []
+    } as Calendar;
     // input.value = '';
 
     this.service.createCalendar(calendar).subscribe(

@@ -20,6 +20,9 @@ import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthorizedHeaderComponent } from './authorized-header/authorized-header.component';
 import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-header.component';
+import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
+import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
+import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-
     NewPostComponent,
     TwitterAuthComponent,
     AuthorizedHeaderComponent,
-    UnauthorizedHeaderComponent
+    UnauthorizedHeaderComponent,
+    CalendarDetailsFormComponent,
+    SocialAccountsConnectionComponent,
+    CalendarWizardComponent
   ],
   imports: [
     BrowserModule,

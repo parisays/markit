@@ -1,0 +1,26 @@
+<div style="margin: auto; text-align: center;">
+    <mat-horizontal-stepper #stepper style="width: 50%; margin: auto; margin-top: 5%;">
+        <mat-step >
+            <ng-template matStepLabel>Calendar Details</ng-template>
+            <app-calendar-details-form></app-calendar-details-form>
+            
+            <mat-toolbar style="margin-top: 30%;">
+              <button style="margin:auto" matStepperNext
+                mat-raised-button color="primary">
+                    Next
+            </button>
+            </mat-toolbar>
+        </mat-step>
+        <mat-step >
+            <ng-template matStepLabel>Social Account Connection</ng-template>
+            <app-social-accounts-connection></app-social-accounts-connection>
+            <mat-toolbar style="margin-top: 20%; display:flex;">
+              <button mat-raised-button matStepperPrevious color="primary">Back</button>
+              <button style="margin: auto; margin-right: 0;" matStepperNext
+                mat-raised-button color="primary">
+                    Next
+              </button>
+            </mat-toolbar>
+        </mat-step>
+      </mat-horizontal-stepper>
+</div>
