@@ -18,6 +18,9 @@ import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
+import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
+import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
+import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { HeaderComponent } from './header/header.component';
     NewCalendarComponent,
     PostsComponent,
     NewPostComponent,
-    TwitterAuthComponent
+    TwitterAuthComponent,
+    CalendarDetailsFormComponent,
+    SocialAccountsConnectionComponent,
+    CalendarWizardComponent
   ],
   imports: [
     BrowserModule,
