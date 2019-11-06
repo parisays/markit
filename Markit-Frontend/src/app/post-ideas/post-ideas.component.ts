@@ -17,6 +17,31 @@ export class PostIdeasComponent implements OnInit {
       type: 'twitter',
       lable: '#test1',
       text: 'kljckjbv;kj oskjdfoidjkjn dijfodjn ;oijf ii'
+    },
+    {
+      type: 'pinterest',
+      lable: '#test2',
+      text: 'kljckjbv;kj oskjdfoidjkjn dijfodjn ;oijf ii'
+    },
+    {
+      type: 'facebook',
+      lable: '#test3',
+      text: 'kljckjbv;kj oskjdfoidjkjn dijfodjn ;oijf ii'
+    },
+    {
+      type: 'twitter',
+      lable: '#test1',
+      text: 'kljckjbv;kj oskjdfoidjkjn dijfodjn ;oijf ii'
+    },
+    {
+      type: 'pinterest',
+      lable: '#test2',
+      text: 'kljckjbv;kj oskjdfoidjkjn dijfodjn ;oijf ii'
+    },
+    {
+      type: 'facebook',
+      lable: '#test3',
+      text: 'kljckjbv;kj oskjdfoidjkjn dijfodjn ;oijf ii'
     }
   ];
   ngOnInit() {
