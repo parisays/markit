@@ -1,14 +1,12 @@
 export class Post {
-  id: number;
-  name: string;
+  id?: number;
+  subject: string;
   text: string;
   calendar: number;
+  status: string;
+}
 
-  published ? = false;
-
-  constructor(title: string, content: string, calendarId: number) {
-    this.name = title;
-    this.text = content;
-    this.calendar = calendarId;
-  }
+export enum PostStatus {
+  PUBLISHED = 'Published',
+  DRAFT = 'Draft'
 }
