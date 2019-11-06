@@ -22,7 +22,7 @@ class CalendarListView(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
-        request.data.update({'owner' : [user.id]})
+        request.data.update({'owner' : user.id})
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -31,7 +31,7 @@ class CalendarListView(generics.ListCreateAPIView):
 
     def list(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
-        calendar_list = Calendar.objects.filter(user=user)
+        calendar_list = Calendar.objects.filter(owner=user)
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)
 

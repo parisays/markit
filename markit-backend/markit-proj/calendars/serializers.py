@@ -23,10 +23,10 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', )
 
     def create(self, validated_data):
-        posts_data = validated_data.pop('posts')
+        # posts_data = validated_data.pop('posts')
         current_calendar = Calendar.objects.create(**validated_data)
-        for post in posts_data:
-            Post.objects.create(calendar=current_calendar, **post)
+        # for post in posts_data:
+        #     Post.objects.create(calendar=current_calendar, **post)
         return current_calendar
 
     def update(self, instance, validated_data):
