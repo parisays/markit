@@ -28,7 +28,12 @@ export class AuthenticationService {
             timeout(10000),
             map(data => {
               if (data && data.key) {
-                const newUser: User = { email, key: data.key };
+                const newUser: User = {
+                  firstName: data.firstName,
+                  lastName: data.lastName,
+                  email,
+                  key: data.key
+                }; // TODO fix logic of firstName lastName
                 localStorage.setItem('currentUser', JSON.stringify(newUser));
                 this.currentUserSubject.next(newUser);
                 return newUser;

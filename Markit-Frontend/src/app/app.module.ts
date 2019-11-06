@@ -19,6 +19,11 @@ import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
 import { PostDetailsFormComponent } from './post-details-form/post-details-form.component';
+import { AuthorizedHeaderComponent } from './authorized-header/authorized-header.component';
+import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-header.component';
+import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
+import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
+import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,12 @@ import { PostDetailsFormComponent } from './post-details-form/post-details-form.
     PostsComponent,
     NewPostComponent,
     TwitterAuthComponent,
-    PostDetailsFormComponent
+    PostDetailsFormComponent,
+    AuthorizedHeaderComponent,
+    UnauthorizedHeaderComponent,
+    CalendarDetailsFormComponent,
+    SocialAccountsConnectionComponent,
+    CalendarWizardComponent
   ],
   imports: [
     BrowserModule,

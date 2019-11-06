@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {PostService} from '@services';
-import {Post} from '@models';
+import {Post, PostStatus} from '@models';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
@@ -25,7 +25,7 @@ export class NewPostComponent implements OnInit {
   {
     return this.form.get('title');
   }
-  
+
   get content()
   {
     return this.form.get('content');
@@ -41,8 +41,14 @@ export class NewPostComponent implements OnInit {
   createPost() {
     // let calId = this.calendarId;
     // let s=this.title
-    let post = new Post(this.title.value, this.content.value, this.calendarId);
-    
+    // let post = new Post(this.title.value, this.content.value, this.calendarId);
+    let post = {
+      subject: this.title.value,
+      text: this.content.value,
+      calendar: this.calendarId,
+      status: PostStatus.DRAFT
+    };
+
     // this.title.value = '';
     // this.content.value = '';
 
