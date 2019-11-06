@@ -18,7 +18,7 @@ class Calendar(models.Model):
     owner = models.ForeignKey(User, related_name='owner', on_delete=models.CASCADE)
     connectedPlatforms = models.CharField(max_length=20,
                                            choices=PLATFORM_CHOICES,
-                                           default=None,
+                                           default="",
                                            null=True,
                                            blank=True)
 
