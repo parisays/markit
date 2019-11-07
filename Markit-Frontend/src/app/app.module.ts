@@ -9,18 +9,39 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MdComponentsModule } from './md-components/md-components.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SignupComponent } from './signup/signup.component';
-import { HomeComponent } from './home/home.component';
 import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CalendarsComponent } from './calendars/calendars.component';
+import { NewCalendarComponent } from './new-calendar/new-calendar.component';
+import { PostsComponent } from './posts/posts.component';
+import { NewPostComponent } from './new-post/new-post.component';
+import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
+import { HeaderComponent } from './header/header.component';
+import { AuthorizedHeaderComponent } from './authorized-header/authorized-header.component';
+import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-header.component';
+import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
+import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
+import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeaderComponent,
+    DashboardComponent,
+    CalendarsComponent,
+    NewCalendarComponent,
+    PostsComponent,
+    NewPostComponent,
+    TwitterAuthComponent,
+    AuthorizedHeaderComponent,
+    UnauthorizedHeaderComponent,
+    CalendarDetailsFormComponent,
+    SocialAccountsConnectionComponent,
+    CalendarWizardComponent
   ],
   imports: [
     BrowserModule,

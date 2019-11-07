@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@services';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,14 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
-
-  calendarNames = [
-    'first',
-    'second',
-    'third'
-  ];
-  
+  constructor(
+    private authService: AuthenticationService,
+  ) { }
   ngOnInit() {
   }
 
