@@ -23,6 +23,7 @@ table {
   .example-element-detail {
     overflow: hidden;
     display: flex;
+    flex-direction: column;
   }
   
   .example-element-diagram {
@@ -48,3 +49,6 @@ table {
     opacity: 0.5;
   }
   
+  .button-row > *{
+    float: right;
+  }
