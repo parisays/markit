@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AutorizedHeaderComponent } from './authorized-header.component';
+import { AuthorizedHeaderComponent } from './authorized-header.component';
 
 describe('AutorizedHeaderComponent', () => {
-  let component: AutorizedHeaderComponent;
-  let fixture: ComponentFixture<AutorizedHeaderComponent>;
+  let component: AuthorizedHeaderComponent;
+  let fixture: ComponentFixture<AuthorizedHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AutorizedHeaderComponent ]
+      declarations: [ AuthorizedHeaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AutorizedHeaderComponent);
+    fixture = TestBed.createComponent(AuthorizedHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
