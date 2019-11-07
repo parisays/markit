@@ -29,7 +29,13 @@ export class CalendarDetailsFormComponent implements OnInit {
   }
 
   createCalendar() {
-    let calendar = new Calendar (this.title.value);
+    // let calendar = new Calendar (this.title.value);
+    let calendar: Calendar = {
+      name: this.title.value,
+      collaborators: [],
+      connectedPlatforms: '',
+      posts: []
+    };
     // input.value = '';
 
     this.service.createCalendar(calendar).subscribe(

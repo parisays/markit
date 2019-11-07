@@ -18,6 +18,8 @@ import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
+import { AuthorizedHeaderComponent } from './authorized-header/authorized-header.component';
+import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-header.component';
 import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
 import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
 import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
@@ -35,6 +37,8 @@ import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.compo
     PostsComponent,
     NewPostComponent,
     TwitterAuthComponent,
+    AuthorizedHeaderComponent,
+    UnauthorizedHeaderComponent,
     CalendarDetailsFormComponent,
     SocialAccountsConnectionComponent,
     CalendarWizardComponent
