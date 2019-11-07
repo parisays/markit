@@ -24,6 +24,7 @@ import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-d
 import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
 import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
 import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
+import { ManualTestComponent } from './manual-test/manual-test.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
     UnauthorizedHeaderComponent,
     CalendarDetailsFormComponent,
     SocialAccountsConnectionComponent,
-    CalendarWizardComponent
+    CalendarWizardComponent,
+    ManualTestComponent
   ],
   imports: [
     BrowserModule,
