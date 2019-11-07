@@ -1,0 +1,13 @@
+<ul *ngFor="let idea of mockPostIdeas">
+  <div class="ripple-container"
+    style="border: 1px; border-color: rgba(128, 128, 128, 0.233); border-style: groove;"
+    matRipple>
+    <img name="image" mat-list-avatar style="height: 40px;" src="./assets/images/{{idea.type}}-logo.png">
+    <label for="image">
+        {{idea.lable}}
+    </label>
+    <p>
+      {{idea.text}}
+    </p>
+  </div>
+</ul>
