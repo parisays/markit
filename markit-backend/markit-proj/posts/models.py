@@ -19,11 +19,7 @@ class Post(models.Model):
     calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE, related_name='posts')
     text = models.TextField()
     status = models.CharField(max_length=9, choices=STATUS_CHOICES, default=Draft)
-    image = models.ImageField(upload_to=MEDIA_ROOT, default='postDefault.png')
+    image = models.ImageField(upload_to='posts/', default='postDefault.png')
 
     def __str__(self):
         return self.subject + ' | ' + self.calendar.name
-
-    # @classmethod
-    # def create_upload_path(cls):
-    #     return os.path.join(MEDIA_URL, str(cls.calendar.owner.id), str(cls.calendar.id), str(cls.id))
