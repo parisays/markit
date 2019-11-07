@@ -1,0 +1,22 @@
+.ripple-container {
+    cursor: pointer;
+    display: flex;
+
+    min-width: 100px;
+    min-height: 100px;
+    background: white;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .ripple-container > * {
+    margin: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }

@@ -17,8 +17,7 @@ export class CalendarDetailsFormComponent implements OnInit {
     title: new FormControl('', Validators.required)
   });
 
-  get title()
-  {
+  get title() {
     return this.form.get('title');
   }
 
