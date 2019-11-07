@@ -78,7 +78,7 @@ export class SignupComponent implements OnInit {
         console.log(err);
         this.error = err;
         let errMsg = 'Registration failed!';
-        if (err.error) {
+        if (err.error && err.statusText === 'Bad Request') {
           errMsg = [].concat(...Object.values(err.error))[0];
         }
         this.snackBar.open(errMsg, 'Dismiss');
