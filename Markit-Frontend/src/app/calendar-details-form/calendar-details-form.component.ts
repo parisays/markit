@@ -11,14 +11,13 @@ import { Calendar } from '@models';
 })
 export class CalendarDetailsFormComponent implements OnInit {
   loading = false;
-
+  isCreated = false;
 
   form = new FormGroup({
     title: new FormControl('', Validators.required)
   });
 
-  get title()
-  {
+  get title() {
     return this.form.get('title');
   }
 
@@ -29,10 +28,16 @@ export class CalendarDetailsFormComponent implements OnInit {
   }
 
   createCalendar() {
-    let calendar = new Calendar (this.title.value);
+    // let calendar = new Calendar (this.title.value);
+    let calendar: Calendar = {
+      name: this.title.value,
+      collaborators: [],
+      connectedPlatforms: '',
+      posts: []
+    };
     // input.value = '';
 
-    this.service.createCalendar(calendar).subscribe(
+    this.service.create(calendar).subscribe(
       response => {
         // calendar['id'] = response.json().id;
         console.log('new calendar has been added!');

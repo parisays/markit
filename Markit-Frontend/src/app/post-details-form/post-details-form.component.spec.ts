@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthorizedHeaderComponent } from './authorized-header.component';
+import { PostDetailsFormComponent } from './post-details-form.component';
 
-describe('AutorizedHeaderComponent', () => {
-  let component: AuthorizedHeaderComponent;
-  let fixture: ComponentFixture<AuthorizedHeaderComponent>;
+describe('PostDetailsFormComponent', () => {
+  let component: PostDetailsFormComponent;
+  let fixture: ComponentFixture<PostDetailsFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthorizedHeaderComponent ]
+      declarations: [ PostDetailsFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthorizedHeaderComponent);
+    fixture = TestBed.createComponent(PostDetailsFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

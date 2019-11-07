@@ -52,7 +52,7 @@ export class NewPostComponent implements OnInit {
     // this.title.value = '';
     // this.content.value = '';
 
-    this.service.createPost(post).subscribe(
+    this.service.create(post).subscribe(
       response => {
         // post['id'] = response.json().id;
         console.log('new post has been added!');

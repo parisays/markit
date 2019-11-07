@@ -10,7 +10,7 @@ import { MdComponentsModule } from './md-components/md-components.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SignupComponent } from './signup/signup.component';
 import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, MatToolbarModule} from '@angular/material';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { NewCalendarComponent } from './new-calendar/new-calendar.component';
@@ -18,11 +18,18 @@ import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
+import { PostDetailsFormComponent } from './post-details-form/post-details-form.component';
 import { AuthorizedHeaderComponent } from './authorized-header/authorized-header.component';
 import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-header.component';
 import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
 import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
 import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
+import { PostIdeasComponent } from './post-ideas/post-ideas.component';
+import { SocialChannelsSelectionComponent } from './social-channels-selection/social-channels-selection.component';
+import { BasePostContentComponent } from './base-post-content/base-post-content.component';
+import { PostWizardComponent } from './post-wizard/post-wizard.component';
+import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
+import { ManualTestComponent } from './manual-test/manual-test.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +44,17 @@ import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.compo
     PostsComponent,
     NewPostComponent,
     TwitterAuthComponent,
+    PostDetailsFormComponent,
     AuthorizedHeaderComponent,
     UnauthorizedHeaderComponent,
     CalendarDetailsFormComponent,
     SocialAccountsConnectionComponent,
-    CalendarWizardComponent
+    CalendarWizardComponent,
+    ManualTestComponent,
+    PostIdeasComponent,
+    SocialChannelsSelectionComponent,
+    BasePostContentComponent,
+    PostWizardComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +70,9 @@ import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.compo
     MatSnackBarModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,33 +1,32 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {environment} from '@environments/environment';
 import {Post} from '@models';
-import {AuthenticationService} from '@app/_services/auth.service';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
-  private createPostEndpoint = `${environment.apiUrl}/api/v1.0/calendar/post/`;
-  private listPostsEndpoint = `${environment.apiUrl}/api/v1.0/calendar/post/?calendar_id=`;
+export class PostService extends DataService {
+  private endpoint: string;
+  // private listPostsEndpoint = `${environment.apiUrl}/calendar/post/?calendar_id=`;
 
-  constructor(private http: HttpClient, private  authService: AuthenticationService) {
+  constructor(http: HttpClient) {
+    const endpoint = `${environment.apiUrl}/calendar/post/`;
+    super(endpoint, http);
+    this.endpoint = endpoint;
   }
 
-  getPosts(calendarId: number) {
-    return this.http.get<Post[]>(this.listPostsEndpoint + calendarId.toString(), {
-      headers: new HttpHeaders({
-        Authorization: `Token ${this.authService.currentUserValue.key}`
-      })
-    });// todo give calendar id in the url
+  getCalendarPosts(calendarId: number) {
+    return super.getAll(new HttpParams().set('calendar_id', calendarId.toString()));
   }
 
-  createPost(post) {
-    return this.http.post(this.createPostEndpoint, JSON.stringify((post)), {
-      headers: new HttpHeaders({
-        Authorization: `Token ${this.authService.currentUserValue.key}`
-      })
-    });
-  }
+  // getPosts(calendarId: number) {
+  //   return this.http.get<Post[]>(this.listPostsEndpoint + calendarId.toString());
+  // }
+
+  // createPost(post) {
+  //   return this.http.post(this.createPostEndpoint, post);
+  // }
 }
