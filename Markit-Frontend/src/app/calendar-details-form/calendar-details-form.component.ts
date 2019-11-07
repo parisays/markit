@@ -11,7 +11,7 @@ import { Calendar } from '@models';
 })
 export class CalendarDetailsFormComponent implements OnInit {
   loading = false;
-
+  isCreated = false;
 
   form = new FormGroup({
     title: new FormControl('', Validators.required)
