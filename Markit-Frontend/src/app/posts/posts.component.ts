@@ -76,7 +76,8 @@ export class PostsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('id');
-      this.service.getPosts(this.calendarId).subscribe(response => {
+      this.service.getCalendarPosts(this.calendarId)
+      .subscribe(response => {
         console.log(response);
         this.dataSource = response as Post[]; // todo get lists
         console.log(this.dataSource);
