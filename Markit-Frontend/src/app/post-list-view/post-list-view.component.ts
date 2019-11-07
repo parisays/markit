@@ -70,7 +70,7 @@ export class PostListViewComponent implements OnInit {
 
   dataSource: Post[]; // data source is posts // public posts: Post[];
   // dataSource = this.ELEMENT_DATA;
-  columnsToDisplay = ['connected-platforms', 'subject', 'status'];
+  columnsToDisplay = ['subject', 'connected-platforms', 'status'];
   expandedElement: Post | null;
 
   calendarId: number;
