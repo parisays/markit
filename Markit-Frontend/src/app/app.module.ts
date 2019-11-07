@@ -18,11 +18,16 @@ import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
+import { PostDetailsFormComponent } from './post-details-form/post-details-form.component';
 import { AuthorizedHeaderComponent } from './authorized-header/authorized-header.component';
 import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-header.component';
 import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
 import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
 import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
+import { PostIdeasComponent } from './post-ideas/post-ideas.component';
+import { SocialChannelsSelectionComponent } from './social-channels-selection/social-channels-selection.component';
+import { BasePostContentComponent } from './base-post-content/base-post-content.component';
+import { PostWizardComponent } from './post-wizard/post-wizard.component';
 import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
 import { ManualTestComponent } from './manual-test/manual-test.component';
 
@@ -39,12 +44,17 @@ import { ManualTestComponent } from './manual-test/manual-test.component';
     PostsComponent,
     NewPostComponent,
     TwitterAuthComponent,
+    PostDetailsFormComponent,
     AuthorizedHeaderComponent,
     UnauthorizedHeaderComponent,
     CalendarDetailsFormComponent,
     SocialAccountsConnectionComponent,
     CalendarWizardComponent,
-    ManualTestComponent
+    ManualTestComponent,
+    PostIdeasComponent,
+    SocialChannelsSelectionComponent,
+    BasePostContentComponent,
+    PostWizardComponent,
   ],
   imports: [
     BrowserModule,
