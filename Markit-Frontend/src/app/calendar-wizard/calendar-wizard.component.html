@@ -6,12 +6,14 @@
 </mat-toolbar>
 <div style="margin: auto; text-align: center;">
     <mat-horizontal-stepper #stepper style="width: 50%; margin: auto; margin-top: 2%;">
-        <mat-step >
+        <mat-step ><!-- labels="details" -->
             <ng-template matStepLabel>Calendar Details</ng-template>
             <app-calendar-details-form></app-calendar-details-form>
         </mat-step>
         <mat-step >
-            <ng-template matStepLabel>Social Account Connection</ng-template>
+            <ng-template matStepLabel ><!-- labels="social-accounts" -->
+                Social Account Connection
+            </ng-template>
             <app-social-accounts-connection></app-social-accounts-connection>
         </mat-step>
       </mat-horizontal-stepper>
