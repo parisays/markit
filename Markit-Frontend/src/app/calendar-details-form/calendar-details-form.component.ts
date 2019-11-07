@@ -38,7 +38,7 @@ export class CalendarDetailsFormComponent implements OnInit {
     };
     // input.value = '';
 
-    this.service.createCalendar(calendar).subscribe(
+    this.service.create(calendar).subscribe(
       response => {
         // calendar['id'] = response.json().id;
         console.log('new calendar has been added!');
