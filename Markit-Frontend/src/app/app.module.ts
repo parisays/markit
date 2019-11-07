@@ -29,6 +29,7 @@ import { SocialChannelsSelectionComponent } from './social-channels-selection/so
 import { BasePostContentComponent } from './base-post-content/base-post-content.component';
 import { PostWizardComponent } from './post-wizard/post-wizard.component';
 import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
+import { ManualTestComponent } from './manual-test/manual-test.component';
 
 @NgModule({
   declarations: [
@@ -49,10 +50,11 @@ import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
     CalendarDetailsFormComponent,
     SocialAccountsConnectionComponent,
     CalendarWizardComponent,
+    ManualTestComponent,
     PostIdeasComponent,
     SocialChannelsSelectionComponent,
     BasePostContentComponent,
-    PostWizardComponent
+    PostWizardComponent,
   ],
   imports: [
     BrowserModule,

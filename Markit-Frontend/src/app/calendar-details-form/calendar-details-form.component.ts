@@ -11,7 +11,7 @@ import { Calendar } from '@models';
 })
 export class CalendarDetailsFormComponent implements OnInit {
   loading = false;
-
+  isCreated = false;
 
   form = new FormGroup({
     title: new FormControl('', Validators.required)
@@ -37,7 +37,7 @@ export class CalendarDetailsFormComponent implements OnInit {
     };
     // input.value = '';
 
-    this.service.createCalendar(calendar).subscribe(
+    this.service.create(calendar).subscribe(
       response => {
         // calendar['id'] = response.json().id;
         console.log('new calendar has been added!');

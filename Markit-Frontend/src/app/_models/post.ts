@@ -4,6 +4,7 @@ export class Post {
   text: string;
   calendar: number;
   status: string;
+  image?: string;
 }
 
 export enum PostStatus {
