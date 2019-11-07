@@ -27,6 +27,7 @@ import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.compo
 import { PostIdeasComponent } from './post-ideas/post-ideas.component';
 import { SocialChannelsSelectionComponent } from './social-channels-selection/social-channels-selection.component';
 import { BasePostContentComponent } from './base-post-content/base-post-content.component';
+import { PostWizardComponent } from './post-wizard/post-wizard.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { BasePostContentComponent } from './base-post-content/base-post-content.
     CalendarWizardComponent,
     PostIdeasComponent,
     SocialChannelsSelectionComponent,
-    BasePostContentComponent
+    BasePostContentComponent,
+    PostWizardComponent
   ],
   imports: [
     BrowserModule,

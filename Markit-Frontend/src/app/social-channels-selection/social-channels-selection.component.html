@@ -1,4 +1,4 @@
-<body style="display: flex;">
+<body style="display: flex; flex-direction: column; margin-top: 20px;">
     <div style="margin: auto;">
         <img *ngIf="isTwitterSelected" src="./assets/images/twitter-logo.png" (click)="isTwitterSelected = false;">
         <img *ngIf="!isTwitterSelected" class="gray-image" src="./assets/images/twitter-logo.png" (click)="isTwitterSelected = true;">
@@ -6,5 +6,9 @@
         <img class="gray-image" src="./assets/images/pinterest-logo.png" (click)="isPinterstSelected = true;">
         <!-- <img *ngIf="isFacebookSelected" src="./assets/images/facebook-logo.png" (click)="isFacebookSelected = false;"> -->
         <img class="gray-image" src="./assets/images/facebook-logo.png" (click)="isFacebookSelected = true;">
+    </div>
+    <div style="display: flex;margin-top: 5%">
+        <button style="margin-left: 5%; size: 70px;" mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button style="margin: auto; margin-right: 10%;" mat-raised-button color="primary" matStepperNext>Next</button>
     </div>
 </body>

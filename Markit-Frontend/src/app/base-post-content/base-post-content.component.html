@@ -1,4 +1,4 @@
-<body style="display: flex;">
+<body style="display: flex; flex-direction: column;margin-top: 5%">
     <div style="margin: auto; display: flex; flex-direction: column;">
         <mat-form-field style="width: 500px" appearance="outline">
             <mat-label>Content</mat-label>
@@ -20,5 +20,9 @@
                 <mat-icon color="gray">library_books</mat-icon>
             </button>
         </div>
+    </div>
+    <div style="display: flex; margin-top: 5%">
+        <button style="margin-left: 5%;" mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button style="margin: auto; margin-right: 10%;" mat-raised-button color="primary" matStepperNext>Next</button>
     </div>
 </body>
