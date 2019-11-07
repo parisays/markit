@@ -11,7 +11,7 @@ export class DataService {
   constructor(private url: string, private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<any>(this.url).pipe(
+    return this.http.get(this.url).pipe(
       catchError(this.handleError)
     );
   }
@@ -23,6 +23,12 @@ export class DataService {
   }
 
   update(resource) {
+    return this.http.put(this.url + '/' + resource.id, resource).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  partialUpdate(resource) {
     return this.http.patch(this.url + '/' + resource.id, resource).pipe(
       catchError(this.handleError)
     );
