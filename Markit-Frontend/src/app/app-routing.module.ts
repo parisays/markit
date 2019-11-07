@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import {CalendarsComponent} from '@app/calendars/calendars.component';
 import {NewCalendarComponent} from '@app/new-calendar/new-calendar.component';
-import {PostsComponent} from '@app/posts/posts.component';
+import {PostListViewComponent} from '@app/post-list-view/post-list-view.component';
 import {NewPostComponent} from '@app/new-post/new-post.component';
 import {AuthGuard} from '@app/_helpers/auth.guard';
 import {TwitterAuthComponent} from '@app/twitter-auth/twitter-auth.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'register', component: SignupComponent },
   { path: 'calendars/:id/create', component: NewPostComponent, canActivate: [AuthGuard]},
   { path: 'calendars/create', component: NewCalendarComponent, canActivate: [AuthGuard]},
-  { path: 'calendars/:id', component: PostsComponent, canActivate: [AuthGuard]},
+  { path: 'calendars/:id', component: PostListViewComponent, canActivate: [AuthGuard]},
   { path: 'calendars', component: CalendarsComponent, canActivate: [AuthGuard]},
   // todo pathMatch:  'full'
   // todo canActivate: [AuthGuard]
