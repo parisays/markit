@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'users',
     'calendars',
     'posts',
+    'socials',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
