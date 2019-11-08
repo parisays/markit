@@ -1,12 +1,23 @@
 <body>
-    <div class="calendar-list mat-elevation-z5">
-        <app-calendar-list-view></app-calendar-list-view>
-        <button style="margin: auto; margin-right: 5px; margin-bottom: 5px;" mat-mini-fab color="primary"
-                routerLink="/calendars/new">
-            <mat-icon>add</mat-icon>
-        </button>
+    <div class="top-row">
+        <div class="calendar-list mat-elevation-z5">
+            <app-calendar-list-view></app-calendar-list-view>
+            <button style="margin: auto; margin-right: 5px; margin-bottom: 5px;" mat-mini-fab color="primary"
+                    routerLink="/calendars/new">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="post-ideas-style mat-elevation-z5" >
+            <h1 style="margin-left: 10px; color: rgb(16, 29, 87);">
+                <mat-icon style="margin: 10px; font-size: 30px;">star_border</mat-icon>
+                Post Ideas
+            </h1>
+            <div style="overflow: scroll; height: 320px;">
+            <app-post-ideas></app-post-ideas>
+            </div>
+        </div>
     </div>
-    <div class="post-ideas-style mat-elevation-z5" >
-        <app-post-ideas></app-post-ideas>
+    <div style="margin: auto;">
+        <app-post-overview-simple></app-post-overview-simple>
     </div>
 </body>
