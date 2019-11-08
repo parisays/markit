@@ -28,31 +28,13 @@ export class SocialAccountsConnectionComponent implements OnInit {
     }
   ];
 
-  constructor(private service: CalendarService, private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
     });
-    // if (this.calendarId) {
-    //   this.service.get(this.calendarId).subscribe(response => {
-    //       this.calendar = response;
-    //     }
-    //   );
-    // }
   }
 
-  editCalendar() {
-    if (this.calendarId) {
-      this.service.get(this.calendarId).subscribe(response => {
-          this.calendar = response;
-          // todo
-          this.service.update(this.calendar);
-        }
-      );
-    }
-
-
-  }
 }
