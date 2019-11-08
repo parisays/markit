@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild, AfterViewInit, ChangeDetectorRef} from '@angular/core';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CalendarService} from '@services';
@@ -10,28 +10,21 @@ import { MatStepper } from '@angular/material';
   templateUrl: './calendar-wizard.component.html',
   styleUrls: ['./calendar-wizard.component.scss']
 })
-export class CalendarWizardComponent implements OnInit {
-  @ViewChild('stepper', { static: false }) stepper : MatStepper;
+export class CalendarWizardComponent implements AfterViewInit {
+  @ViewChild('stepper', { static: false }) stepper: MatStepper;
 
   constructor(private location: Location,
               private route: ActivatedRoute,
-              private router: Router,
-              private service: CalendarService) {
-  }
+              private service: CalendarService,
+              private changeDetector: ChangeDetectorRef) {
+    }
 
-  calendarId: number;
-  calendar/*: Calendar*/;
-  // @Output() animationDone: EventEmitter<void>;
+    calendarId: number;
+    calendar/*: Calendar*/;
+    // @Output() animationDone: EventEmitter<void>;
 
-  ngOnInit() {
-    // this.stepper.animationDone.subscribe(() => {
-    //   if (this.stepper.selectedIndex === 0) {
-    //     this.location.go(`/calendars/${this.calendarId}/wizard/details`);
-    //   }
-    //   if (this.stepper.selectedIndex === 1) {
-    //     this.location.go(`/calendars/${this.calendarId}/wizard/social-accounts`);
-    //   }
-    // });
+  ngAfterViewInit() {
+    this.stepperSelectionChange();
 
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
@@ -39,13 +32,13 @@ export class CalendarWizardComponent implements OnInit {
 
     console.log(this.calendarId);
 
-    if (this.calendarId) { // edit existing calendar
+    if (this.calendarId || this.calendarId === 0) { // edit existing calendar
       this.route.url.subscribe((value) => {
-        console.log(this.router.url);
-        if (this.router.url === `/calendars/${this.calendarId}/wizard/details`) {
+        console.log(value);
+        if (this.location.isCurrentPathEqualTo(`/calendars/${this.calendarId}/wizard/details`)) {
           this.stepper.selectedIndex = 0;
         }
-        if (this.router.url === `/calendars/${this.calendarId}/wizard/social-accounts`) {
+        if (this.location.isCurrentPathEqualTo(`/calendars/${this.calendarId}/wizard/social-accounts`)) {
           this.stepper.selectedIndex = 1;
         }
       });
@@ -54,9 +47,17 @@ export class CalendarWizardComponent implements OnInit {
     //   this.stepper.selectedIndex = 0;
     // } todo check if necessary
 
+    this.changeDetector.detectChanges();
   }
 
   stepperSelectionChange() {// todo
-    
+    this.stepper.animationDone.subscribe(() => {
+      if (this.stepper.selectedIndex === 0) {
+        this.location.go(`/calendars/${this.calendarId}/wizard/details`);
+      }
+      if (this.stepper.selectedIndex === 1) {
+        this.location.go(`/calendars/${this.calendarId}/wizard/social-accounts`);
+      }
+    });
   }
 }
