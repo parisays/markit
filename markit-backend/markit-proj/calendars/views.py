@@ -1,19 +1,13 @@
-from allauth.socialaccount.models import SocialApp, SocialToken, SocialAccount
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-import tweepy
 from calendars.models import Calendar
 from calendars.serializers import (
     NestedCalendarSerializer,
-    CalendarSerializer,
     CalendarUpdateSerializer,
 )
 from users.models import User
-from posts.models import Post
-from posts.serializers import PostSerializer
 
 
 class CalendarListView(generics.ListCreateAPIView):
