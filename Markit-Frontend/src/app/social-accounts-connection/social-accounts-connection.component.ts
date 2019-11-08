@@ -8,8 +8,8 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./social-accounts-connection.component.scss']
 })
 export class SocialAccountsConnectionComponent implements OnInit {
-
-
+  private calendarId: number;
+  private calendar;
   socialAccounts = [
     {
       image: '../assets/images/twitter-logo.png',
@@ -28,19 +28,13 @@ export class SocialAccountsConnectionComponent implements OnInit {
     }
   ];
 
-  constructor(private service: CalendarService, private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute) {
   }
-
-  calendarId: number;
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
     });
-
   }
 
-  editCalendar() {
-
-  }
 }

@@ -29,19 +29,19 @@ export class DataService {
   }
 
   update(resource) {
-    return this.http.put(this.url + '/' + resource.id, resource).pipe(
+    return this.http.put(this.url + resource.id + '/', resource).pipe(
       catchError(this.handleError)
     );
   }
 
   partialUpdate(resource) {
-    return this.http.patch(this.url + '/' + resource.id, resource).pipe(
+    return this.http.patch(this.url + resource.id + '/', resource).pipe(
       catchError(this.handleError)
     );
   }
 
   delete(id) {
-    return this.http.delete(this.url + '/' + id).pipe(
+    return this.http.delete(this.url + id + '/').pipe(
       catchError(this.handleError)
     );
   }
