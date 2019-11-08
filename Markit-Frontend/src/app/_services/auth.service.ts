@@ -10,8 +10,8 @@ import { User } from '@models';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private loginEndpoint = `${environment.apiUrl}/api/v1.0/auth/rest-auth/login/`;
-    private registerEndpoint = `${environment.apiUrl}/api/v1.0/auth/rest-auth/registration/`;
+    private loginEndpoint = `${environment.apiUrl}/auth/rest-auth/login/`;
+    private registerEndpoint = `${environment.apiUrl}/auth/rest-auth/registration/`;
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -28,7 +28,12 @@ export class AuthenticationService {
             timeout(10000),
             map(data => {
               if (data && data.key) {
-                const newUser: User = { email, key: data.key };
+                const newUser: User = {
+                  firstName: data.firstName,
+                  lastName: data.lastName,
+                  email,
+                  key: data.key
+                }; // TODO fix logic of firstName lastName
                 localStorage.setItem('currentUser', JSON.stringify(newUser));
                 this.currentUserSubject.next(newUser);
                 return newUser;

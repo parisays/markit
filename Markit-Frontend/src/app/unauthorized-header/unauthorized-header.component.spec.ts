@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { UnauthorizedHeaderComponent } from './unauthorized-header.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('UnauthorizedHeaderComponent', () => {
+  let component: UnauthorizedHeaderComponent;
+  let fixture: ComponentFixture<UnauthorizedHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ UnauthorizedHeaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(UnauthorizedHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
