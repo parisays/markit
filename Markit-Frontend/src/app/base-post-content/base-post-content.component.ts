@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-base-post-content',
@@ -8,7 +8,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class BasePostContentComponent implements OnInit {
 
-  uploadedImage: string;
+  private selectedFile: File;
+  private imageUrl;
+  private imageName;
+  private imagePath: string;
+
   form: FormGroup = this.fb.group(
     {
       content: ['', [
@@ -17,10 +21,33 @@ export class BasePostContentComponent implements OnInit {
     }
   );
 
+  constructor(private fb: FormBuilder) {
+  }
+
   get content() {
     return this.form.get('content');
   }
-  constructor(private fb: FormBuilder) { }
+
+  onFileChanged(event) {
+    if (event.target.files.length === 0) {
+      return;
+    }
+
+    if (event.target.files[0].type.match(/image\/*/) == null) {
+      console.log('Only images are supported.');
+      return;
+    }
+
+    let reader = new FileReader();
+    this.imagePath = event.target.files;
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (e) => {
+      this.imageUrl = reader.result;
+    };
+
+    this.selectedFile = event.target.files[0];
+    this.imageName = this.selectedFile.name;
+  }
 
   ngOnInit() {
   }
