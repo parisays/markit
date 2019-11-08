@@ -1,6 +1,20 @@
 .calendar-list{
+    display: flex;
+    flex-direction: column;
     margin: 3%;
     margin-left: 15%;
-    width: 35%;
-    background: #fff;
+    height: 400px; 
+    width: 32%; 
+    overflow: scroll; 
+    background: rgba(216, 216, 216, 0.164);
+}
+.post-ideas-style{
+    margin: 3%;
+    height: 400px; 
+    width: 32%; 
+    overflow: scroll; 
+    background: rgba(216, 216, 216, 0.164);
+}
+body{
+    display: flex;
 }

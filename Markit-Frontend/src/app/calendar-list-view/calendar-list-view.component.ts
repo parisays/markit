@@ -5,11 +5,11 @@ import {ActivatedRoute} from '@angular/router';
 import {Calendar} from '@models';
 
 @Component({
-  selector: 'app-calendars',
-  templateUrl: './calendars.component.html',
-  styleUrls: ['./calendars.component.scss']
+  selector: 'app-calendar-list-view',
+  templateUrl: './calendar-list-view.component.html',
+  styleUrls: ['./calendar-list-view.component.scss']
 })
-export class CalendarsComponent implements OnInit {
+export class CalendarListViewComponent implements OnInit {
   calendars: Calendar[];
   loading = false;
 

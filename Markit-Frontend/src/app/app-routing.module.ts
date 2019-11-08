@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
-import {CalendarsComponent} from '@app/calendars/calendars.component';
+import {CalendarListViewComponent} from '@app/calendar-list-view/calendar-list-view.component';
 import {PostListViewComponent} from '@app/post-list-view/post-list-view.component';
 import {NewPostComponent} from '@app/new-post/new-post.component';
 import {AuthGuard} from '@app/_helpers/auth.guard';
