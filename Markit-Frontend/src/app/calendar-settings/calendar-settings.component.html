@@ -1,3 +1,9 @@
+<mat-toolbar class="mat-elevation-z5" style="background: white;">
+    <h1 style="font-size: 40px;margin:auto; margin-right: 23%;">Calendar Setting</h1>
+    <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button>
+        <mat-icon style="font-size: 30px;">close</mat-icon>
+    </button>
+</mat-toolbar>
 <mat-tab-group style="margin-top: 3%;" mat-align-tabs="center">
         <mat-tab label="Details">
             <div class="container-style">
@@ -24,6 +30,8 @@
         </mat-tab>
 
         <mat-tab label="Social Accounts Connection">
-            <!-- <app-social-accounts-connection></app-social-accounts-connection> -->
+            <div style="width: 60%; margin: auto; ">
+                <app-social-accounts-connection></app-social-accounts-connection>
+            </div>
         </mat-tab>
 </mat-tab-group>

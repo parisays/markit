@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'calendars/:calendarId/wizard/details', component: CalendarWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/wizard/social-accounts', component: CalendarWizardComponent, canActivate: [AuthGuard]},
 
-  {path: 'calendars/:calendarId/posts', component: PostsComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/posts', component: PostListViewComponent, canActivate: [AuthGuard]},
 
   // { path: 'calendars/:calendarId/edit', component: CalendarsSettingsComponent, canActivate: [AuthGuard]},
 
