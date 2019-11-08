@@ -10,20 +10,21 @@ import {Calendar} from '@models';
   styleUrls: ['./calendar-list-view.component.scss']
 })
 export class CalendarListViewComponent implements OnInit {
-  calendars: Calendar[];
-  loading = false;
+  private calendars; // : Calendar[]
+  private loading;
 
   constructor(private service: CalendarService, private  authService: AuthenticationService) {
   }
 
   ngOnInit() {
-    console.log('calendars component running');
-    this.service.getAll().subscribe((response: any) => {
+    this.loading = true;
+
+    this.service.getAll().subscribe((response/*: any*/) => {
       console.log(response);
       this.calendars = response;
-      // = response.json();//todo
     }, err => {
       console.log(err);
+      this.loading = false;
     });
   }
 }
