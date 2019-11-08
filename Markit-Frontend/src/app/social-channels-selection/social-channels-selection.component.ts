@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SocialChannelsSelectionComponent implements OnInit {
 
   isTwitterSelected = false;
-  isPinterstSelected = false;
+  isPinterestSelected = false;
   isFacebookSelected = false;
   constructor() { }
 
