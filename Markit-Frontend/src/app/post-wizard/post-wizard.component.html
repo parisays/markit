@@ -1,7 +1,7 @@
 <body style="display:flex; flex-direction: column;">
     <mat-toolbar class="mat-elevation-z5" style="background: white;">
         <h1 style="font-size: 40px;margin:auto; margin-left: 15%;">Post Wizard</h1>
-        <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button>
+        <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button [routerLink]="['calendars', calendarId, 'posts']">
             <mat-icon style="font-size: 30px;">close</mat-icon>
         </button>
     </mat-toolbar>
