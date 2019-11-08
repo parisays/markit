@@ -5,25 +5,26 @@ import {ActivatedRoute} from '@angular/router';
 import {Calendar} from '@models';
 
 @Component({
-  selector: 'app-calendars',
-  templateUrl: './calendars.component.html',
-  styleUrls: ['./calendars.component.scss']
+  selector: 'app-calendar-list-view',
+  templateUrl: './calendar-list-view.component.html',
+  styleUrls: ['./calendar-list-view.component.scss']
 })
-export class CalendarsComponent implements OnInit {
-  calendars: Calendar[];
-  loading = false;
+export class CalendarListViewComponent implements OnInit {
+  private calendars; // : Calendar[]
+  private loading;
 
   constructor(private service: CalendarService, private  authService: AuthenticationService) {
   }
 
   ngOnInit() {
-    console.log('calendars component running');
-    this.service.getAll().subscribe((response: any) => {
+    this.loading = true;
+
+    this.service.getAll().subscribe((response/*: any*/) => {
       console.log(response);
       this.calendars = response;
-      // = response.json();//todo
     }, err => {
       console.log(err);
+      this.loading = false;
     });
   }
 }
