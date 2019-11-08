@@ -16,6 +16,12 @@ export class DataService {
     );
   }
 
+  get(id) {
+    return this.http.get(`${this.url}${id.toString()}/`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   create(resource) {
     return this.http.post(this.url, resource).pipe(
       catchError(this.handleError)
