@@ -10,8 +10,8 @@ import { User } from '@models';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private loginEndpoint = `${environment.apiUrl}/auth/rest-auth/login/`;
-    private registerEndpoint = `${environment.apiUrl}/auth/rest-auth/registration/`;
+    private loginEndpoint = `${environment.apiUrl}auth/rest-auth/login/`;
+    private registerEndpoint = `${environment.apiUrl}auth/rest-auth/registration/`;
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));

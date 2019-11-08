@@ -12,7 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CalendarsComponent } from './calendars/calendars.component';
+import { CalendarListViewComponent } from './calendar-list-view/calendar-list-view.component';
 import { PostListViewComponent } from './post-list-view/post-list-view.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
@@ -29,7 +29,9 @@ import { BasePostContentComponent } from './base-post-content/base-post-content.
 import { PostWizardComponent } from './post-wizard/post-wizard.component';
 import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
 import { ManualTestComponent } from './manual-test/manual-test.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
+import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     SignupComponent,
     DashboardComponent,
     HeaderComponent,
-    CalendarsComponent,
+    CalendarListViewComponent,
     PostListViewComponent,
     NewPostComponent,
     TwitterAuthComponent,
@@ -53,6 +55,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     SocialChannelsSelectionComponent,
     BasePostContentComponent,
     PostWizardComponent,
+    CalendarSettingsComponent,
+    PostOverviewSimpleComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,6 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatCardModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatStepperModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
