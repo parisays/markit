@@ -1,18 +1,12 @@
-<div style="height: 400px;"> 
-    <h3>Social Accounts</h3>
-    <mat-list style="display: flex;background: rgba(180, 182, 196, 0.123); border-bottom :rgba(180, 180, 180, 0.466); border-bottom-width: 2px;
+<div style="height: 400px;">
+  <h3>Social Accounts</h3>
+  <mat-list style="display: flex;background: rgba(180, 182, 196, 0.123); border-bottom :rgba(180, 180, 180, 0.466); border-bottom-width: 2px;
     border-bottom-style:groove;" role="list" *ngFor="let sac of socialAccounts">
-        <mat-list-item role="listitem">
-            <img mat-list-avatar                                                                                                                                                                                                                                                                                                                                         style="max-height: 30px; margin: 10px;" [src]="sac.image">
-            {{sac.name}}
-        </mat-list-item>
-        <button mat-raised-button color="primary" style="float: right; margin: 5px;">Connect</button>
-    </mat-list>
-</div>
-<mat-toolbar style="margin-top: 20%; display:flex;">
-    <button mat-raised-button matStepperPrevious color="primary">Back</button>
-    <button style="margin: auto; margin-right: 0;" matStepperNext
-        mat-raised-button color="primary">
-            Finnish
+    <mat-list-item role="listitem">
+      <img mat-list-avatar style="max-height: 30px; margin: 10px;" [src]="sac.image">
+      {{sac.name}}
+    </mat-list-item>
+    <button mat-raised-button color="primary" style="float: right; margin: 5px;" [routerLink]="[sac.authLink]">Connect
     </button>
-</mat-toolbar>
+  </mat-list>
+</div>

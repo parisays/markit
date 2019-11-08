@@ -12,8 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CalendarsComponent } from './calendars/calendars.component';
-import { NewCalendarComponent } from './new-calendar/new-calendar.component';
+import { CalendarListViewComponent } from './calendar-list-view/calendar-list-view.component';
 import { PostListViewComponent } from './post-list-view/post-list-view.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
@@ -30,6 +29,8 @@ import { BasePostContentComponent } from './base-post-content/base-post-content.
 import { PostWizardComponent } from './post-wizard/post-wizard.component';
 import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
 import { ManualTestComponent } from './manual-test/manual-test.component';
+import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
+import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
 
 @NgModule({
   declarations: [
@@ -38,9 +39,7 @@ import { ManualTestComponent } from './manual-test/manual-test.component';
     SignupComponent,
     DashboardComponent,
     HeaderComponent,
-    DashboardComponent,
-    CalendarsComponent,
-    NewCalendarComponent,
+    CalendarListViewComponent,
     PostListViewComponent,
     NewPostComponent,
     TwitterAuthComponent,
@@ -55,6 +54,8 @@ import { ManualTestComponent } from './manual-test/manual-test.component';
     SocialChannelsSelectionComponent,
     BasePostContentComponent,
     PostWizardComponent,
+    CalendarSettingsComponent,
+    PostOverviewSimpleComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +69,7 @@ import { ManualTestComponent } from './manual-test/manual-test.component';
     MatListModule,
     MatCardModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
