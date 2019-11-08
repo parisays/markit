@@ -16,6 +16,12 @@ export class DataService {
     );
   }
 
+  get(id) {
+    return this.http.get(`${this.url}${id.toString()}/`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   create(resource) {
     return this.http.post(this.url, resource).pipe(
       catchError(this.handleError)
@@ -23,19 +29,19 @@ export class DataService {
   }
 
   update(resource) {
-    return this.http.put(this.url + '/' + resource.id, resource).pipe(
+    return this.http.put(this.url + resource.id + '/', resource).pipe(
       catchError(this.handleError)
     );
   }
 
   partialUpdate(resource) {
-    return this.http.patch(this.url + '/' + resource.id, resource).pipe(
+    return this.http.patch(this.url + resource.id + '/', resource).pipe(
       catchError(this.handleError)
     );
   }
 
   delete(id) {
-    return this.http.delete(this.url + '/' + id).pipe(
+    return this.http.delete(this.url + id + '/').pipe(
       catchError(this.handleError)
     );
   }
