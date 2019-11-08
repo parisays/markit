@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from allauth.socialaccount.models import SocialApp, SocialToken
+from allauth.socialaccount.models import SocialApp, SocialToken, SocialAccount
 
 class SocialAppSerializer(serializers.ModelSerializer):
     """

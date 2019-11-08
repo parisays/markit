@@ -1,12 +1,14 @@
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
 from rest_auth.registration.views import SocialConnectView
+from rest_auth.registration.serializers import SocialAccountSerializer
 from rest_auth.social_serializers import TwitterConnectSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.test import APIClient
 from rest_framework.authtoken.models import Token
+from rest_framework import status
 import tweepy
 from users.models import User
 from posts.models import Post
@@ -98,9 +100,22 @@ class CustomTwitterAccountConnectView(APIView):
         token = Token.objects.get(user=request.user)
         client = APIClient()
         client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
-        response = client.post('/api/v1.0/auth/rest-auth/twitter/connect/', {"access_token": twitter_auth.access_token,
-                               "token_secret": twitter_auth.access_token_secret}, format='json')
-        return Response(response.data)
+        response = client.post('/api/v1.0/socials/rest-auth/twitter/connect/',
+                               {"access_token": twitter_auth.access_token,
+                                "token_secret": twitter_auth.access_token_secret}, format='json')
+        if self.connect_calendar(request, calendar_id, client):
+            return Response(response.data)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def connect_calendar(self, request, calendar_id, client):
+        user = User.objects.get(email=request.user)
+        social_account = SocialAccount.objects.filter(user=user).order_by('id')[0]
+        social_account_data = SocialAccountSerializer(social_account).data
+        client.patch('/api/v1.0/calendar/{calendar_id}/', {"twitter":social_account_data})
+        return True
+
+
 
 class TweetView(APIView):
     """

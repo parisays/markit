@@ -10,7 +10,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     Calendar serializer.
     """
     posts = PostSerializer(many=True, read_only=True)
-    socials = SocialAccountSerializer(read_only=True)
+    # socials = SocialAccountSerializer(read_only=True)
     class Meta:
         model = Calendar
         fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connectedPlatforms')
