@@ -1,0 +1,39 @@
+<mat-toolbar class="mat-elevation-z5" style="background: white;">
+  <h1 style="font-size: 40px;margin:auto; margin-right: 23%;">Calendar Wizard</h1>
+  <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button>
+      <mat-icon style="font-size: 30px;">close</mat-icon>
+  </button>
+</mat-toolbar>
+<div style="margin: auto; text-align: center;">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper style="width: 50%; margin: auto; margin-top: 2%;">
+        <mat-step [completed]="stepComplete[0]">
+            <ng-template matStepLabel>Calendar Details</ng-template>
+            <app-calendar-details-form #calendar_details></app-calendar-details-form>
+            <mat-toolbar style="margin-top: 30%;">
+                <button *ngIf="calendar && !loading" (click)="updateCalendar()" style="margin:auto" matStepperNext
+                    mat-raised-button color="primary"><!-- todo -->
+                    Next
+                </button>
+                <button *ngIf="!calendar && !loading" [disabled]="!!calendar || !isDetailsFormValid" (click)="createCalendar()" style="margin:auto"
+                        mat-raised-button color="primary"><!-- todo -->
+                    Create Calendar
+                </button>
+                <mat-spinner *ngIf="loading" color="primary" style="margin:auto"></mat-spinner>
+            </mat-toolbar>
+        </mat-step>
+        <mat-step [completed]="stepComplete[1]">
+            <ng-template matStepLabel >
+                Social Account Connection
+            </ng-template>
+            <app-social-accounts-connection></app-social-accounts-connection>
+            <mat-toolbar style="margin-top: 20%; display:flex;">
+                <button mat-raised-button matStepperPrevious color="primary">Back</button>
+                <button style="margin: auto; margin-right: 0;" matStepperNext
+                        mat-raised-button color="primary"
+                        (click)="finish()">
+                    Finish
+                </button>
+            </mat-toolbar>
+        </mat-step>
+      </mat-horizontal-stepper>
+</div>

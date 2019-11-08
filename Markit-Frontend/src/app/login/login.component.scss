@@ -1,0 +1,26 @@
+.form-style{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-style > * {
+    width: 80%;
+    margin: auto;
+}
+
+.container-style{
+    min-height: 450px;
+    min-width: 300px;
+    max-width: 50%;
+    margin: 10% auto auto;
+}
+
+h1{
+    text-align: center;
+    font-size: 60px;
+}
+
+mat-spinner {
+  width: 12px;
+  height: 12px;
+}
