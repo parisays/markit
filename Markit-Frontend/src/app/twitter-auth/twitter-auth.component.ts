@@ -29,7 +29,7 @@ export class TwitterAuthComponent implements OnInit {
     const oauthToken = this.route.snapshot.queryParamMap.get('oauth_token');
     const oauthVerifier = this.route.snapshot.queryParamMap.get('oauth_verifier');
 
-    this.http.get<any>(`${environment.apiUrl}/api/v1.0/auth/twitter/verify/${oauthToken}/${oauthVerifier}/`, {
+    this.http.get<any>(`${environment.apiUrl}auth/twitter/verify/${oauthToken}/${oauthVerifier}/`, {
       headers: {
         Authorization: `Token ${this.authService.currentUserValue.key}`
       }
@@ -43,7 +43,7 @@ export class TwitterAuthComponent implements OnInit {
       })
     ).subscribe((data: { access_token: string, token_secret: string }) => {
       console.log(data);
-      this.http.post<any>(`${environment.apiUrl}/api/v1.0/auth/rest-auth/twitter/connect/`, data, {
+      this.http.post<any>(`${environment.apiUrl}auth/rest-auth/twitter/connect/`, data, {
           headers: {
             Authorization: `Token ${this.authService.currentUserValue.key}`
           }
