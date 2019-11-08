@@ -15,6 +15,10 @@
     overflow: scroll; 
     background: rgba(216, 216, 216, 0.164);
 }
+.top-row{
+    display: flex;
+}
 body{
     display: flex;
+    flex-direction: column;
 }
