@@ -23,15 +23,10 @@ import {environment} from '@environments/environment';
   ],
 })
 export class PostListViewComponent implements OnInit {
-  private twitterAppData: { client_id: string, secret: string };
-
   constructor(private service: PostService,
               private route: ActivatedRoute,
               private twitter: TwitterService,
-              private snackBar: MatSnackBar,
-              private authService: AuthenticationService,
-              private http: HttpClient,
-              private router: Router) {
+              private snackBar: MatSnackBar) {
     this.dataSource = this.ELEMENT_DATA;
     this.calendars = [
       {
@@ -57,12 +52,9 @@ export class PostListViewComponent implements OnInit {
       collaborators: [1]
     };
   }
-  /*@Input()*/
+
   get isTwitterConnected() {
-    const twitterLinkedStorage = localStorage.getItem('twitterLinked');
-    if (twitterLinkedStorage) {
-      return twitterLinkedStorage === 'true';
-    } else { return false; }
+    return this.twitter.isConnected();
   }
 
   calendars: Calendar[]; // calendars to show in select menu
@@ -103,58 +95,7 @@ export class PostListViewComponent implements OnInit {
     },
   ];
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.calendarId = +params.get('id');
-      this.service.getCalendarPosts(this.calendarId)
-      .subscribe(response => {
-        console.log(response);
-        this.dataSource = response as Post[]; // todo get lists
-        console.log(this.dataSource);
-      });
-    });
-  }
-
-  onTwitterAuth() {
-    this.http.get<any>(`${environment.apiUrl}/api/v1.0/auth/twitter/`, {
-      headers: new HttpHeaders({
-        Authorization: `Token ${this.authService.currentUserValue.key}`
-      })
-    }).pipe(
-      map(data => {
-        if (data && data.provider && data.provider === 'twitter') {
-          return {
-            client_id: data.client_id as string,
-            secret: data.secret as string
-          };
-        } else {
-          return throwError(new Error('twitter oauth failed'));
-        }
-      })
-    ).subscribe(data => {
-        this.twitterAppData = data as { client_id: string, secret: string };
-        console.log(data);
-        this.http.get<any>(`${environment.apiUrl}/api/v1.0/auth/twitter/oauth`, {
-          headers: {
-            Authorization: `Token ${this.authService.currentUserValue.key}`
-          }
-        }).pipe(map(authData => {
-          if (authData && authData.url) {
-            return authData.url as string;
-          } else {
-            return throwError(new Error('twitter fetch token failed'));
-          }
-        })).subscribe(twitterUrl => {
-          console.log(twitterUrl);
-          window.location.href = twitterUrl as string;
-        }, error => {
-          console.log('twitter routing failed');
-        });
-      },
-      error => {
-        console.log(error);
-      });
-  }
+  ngOnInit() {}
 
 
   publishOnTweeter(post: Post) {
