@@ -1,2 +1,4 @@
-<p>manual-test works!</p>
-<button (click)="onClick()">TEST</button>
+<input
+  type="file" (change)="onFileChanged($event)"
+  #fileInput>
+<button (click)="onUpload()">Upload!</button>
