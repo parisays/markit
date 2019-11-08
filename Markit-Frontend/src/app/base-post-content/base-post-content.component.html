@@ -1,5 +1,5 @@
 <body style="display: flex; flex-direction: column;margin-top: 5%">
-    <div style="margin: auto; display: flex; flex-direction: column;">
+    <form style="margin: auto; display: flex; flex-direction: column;" [formGroup]="form">
         <mat-form-field style="width: 500px" appearance="outline">
             <mat-label>Content</mat-label>
             <textarea cols="80" rows="10" formControlName="content" matInput placeholder="Your post content." autofocus></textarea>
@@ -20,7 +20,9 @@
                 <mat-icon color="gray">library_books</mat-icon>
             </button>
         </div>
-    </div>
+        <img [src]="uploadedImage" alt="">
+    </form>
+    
     <div style="display: flex; margin-top: 5%">
         <button style=" margin: 3%; margin-left: auto;" mat-raised-button color="primary" matStepperPrevious>Back</button>
         <button style="margin: auto; margin-left: 0;" mat-raised-button color="primary" matStepperNext>Next</button>

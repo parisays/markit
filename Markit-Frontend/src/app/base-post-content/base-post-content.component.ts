@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-base-post-content',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasePostContentComponent implements OnInit {
 
-  constructor() { }
+  uploadedImage: string;
+  form: FormGroup = this.fb.group(
+    {
+      content: ['', [
+        Validators.required
+      ]]
+    }
+  );
+
+  get content() {
+    return this.form.get('content');
+  }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }
