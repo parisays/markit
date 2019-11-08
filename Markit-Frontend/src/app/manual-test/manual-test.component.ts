@@ -11,15 +11,27 @@ export class ManualTestComponent implements OnInit {
   constructor(private calendarService: CalendarService,
               private postService: PostService) { }
 
+  private selectedFile: File;
+
   ngOnInit() {
   }
 
-  onClick() {
-    this.postService.getCalendarPosts(6)
-      .subscribe(value => {
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload() {
+    const uploadData = new FormData();
+    uploadData.append('calendar', '2');
+    uploadData.append('image', this.selectedFile, this.selectedFile.name);
+    uploadData.append('subject', 'with img');
+    uploadData.append('text', 'test_text');
+    this.postService.create(uploadData).subscribe(
+      value => {
         console.log(value);
-      }, error => {
-        console.log(error);
-      });
+      }, err => {
+        console.log(err);
+      }
+    );
   }
 }
