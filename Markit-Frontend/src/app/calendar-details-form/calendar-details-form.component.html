@@ -20,14 +20,3 @@
     </form>
 </div>
 
-<mat-toolbar style="margin-top: 30%;">
-    <button [disabled]="!form.valid" *ngIf="isCreated && !loading" (click)="editCalendar()" style="margin:auto" matStepperNext
-        mat-raised-button color="primary"><!-- todo -->
-        Next
-    </button>
-    <button [disabled]="!form.valid" *ngIf="!isCreated && !loading" (click)="createCalendar()"  style="margin:auto" matStepperNext
-        mat-raised-button color="primary"><!-- todo -->
-        Create New Calendar
-    </button>
-    <mat-spinner *ngIf="loading" color="primary"></mat-spinner>
-</mat-toolbar>
