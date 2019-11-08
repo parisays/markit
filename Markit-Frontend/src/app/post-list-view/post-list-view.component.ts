@@ -94,28 +94,8 @@ export class PostListViewComponent implements OnInit {
     },
   ];
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.calendarId = +params.get('id');
-      this.service.getCalendarPosts(this.calendarId)
-      .subscribe(response => {
-        console.log(response);
-        this.dataSource = response as Post[]; // todo get lists
-        console.log(this.dataSource);
-      });
-    });
-  }
+  ngOnInit() {}
 
-  onTwitterAuth() {
-    this.twitter.connect()
-      .subscribe(twitterUrl => {
-          console.log(twitterUrl);
-          window.location.href = twitterUrl as string;
-        }, error => {
-          console.log('twitter routing failed');
-          console.log(error);
-      });
-  }
 
   publishOnTweeter(post: Post) {
     console.log(post);
