@@ -22,28 +22,17 @@ export class TwitterService {
     return !!twitterLinkedStorage && (twitterLinkedStorage === 'true');
   }
 
-  connect() {
-    return this.http.get<any>(`${environment.apiUrl}auth/twitter/`).pipe(
-      map(data => {
-        if (data && data.provider && data.provider === 'twitter') {
-          return {
-            client_id: data.client_id as string,
-            secret: data.secret as string
-          };
+  connect(returnUrl: string, calendarId: number) {
+    return this.http.get<any>(`${environment.apiUrl}socials/twitter/oauth`).pipe(
+      map(authData => {
+        if (authData && authData.url) {
+          localStorage.setItem('pendingCalendarTwitterConnect', calendarId.toString());
+          localStorage.setItem('pendingTwitterConnectReturnUrl', returnUrl);
+          return authData.url as string;
         } else {
-          return throwError(new Error('twitter oauth failed'));
+          console.log('twitter fetch token failed');
+          return throwError(new Error('twitter fetch token failed'));
         }
-      })
-    ).pipe(switchMap(data => {
-        console.log(data);
-        return this.http.get<any>(`${environment.apiUrl}auth/twitter/oauth`).pipe(
-          map(authData => {
-            if (authData && authData.url) {
-              return authData.url as string;
-            } else {
-              return throwError(new Error('twitter fetch token failed'));
-            }
-          }));
       }));
   }
 }
