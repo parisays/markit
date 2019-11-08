@@ -9,6 +9,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRippleModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   exports: [
@@ -20,7 +21,8 @@ import {MatRippleModule} from '@angular/material/core';
     MatTableModule,
     MatMenuModule,
     MatStepperModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSelectModule
   ]
 })
 export class MdComponentsModule { }

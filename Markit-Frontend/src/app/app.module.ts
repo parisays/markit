@@ -13,7 +13,7 @@ import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, M
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarsComponent } from './calendars/calendars.component';
-import { PostsComponent } from './posts/posts.component';
+import { PostListViewComponent } from './post-list-view/post-list-view.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
@@ -39,7 +39,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     DashboardComponent,
     HeaderComponent,
     CalendarsComponent,
-    PostsComponent,
+    PostListViewComponent,
     NewPostComponent,
     TwitterAuthComponent,
     PostDetailsFormComponent,
