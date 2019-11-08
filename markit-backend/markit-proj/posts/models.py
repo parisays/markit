@@ -19,7 +19,7 @@ class Post(models.Model):
     calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE, related_name='posts')
     text = models.TextField()
     status = models.CharField(max_length=9, choices=STATUS_CHOICES, default=Draft)
-    image = models.ImageField(upload_to='posts/', default='postDefault.png')
+    image = models.ImageField(upload_to='posts/', default='posts/postDefault.png')
 
     def __str__(self):
         return self.subject + ' | ' + self.calendar.name

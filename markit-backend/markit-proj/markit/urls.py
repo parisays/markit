@@ -9,5 +9,6 @@ urlpatterns = [
     path('api/v1.0/auth/', include('users.urls')),
     path('api/v1.0/calendar/', include('calendars.urls')),
     path('api/v1.0/post/', include('posts.urls')),
+    path('api/v1.0/socials/', include('socials.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,4 +1,5 @@
 from django.db import models
+from allauth.socialaccount.models import SocialAccount
 from users.models import User
 
 class Calendar(models.Model):
@@ -14,13 +15,16 @@ class Calendar(models.Model):
         (FT, 'Facebook and Twitter'),
     ]
     name = models.CharField(max_length=100)
-    collaborators = models.ManyToManyField(User, related_name='collaborators', default=[], blank=True)
+    collaborators = models.ManyToManyField(User, related_name='collaborators',
+                                           default=[], blank=True)
     owner = models.ForeignKey(User, related_name='owner', on_delete=models.CASCADE)
     connectedPlatforms = models.CharField(max_length=20,
                                           choices=PLATFORM_CHOICES,
                                           default="",
                                           null=True,
                                           blank=True)
+    twitter = models.ForeignKey(SocialAccount, related_name='twitter', on_delete=models.CASCADE,
+                                null=True, default=None)
 
     def __str__(self):
         return self.name

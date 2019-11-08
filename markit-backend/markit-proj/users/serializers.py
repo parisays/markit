@@ -1,9 +1,7 @@
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
-from allauth.socialaccount.models import SocialApp, SocialToken
 from calendars.serializers import CalendarSerializer
 from .models import User
-
 
 class AccountRegistrationSerializer(RegisterSerializer):
     """
@@ -34,18 +32,3 @@ class CustomAccountDetailsSerializer(serializers.ModelSerializer):
         fields = ('id', 'email', 'firstName', 'lastName', 'calendars')
         read_only_fields = ('id',)
 
-class SocialAppSerializer(serializers.ModelSerializer):
-    """
-    Social app serializer.
-    """
-    class Meta:
-        model = SocialApp
-        fields = ('provider', 'client_id', 'secret')
-
-class SocialTokenSerializer(serializers.ModelSerializer):
-    """
-    Social token serializer.
-    """
-    class Meta:
-        model = SocialToken
-        fields = ('token', 'token_secret')
