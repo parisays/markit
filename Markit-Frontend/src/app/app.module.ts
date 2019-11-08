@@ -30,6 +30,7 @@ import { BasePostContentComponent } from './base-post-content/base-post-content.
 import { PostWizardComponent } from './post-wizard/post-wizard.component';
 import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
 import { ManualTestComponent } from './manual-test/manual-test.component';
+import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ManualTestComponent } from './manual-test/manual-test.component';
     SocialChannelsSelectionComponent,
     BasePostContentComponent,
     PostWizardComponent,
+    CalendarSettingsComponent,
   ],
   imports: [
     BrowserModule,

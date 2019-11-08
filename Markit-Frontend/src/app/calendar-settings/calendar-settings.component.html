@@ -1,0 +1,29 @@
+<mat-tab-group style="margin-top: 3%;" mat-align-tabs="center">
+        <mat-tab label="Details">
+            <div class="container-style">
+                <form class="form-style" [formGroup]="form">
+                        <input style="display: none" type="file" #fileInput>
+                        <span style="color: gray;">No Logo Image</span>
+                        <button mat-raised-button color="accent" (click)="fileInput.click()">
+                            <span>Logo Image</span>
+                        </button>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Title</mat-label>
+                        <input formControlName="title" matInput placeholder="Enter new calendar title" autofocus>
+                        <mat-icon matSuffix>edit</mat-icon>
+                        <mat-error *ngIf="title.touched && title.value == ''">title is required!</mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
+            <div>
+                <mat-toolbar style="display: flex;">
+                    <button style=" margin: 15%; margin-left: auto;" mat-raised-button color="primary">Save Changes</button>
+                    <button style="margin: auto; margin-left: 0;" mat-raised-button color="warn">Delete Calendar</button>
+                </mat-toolbar>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Social Accounts Connection">
+            <!-- <app-social-accounts-connection></app-social-accounts-connection> -->
+        </mat-tab>
+</mat-tab-group>
