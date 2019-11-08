@@ -8,12 +8,16 @@ class CalendarForm(forms.ModelForm):
     Admin page calendar form.
     """
     name = forms.CharField(label="Name")
-    users = forms.ModelMultipleChoiceField(label='Users', queryset=User.objects.all(),
-                                          widget=forms.CheckboxSelectMultiple)
+    owner = forms.ModelChoiceField(label='Owner', queryset=User.objects.all(), empty_label=None)
+    collaborators = forms.ModelMultipleChoiceField(label='Collaborators',
+                                                   queryset=User.objects.all(),
+                                                   widget=forms.CheckboxSelectMultiple)
+    connectedPlatforms = forms.ChoiceField(label='Connected Platforms', widget=forms.Select)
+
 
     class Meta:
         model = Calendar
-        fields = ('name', 'users')
+        fields = ('name', 'owner', 'collaborators', 'connectedPlatforms')
 
 class CalendarAdmin(admin.ModelAdmin):
     """
@@ -21,20 +25,20 @@ class CalendarAdmin(admin.ModelAdmin):
     """
     change_form = CalendarForm
     add_form = CalendarForm
-    list_display = ('id', 'name',)
-    list_display_links = ('id',)
-    ordering = ('id', 'name',)
-    list_filter = ('id', 'name')
-    search_fields = ('users', 'name')
-    filter_horizontal = ('users',)
+    list_display = ('id', 'name', 'owner','connectedPlatforms')
+    list_display_links = ('id', 'owner', 'connectedPlatforms')
+    ordering = ('id', 'owner', 'name', 'collaborators', 'connectedPlatforms')
+    list_filter = ('id', 'name', 'owner', 'collaborators', 'connectedPlatforms')
+    search_fields = ('owner', 'name')
+    filter_horizontal = ('collaborators',)
 
     fieldsets = (
-        (None, {'fields': ('name', 'users',)}),
+        (None, {'fields': ('name', 'owner', 'collaborators', 'connectedPlatforms',)}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('name', 'users',)}
+            'fields': ('name', 'owner', 'collaborators', 'connectedPlatforms',)}
         ),
     )
 

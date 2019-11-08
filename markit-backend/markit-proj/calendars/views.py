@@ -6,7 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 import tweepy
 from calendars.models import Calendar
-from calendars.serializers import CalendarSerializer
+from calendars.serializers import (
+    NestedCalendarSerializer,
+)
 from users.models import User
 from posts.models import Post
 from posts.serializers import PostSerializer
@@ -18,11 +20,12 @@ class CalendarListView(generics.ListCreateAPIView):
     """
     permission_classes = (IsAuthenticated,)
     queryset = Calendar.objects.all()
-    serializer_class = CalendarSerializer
+    serializer_class = NestedCalendarSerializer
 
     def create(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
-        request.data.update({'users' : [user.id]})
+        request.data.update({'owner' : user.id})
+        request.data.update({'posts' : []})
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -31,7 +34,7 @@ class CalendarListView(generics.ListCreateAPIView):
 
     def list(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
-        calendar_list = Calendar.objects.filter(users=user)
+        calendar_list = Calendar.objects.filter(owner=user)
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)
 
@@ -41,13 +44,9 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
     """
     permission_classes = (IsAuthenticated,)
 
-    serializer_class = CalendarSerializer
+    serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
 
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
 
 class TweetView(APIView):
     """

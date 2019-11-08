@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+
+
 AUTH_EMAIL_VERIFICATION = True
 
 REST_FRAMEWORK = {
@@ -60,7 +62,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
-    )
+    ),
 }
 
 REST_AUTH_SERIALIZERS = {
