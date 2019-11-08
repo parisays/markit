@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, Validators, FormControl} from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormGroup, Validators, FormControl, FormBuilder} from '@angular/forms';
 import {CalendarService} from '@services';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Calendar} from '@models';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-calendar-details-form',
@@ -10,48 +11,26 @@ import {Calendar} from '@models';
   styleUrls: ['./calendar-details-form.component.scss']
 })
 export class CalendarDetailsFormComponent implements OnInit {
-  loading = false;
-  isCreated = false;
+  @Input() inputTitle: string;
+  @Output() outputTitle = new EventEmitter();
 
-  form = new FormGroup({
-    title: new FormControl('', Validators.required)
+  public form = new FormGroup({
+    name: new FormControl('', Validators.required),
   });
 
+  public imageFile: File;
+
   get title() {
-    return this.form.get('title');
+    return this.form.controls.name;
   }
 
-  constructor(private service: CalendarService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder) {
   }
-
-  calendarId: number;
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.calendarId = +params.get('calendarId');
-    });
-
   }
 
-  createCalendar() {
-    const calendar = {
-      name: this.title.value,
-      collaborators: [],
-      connectedPlatforms: '',
-      posts: []
-    } as Calendar;
-
-    this.service.create(calendar).subscribe(
-      response => {
-        console.log('new calendar has been added!');
-      }
-    );
-
-    this.isCreated = true;
-  }
-
-  editCalendar() {
-    // this.service.get(calenarId).subscribe();
-    // this.service.update();
+  onImageChanged(event) {
+    this. imageFile = event.target.files[0];
   }
 }
