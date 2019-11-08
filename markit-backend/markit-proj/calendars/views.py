@@ -8,6 +8,8 @@ import tweepy
 from calendars.models import Calendar
 from calendars.serializers import (
     NestedCalendarSerializer,
+    CalendarSerializer,
+    CalendarUpdateSerializer,
 )
 from users.models import User
 from posts.models import Post
@@ -38,12 +40,21 @@ class CalendarListView(generics.ListCreateAPIView):
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)
 
-class CalendarView(generics.RetrieveUpdateDestroyAPIView):
+class CalendarView(generics.RetrieveDestroyAPIView):
     """
-    Retrieve calendar view.
+    Retrieve Destroy calendar view.
     """
     permission_classes = (IsAuthenticated,)
 
     serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
 
+
+class CalendarUpdateView(generics.UpdateAPIView):
+    """
+    Retrieve calendar view.
+    """
+    permission_classes = (IsAuthenticated,)
+
+    serializer_class = CalendarUpdateSerializer
+    queryset = Calendar.objects.all()

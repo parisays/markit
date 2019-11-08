@@ -144,7 +144,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'markitdb',
-        'USER': 'se',
+        'USER': 'postgres',
         'PASSWORD': 'sebackendfall19',
         'HOST': 'localhost',
         'PORT': '5432',
