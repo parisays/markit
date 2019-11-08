@@ -11,6 +11,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {CalendarWizardComponent} from '@app/calendar-wizard/calendar-wizard.component';
 import {PostWizardComponent} from '@app/post-wizard/post-wizard.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-settings.component';
 
 
 const routes: Routes = [
@@ -22,20 +23,17 @@ const routes: Routes = [
 
   {path: 'calendars/:calendarId/posts/new', component: PostWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/posts/:postId/edit', component: PostWizardComponent, canActivate: [AuthGuard]},
-  { path: 'calendars/:calendarId/posts', component: PostListViewComponent, canActivate: [AuthGuard]},
-
-  {path: 'calendars/new', component: CalendarWizardComponent, canActivate: [AuthGuard]},
-  {path: 'calendars/:calendarId/wizard', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
-  /*children: [*/
-  {path: 'calendars/:calendarId/wizard/details', component: CalendarWizardComponent, canActivate: [AuthGuard]},
-  {path: 'calendars/:calendarId/wizard/social-accounts', component: CalendarWizardComponent, canActivate: [AuthGuard]},
-
   {path: 'calendars/:calendarId/posts', component: PostListViewComponent, canActivate: [AuthGuard]},
 
-  // { path: 'calendars/:calendarId/edit', component: CalendarsSettingsComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/edit', component: CalendarSettingsComponent, canActivate: [AuthGuard]},
 
-  // todo pathMatch:  'full'
+  {path: 'calendars/new', component: CalendarWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/wizard/details', component: CalendarWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/wizard/social-accounts', component: CalendarWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/wizard', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
+
   {path: '**', redirectTo: ''}// redirect to not found??
+  // todo pathMatch:  'full'
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CalendarService, PostService} from '@services';
+import {Calendar} from '@models';
 
 @Component({
   selector: 'app-manual-test',
@@ -9,7 +10,10 @@ import {CalendarService, PostService} from '@services';
 export class ManualTestComponent implements OnInit {
 
   constructor(private calendarService: CalendarService,
-              private postService: PostService) { }
+              private postService: PostService) {
+  }
+
+  newCalendar;
 
   private selectedFile: File;
 
@@ -33,5 +37,38 @@ export class ManualTestComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  
+  onClick() {
+    // let calendar = {
+    //   name: 'calendar Name 1234',
+    // };
+    //
+    // this.calendarService.create(calendar).subscribe(response => {
+    //   this.newCalendar = response;
+    //   console.log('create calendar response: ', response);
+    // }, error => {
+    //   console.log(error);
+    // });
+
+    console.log('start of testing');
+    let post = {
+      calendar: 10,
+      subject: 'post subject 123',
+      text: 'post text 123',
+    };
+
+    this.postService.create(post).subscribe(response => {
+      console.log('create post response: ', response);
+    }, error => {
+      console.log('errorrrrrrrrrrrrrr: ', error);
+    });
+
+    // this.postService.getCalendarPosts(this.newCalendar.id)
+    //   .subscribe(value => {
+    //     console.log('get calendar result: ', value);
+    //   }, error => {
+    //     console.log(error);
+    //   });
   }
 }
