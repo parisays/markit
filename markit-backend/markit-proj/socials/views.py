@@ -8,8 +8,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.test import APIClient
 from rest_framework.authtoken.models import Token
+from rest_framework.renderers import JSONRenderer
 from rest_framework import status
 import tweepy
+from markit import settings
 from users.models import User
 from posts.models import Post
 from posts.serializers import PostSerializer
@@ -122,22 +124,37 @@ class TweetView(APIView):
     Tweet on user twitter account.
     """
     permission_classes = (IsAuthenticated,)
-
     serializer_class = PostSerializer
-    provider = 'twitter'
 
     def get(self, request, pk):
         post = Post.objects.get(pk=pk)
-        twitter_app = SocialApp.objects.get(provider=self.provider)
         user = User.objects.get(email=request.user)
         twitter_account = SocialAccount.objects.get(user=user)
         user_credentials = SocialToken.objects.get(account=twitter_account)
         user_access_token = user_credentials.token
         user_secret_token = user_credentials.token_secret
-        twitter_auth = tweepy.OAuthHandler(twitter_app.client_id, twitter_app.secret)
+        twitter_auth = tweepy.OAuthHandler(settings.TWITTER_KEY, settings.TWITTER_SECRET)
         twitter_auth.set_access_token(user_access_token, user_secret_token)
         twitter_api = tweepy.API(twitter_auth)
         twitter_api.update_status(post.text)
 
         return Response(True)
 
+class TwitterTrendsView(APIView):
+    """
+    Get twitter trends.
+    """
+    def get(self, request):
+        auth = tweepy.OAuthHandler(settings.TWITTER_KEY, settings.TWITTER_SECRET)
+        api = tweepy.API(auth)
+        trends = api.trends_place(2459115)
+        data = trends[0]
+        trends_data = data['trends']
+        response = []
+        for trend in trends_data:
+            name = trend['name']
+            label = 'hashtag-trend' if name[0] == '#' else 'trend'
+            trend_response = {'type':'twitter', 'label':label, 'text':name}
+            response.append(trend_response)
+        response = JSONRenderer().render(response)
+        return Response(response)

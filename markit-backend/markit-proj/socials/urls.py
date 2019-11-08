@@ -11,6 +11,7 @@ from .views import (
     TwitterOAuth,
     CustomTwitterAccountConnectView,
     TweetView,
+    TwitterTrendsView
 )
 
 
@@ -24,4 +25,5 @@ urlpatterns = [
         CustomTwitterAccountConnectView.as_view(), name='twitter-account-connect'),
     url(r'^rest-auth/twitter/connect/$', TwitterConnect.as_view(), name='twitter-rest-auth-connect'),
     url(r'^twitter/tweet/(?P<pk>\d+)/$', TweetView.as_view(), name='tweet-post'),
+    url(r'^twitter/trends/$', TwitterTrendsView.as_view(), name='twitter-trends'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
