@@ -1,13 +1,16 @@
 from rest_framework import serializers
+from rest_auth.registration.serializers import SocialAccountSerializer
 from posts.serializers import PostSerializer
-from .models import Calendar
 from users.models import User
+from .models import Calendar
+
 
 class CalendarSerializer(serializers.ModelSerializer):
     """
     Calendar serializer.
     """
     posts = PostSerializer(many=True, read_only=True)
+    socials = SocialAccountSerializer(read_only=True)
     class Meta:
         model = Calendar
         fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connectedPlatforms')
@@ -32,7 +35,8 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
         current_posts = (instance.posts).all()
         current_posts = list(current_posts)
         instance.name = validated_data.get('name', instance.name)
-        instance.connectedPlatforms = validated_data.get('connectedPlatforms', instance.connectedPlatforms)
+        instance.connectedPlatforms = validated_data.get('connectedPlatforms',
+                                                         instance.connectedPlatforms)
         instance.save()
 
         # for post in posts_data:

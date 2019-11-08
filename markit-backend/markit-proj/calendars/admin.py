@@ -10,8 +10,8 @@ class CalendarForm(forms.ModelForm):
     name = forms.CharField(label="Name")
     owner = forms.ModelChoiceField(label='Owner', queryset=User.objects.all(), empty_label=None)
     collaborators = forms.ModelMultipleChoiceField(label='Collaborators',
-                                                      queryset=User.objects.all(),
-                                                      widget=forms.CheckboxSelectMultiple)
+                                                   queryset=User.objects.all(),
+                                                   widget=forms.CheckboxSelectMultiple)
     connectedPlatforms = forms.ChoiceField(label='Connected Platforms', widget=forms.Select)
 
 

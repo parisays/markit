@@ -6,7 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 import tweepy
 from calendars.models import Calendar
-from calendars.serializers import *
+from calendars.serializers import (
+    NestedCalendarSerializer,
+)
 from users.models import User
 from posts.models import Post
 from posts.serializers import PostSerializer
