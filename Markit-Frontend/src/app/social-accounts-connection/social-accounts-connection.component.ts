@@ -11,9 +11,14 @@ import {throwError} from 'rxjs';
   styleUrls: ['./social-accounts-connection.component.scss']
 })
 export class SocialAccountsConnectionComponent implements OnInit {
+<<<<<<< HEAD
   @Input() calendarId: number;
   @Input() returnURL: string;
 
+=======
+  private calendarId: number;
+  private calendar;
+>>>>>>> Frontend/dev
   socialAccounts = [
     {
       image: '../assets/images/twitter-logo.png',

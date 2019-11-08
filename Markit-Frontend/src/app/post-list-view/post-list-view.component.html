@@ -39,9 +39,13 @@
                 <button mat-button [disabled]="element.status != 'draft'"><mat-icon >edit</mat-icon></button>
                 <button mat-button color="warn"><mat-icon>delete</mat-icon></button>
             </div>
-            <p>
-              {{element.text}}
-            </p>
+            <div style="display: flex;">
+              <img style="max-width: 30%; max-height: 200px;" [src]="element.image" alt="">
+              <p style="width: 100%;">
+                {{element.text}}
+              </p>
+            </div>
+            
         </div>
       </td>
     </ng-container>
