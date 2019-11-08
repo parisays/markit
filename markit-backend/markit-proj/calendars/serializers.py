@@ -54,3 +54,13 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
             instance.collaborators.add(*collaborator)
 
         return instance
+
+
+class CalendarUpdateSerializer(serializers.ModelSerializer):
+    """
+    Calendar serializer.
+    """
+    class Meta:
+        model = Calendar
+        fields = ('id', 'name', 'owner', 'collaborators', 'connectedPlatforms', 'twitter')
+        read_only_fields = ('id', )

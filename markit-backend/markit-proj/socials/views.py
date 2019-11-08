@@ -113,8 +113,8 @@ class CustomTwitterAccountConnectView(APIView):
     def connect_calendar(self, request, calendar_id, client):
         user = User.objects.get(email=request.user)
         social_account = SocialAccount.objects.filter(user=user).order_by('id')[0]
-        social_account_data = SocialAccountSerializer(social_account).data
-        client.patch('/api/v1.0/calendar/{calendar_id}/', {"twitter":social_account_data})
+        social_account_data = SocialAccountSerializer(social_account)
+        client.patch('/api/v1.0/calendar/update/{calendar_id}/', {"twitter":social_account_data})
         return True
 
 

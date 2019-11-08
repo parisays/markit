@@ -1,17 +1,13 @@
-from allauth.socialaccount.models import SocialApp, SocialToken, SocialAccount
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-import tweepy
 from calendars.models import Calendar
 from calendars.serializers import (
     NestedCalendarSerializer,
+    CalendarUpdateSerializer,
 )
 from users.models import User
-from posts.models import Post
-from posts.serializers import PostSerializer
 
 
 class CalendarListView(generics.ListCreateAPIView):
@@ -38,11 +34,20 @@ class CalendarListView(generics.ListCreateAPIView):
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)
 
-class CalendarView(generics.RetrieveUpdateDestroyAPIView):
+class CalendarView(generics.RetrieveDestroyAPIView):
+    """
+    Retrieve Destroy calendar view.
+    """
+    permission_classes = (IsAuthenticated,)
+
+    serializer_class = NestedCalendarSerializer
+    queryset = Calendar.objects.all()
+
+class CalendarUpdateView(generics.UpdateAPIView):
     """
     Retrieve calendar view.
     """
     permission_classes = (IsAuthenticated,)
 
-    serializer_class = NestedCalendarSerializer
+    serializer_class = CalendarUpdateSerializer
     queryset = Calendar.objects.all()
