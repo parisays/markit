@@ -13,7 +13,6 @@ import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, M
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarsComponent } from './calendars/calendars.component';
-import { NewCalendarComponent } from './new-calendar/new-calendar.component';
 import { PostListViewComponent } from './post-list-view/post-list-view.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
@@ -39,9 +38,7 @@ import { CalendarSettingsComponent } from './calendar-settings/calendar-settings
     SignupComponent,
     DashboardComponent,
     HeaderComponent,
-    DashboardComponent,
     CalendarsComponent,
-    NewCalendarComponent,
     PostListViewComponent,
     NewPostComponent,
     TwitterAuthComponent,
@@ -70,7 +67,7 @@ import { CalendarSettingsComponent } from './calendar-settings/calendar-settings
     MatListModule,
     MatCardModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
