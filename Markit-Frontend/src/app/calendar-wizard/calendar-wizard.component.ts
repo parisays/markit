@@ -3,7 +3,7 @@ import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CalendarService} from '@services';
 import {Calendar} from '@models';
-import { MatStepper } from '@angular/material';
+import {MatSnackBar, MatStepper} from '@angular/material';
 
 @Component({
   selector: 'app-calendar-wizard',
@@ -11,17 +11,20 @@ import { MatStepper } from '@angular/material';
   styleUrls: ['./calendar-wizard.component.scss']
 })
 export class CalendarWizardComponent implements AfterViewInit {
-  @ViewChild('stepper', { static: false }) stepper: MatStepper;
+  @ViewChild('stepper', {static: false}) stepper: MatStepper;
+
+  private loading = false;
+  private isCreated = false;
+  calendarId: number;
+  calendar/*: Calendar*/;
 
   constructor(private location: Location,
               private route: ActivatedRoute,
+              private router: Router,
               private service: CalendarService,
-              private changeDetector: ChangeDetectorRef) {
-    }
-
-    calendarId: number;
-    calendar/*: Calendar*/;
-    // @Output() animationDone: EventEmitter<void>;
+              private changeDetector: ChangeDetectorRef,
+              private snackBar: MatSnackBar) {
+  }
 
   ngAfterViewInit() {
     this.stepperSelectionChange();
@@ -30,7 +33,13 @@ export class CalendarWizardComponent implements AfterViewInit {
       this.calendarId = +params.get('calendarId');
     });
 
-    console.log(this.calendarId);
+    if (this.calendarId || this.calendarId === 0) {
+      this.service.get(this.calendarId).subscribe(response => {
+          this.calendar = response;
+          this.isCreated = true;
+        }
+      );
+    }
 
     if (this.calendarId || this.calendarId === 0) { // edit existing calendar
       this.route.url.subscribe((value) => {
@@ -50,7 +59,7 @@ export class CalendarWizardComponent implements AfterViewInit {
     this.changeDetector.detectChanges();
   }
 
-  stepperSelectionChange() {// todo
+  stepperSelectionChange() {
     this.stepper.animationDone.subscribe(() => {
       if (this.stepper.selectedIndex === 0) {
         this.location.go(`/calendars/${this.calendarId}/wizard/details`);
@@ -60,4 +69,57 @@ export class CalendarWizardComponent implements AfterViewInit {
       }
     });
   }
+
+  createCalendar() {
+    this.loading = true;
+
+    const calendar = {
+      name: this.title.value,
+      collaborators: [],
+      connectedPlatforms: '',
+      posts: []
+    } as Calendar;
+
+    this.service.create(calendar).subscribe(
+      response => {
+        console.log('new calendar has been added!');
+        console.log(response);
+
+        this.calendar = response;
+        this.router.navigate(['calendars', this.calendarId, 'wizard/social-accounts']);
+        this.isCreated = true;
+      }, err => {
+        console.log(err);
+        this.snackBar.open('Calendar Creation Failed!', 'OK');
+        // this.loading = false;
+      }
+    );
+
+    this.loading = false;
+  }
+
+  editCalendar() {
+    if (this.calendarId) {
+      this.service.get(this.calendarId).subscribe(response => {
+          this.calendar = response;
+        },
+        err => {
+          console.log(err);
+          this.snackBar.open('Calendar Creation Failed!', 'OK');
+        }
+      );
+
+      this.calendar.name = this.title.value; // todo check if not ok declare as a calendar
+
+      this.service.update(this.calendar).subscribe((response) => {
+          this.calendar = response;
+        },
+        err => {
+          console.log(err);
+          this.snackBar.open('Calendar Edition Failed!', 'OK');
+        });
+    }
+  }
+
+
 }
