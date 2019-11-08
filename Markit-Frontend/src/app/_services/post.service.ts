@@ -13,7 +13,7 @@ export class PostService extends DataService {
   // private listPostsEndpoint = `${environment.apiUrl}/calendar/post/?calendar_id=`;
 
   constructor(http: HttpClient) {
-    const endpoint = `${environment.apiUrl}/calendar/post/`;
+    const endpoint = `${environment.apiUrl}post/`;
     super(endpoint, http);
     this.endpoint = endpoint;
   }
@@ -22,11 +22,4 @@ export class PostService extends DataService {
     return super.getAll(new HttpParams().set('calendar_id', calendarId.toString()));
   }
 
-  // getPosts(calendarId: number) {
-  //   return this.http.get<Post[]>(this.listPostsEndpoint + calendarId.toString());
-  // }
-
-  // createPost(post) {
-  //   return this.http.post(this.createPostEndpoint, post);
-  // }
 }
