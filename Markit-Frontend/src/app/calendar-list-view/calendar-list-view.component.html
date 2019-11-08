@@ -4,15 +4,18 @@
           <mat-icon matPrefix>date_range</mat-icon>
           Calendars
       </h1>
+    <div *ngIf="!loading">
       <div *ngFor="let calendar of calendars">
-          <button class="calendar-listitems"
-                  mat-list-item [routerLink]="['/calendars',calendar.id] ">
-                   {{calendar.name}}
-          </button>
+        <button class="calendar-listitems"
+                mat-list-item [routerLink]="['/calendars',calendar.id,'posts'] ">
+          {{calendar.name}}
+        </button>
       </div>
+    </div>
+    <mat-spinner *ngIf="loading" style="margin: auto" color="primary"></mat-spinner>
   </mat-action-list>
   <div style="justify-content: flex-end;
   display: flex; margin: 5px;">
-      
+
   </div>
 </div>
