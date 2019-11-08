@@ -8,12 +8,12 @@ class CalendarForm(forms.ModelForm):
     Admin page calendar form.
     """
     name = forms.CharField(label="Name")
-    user = forms.ModelMultipleChoiceField(label='Users', queryset=User.objects.all(),
+    users = forms.ModelMultipleChoiceField(label='Users', queryset=User.objects.all(),
                                           widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = Calendar
-        fields = ('name', 'user')
+        fields = ('name', 'users')
 
 class CalendarAdmin(admin.ModelAdmin):
     """
@@ -25,16 +25,16 @@ class CalendarAdmin(admin.ModelAdmin):
     list_display_links = ('id',)
     ordering = ('id', 'name',)
     list_filter = ('id', 'name')
-    search_fields = ('user', 'name')
-    filter_horizontal = ('user',)
+    search_fields = ('users', 'name')
+    filter_horizontal = ('users',)
 
     fieldsets = (
-        (None, {'fields': ('name', 'user',)}),
+        (None, {'fields': ('name', 'users',)}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('name', 'user',)}
+            'fields': ('name', 'users',)}
         ),
     )
 

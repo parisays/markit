@@ -1,4 +1,6 @@
 from allauth.account.adapter import DefaultAccountAdapter
+from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
+from .models import User
 
 class CustomAccountAdapter(DefaultAccountAdapter):
     """
