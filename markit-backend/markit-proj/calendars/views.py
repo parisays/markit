@@ -46,4 +46,3 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
-
