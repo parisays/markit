@@ -4,8 +4,9 @@
 }
 
 .form-style > * {
-    width: 80%;
+    max-width: 80%;
     margin: auto;
+    margin-top: 30px;
 }
 
 .container-style{
@@ -13,7 +14,6 @@
     min-width: 300px;
     max-width: 50%;
     margin: auto;
-    margin-top: 20%;
 }
 h1{
     text-align: center;

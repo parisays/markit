@@ -6,13 +6,34 @@
 </mat-toolbar>
 <div style="margin: auto; text-align: center;">
     <mat-horizontal-stepper #stepper style="width: 50%; margin: auto; margin-top: 2%;">
-        <mat-step >
+        <mat-step ><!-- labels="details" -->
             <ng-template matStepLabel>Calendar Details</ng-template>
             <app-calendar-details-form></app-calendar-details-form>
+            <mat-toolbar style="margin-top: 30%;">
+                <button [disabled]="!form.valid" *ngIf="isCreated && !loading" (click)="editCalendar()" style="margin:auto" matStepperNext
+                    mat-raised-button color="primary"><!-- todo -->
+                    Next
+                </button>
+                <button [disabled]="!form.valid" *ngIf="!isCreated && !loading" (click)="createCalendar()"  style="margin:auto" matStepperNext
+                    mat-raised-button color="primary"><!-- todo -->
+                    Create New Calendar
+                </button>
+                <mat-spinner *ngIf="loading" color="primary"></mat-spinner>
+            </mat-toolbar>
         </mat-step>
         <mat-step >
-            <ng-template matStepLabel>Social Account Connection</ng-template>
+            <ng-template matStepLabel ><!-- labels="social-accounts" -->
+                Social Account Connection
+            </ng-template>
             <app-social-accounts-connection></app-social-accounts-connection>
+            <mat-toolbar style="margin-top: 20%; display:flex;">
+                <button mat-raised-button matStepperPrevious color="primary">Back</button>
+                <button style="margin: auto; margin-right: 0;" matStepperNext
+                        mat-raised-button color="primary"
+                        (click)="editCalendar()">
+                    Finish
+                </button>
+            </mat-toolbar>
         </mat-step>
       </mat-horizontal-stepper>
 </div>
