@@ -23,7 +23,7 @@ class Calendar(models.Model):
                                           default="",
                                           null=True,
                                           blank=True)
-    twitter = models.ForeignKey(SocialAccount, related_name='twitter', on_delete=models.CASCADE,
+    twitter = models.ForeignKey(SocialAccount, related_name='twitter', on_delete=models.SET_NULL,
                                 null=True, default=None)
 
     def __str__(self):

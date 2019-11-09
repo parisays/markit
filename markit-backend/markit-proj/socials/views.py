@@ -1,7 +1,6 @@
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
 from rest_auth.registration.views import SocialConnectView
-from rest_auth.registration.serializers import SocialAccountSerializer
 from rest_auth.social_serializers import TwitterConnectSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -9,10 +8,10 @@ from rest_framework.views import APIView
 from rest_framework.test import APIClient
 from rest_framework.authtoken.models import Token
 from rest_framework.renderers import JSONRenderer
-from rest_framework import status
 import tweepy
 from markit import settings
 from users.models import User
+from calendars.models import Calendar
 from posts.models import Post
 from posts.serializers import PostSerializer
 from .serializers import (
@@ -91,33 +90,34 @@ class CustomTwitterAccountConnectView(APIView):
         twitter_auth.request_token = {'oauth_token' : oauth_token,
                                       'oauth_token_secret' : oauth_verifier}
         twitter_auth.get_access_token(oauth_verifier)
-        # return Response({"access_token": twitter_auth.access_token,
-        #                  "token_secret": twitter_auth.access_token_secret})
         return self.connect(request, twitter_auth, calendar_id)
 
     def connect(self, request, twitter_auth, calendar_id):
         """
         Twitter connect.
         """
+        calendar = Calendar.objects.get(pk=calendar_id)
         token = Token.objects.get(user=request.user)
         client = APIClient()
         client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
         response = client.post('/api/v1.0/socials/rest-auth/twitter/connect/',
                                {"access_token": twitter_auth.access_token,
-                                "token_secret": twitter_auth.access_token_secret}, format='json')
-        if self.connect_calendar(request, calendar_id, client):
-            return Response(response.data)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+                                "token_secret": twitter_auth.access_token_secret},
+                               format='json')
+        self.connect_calendar(request, calendar)
+        return Response(response.data)
 
-    def connect_calendar(self, request, calendar_id, client):
+    def connect_calendar(self, request, calendar):
+        """
+        Twitter calendar connection.
+        """
         user = User.objects.get(email=request.user)
-        social_account = SocialAccount.objects.filter(user=user).order_by('id')[0]
-        social_account_data = SocialAccountSerializer(social_account)
-        client.patch('/api/v1.0/calendar/update/{calendar_id}/', {"twitter":social_account_data})
+        twitter_account = SocialAccount.objects.filter(user=user,
+                                                       provider='twitter').order_by('id')[0]
+        calendar.twitter = twitter_account
+        calendar.connectedPlatforms = 'Twitter'
+        calendar.save()
         return True
-
-
 
 class TweetView(APIView):
     """
@@ -128,15 +128,20 @@ class TweetView(APIView):
 
     def get(self, request, pk):
         post = Post.objects.get(pk=pk)
-        user = User.objects.get(email=request.user)
-        twitter_account = SocialAccount.objects.get(user=user)
-        user_credentials = SocialToken.objects.get(account=twitter_account)
-        user_access_token = user_credentials.token
-        user_secret_token = user_credentials.token_secret
-        twitter_auth = tweepy.OAuthHandler(settings.TWITTER_KEY, settings.TWITTER_SECRET)
-        twitter_auth.set_access_token(user_access_token, user_secret_token)
-        twitter_api = tweepy.API(twitter_auth)
+        if post.status == 'Published':
+            return Response(False)
+        calendar = Calendar.objects.get(pk=post.calendar.id)
+        twitter_id = calendar.twitter.id
+        twitter_account = SocialAccount.objects.get(pk=twitter_id)
+        credentials = SocialToken.objects.get(account=twitter_account)
+        access_token = credentials.token
+        secret_token = credentials.token_secret
+        auth = tweepy.OAuthHandler(settings.TWITTER_KEY, settings.TWITTER_SECRET)
+        auth.set_access_token(access_token, secret_token)
+        twitter_api = tweepy.API(auth)
         twitter_api.update_status(post.text)
+        post.status = 'Published'
+        post.save()
 
         return Response(True)
 
