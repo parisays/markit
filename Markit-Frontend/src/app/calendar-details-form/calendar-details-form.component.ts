@@ -11,8 +11,6 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./calendar-details-form.component.scss']
 })
 export class CalendarDetailsFormComponent implements OnInit {
-  @Input() inputTitle: string;
-  @Output() outputTitle = new EventEmitter();
 
   public form = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -31,6 +29,6 @@ export class CalendarDetailsFormComponent implements OnInit {
   }
 
   onImageChanged(event) {
-    this. imageFile = event.target.files[0];
+    this.imageFile = event.target.files[0];
   }
 }

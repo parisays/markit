@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'calendars/:calendarId/posts/:postId/edit', component: PostWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/posts', component: PostListViewComponent, canActivate: [AuthGuard]},
 
-  {path: 'calendars/:calendarId/edit', component: CalendarSettingsComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/edit', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
 
   {path: 'calendars/new', component: CalendarWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/wizard/details', component: CalendarWizardComponent, canActivate: [AuthGuard]},
