@@ -2,9 +2,9 @@
   <mat-toolbar style="margin-top: 5%; margin-left: 10%; width: 80%; display: flex;">
     <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 5%;">
       <mat-label>Change Calendar...</mat-label>
-      <mat-select >
+      <mat-select>
         <mat-option *ngFor="let calendar of calendars" [value]="calendar.id" disabled="">
-          <button [routerLink]="['calendars', calendar.id, 'posts']" mat-button>
+          <button [routerLink]="['/calendars', calendar.id, 'posts']" mat-button>
             <mat-icon color="accent">
               arrow_forward
             </mat-icon>
@@ -14,7 +14,7 @@
       </mat-select>
     </mat-form-field>
     <a mat-raised-button color="accent" style="margin-left: auto; margin-right: 5%;"
-       [routerLink]="['/calendars', calendarId, 'posts/new']">
+       [routerLink]="['/calendars', calendarId, 'posts', 'new']">
       New Post
     </a>
     <button mat-button disabled>
@@ -45,7 +45,8 @@
         <div class="example-element-detail"
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="button-row">
-            <button mat-button [disabled]="element.status != 'draft'" (click)="publishOnTweeter(element)">Publish
+            <button mat-button [disabled]="element.status != 'draft'" (click)="publishOnTweeter(element)">
+              Publish
             </button>
             <button mat-button [disabled]="element.status != 'draft'">
               <mat-icon>edit</mat-icon>
