@@ -24,9 +24,9 @@ export class ManualTestComponent implements OnInit {
 
   onUpload() {
     const uploadData = new FormData();
-    uploadData.append('calendar', '9');
+    uploadData.append('calendar', '3');
     uploadData.append('image', this.selectedFile, this.selectedFile.name);
-    uploadData.append('subject', 'with img');
+    uploadData.append('subject', 'with img sajdfjklas');
     uploadData.append('text', 'test_text');
 
     this.postService.create(uploadData).subscribe(
@@ -37,7 +37,7 @@ export class ManualTestComponent implements OnInit {
       }
     );
 
-    this.postService.getCalendarPosts(9)
+    this.postService.getCalendarPosts(3)
       .subscribe(value => {
         console.log('get calendar result: ', value);
       }, error => {
