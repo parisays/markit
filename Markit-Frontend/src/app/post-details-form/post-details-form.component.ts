@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Subject } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-post-details-form',
@@ -9,6 +9,9 @@ import { Subject } from 'rxjs';
 })
 export class PostDetailsFormComponent implements OnInit {
 
+  private postSubject;
+  private postDate;
+
   form: FormGroup = this.fb.group({
       subject: [''],
       date: ['']
@@ -16,10 +19,17 @@ export class PostDetailsFormComponent implements OnInit {
   );
 
   tempDate = new Date(Date.now());
-  constructor(
-    private fb: FormBuilder
-    ) {
-    }
+
+  constructor(private fb: FormBuilder) {
+  }
+
+  get subject() {
+    return this.form.get('subject');
+  }
+
+  get date() {
+    return this.form.get('date');
+  }
 
   ngOnInit() {
   }
