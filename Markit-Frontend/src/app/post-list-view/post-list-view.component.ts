@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AuthenticationService, PostService} from '@services';
+import {AuthenticationService, CalendarService, PostService} from '@services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Post, PostStatus, Calendar} from '@models';
 import {animate, state, style, transition, trigger} from '@angular/animations';
@@ -27,69 +27,20 @@ export class PostListViewComponent implements OnInit {
 
   private calendars; // : Calendar[]
   private calendarId: number;
+  private loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
   dataSource: Post[]; // data source is posts
   columnsToDisplay = ['subject', 'connected-platforms', 'status'];
   expandedElement: Post | null;
 
-  ELEMENT_DATA: Post[] = [
-    {
-      id: 1,
-      calendar: 11,
-      subject: 'Hydrogen',
-      text: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-        atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`,
-      status: 'draft'
-    }, {
-      id: 2,
-      calendar: 11,
-      subject: 'Helium',
-      text: `Helium is a chemical element with symbol He and atomic number 2. It is a
-        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-        group in the periodic table. Its boiling point is the lowest among all the elements.`,
-      status: 'draft'
-    }, {
-      id: 3,
-      calendar: 11,
-      subject: 'Lithium',
-      text: `Lithium is a chemical element with symbol Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`,
-      status: 'published'
-    },
-  ];
-
   private twitterAppData: { client_id: string, secret: string };
 
-  constructor(private service: PostService,
+  constructor(private postService: PostService,
+              private calendarService: CalendarService,
               private route: ActivatedRoute,
               private twitter: TwitterService,
               private snackBar: MatSnackBar) {
-    this.dataSource = this.ELEMENT_DATA;
-    this.calendars = [
-      {
-        id: 12,
-        name: 'skdjhfjk',
-        connectedPlatforms: 'dlkfn',
-        posts: this.dataSource,
-        collaborators: [1]
-      },
-      {
-        id: 22,
-        name: 'jhfjk',
-        connectedPlatforms: 'dlkfn',
-        posts: this.dataSource,
-        collaborators: [1]
-      }
-    ];
-    this.selectedCalendar = {
-      id: 12,
-      name: 'calendar Name 12',
-      connectedPlatforms: 'twitter',
-      posts: this.dataSource,
-      collaborators: [1]
-    };
   }
 
   get isTwitterConnected() {
@@ -105,14 +56,29 @@ export class PostListViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
+
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
-      this.service.getCalendarPosts(this.calendarId)
+      console.log(this.calendarId);
+
+      this.postService.getCalendarPosts(this.calendarId)
         .subscribe(response => {
-          console.log(response);
-          this.dataSource = response as Post[]; // todo get lists
-          console.log(`posts of this calendar ${this.calendarId}: `, this.dataSource);
+          // console.log(response);
+          this.dataSource = response as Post[];
+          // console.log(`posts of this calendar ${this.calendarId}: `, this.dataSource);
+          this.loading = false;
         });
+    }, err => {
+      console.log(err);
+      this.loading = false;
+    });
+
+    this.calendarService.getAll().subscribe((response/*: any*/) => {
+      // console.log(response);
+      this.calendars = response;
+    }, err => {
+      console.log(err);
     });
   }
 
