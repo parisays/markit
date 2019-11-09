@@ -10,6 +10,7 @@ import {TwitterAuthComponent} from '@app/twitter-auth/twitter-auth.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CalendarWizardComponent} from '@app/calendar-wizard/calendar-wizard.component';
 import {PostWizardComponent} from '@app/post-wizard/post-wizard.component';
+import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-settings.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-settings.component';
 
