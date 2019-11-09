@@ -150,12 +150,11 @@ class TwitterTrendsView(APIView):
         trends = api.trends_place(2459115)
         data = trends[0]
         trends_data = data['trends']
-        print(trends_data[3:10])  
         response = []
         for trend in trends_data:
             label = trend['name']
             url = trend['url']
-            trend_response = {'type':'twitter', 'label':label, 'url':url}
+            trend_response = {'type':'twitter', 'label':label, 'text':url}
             response.append(trend_response)
         response = JSONRenderer().render(response)
         return Response(response)
