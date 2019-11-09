@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from calendars.models import Calendar
 from calendars.serializers import (
     NestedCalendarSerializer,
-    CalendarUpdateSerializer,
+    CalendarSerializer,
 )
 from users.models import User
 
@@ -46,23 +46,24 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
 
         
     def update(self, request, *args, **kwargs):
-        serializer_class = CalendarSerializer
+        self.serializer_class = CalendarSerializer
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
+        print("before perform update")
         self.perform_update(serializer)
         return Response(serializer.data)
 
 
     def destroy(self, request, *args, **kwargs):
-        serializer_class = NestedCalendarSerializer
+        self.serializer_class = NestedCalendarSerializer
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def retrieve(self, request, *args, **kwargs):
-        serializer_class = NestedCalendarSerializer
+        self.serializer_class = NestedCalendarSerializer
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
