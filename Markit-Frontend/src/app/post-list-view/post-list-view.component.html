@@ -76,10 +76,5 @@
 </div>
 
 <div *ngIf="!isTwitterConnected" style="margin: 20%; text-align: center;">
-  <h2>You are not connected to any twitter account!</h2>
-  <a mat-button color="primary" style="font-size: 20px;" (click)="onTwitterAuth()">
-    <mat-icon color="primary">arrow_forward</mat-icon>
-    Connect to your twitter account!
-    <mat-icon color="primary">arrow_back</mat-icon>
-  </a>
+  <app-social-accounts-connection [calendarId]="calendarId" returnURL="returnUrl"></app-social-accounts-connection>
 </div>

@@ -27,6 +27,7 @@ export class PostListViewComponent implements OnInit {
 
   private calendars; // : Calendar[]
   private calendarId: number;
+  returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
   dataSource: Post[]; // data source is posts
   columnsToDisplay = ['subject', 'connected-platforms', 'status'];
@@ -64,10 +65,7 @@ export class PostListViewComponent implements OnInit {
   constructor(private service: PostService,
               private route: ActivatedRoute,
               private twitter: TwitterService,
-              private snackBar: MatSnackBar,
-              private authService: AuthenticationService,
-              private http: HttpClient,
-              private router: Router) {
+              private snackBar: MatSnackBar) {
     this.dataSource = this.ELEMENT_DATA;
     this.calendars = [
       {
@@ -116,47 +114,6 @@ export class PostListViewComponent implements OnInit {
           console.log(`posts of this calendar ${this.calendarId}: `, this.dataSource);
         });
     });
-  }
-
-  onTwitterAuth() {
-    this.http.get<any>(`${environment.apiUrl}/api/v1.0/auth/twitter/`, {
-      headers: new HttpHeaders({
-        Authorization: `Token ${this.authService.currentUserValue.key}`
-      })
-    }).pipe(
-      map(data => {
-        if (data && data.provider && data.provider === 'twitter') {
-          return {
-            client_id: data.client_id as string,
-            secret: data.secret as string
-          };
-        } else {
-          return throwError(new Error('twitter oauth failed'));
-        }
-      })
-    ).subscribe(data => {
-        this.twitterAppData = data as { client_id: string, secret: string };
-        console.log(data);
-        this.http.get<any>(`${environment.apiUrl}/api/v1.0/auth/twitter/oauth`, {
-          headers: {
-            Authorization: `Token ${this.authService.currentUserValue.key}`
-          }
-        }).pipe(map(authData => {
-          if (authData && authData.url) {
-            return authData.url as string;
-          } else {
-            return throwError(new Error('twitter fetch token failed'));
-          }
-        })).subscribe(twitterUrl => {
-          console.log(twitterUrl);
-          window.location.href = twitterUrl as string;
-        }, error => {
-          console.log('twitter routing failed');
-        });
-      },
-      error => {
-        console.log(error);
-      });
   }
 
 
