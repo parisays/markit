@@ -43,15 +43,12 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
 
-
-        
     def update(self, request, *args, **kwargs):
         self.serializer_class = CalendarSerializer
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
-        print("before perform update")
         self.perform_update(serializer)
         return Response(serializer.data)
 
@@ -67,4 +64,3 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
-
