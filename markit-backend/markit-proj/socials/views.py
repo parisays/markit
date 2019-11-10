@@ -49,12 +49,13 @@ class TwitterAccountCredential(APIView):
     """
     permission_classes = (IsAuthenticated,)
     serializer_class = SocialTokenSerializer
-    def get(self, request):
+    def get(self, request, calendar_id):
         """
-        Get user's twitter account credentials.
+        Get calendar's twitter account credentials.
         """
-        user = User.objects.get(email=self.request.user)
-        account = SocialAccount.objects.get(user=user)
+        calendar = Calendar.objects.get(pk=calendar_id)
+        twitter_id = calendar.twitter.id
+        account = SocialAccount.objects.get(pk=twitter_id)
         social_token = SocialToken.objects.get(account=account)
         serializer = self.serializer_class(social_token)
         return Response(serializer.data)
