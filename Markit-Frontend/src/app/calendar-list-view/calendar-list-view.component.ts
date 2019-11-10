@@ -20,8 +20,9 @@ export class CalendarListViewComponent implements OnInit {
     this.loading = true;
 
     this.service.getAll().subscribe((response/*: any*/) => {
-      console.log(response);
+      // console.log(response);
       this.calendars = response;
+      this.loading = false;
     }, err => {
       console.log(err);
       this.loading = false;

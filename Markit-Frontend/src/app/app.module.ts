@@ -31,6 +31,7 @@ import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
 import { ManualTestComponent } from './manual-test/manual-test.component';
 import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
 import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { PostOverviewSimpleComponent } from './post-overview-simple/post-overvie
     PostWizardComponent,
     CalendarSettingsComponent,
     PostOverviewSimpleComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
