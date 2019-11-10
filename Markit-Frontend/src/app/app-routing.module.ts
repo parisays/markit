@@ -4,13 +4,11 @@ import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {CalendarListViewComponent} from '@app/calendar-list-view/calendar-list-view.component';
 import {PostListViewComponent} from '@app/post-list-view/post-list-view.component';
-import {NewPostComponent} from '@app/new-post/new-post.component';
 import {AuthGuard} from '@app/_helpers/auth.guard';
 import {TwitterAuthComponent} from '@app/twitter-auth/twitter-auth.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CalendarWizardComponent} from '@app/calendar-wizard/calendar-wizard.component';
 import {PostWizardComponent} from '@app/post-wizard/post-wizard.component';
-import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-settings.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-settings.component';
 
