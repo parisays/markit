@@ -9,9 +9,6 @@ import {Subject} from 'rxjs';
 })
 export class PostDetailsFormComponent implements OnInit {
 
-  private postSubject;
-  private postDate;
-
   form: FormGroup = this.fb.group({
       subject: [''],
       date: ['']

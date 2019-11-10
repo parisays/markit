@@ -22,8 +22,6 @@ export class PostIdeasComponent implements OnInit {
     this.loading = true;
 
     this.service.getAll().subscribe((response) => {
-      console.log(response);
-      console.log(JSON.parse(response as string));
       this.postIdeas = JSON.parse(response as string);
       this.loading = false;
     }, err => {
