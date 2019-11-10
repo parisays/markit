@@ -8,14 +8,14 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 })
 export class BasePostContentComponent implements OnInit {
 
-  private selectedFile: File;
-  private imageUrl;
+  selectedFile: File = null;
+  imageUrl;
   private imageName;
   private imagePath: string;
 
   form: FormGroup = this.fb.group(
     {
-      content: ['', [
+      text: ['', [
         Validators.required
       ]]
     }
@@ -24,8 +24,8 @@ export class BasePostContentComponent implements OnInit {
   constructor(private fb: FormBuilder) {
   }
 
-  get content() {
-    return this.form.get('content');
+  get text() {
+    return this.form.get('text');
   }
 
   onFileChanged(event) {
