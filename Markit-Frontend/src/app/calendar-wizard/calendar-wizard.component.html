@@ -1,6 +1,6 @@
 <mat-toolbar class="mat-elevation-z5" style="background: white;">
   <h1 style="font-size: 40px;margin:auto; margin-right: 23%;">Calendar Wizard</h1>
-  <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button>
+  <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button routerLink="">
       <mat-icon style="font-size: 30px;">close</mat-icon>
   </button>
 </mat-toolbar>
@@ -25,7 +25,7 @@
             <ng-template matStepLabel >
                 Social Account Connection
             </ng-template>
-            <app-social-accounts-connection></app-social-accounts-connection>
+            <app-social-accounts-connection [calendarId]="this.calendarId" [returnURL]="returnUrl"></app-social-accounts-connection>
             <mat-toolbar style="margin-top: 20%; display:flex;">
                 <button mat-raised-button matStepperPrevious color="primary">Back</button>
                 <button style="margin: auto; margin-right: 0;" matStepperNext

@@ -25,7 +25,8 @@ import {environment} from '@environments/environment';
 
 export class PostListViewComponent implements OnInit {
 
-  private calendars; // : Calendar[]
+  private allCalendars: Calendar[];
+  private calendar: Calendar;
   private calendarId: number;
   private loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
@@ -44,15 +45,7 @@ export class PostListViewComponent implements OnInit {
   }
 
   get isTwitterConnected() {
-    return true;
-
-    // todo uncomment
-    // const twitterLinkedStorage = localStorage.getItem('twitterLinked');
-    // if (twitterLinkedStorage) {
-    //   return twitterLinkedStorage === 'true';
-    // } else {
-    //   return false;
-    // }
+    return this.calendar ? this.calendar.connectedPlatforms.split('/').includes('Twitter') : false;
   }
 
   ngOnInit() {
@@ -76,7 +69,8 @@ export class PostListViewComponent implements OnInit {
 
     this.calendarService.getAll().subscribe((response/*: any*/) => {
       // console.log(response);
-      this.calendars = response;
+      this.allCalendars = response as Calendar[];
+      this.calendar = this.allCalendars.filter(v => v.id === this.calendarId)[0];
     }, err => {
       console.log(err);
     });

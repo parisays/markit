@@ -14,7 +14,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarListViewComponent } from './calendar-list-view/calendar-list-view.component';
 import { PostListViewComponent } from './post-list-view/post-list-view.component';
-import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
 import { PostDetailsFormComponent } from './post-details-form/post-details-form.component';
@@ -42,7 +41,6 @@ import { HomepageComponent } from './homepage/homepage.component';
     HeaderComponent,
     CalendarListViewComponent,
     PostListViewComponent,
-    NewPostComponent,
     TwitterAuthComponent,
     PostDetailsFormComponent,
     AuthorizedHeaderComponent,
