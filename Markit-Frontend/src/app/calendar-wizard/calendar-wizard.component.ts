@@ -21,6 +21,9 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
   private stepComplete = [false, false];
   private isDetailsFormValid = false;
   private calendarId: number;
+  private get returnUrl() {
+    return this.calendar ? `calendars/${this.calendar.id}/wizard/social-accounts` : null;
+  }
 
   constructor(private location: Location,
               private route: ActivatedRoute,
@@ -110,6 +113,6 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
 
   finish() {
     this.updateCalendar();
-    this.router.navigate(['calendars', this.calendar.id]);
+    this.router.navigate(['calendars', this.calendar.id, 'posts']);
   }
 }
