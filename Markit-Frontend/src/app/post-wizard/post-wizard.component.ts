@@ -63,13 +63,14 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
           this.postChannels.connectedPlatforms = this.calendar.connectedPlatforms.split('/');
         }, err => {
           console.log(err);
-          this.router.navigate(['calendars', this.calendarId, 'posts', 'new']);
+          this.router.navigate(['/calendars', this.calendarId, 'posts', 'new']);
         });
       }
     }, err => {
       console.log(err);
+      this.snackBar.open('Calendar not found!', 'Dismiss', {duration: 2000});
+      this.router.navigate(['/']);
     });
-    // todo check whole form and then enable create post button
   }
 
   createPost() {
@@ -88,7 +89,7 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
         this.post = value;
         this.postId = value.id;
         this.snackBar.open('Post has been created successfully!', 'Dismiss', {duration: 2000});
-        this.router.navigate(['/calendars', value.id, 'posts']);
+        this.router.navigate(['/calendars', this.calendarId, 'posts']);
       }, err => {
         console.log(err);
 
@@ -113,8 +114,8 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
         console.log(value);
 
         this.snackBar.open('Post has been updated successfully!', 'Dismiss', {duration: 1000});
-        this.loading = false;
-        this.router.navigate(['/calendars', value.id, 'posts']);
+        // this.loading = false;
+        this.router.navigate(['/calendars', this.calendarId, 'posts']);
       }, err => {
         console.log(err);
 
