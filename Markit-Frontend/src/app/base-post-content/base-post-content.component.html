@@ -1,28 +1,32 @@
 <body style="display: flex; flex-direction: column;margin-top: 5%">
-    <div style="margin: auto; display: flex; flex-direction: column;">
-        <mat-form-field style="width: 500px" appearance="outline">
-            <mat-label>Content</mat-label>
-            <textarea cols="80" rows="10" formControlName="content" matInput placeholder="Your post content." autofocus></textarea>
-            <mat-icon matSuffix>edit</mat-icon>
-        </mat-form-field>
-        <div>
-            <input style="display: none" type="file" #fileInput>
-            <button mat-button (click)="fileInput.click()">
-                <mat-icon>image</mat-icon>
-            </button>
-            <button mat-button disabled>
-                <mat-icon>videocam</mat-icon>
-            </button>
-            <button mat-button disabled>
-                <mat-icon>save_alt</mat-icon>
-            </button>
-            <button mat-button disabled>
-                <mat-icon color="gray">library_books</mat-icon>
-            </button>
-        </div>
-    </div>
-    <div style="display: flex; margin-top: 5%">
-        <button style=" margin: 3%; margin-left: auto;" mat-raised-button color="primary" matStepperPrevious>Back</button>
-        <button style="margin: auto; margin-left: 0;" mat-raised-button color="primary" matStepperNext>Next</button>
-    </div>
+<form style="margin: auto; display: flex; flex-direction: column;" [formGroup]="form">
+  <mat-form-field style="width: 500px" appearance="outline">
+    <mat-label>Content</mat-label>
+    <textarea cols="80" rows="10" formControlName="text" matInput placeholder="Your post text."
+              autofocus></textarea>
+    <mat-icon matSuffix>edit</mat-icon>
+  </mat-form-field>
+  <div>
+    <input style="display: none" type="file" #fileInput (change)="onFileChanged($event)">
+    <button mat-button (click)="fileInput.click()">
+      <mat-icon>image</mat-icon>
+    </button>
+    <button mat-button disabled>
+      <mat-icon>videocam</mat-icon>
+    </button>
+    <button mat-button disabled>
+      <mat-icon>save_alt</mat-icon>
+    </button>
+    <button mat-button disabled>
+      <mat-icon color="gray">library_books</mat-icon>
+    </button>
+  </div>
+  <img [src]="imageUrl" height="200" *ngIf="imageUrl">
+  <span style="margin-top: 50px; color: #3f51b5">{{imageName}}</span>
+</form>
+
+<div style="display: flex; margin-top: 5%">
+  <button style=" margin: 3%; margin-left: auto;" mat-raised-button color="primary" matStepperPrevious>Back</button>
+  <button style="margin: auto; margin-left: 0;" mat-raised-button color="primary" matStepperNext>Next</button>
+</div>
 </body>

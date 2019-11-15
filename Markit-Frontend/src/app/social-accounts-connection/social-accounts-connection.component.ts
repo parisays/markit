@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {CalendarService} from '@services';
+import {Component, Input, OnInit} from '@angular/core';
+import {CalendarService, TwitterService} from '@services';
 import {ActivatedRoute} from '@angular/router';
+import {Post, PostStatus} from '@models';
+import {map} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-social-accounts-connection',
@@ -8,39 +11,53 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./social-accounts-connection.component.scss']
 })
 export class SocialAccountsConnectionComponent implements OnInit {
-
+  @Input() calendarId: number;
+  @Input() returnURL: string;
 
   socialAccounts = [
     {
       image: '../assets/images/twitter-logo.png',
       name: 'Twitter',
-      authLink: 'twitter-auth'
+      connect: this.connectTwitter,
     },
     {
       image: '../assets/images/facebook-logo.png',
       name: 'Facebook',
-      authLink: 'facebook-auth'
+      connect: this.connectFB,
     },
     {
       image: '../assets/images/pinterest-logo.png',
       name: 'Pinterest',
-      authLink: 'pinterest-auth'
+      connect: this.connectPinterest,
     }
   ];
 
-  constructor(private service: CalendarService, private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private twitter: TwitterService) {
   }
-
-  calendarId: number;
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.calendarId = +params.get('calendarId');
-    });
-
+    console.log(this.calendarId, this.returnURL);
   }
 
-  editCalendar() {
+  private connectTwitter(c: SocialAccountsConnectionComponent) {
+    console.log(c.calendarId);
+    console.log(c.returnURL);
+    if (!c.calendarId || !c.returnURL) { return; }
+    console.log('b');
 
+    c.twitter.connect(c.returnURL as string, c.calendarId as number)
+      .subscribe(twitterUrl => {
+        console.log(twitterUrl);
+        window.location.href = twitterUrl as string;
+      }, error => {
+        console.log('twitter routing failed');
+        console.log(error);
+      });
   }
+
+  private connectFB(c: SocialAccountsConnectionComponent) { }
+
+  private connectPinterest(c: SocialAccountsConnectionComponent) { }
+
 }

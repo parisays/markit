@@ -14,7 +14,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalendarListViewComponent } from './calendar-list-view/calendar-list-view.component';
 import { PostListViewComponent } from './post-list-view/post-list-view.component';
-import { NewPostComponent } from './new-post/new-post.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
 import { PostDetailsFormComponent } from './post-details-form/post-details-form.component';
@@ -31,6 +30,7 @@ import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
 import { ManualTestComponent } from './manual-test/manual-test.component';
 import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
 import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { PostOverviewSimpleComponent } from './post-overview-simple/post-overvie
     HeaderComponent,
     CalendarListViewComponent,
     PostListViewComponent,
-    NewPostComponent,
     TwitterAuthComponent,
     PostDetailsFormComponent,
     AuthorizedHeaderComponent,
@@ -56,6 +55,7 @@ import { PostOverviewSimpleComponent } from './post-overview-simple/post-overvie
     PostWizardComponent,
     CalendarSettingsComponent,
     PostOverviewSimpleComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,
