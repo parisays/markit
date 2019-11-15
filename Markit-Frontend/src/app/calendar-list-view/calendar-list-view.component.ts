@@ -14,6 +14,35 @@ export class CalendarListViewComponent implements OnInit {
   private loading;
 
   constructor(private service: CalendarService, private  authService: AuthenticationService) {
+    this.calendars = [
+      {
+        name: 'jdfljnkg'
+      },
+      {
+        name: 'jndfkajs'
+      },
+      {
+        name: 'kjdfhd'
+      },
+      {
+        name: 'jdfljnkg'
+      },
+      {
+        name: 'jndfkajs'
+      },
+      {
+        name: 'kjdfhd'
+      },
+      {
+        name: 'jdfljnkg'
+      },
+      {
+        name: 'jndfkajs'
+      },
+      {
+        name: 'kjdfhd'
+      }
+    ];
   }
 
   ngOnInit() {
