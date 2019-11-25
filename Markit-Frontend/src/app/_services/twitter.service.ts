@@ -14,12 +14,7 @@ export class TwitterService {
     private http: HttpClient  ) {  }
 
   publishTweet(postId: number) {
-    return this.http.get<any>(`${environment.apiUrl}calendar/tweet/${postId}`);
-  }
-
-  isConnected(): boolean {
-    const twitterLinkedStorage = localStorage.getItem('twitterLinked');
-    return !!twitterLinkedStorage && (twitterLinkedStorage === 'true');
+    return this.http.get<any>(`${environment.apiUrl}twitter/tweet/${postId}`);
   }
 
   connect(returnUrl: string, calendarId: number) {

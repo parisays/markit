@@ -24,6 +24,7 @@ export class CalendarListViewComponent implements OnInit {
       this.calendars = response;
       this.loading = false;
     }, err => {
+      console.log('calendar list view error');
       console.log(err);
       this.loading = false;
     });

@@ -1,4 +1,4 @@
-<div *ngIf="isTwitterConnected">
+<div>
   <mat-toolbar style="margin-top: 5%; margin-left: 10%; width: 80%; display: flex;">
     <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 5%;">
       <mat-label>
@@ -78,8 +78,4 @@
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
-</div>
-
-<div *ngIf="!isTwitterConnected" style="margin: 20%; text-align: center;">
-  <app-social-accounts-connection [calendarId]="calendarId" returnURL="returnUrl"></app-social-accounts-connection>
 </div>
