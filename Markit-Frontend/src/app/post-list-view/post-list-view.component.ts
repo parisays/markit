@@ -60,13 +60,19 @@ export class PostListViewComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
-      console.log(this.calendarId);
+      // console.log(this.calendarId);
+
+      this.calendarService.get(this.calendarId).subscribe(value => {
+        console.log(value);
+        this.calendar = value as Calendar;
+      }, err => {
+        console.log(err);
+        this.loading = false;
+      });
 
       this.postService.getCalendarPosts(this.calendarId)
         .subscribe(response => {
-          // console.log(response);
           this.dataSource = response as Post[];
-          // console.log(`posts of this calendar ${this.calendarId}: `, this.dataSource);
           this.loading = false;
         });
     }, err => {
@@ -74,14 +80,14 @@ export class PostListViewComponent implements OnInit {
       this.loading = false;
     });
 
-    this.calendarService.getAll().subscribe((response/*: any*/) => {
-      // console.log(response);
-      this.calendars = response;
+    this.calendarService.getAll().subscribe((response) => {
+      this.allCalendars = response as Calendar[];
+      // this.calendar = this.allCalendars.filter(v => v.id === this.calendarId)[0];
+      console.log('calendar is now this:', this.calendarId, this.calendar.name);
     }, err => {
       console.log(err);
     });
   }
-
 
   publishOnTweeter(post: Post) {
     console.log(post);
