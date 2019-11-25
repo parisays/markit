@@ -10,7 +10,7 @@ from calendars.serializers import (
 from users.models import User
 
 
-class CalendarListView(generics.ListCreateAPIView):
+class CalendarListCreateView(generics.ListCreateAPIView):
     """
     Create and list calendars view.
     """

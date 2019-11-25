@@ -27,7 +27,7 @@ class PostListView(generics.ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
-        calendar_id = self.request.query_params.get('calendar_id')
+        calendar_id = kwargs.get('calendar_id')
         calendar = Calendar.objects.get(id=calendar_id)
         post_list = Post.objects.filter(calendar=calendar)
         serializer = self.get_serializer(post_list, many=True)
