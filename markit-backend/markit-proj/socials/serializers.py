@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from allauth.socialaccount.models import SocialApp, SocialToken, SocialAccount
+from .models import SocialApp, SocialAccount
 
 class SocialAppSerializer(serializers.ModelSerializer):
     """
@@ -7,12 +7,15 @@ class SocialAppSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = SocialApp
-        fields = ('provider', 'client_id', 'secret')
+        fields = ('provider', 'clientId', 'secret')
 
-class SocialTokenSerializer(serializers.ModelSerializer):
+class SocialAccountSerializer(serializers.ModelSerializer):
     """
     Social token serializer.
     """
     class Meta:
-        model = SocialToken
-        fields = ('token', 'token_secret')
+        model = SocialAccount
+        fields = ('app', 'provider', 'calendar', 'token', 'tokenSecret', 'expireDate')
+
+    def create(self, validated_data):
+        return SocialAccount.objects.create(**validated_data)

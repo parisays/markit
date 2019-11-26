@@ -1,126 +1,90 @@
-from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
-from allauth.socialaccount.models import SocialApp, SocialAccount, SocialToken
-from rest_auth.registration.views import SocialConnectView
-from rest_auth.social_serializers import TwitterConnectSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.test import APIClient
-from rest_framework.authtoken.models import Token
 from rest_framework.renderers import JSONRenderer
+from rest_framework import generics, status, mixins
 import tweepy
 from markit import settings
-from users.models import User
 from calendars.models import Calendar
 from posts.models import Post
 from posts.serializers import PostSerializer
 from .serializers import (
     SocialAppSerializer,
-    SocialTokenSerializer,
+    SocialAccountSerializer,
 )
-# from calendars.models import Calendar
-# from calendars.serializers import CalendarSerializer
-from markit import settings
+from .models import SocialAccount, SocialApp
 
-class TwitterConnect(SocialConnectView):
-    """
-    Twitter connect view.
-    """
-    serializer_class = TwitterConnectSerializer
-    adapter_class = TwitterOAuthAdapter
+# class SocialAppCredentials(APIView):
+#     """
+#     Get twitter app credentials view.
+#     """
+#     serializer_class = SocialAppSerializer
+#     def get(self, request):
+#         """
+#         Get method.
+#         """
+#         twitter_app = SocialApp.objects.get(provider='Twitter')
+#         serializer = self.serializer_class(twitter_app)
+#         return Response(serializer.data)
 
-class TwitterAppCredential(APIView):
-    """
-    Get twitter app credentials view.
-    """
-    serializer_class = SocialAppSerializer
-    provider = 'twitter'
-    def get(self, request):
-        """
-        Get method.
-        """
-        twitter_app = SocialApp.objects.get(provider=self.provider)
-        serializer = self.serializer_class(twitter_app)
-        return Response(serializer.data)
-
-class TwitterAccountCredential(APIView):
-    """
-    Get twitter account credentials.
-    """
-    permission_classes = (IsAuthenticated,)
-    serializer_class = SocialTokenSerializer
-    def get(self, request, calendar_id):
-        """
-        Get calendar's twitter account credentials.
-        """
-        calendar = Calendar.objects.get(pk=calendar_id)
-        twitter_id = calendar.twitter.id
-        account = SocialAccount.objects.get(pk=twitter_id)
-        social_token = SocialToken.objects.get(account=account)
-        serializer = self.serializer_class(social_token)
-        return Response(serializer.data)
+# class SocialAccountCredential(generics.RetrieveDestroyAPIView):
+#     """
+#     Social account retreive destroy api view.
+#     """
+#     permission_classes = (IsAuthenticated,)
+#     queryset = SocialAccount.objects.all()
+#     serializer_class = SocialAccountSerializer
 
 class TwitterOAuth(APIView):
     """
-    Get twitter auth URL.
+    Get twitter oauth URL.
     """
-    provider = 'twitter'
     def get(self, request):
         """
         Get method.
         """
-        twitter_app = SocialApp.objects.get(provider=self.provider)
-        twitter_auth = tweepy.OAuthHandler(twitter_app.client_id, twitter_app.secret,
+        twitter_app = SocialApp.objects.get(provider='Twitter')
+        twitter_auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret,
                                            settings.TWITTER_CALLBACK_URL)
         twitter_oauth = twitter_auth.get_authorization_url()
         return Response({'url' : twitter_oauth})
 
-class CustomTwitterAccountConnectView(APIView):
+class TwitterAccountConnect(mixins.CreateModelMixin, generics.GenericAPIView):
     """
-    Get twitter authorization tokens.
+    Social account create view.
     """
     permission_classes = (IsAuthenticated,)
-    provider = 'twitter'
-    def get(self, request, oauth_token, oauth_verifier, calendar_id):
+    serializer_class = SocialAccountSerializer
+    def get(self, request, *args, **kwargs):
         """
         Get method.
         """
-        twitter_app = SocialApp.objects.get(provider=self.provider)
-        twitter_auth = tweepy.OAuthHandler(twitter_app.client_id, twitter_app.secret,
+        oauth_token = kwargs.get('oauth_token')
+        oauth_verifier = kwargs.get('oauth_verifier')
+        twitter_app = SocialApp.objects.get(provider='Twitter')
+        twitter_auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret,
                                            settings.TWITTER_CALLBACK_URL)
         twitter_auth.request_token = {'oauth_token' : oauth_token,
                                       'oauth_token_secret' : oauth_verifier}
         twitter_auth.get_access_token(oauth_verifier)
-        return self.connect(request, twitter_auth, calendar_id)
-
-    def connect(self, request, twitter_auth, calendar_id):
-        """
-        Twitter connect.
-        """
+        calendar_id = kwargs.get('calendar_id')
         calendar = Calendar.objects.get(pk=calendar_id)
-        token = Token.objects.get(user=request.user)
-        client = APIClient()
-        client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
-        response = client.post('/api/v1.0/socials/rest-auth/twitter/connect/',
-                               {"access_token": twitter_auth.access_token,
-                                "token_secret": twitter_auth.access_token_secret},
-                               format='json')
-        self.connect_calendar(request, calendar)
-        return Response(response.data)
+        access_token = twitter_auth.access_token
+        token_secret = twitter_auth.access_token_secret
 
-    def connect_calendar(self, request, calendar):
-        """
-        Twitter calendar connection.
-        """
-        user = User.objects.get(email=request.user)
-        twitter_account = SocialAccount.objects.filter(user=user,
-                                                       provider='twitter').order_by('id')[0]
-        calendar.twitter = twitter_account
-        calendar.connectedPlatforms = 'Twitter'
-        calendar.save()
-        return True
+        social_account = SocialAccount(app=twitter_app, calendar=calendar, provider='Twitter',
+                                       token=access_token, tokenSecret=token_secret)
+        serializer = self.serializer_class(data=self.serializer_class(social_account).data)
+        if serializer.is_valid():
+            serializer.create(serializer.validated_data)
+            calendar.connectedPlatforms = 'Twitter'
+            calendar.save()
+            return Response('twitter account connected to calendar successfully.',
+                            status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class TweetView(APIView):
+
+class Tweet(APIView):
     """
     Tweet on user twitter account.
     """
@@ -132,11 +96,9 @@ class TweetView(APIView):
         if post.status == 'Published':
             return Response(False)
         calendar = Calendar.objects.get(pk=post.calendar.id)
-        twitter_id = calendar.twitter.id
-        twitter_account = SocialAccount.objects.get(pk=twitter_id)
-        credentials = SocialToken.objects.get(account=twitter_account)
-        access_token = credentials.token
-        secret_token = credentials.token_secret
+        twitter_account = SocialAccount.objects.get(pk=calendar.socialaccount_calendar.id)
+        access_token = twitter_account.token
+        secret_token = twitter_account.tokenSecret
         auth = tweepy.OAuthHandler(settings.TWITTER_KEY, settings.TWITTER_SECRET)
         auth.set_access_token(access_token, secret_token)
         twitter_api = tweepy.API(auth)
@@ -146,7 +108,7 @@ class TweetView(APIView):
 
         return Response(True)
 
-class TwitterTrendsView(APIView):
+class TwitterTrends(APIView):
     """
     Get twitter trends.
     """

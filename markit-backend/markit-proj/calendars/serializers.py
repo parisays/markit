@@ -10,10 +10,9 @@ class CalendarSerializer(serializers.ModelSerializer):
     Calendar serializer.
     """
     posts = PostSerializer(many=True, read_only=True)
-    # socials = SocialAccountSerializer(read_only=True)
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connectedPlatforms', 'twitter')
+        fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connectedPlatforms')
         read_only_fields = ('id', )
 
 class NestedCalendarSerializer(serializers.ModelSerializer):
@@ -23,7 +22,7 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
     posts = PostSerializer(many=True, read_only=True)
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connectedPlatforms', 'twitter')
+        fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connectedPlatforms')
         read_only_fields = ('id', )
 
     def create(self, validated_data):
@@ -38,16 +37,7 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
         instance.connectedPlatforms = validated_data.get('connectedPlatforms',
                                                          instance.connectedPlatforms)
 
-        instance.twitter = validated_data.get('twitter', instance.twitter)
-
         instance.save()
-
-        # for post in posts_data:
-        #     p = current_posts.pop(0)
-        #     p.name = post.get('subject', p.subject)
-        #     p.text = post.get('text', p.text)
-        #     p.status = post.get('status', p.status)
-        #     p.save()
 
         for data in collab_data:
             collaborator = User.objects.filter(email=data)
@@ -62,5 +52,5 @@ class CalendarUpdateSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'collaborators', 'connectedPlatforms', 'twitter')
+        fields = ('id', 'name', 'owner', 'collaborators', 'connectedPlatforms')
         read_only_fields = ('id', )
