@@ -19,14 +19,14 @@
 body{
     display: flexbox;
     flex-direction: column;
-    background: #b9c1ce38;
+    background: #53798b0a;
 }
 
 h1 {
     margin-left: 20px;
     margin-right: 20px;
-    color: rgb(19, 35, 104);
-    border-bottom: 2px rgba(128, 128, 128, 0.329) double;
+    color: #e25a53;
+    border-bottom: 2px #fdb35d double;
 }
 
 h1 mat-icon {
@@ -41,4 +41,5 @@ div button{
     position: absolute;
     right: 10px;
     bottom: 10px;
+    background: #fdb35d;
 }

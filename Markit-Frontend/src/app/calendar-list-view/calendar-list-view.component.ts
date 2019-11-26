@@ -14,6 +14,20 @@ export class CalendarListViewComponent implements OnInit {
   private loading;
 
   constructor(private service: CalendarService, private  authService: AuthenticationService) {
+  }
+
+  ngOnInit() {
+    this.loading = true;
+
+    this.service.getAll().subscribe((response/*: any*/) => {
+      // console.log(response);
+      this.calendars = response;
+      this.loading = false;
+    }, err => {
+      console.log('calendar list view error');
+      console.log(err);
+      this.loading = false;
+    });
     this.calendars = [
       {
         name: 'jdfljnkg'
@@ -43,19 +57,5 @@ export class CalendarListViewComponent implements OnInit {
         name: 'kjdfhd'
       }
     ];
-  }
-
-  ngOnInit() {
-    this.loading = true;
-
-    this.service.getAll().subscribe((response/*: any*/) => {
-      // console.log(response);
-      this.calendars = response;
-      this.loading = false;
-    }, err => {
-      console.log('calendar list view error');
-      console.log(err);
-      this.loading = false;
-    });
   }
 }
