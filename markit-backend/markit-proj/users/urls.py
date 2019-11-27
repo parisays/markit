@@ -2,9 +2,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path, re_path
-from rest_auth.registration.views import (
-    VerifyEmailView,
-)
+from rest_auth.registration.views import VerifyEmailView
 from rest_auth.views import PasswordResetConfirmView, PasswordResetView
 from .views import (
     CustomRegistrationView,
@@ -14,8 +12,8 @@ from .views import (
 
 urlpatterns = [
     url(r'^rest-auth/password_reset/$', PasswordResetView.as_view()),
-    re_path(r'^rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-            PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    # re_path(r'^rest-auth/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    #         PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     url(r'^rest-auth/login/$', CustomLoginView.as_view()),
     path('rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/$', CustomRegistrationView.as_view()),
