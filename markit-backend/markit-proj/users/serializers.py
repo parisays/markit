@@ -1,3 +1,6 @@
+from django.contrib.auth.forms import PasswordResetForm
+from django.conf import settings
+from django.utils.translation import gettext as _
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
 from calendars.serializers import CalendarSerializer
@@ -26,9 +29,40 @@ class CustomAccountDetailsSerializer(serializers.ModelSerializer):
     """
     Custom account detail serializer.
     """
-    calendars = CalendarSerializer(many=True, read_only=True)
+    calendar_owner = CalendarSerializer(many=True, read_only=True)
+    calendar_collaborators = CalendarSerializer(many=True, read_only=True)
     class Meta:
         model = User
-        fields = ('id', 'email', 'firstName', 'lastName', 'calendars')
+        fields = ('id', 'email', 'firstName', 'lastName', 'calendar_owner', 'calendar_collaborators')
         read_only_fields = ('id',)
 
+
+class CustomPasswordResetSerializer(serializers.Serializer):
+    """
+    Password reset serializer.
+    """
+    email = serializers.EmailField()
+    password_reset_form_class = PasswordResetForm
+    def validate_email(self, value):
+        """
+        Email validator.
+        """
+        self.reset_form = self.password_reset_form_class(data=self.initial_data)
+        if not self.reset_form.is_valid():
+            raise serializers.ValidationError(_('Error'))
+        if not User.objects.filter(email=value).exists():
+            raise serializers.ValidationError(_('Invalid e-mail address'))
+        return value
+
+    def save(self):
+        """
+        Save.
+        """
+        request = self.context.get('request')
+        opts = {
+            'use_https': request.is_secure(),
+            'from_email': getattr(settings, 'DEFAULT_FROM_EMAIL'),
+            'email_template_name': 'password_reset.txt',
+            'request': request,
+        }
+        self.reset_form.save(**opts)

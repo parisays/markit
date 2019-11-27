@@ -43,9 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.twitter',
+    'allauth.account',
+    'allauth.socialaccount',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -67,7 +66,8 @@ REST_FRAMEWORK = {
 }
 
 REST_AUTH_SERIALIZERS = {
-    "USER_DETAILS_SERIALIZER": "users.serializers.CustomAccountDetailsSerializer",
+    'USER_DETAILS_SERIALIZER': 'users.serializers.CustomAccountDetailsSerializer',
+    'PASSWORD_RESET_SERIALIZER': 'users.serializers.CustomPasswordResetSerializer',
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
@@ -83,7 +83,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'markitteamservice@gmail.com'
-EMAIL_HOST_PASSWORD = 'markitteam2019'
+EMAIL_HOST_PASSWORD = 'seteamfall19'
 EMAIL_HOST_USERNAME = 'markitteamservice'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 

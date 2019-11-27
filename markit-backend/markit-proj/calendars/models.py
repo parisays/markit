@@ -15,9 +15,9 @@ class Calendar(models.Model):
         (FT, 'Facebook and Twitter'),
     ]
     name = models.CharField(max_length=100)
-    collaborators = models.ManyToManyField(User, related_name='collaborators',
+    collaborators = models.ManyToManyField(User, related_name='calendar_collaborators',
                                            default=[], blank=True)
-    owner = models.ForeignKey(User, related_name='owner', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='calendar_owner', on_delete=models.CASCADE)
     connectedPlatforms = models.CharField(max_length=20,
                                           choices=PLATFORM_CHOICES,
                                           default="",

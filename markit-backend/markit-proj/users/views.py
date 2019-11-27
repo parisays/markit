@@ -1,4 +1,5 @@
 from rest_auth.registration.views import RegisterView, LoginView
+from rest_auth.views import PasswordResetView
 from .serializers import (
     CustomAccountDetailsSerializer,
     AccountRegistrationSerializer,

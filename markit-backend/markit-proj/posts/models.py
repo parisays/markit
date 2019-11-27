@@ -1,7 +1,5 @@
-import os
 from django.db import models
 from calendars.models import Calendar
-from markit.settings import MEDIA_URL, MEDIA_ROOT
 
 class Post(models.Model):
     """
