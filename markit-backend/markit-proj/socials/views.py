@@ -1,19 +1,16 @@
+import os
+import requests
+import tweepy
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 from rest_framework import generics, status, mixins
-import tweepy
-import requests
-import os
 from markit import settings
 from calendars.models import Calendar
 from posts.models import Post
 from posts.serializers import PostSerializer
-from .serializers import (
-    SocialAppSerializer,
-    SocialAccountSerializer,
-)
+from .serializers import SocialAccountSerializer
 from .models import SocialAccount, SocialApp
 
 # class SocialAppCredentials(APIView):
