@@ -101,8 +101,6 @@ ACCOUNT_ADAPTER = 'users.adapter.CustomAccountAdapter'
 REST_USE_JWT = False
 
 # Twitter app credentials
-TWITTER_KEY = 'SAMuCOQzTaSza7eVU7lprNOEr'
-TWITTER_SECRET = 'vGmnvT6HpQRrNfbUb5DAsnyJeD8Q177MBqZ2pcZWHw6GET1A1u'
 TWITTER_CALLBACK_URL = 'http://127.0.0.1:4200/twitter-auth/'
 
 MIDDLEWARE = [

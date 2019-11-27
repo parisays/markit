@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 from rest_framework import generics, status, mixins
 import tweepy
+import requests
+import os
 from markit import settings
 from calendars.models import Calendar
 from posts.models import Post
@@ -94,26 +96,40 @@ class Tweet(APIView):
     def get(self, request, pk):
         post = Post.objects.get(pk=pk)
         if post.status == 'Published':
-            return Response(False)
-        calendar = Calendar.objects.get(pk=post.calendar.id)
-        twitter_account = SocialAccount.objects.get(pk=calendar.socialaccount_calendar.id)
+            return Response("Tweet has been published previously.",
+                            status=status.HTTP_400_BAD_REQUEST)
+        user = self.request.user
+        calendar = Calendar.objects.get(pk=post.calendar.id, owner=user)
+        twitter_account = SocialAccount.objects.get(calendar=calendar)
         access_token = twitter_account.token
         secret_token = twitter_account.tokenSecret
-        auth = tweepy.OAuthHandler(settings.TWITTER_KEY, settings.TWITTER_SECRET)
+        twitter_app = twitter_account.app
+        auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret)
         auth.set_access_token(access_token, secret_token)
         twitter_api = tweepy.API(auth)
-        twitter_api.update_status(post.text)
+        image_url = request.build_absolute_uri(PostSerializer(post).data['image'])
+        image_file = 'temp.jpg'
+        request = requests.get(image_url, stream=True)
+        if request.status_code == 200:
+            with open(image_file, 'wb') as image:
+                for chunk in request:
+                    image.write(chunk)
+            twitter_api.update_with_media(image_file, status=post.text)
+            os.remove(image_file)
+        else:
+            twitter_api.update_status(post.text)
         post.status = 'Published'
         post.save()
+        return Response("Tweet sent successfully.", status=status.HTTP_200_OK)
 
-        return Response(True)
 
 class TwitterTrends(APIView):
     """
     Get twitter trends.
     """
     def get(self, request):
-        auth = tweepy.OAuthHandler(settings.TWITTER_KEY, settings.TWITTER_SECRET)
+        twitter_app = SocialApp.objects.get(provider='Twitter')
+        auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret)
         api = tweepy.API(auth)
         trends = api.trends_place(2459115)
         data = trends[0]
