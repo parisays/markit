@@ -18,6 +18,8 @@ class Post(models.Model):
     text = models.TextField()
     status = models.CharField(max_length=9, choices=STATUS_CHOICES, default=Draft)
     image = models.ImageField(upload_to='posts/', default='posts/postDefault.png')
+    publishDateTime = models.DateTimeField(verbose_name='Publish Date and Time',
+                                           blank=True, default=None)
 
     def __str__(self):
         return self.subject + ' | ' + self.calendar.name

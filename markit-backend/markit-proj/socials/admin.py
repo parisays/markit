@@ -6,7 +6,7 @@ class SocialAppAdmin(admin.ModelAdmin):
     Custom social app admin page.
     """
     list_display = ('id', 'name', 'provider',)
-    list_display_links = ('id',)
+    list_display_links = ('name',)
     ordering = ('id',)
     list_filter = ('provider',)
     search_fields = ('provider',)

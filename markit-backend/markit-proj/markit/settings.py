@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_celery_beat',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -51,8 +52,6 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'corsheaders',
 ]
-
-
 
 AUTH_EMAIL_VERIFICATION = True
 
@@ -102,6 +101,24 @@ REST_USE_JWT = False
 
 # Twitter app credentials
 TWITTER_CALLBACK_URL = 'http://127.0.0.1:4200/twitter-auth/'
+
+# Celery configurations
+CELERY_BROKER_URL = 'amqp://markit:sebackendfall19@localhost:5672/markitvhost'
+CELERY_RESULT_BACKEND = 'amqp'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_AMQP_TASK_RESULT_EXPIRES = 1000
+
+# CELERY_BEAT_SCHEDULE = {
+#     'publish-tweets': {
+#         'task': 'socials.tasks.publish_tweet',
+#         # There are 4 ways we can handle time, read further
+#         'schedule': 60.0,
+#         # If you're using any arguments
+#         'args': (),
+#     },
+# }
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
