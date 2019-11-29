@@ -92,8 +92,8 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_EMAIL_FIELD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = True
 AUTH_USER_MODEL = 'users.User'
 ACCOUNT_EMAIL_VERIFICATION = "optional"
@@ -142,7 +142,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'markitdb',
-        'USER': 'postgres',
+        'USER': 'markit',
         'PASSWORD': 'sebackendfall19',
         'HOST': 'localhost',
         'PORT': '5432',

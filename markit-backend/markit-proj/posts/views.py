@@ -2,15 +2,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from users.models import User
 from calendars.models import Calendar
 from .serializers import PostSerializer
 from .models import Post
 
-class PostListView(generics.ListCreateAPIView):
+class PostCreateView(generics.CreateAPIView):
     """
-    Create and list posts view.
+    Create posts view.
     """
     permission_classes = (IsAuthenticated,)
     queryset = Post.objects.all()
@@ -22,6 +20,15 @@ class PostListView(generics.ListCreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class PostListView(generics.ListAPIView):
+    """
+    List posts view.
+    """
+    permission_classes = (IsAuthenticated,)
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
     def list(self, request, *args, **kwargs):
         calendar_id = kwargs.get('calendar_id')
