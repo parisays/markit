@@ -7,7 +7,6 @@ from socials.tasks import create_tweet_task
 from .serializers import PostSerializer
 from .models import Post
 
-
 class PostCreateView(generics.CreateAPIView):
     """
     Create posts view.
