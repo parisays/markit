@@ -10,8 +10,8 @@ export class BasePostContentComponent implements OnInit {
 
   selectedFile: File = null;
   imageUrl;
-  private imageName;
-  private imagePath: string;
+  imageName;
+  imagePath: string;
 
   form: FormGroup = this.fb.group(
     {

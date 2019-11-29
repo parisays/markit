@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AuthorizedHeaderComponent implements OnInit {
 
   constructor(
-    private authService: AuthenticationService,
+    public authService: AuthenticationService,
     private http: HttpClient,
     private router: Router) { }
 

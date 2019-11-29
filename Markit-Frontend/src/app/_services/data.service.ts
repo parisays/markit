@@ -6,7 +6,6 @@ import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
-@Injectable()
 export class DataService {
   constructor(private url: string, private http: HttpClient) { }
 
