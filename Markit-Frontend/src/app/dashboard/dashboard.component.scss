@@ -1,3 +1,5 @@
+@import "../../theme";
+
 .calendar-list{
     display: flex;
     flex-direction: column;
@@ -25,8 +27,8 @@ body{
 h1 {
     margin-left: 20px;
     margin-right: 20px;
-    color: #e25a53;
-    border-bottom: 2px #fdb35d   double;
+    color: $app-dark-primary;
+    border-bottom: 2px $app-light-primary double;
 }
 
 h1 mat-icon {
