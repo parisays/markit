@@ -1,15 +1,16 @@
-<mat-toolbar class="mat-elevation-z5" style="background: white;">
-    <a mat-button routerLink="/" style="font-size: 40px;margin: auto; margin-left: 7%; color: #156187;">
-        <mat-icon>
+<mat-toolbar class="mat-elevation-z5 toolbar">
+    <a mat-button routerLink="/" class="markit">
+        <mat-icon style="font-size: 40px;padding-right: 10px; height: 47px;">
             bookmark
         </mat-icon>
         Markit
     </a>
-    <mat-icon style="margin-right :20px; color: dimgrey;">contact_support</mat-icon>
-    <mat-icon style="margin-right :20px; color: dimgrey;">notifications</mat-icon>
+    <mat-icon style="margin-right :20px; color: rgb(182, 181, 181);">contact_support</mat-icon>
+    <mat-icon style="margin-right :20px; color: rgb(182, 181, 181);">notifications</mat-icon>
     <button 
+    color="primary"
     mat-mini-fab
-    style="margin-right: 10%;background:#156187;"
+    style="margin-right: 10%;"
     [matMenuTriggerFor]="beforeMenu">
         <mat-icon>
             person_pin
