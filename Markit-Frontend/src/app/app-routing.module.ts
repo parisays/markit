@@ -11,11 +11,12 @@ import {CalendarWizardComponent} from '@app/calendar-wizard/calendar-wizard.comp
 import {PostWizardComponent} from '@app/post-wizard/post-wizard.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-settings.component';
+import {ProfileComponent} from '@app/profile/profile.component';
 
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
-  // {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: SignupComponent},
   {path: 'twitter-auth', component: TwitterAuthComponent},
