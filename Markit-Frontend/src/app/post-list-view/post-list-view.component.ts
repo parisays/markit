@@ -28,6 +28,7 @@ export class PostListViewComponent implements OnInit {
   private allCalendars: Calendar[];
   private calendar: Calendar;
   private calendarId: number;
+  private calendarName;
   private loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
@@ -56,20 +57,22 @@ export class PostListViewComponent implements OnInit {
       // console.log(this.calendarId);
 
       this.calendarService.get(this.calendarId).subscribe(value => {
-        console.log(value);
+        console.log('post list view calendar service', value);
         this.calendar = value as Calendar;
+        this.calendarName = (value as Calendar).name;
       }, err => {
-        console.log(err);
+        console.log('post list view calendar service error', err);
         this.loading = false;
       });
 
       this.postService.getCalendarPosts(this.calendarId)
         .subscribe(response => {
+          console.log('post list view calendar service', response);
           this.dataSource = response as Post[];
           this.loading = false;
         });
     }, err => {
-      console.log(err);
+      console.log('post list view post service error', err);
       this.loading = false;
     });
 

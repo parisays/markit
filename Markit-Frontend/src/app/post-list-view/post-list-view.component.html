@@ -1,8 +1,8 @@
 <div>
   <mat-toolbar style="margin-top: 5%; margin-left: 10%; width: 80%; display: flex;">
     <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 5%;">
-      <mat-label>
-        {{this.calendar.name}}
+      <mat-label >
+        {{this.calendarName}}
       </mat-label>
       <mat-select #selector>
         <mat-option *ngFor="let calendar of allCalendars" [value]="calendar.id" disabled="">
