@@ -9,6 +9,6 @@ import {AuthenticationService, CalendarService} from '@services';
 export class AppComponent {
   title = 'Markit';
 
-  constructor(private  authService: AuthenticationService) {
+  constructor(public  authService: AuthenticationService) {
   }
 }

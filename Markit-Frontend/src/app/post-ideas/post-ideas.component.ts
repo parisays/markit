@@ -8,8 +8,8 @@ import {Calendar, PostIdea} from '@models';
   styleUrls: ['./post-ideas.component.scss']
 })
 export class PostIdeasComponent implements OnInit {
-  private postIdeas/*: PostIdea[] = null*/;
-  private loading = false;
+  postIdeas/*: PostIdea[] = null*/;
+  loading = false;
 
   centered = false;
   disabled = false;

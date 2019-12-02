@@ -12,14 +12,17 @@
     mat-mini-fab
     style="margin-right: 10%;"
     [matMenuTriggerFor]="beforeMenu">
-        <mat-icon>
-            person_pin
-        </mat-icon>
+    <mat-icon>
+      person_pin
+    </mat-icon>
+  </button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item routerLink="/profile">
+      Account Setting
     </button>
-    <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item>Account Setting</button>
-        <button 
-        mat-menu-item
-        (click)="authService.logout()">Logout</button>
-      </mat-menu>
+    <button
+      mat-menu-item
+      (click)="authService.logout()">Logout
+    </button>
+  </mat-menu>
 </mat-toolbar>
