@@ -25,10 +25,10 @@ import {environment} from '@environments/environment';
 
 export class PostListViewComponent implements OnInit {
 
-  private allCalendars: Calendar[];
-  private calendar: Calendar;
-  private calendarId: number;
-  private loading = false;
+  allCalendars: Calendar[];
+  calendar: Calendar;
+  calendarId: number;
+  loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
   dataSource: Post[]; // data source is posts

@@ -11,10 +11,10 @@ import {UserService} from '@app/_services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  private image = '../../assets/images/user-logo.png'; // todo image should be replaced with image that server gives for each individual
+  image = '../../assets/images/user-logo.png'; // todo image should be replaced with image that server gives for each individual
 
-  private user: User;
-  private loading = false;
+  user: User;
+  loading = false;
 
   constructor(private service: UserService, private snackBar: MatSnackBar) {
   }
