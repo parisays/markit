@@ -1,16 +1,24 @@
-import { BadInput } from '../_helpers/bad-input';
-import { NotFoundError } from '../_helpers/not-found-error';
-import { AppError } from '../_helpers/app-error';
-import { Injectable } from '@angular/core';
+import {BadInput} from '../_helpers/bad-input';
+import {NotFoundError} from '../_helpers/not-found-error';
+import {AppError} from '../_helpers/app-error';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
-  constructor(private url: string, private http: HttpClient) { }
+  constructor(private url: string, private http: HttpClient) {
+  }
 
-  getAll(params?: HttpParams) {
+  getAll(params?: HttpParams, url?: string) {
+    console.log('url in data service', this.url);
+
+    if (url) {
+      return this.http.get(url, {params}).pipe(
+        catchError(this.handleError)
+      );
+    }
     return this.http.get(this.url, { params }).pipe(
       catchError(this.handleError)
     );
