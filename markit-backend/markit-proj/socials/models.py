@@ -11,7 +11,7 @@ class SocialApp(models.Model):
     Social App model.
     contains twitter developer app info.
     """
-    provider = models.CharField(verbose_name='provider',
+    provider = models.CharField(unique=True, verbose_name='provider',
                                 max_length=30,
                                 choices=PROVIDERS)
     name = models.CharField(verbose_name='name',
@@ -39,7 +39,7 @@ class SocialAccount(models.Model):
     app = models.ForeignKey(SocialApp, related_name='socialaccount_app', on_delete=models.CASCADE)
     calendar = models.ForeignKey(Calendar, related_name='socialaccount_calendar',
                                  on_delete=models.CASCADE)
-    provider = models.CharField(unique=True, verbose_name='provider',
+    provider = models.CharField(verbose_name='provider',
                                 max_length=30,
                                 choices=PROVIDERS)
     token = models.TextField(
