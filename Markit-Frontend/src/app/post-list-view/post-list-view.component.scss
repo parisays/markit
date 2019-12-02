@@ -1,7 +1,9 @@
+@import "../../theme.scss";
+
 table {
     width: 80%;
     margin: 10%;
-    margin-top: 0%;
+    margin-top: 1%;
   }
   
   tr.example-detail-row {
@@ -51,4 +53,24 @@ table {
   
   .button-row > *{
     float: right;
+  }
+
+  .toolbar {
+    margin-top: 5%;
+    margin-left: 10%;
+    width: 80%;
+    display: flex;
+    background: $app-light-primary;
+    border-radius: 5px;
+  }
+
+  .select{
+    height: 63px;
+    font-size: 15px;
+    margin-left: 5%;
+  }
+
+  h1{
+    color: $app-dark-primary;
+    padding: 0px 20px;
   }
