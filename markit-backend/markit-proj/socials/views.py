@@ -64,13 +64,17 @@ class TwitterAccountConnect(mixins.CreateModelMixin, generics.GenericAPIView):
         oauth_token = kwargs.get('oauth_token')
         oauth_verifier = kwargs.get('oauth_verifier')
         twitter_app = SocialApp.objects.get(provider='Twitter')
+        calendar_id = kwargs.get('calendar_id')
+        calendar = Calendar.objects.get(pk=calendar_id)
+        if (calendar.connectedPlatforms == 'Twitter'):
+            return Response('calendar has already connected to a twitter account.',
+                            status=status.HTTP_400_BAD_REQUEST)
         twitter_auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret,
                                            settings.TWITTER_CALLBACK_URL)
         twitter_auth.request_token = {'oauth_token' : oauth_token,
                                       'oauth_token_secret' : oauth_verifier}
         twitter_auth.get_access_token(oauth_verifier)
-        calendar_id = kwargs.get('calendar_id')
-        calendar = Calendar.objects.get(pk=calendar_id)
+        
         access_token = twitter_auth.access_token
         token_secret = twitter_auth.access_token_secret
 
