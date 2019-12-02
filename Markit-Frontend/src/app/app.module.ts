@@ -31,6 +31,7 @@ import { ManualTestComponent } from './manual-test/manual-test.component';
 import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
 import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     CalendarSettingsComponent,
     PostOverviewSimpleComponent,
     HomepageComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

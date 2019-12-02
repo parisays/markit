@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "indigo-charge-240916"
+  },
+  "targets": {
+    "indigo-charge-240916": {
+      "hosting": {
+        "iust-markit": [
+          "iust-markit"
+        ]
+      }
+    }
+  }
+}

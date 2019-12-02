@@ -1,0 +1,10 @@
+<div *ngIf="!loading" class="profile">
+  <img [src]="image" alt="">
+
+  <input #FirstName type="text" value="{{this.user.firstName}}">
+  <input #LastName type="text" value="{{this.user.lastName}}">
+  <input #Email type="text" value="{{this.user.email}}">
+
+  <button (click)="onUpdateProfile(FirstName.value, LastName.value, Email.value)">Save Changes!!</button>
+</div>
+<mat-spinner *ngIf="loading" style="margin: auto" color="primary"></mat-spinner>

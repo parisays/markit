@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SocialChannelsSelectionComponent implements OnInit {
 
-  private isTwitterSelected = false;
-  private isPinterestSelected = false;
-  private isFacebookSelected = false;
+  isTwitterSelected = false;
+  isPinterestSelected = false;
+  isFacebookSelected = false;
 
-  public connectedPlatforms: string[] = [];
+  connectedPlatforms: string[] = [];
 
-  public get twitterEnabled() {
+  get twitterEnabled() {
     return this.isTwitterSelected && this.connectedPlatforms.includes('Twitter');
   }
   constructor() { }
