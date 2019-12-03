@@ -47,7 +47,7 @@
         <div class="example-element-detail"
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="button-row">
-            <button mat-button [disabled]="element.status != 'Draft' && !isTwitterConnected"
+            <button mat-button [disabled]="element.status != 'Draft' || !isTwitterConnected"
                     (click)="publishOnTweeter(element)">
               Publish
             </button>
