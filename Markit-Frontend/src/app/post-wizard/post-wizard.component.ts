@@ -19,11 +19,11 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
   @ViewChild('post_content', {static: false}) postContent: BasePostContentComponent;
   @ViewChild('post_channels', {static: false}) postChannels: SocialChannelsSelectionComponent;
 
-  private calendarId: number;
-  private calendar: Calendar = null;
-  private postId: number;
-  private post: Post = null;
-  private loading = false;
+  calendarId: number;
+  calendar: Calendar = null;
+  postId: number;
+  post: Post = null;
+  loading = false;
 
   constructor(private location: Location,
               private route: ActivatedRoute,
@@ -34,7 +34,7 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
               private snackBar: MatSnackBar) {
   }
 
-  private get canPublish(): boolean {
+  get canPublish(): boolean {
     return this.postChannels ? this.postChannels.twitterEnabled : false;
   }
 

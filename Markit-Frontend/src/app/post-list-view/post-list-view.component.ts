@@ -25,14 +25,14 @@ import {environment} from '@environments/environment';
 
 export class PostListViewComponent implements OnInit {
 
-  private allCalendars: Calendar[];
-  private calendar: Calendar;
-  private calendarId: number;
-  private loading = false;
+  allCalendars: Calendar[];
+  calendar: Calendar;
+  calendarId: number;
+  loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
-  dataSource: Post[]; // data source is posts
-  columnsToDisplay = ['subject', 'connected-platforms', 'status'];
+  dataSource: Post[]; // data source is posts 
+  columnsToDisplay = ['subject', 'connected-platforms', 'status', 'date', 'time'];
   expandedElement: Post | null;
 
   private twitterAppData: { client_id: string, secret: string };
@@ -42,6 +42,16 @@ export class PostListViewComponent implements OnInit {
               private route: ActivatedRoute,
               private twitter: TwitterService,
               private snackBar: MatSnackBar) {
+      // this.dataSource = [
+      //   {
+      //     text: ';lkdfhidhf;oidnfojdnfonv;jaoidfdjf odfrghrognonf oigaijf ejdfa iajeof adf o',
+      //     subject: 'dkfnjnf',
+      //     status: 'Draft',
+      //     date: '2019/08/23',
+      //     time: '14:45:33',
+      //     image: '../assets/images/sample-3.jpg'
+      //   }
+      // ]
   }
 
   get isTwitterConnected() {

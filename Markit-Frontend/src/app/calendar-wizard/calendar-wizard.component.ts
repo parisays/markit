@@ -15,13 +15,13 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
   @ViewChild('stepper', {static: false}) stepper: MatStepper;
   @ViewChild('calendar_details', {static: false}) calendarDetails: CalendarDetailsFormComponent;
 
-  private loading = false;
-  private calendar: Calendar = null;
-  private isLinear = true;
-  private stepComplete = [false, false];
-  private isDetailsFormValid = false;
-  private calendarId: number;
-  private get returnUrl() {
+  loading = false;
+  calendar: Calendar = null;
+  isLinear = true;
+  stepComplete = [false, false];
+  isDetailsFormValid = false;
+  calendarId: number;
+  get returnUrl() {
     return this.calendar ? `calendars/${this.calendar.id}/wizard/social-accounts` : null;
   }
 
