@@ -30,6 +30,10 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
               private snackBar: MatSnackBar) {
   }
 
+  private get returnUrl() {
+    return this.calendar ? `calendars/${this.calendar.id}/wizard/social-accounts` : null;
+  }
+
   ngOnInit(): void {
     if (this.location.isCurrentPathEqualTo(`/calendars/new`)) {
       return;
@@ -110,6 +114,6 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
 
   finish() {
     this.updateCalendar();
-    this.router.navigate(['calendars', this.calendar.id]);
+    this.router.navigate(['calendars', this.calendar.id, 'posts']);
   }
 }

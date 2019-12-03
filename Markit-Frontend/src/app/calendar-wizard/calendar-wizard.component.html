@@ -25,7 +25,7 @@
             <ng-template matStepLabel >
                 Social Account Connection
             </ng-template>
-            <app-social-accounts-connection></app-social-accounts-connection>
+            <app-social-accounts-connection [calendarId]="this.calendarId" [returnURL]="returnUrl"></app-social-accounts-connection>
             <mat-toolbar style="margin-top: 20%; display:flex;">
                 <button mat-raised-button matStepperPrevious color="primary">Back</button>
                 <button style="margin: auto; margin-right: 0;" matStepperNext
