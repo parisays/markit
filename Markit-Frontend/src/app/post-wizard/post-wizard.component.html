@@ -1,33 +1,37 @@
 <body style="display:flex; flex-direction: column;">
-<mat-toolbar class="mat-elevation-z5" style="background: white;">
-  <h1 style="font-size: 40px;margin:auto; margin-left: 15%;">Post Wizard</h1>
-  <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button
-          [routerLink]="['/calendars', calendarId, 'posts']">
-    <mat-icon style="font-size: 30px;">close</mat-icon>
-  </button>
-</mat-toolbar>
-<mat-vertical-stepper linear
-                      style="margin: 10%; margin-top: 1%; border: rgba(204, 201, 201, 0.103); border-style: groove;"
-                      #stepper>
-  <mat-step>
-    <ng-template matStepLabel>Post Details</ng-template>
-    <app-post-details-form #post_general_info></app-post-details-form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Social Channel Selection</ng-template>
-    <app-social-channels-selection #post_channels></app-social-channels-selection>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Base Post Content</ng-template>
-    <app-base-post-content #post_content></app-base-post-content>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Create Post</ng-template>
-    <div style="display: flex;margin-top: 5%">
-      <button style=" margin: 3%; margin-left: auto;" mat-raised-button color="accent" (click)="publishPost()" [disabled]="canPublish">Publish</button>
-      <button *ngIf="!post" style="margin: auto; margin-left: 0;" mat-raised-button color="primary"  (click)="createPost()">Draft</button>
-      <button *ngIf="!!post" style="margin: auto; margin-left: 0;" mat-raised-button color="primary"  (click)="updatePost()">Update</button>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+  <mat-toolbar class="mat-elevation-z5" style="background: white;">
+    <h1 style="font-size: 40px;margin:auto; margin-left: 15%;">Post Wizard</h1>
+    <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button
+      [routerLink]="['/calendars', calendarId, 'posts']">
+      <mat-icon style="font-size: 30px;">close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-vertical-stepper linear
+    style="margin: 10%; margin-top: 1%; border: rgba(204, 201, 201, 0.103); border-style: groove;" #stepper>
+    <mat-step>
+      <ng-template matStepLabel>Post Details</ng-template>
+      <app-post-details-form #post_general_info></app-post-details-form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Social Channel Selection</ng-template>
+      <app-social-channels-selection #post_channels></app-social-channels-selection>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Base Post Content</ng-template>
+      <app-base-post-content #post_content></app-base-post-content>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Create Post</ng-template>
+      <div style="display: flex;margin-top: 5%">
+        <button style=" margin: 3%; margin-left: auto;" mat-raised-button color="accent" (click)="publishPost()"
+          [disabled]="canPublish">Publish
+        </button>
+        <button *ngIf="!post" style="margin: auto; margin-left: 0;" mat-raised-button color="primary"
+          (click)="createPost()">Draft
+        </button>
+        <button *ngIf="!!post" style="margin: auto; margin-left: 0;" mat-raised-button color="primary"
+          (click)="updatePost()">Update
+        </button></div>
+    </mat-step>
+  </mat-vertical-stepper>
 </body>

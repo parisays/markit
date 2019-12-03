@@ -73,12 +73,14 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  createPost() {
+  createPost(publish: boolean = false) {
     this.loading = true;
 
     const postData = new FormData();
     postData.append('calendar', `${this.calendarId}`);
-    postData.append('image', this.postContent.selectedFile, this.postContent.selectedFile.name);
+    if (this.postContent.selectedFile) {
+      postData.append('image', this.postContent.selectedFile, this.postContent.selectedFile.name);
+    }
     postData.append('subject', this.postGeneralInfo.form.controls.subject.value);
     postData.append('text', this.postContent.form.controls.text.value);
 
@@ -89,7 +91,21 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
         this.post = value;
         this.postId = value.id;
         this.snackBar.open('Post has been created successfully!', 'Dismiss', {duration: 2000});
-        this.router.navigate(['/calendars', this.calendarId, 'posts']);
+        if (publish) {
+          this.twitterService.publishTweet(this.post.id).subscribe(
+            v => {
+              this.snackBar.open('Post has been published', 'Dismiss', { duration: 2000 });
+              console.log(v);
+            }, e => {
+              this.snackBar.open(`Failed to publish post`, 'Dismiss', { duration: 2000 });
+              console.log(e);
+            }, () => {
+              this.router.navigate(['/calendars', this.calendarId, 'posts']);
+            }
+          );
+        } else {
+          this.router.navigate(['/calendars', this.calendarId, 'posts']);
+        }
       }, err => {
         console.log(err);
 
@@ -105,12 +121,15 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
     // const updatedPost: Post = this.post;
 
     const updatedPostData = new FormData();
-    updatedPostData.append('calendar', `${this.calendarId}`);
+    // updatedPostData.append('calendar', `${this.calendarId}`);
+    if (this.postContent.selectedFile) {
+      updatedPostData.append('image', this.postContent.selectedFile, this.postContent.selectedFile.name);
+    }
     updatedPostData.append('image', this.postContent.selectedFile, this.postContent.selectedFile.name);
     updatedPostData.append('subject', this.postGeneralInfo.form.controls.subject.value);
     updatedPostData.append('text', this.postContent.form.controls.text.value);
 
-    this.postService.update(updatedPostData).subscribe((value: Post) => {
+    this.postService.partialUpdate(this.post.id, updatedPostData).subscribe((value: Post) => {
         console.log(value);
 
         this.snackBar.open('Post has been updated successfully!', 'Dismiss', {duration: 1000});
@@ -129,15 +148,7 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
     if (this.postId) {
       this.updatePost();
     } else {
-      this.createPost();
+      this.createPost(true);
     }
-
-    this.twitterService.publishTweet(this.postId).subscribe(
-      v => {
-        console.log(v);
-      }, e => {
-        console.log(e);
-      }
-    );
   }
 }
