@@ -28,7 +28,7 @@ export class PostService extends DataService {
     // return this.http.get(this.url, { params }).pipe(
     //   catchError(this.handleError)
     // );
-    let url = `${this.endpoint}${calendarId}/`;
+    let url = `${this.endpoint}${calendarId}`;
     return super.getAll(undefined, url);
   }
 
