@@ -10,8 +10,8 @@ import {Calendar} from '@models';
   styleUrls: ['./calendar-list-view.component.scss']
 })
 export class CalendarListViewComponent implements OnInit {
-  private calendars; // : Calendar[]
-  private loading;
+  public calendars; // : Calendar[]
+  public loading;
 
   constructor(private service: CalendarService, private  authService: AuthenticationService) {
   }
@@ -24,6 +24,7 @@ export class CalendarListViewComponent implements OnInit {
       this.calendars = response;
       this.loading = false;
     }, err => {
+      console.log('calendar list view error');
       console.log(err);
       this.loading = false;
     });

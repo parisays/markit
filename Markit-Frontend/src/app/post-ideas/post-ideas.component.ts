@@ -8,8 +8,8 @@ import {Calendar, PostIdea} from '@models';
   styleUrls: ['./post-ideas.component.scss']
 })
 export class PostIdeasComponent implements OnInit {
-  private postIdeas/*: PostIdea[] = null*/;
-  private loading = false;
+  postIdeas/*: PostIdea[] = null*/;
+  loading = false;
 
   centered = false;
   disabled = false;
@@ -22,8 +22,6 @@ export class PostIdeasComponent implements OnInit {
     this.loading = true;
 
     this.service.getAll().subscribe((response) => {
-      console.log(response);
-      console.log(JSON.parse(response as string));
       this.postIdeas = JSON.parse(response as string);
       this.loading = false;
     }, err => {

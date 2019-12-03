@@ -6,9 +6,8 @@ import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
-@Injectable()
 export class DataService {
-  constructor(private url: string, private http: HttpClient) { }
+  constructor(private url: string, protected http: HttpClient) { }
 
   getAll(params?: HttpParams) {
     return this.http.get(this.url, { params }).pipe(
@@ -46,7 +45,7 @@ export class DataService {
     );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  protected handleError(error: HttpErrorResponse) {
     if (error.status === 400) {
       return throwError(new BadInput(error));
     }
