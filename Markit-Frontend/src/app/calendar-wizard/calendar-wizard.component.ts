@@ -33,6 +33,10 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
               private snackBar: MatSnackBar) {
   }
 
+  private get returnUrl() {
+    return this.calendar ? `calendars/${this.calendar.id}/wizard/social-accounts` : null;
+  }
+
   ngOnInit(): void {
     if (this.location.isCurrentPathEqualTo(`/calendars/new`)) {
       return;
@@ -98,7 +102,7 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     this.loading = true;
     const updatedCalendar: Calendar = this.calendar;
     updatedCalendar.name = this.calendarDetails.form.controls.name.value;
-    this.service.update(updatedCalendar)
+    this.service.partialUpdate(updatedCalendar.id, {name: updatedCalendar.name})
       .subscribe((value: Calendar) => {
         console.log(value);
         this.snackBar.open('Calendar updated successfully!', 'Dismiss', { duration: 1000 });
