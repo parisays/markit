@@ -25,11 +25,11 @@ import {environment} from '@environments/environment';
 
 export class PostListViewComponent implements OnInit {
 
-  private allCalendars: Calendar[];
-  private calendar: Calendar;
-  private calendarId: number;
-  private calendarName;
-  private loading = false;
+  allCalendars: Calendar[];
+  calendar: Calendar;
+  calendarId: number;
+  calendarName;
+  loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
   dataSource: Post[]; // data source is posts
@@ -57,7 +57,7 @@ export class PostListViewComponent implements OnInit {
       // console.log(this.calendarId);
 
       this.calendarService.get(this.calendarId).subscribe(value => {
-        console.log('post list view calendar service', value);
+        console.log('post list view calendar service 1', value);
         this.calendar = value as Calendar;
         this.calendarName = (value as Calendar).name;
       }, err => {
@@ -67,8 +67,9 @@ export class PostListViewComponent implements OnInit {
 
       this.postService.getCalendarPosts(this.calendarId)
         .subscribe(response => {
-          console.log('post list view calendar service', response);
+          console.log('post list view calendar service 2', response);
           this.dataSource = response as Post[];
+          console.log(this.dataSource);
           this.loading = false;
         });
     }, err => {
