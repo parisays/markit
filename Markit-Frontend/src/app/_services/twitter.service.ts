@@ -14,7 +14,7 @@ export class TwitterService {
     private http: HttpClient  ) {  }
 
   publishTweet(postId: number) {
-    return this.http.get<any>(`${environment.apiUrl}twitter/tweet/${postId}`);
+    return this.http.get<any>(`${environment.apiUrl}socials/twitter/tweet/${postId}`);
   }
 
   connect(returnUrl: string, calendarId: number) {

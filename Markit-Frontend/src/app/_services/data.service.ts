@@ -1,16 +1,19 @@
-import { BadInput } from '../_helpers/bad-input';
-import { NotFoundError } from '../_helpers/not-found-error';
-import { AppError } from '../_helpers/app-error';
-import { Injectable } from '@angular/core';
+import {BadInput} from '../_helpers/bad-input';
+import {NotFoundError} from '../_helpers/not-found-error';
+import {AppError} from '../_helpers/app-error';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
 export class DataService {
-  constructor(private url: string, protected http: HttpClient) { }
+  constructor(private url: string, protected http: HttpClient) {
+  }
 
-  getAll(params?: HttpParams) {
-    return this.http.get(this.url, { params }).pipe(
+  getAll(params?: HttpParams, url?: string) {
+    console.log('url in data service', this.url);
+
+    return this.http.get(url ? url : this.url, { params }).pipe(
       catchError(this.handleError)
     );
   }
@@ -33,8 +36,8 @@ export class DataService {
     );
   }
 
-  partialUpdate(resource) {
-    return this.http.patch(this.url + resource.id + '/', resource).pipe(
+  partialUpdate(id, resource) {
+    return this.http.patch(this.url + id.toString() + '/', resource).pipe(
       catchError(this.handleError)
     );
   }

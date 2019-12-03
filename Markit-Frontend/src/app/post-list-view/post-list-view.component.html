@@ -1,10 +1,12 @@
 <div>
-  <mat-toolbar class="toolbar mat-elevation-z5">
-    <mat-form-field appearance="outline" class="select">
-      <mat-label>Change Calendar...</mat-label>
-      <mat-select>
+  <mat-toolbar style="margin-top: 5%; margin-left: 10%; width: 80%; display: flex;">
+    <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 5%;">
+      <mat-label >
+        {{this.calendarName}}
+      </mat-label>
+      <mat-select #selector>
         <mat-option *ngFor="let calendar of allCalendars" [value]="calendar.id" disabled="">
-          <button [routerLink]="['/calendars', calendar.id, 'posts']" mat-button>
+          <button [routerLink]="['/calendars', calendar.id, 'posts']" (click)="selector.close()" mat-button>
             <mat-icon color="accent">
               arrow_forward
             </mat-icon>
@@ -50,10 +52,12 @@
         <div class="example-element-detail"
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="button-row">
-            <button mat-button [disabled]="element.status != 'Draft' && !isTwitterConnected" (click)="publishOnTweeter(element)">
+            <button mat-button [disabled]="element.status != 'Draft' || !isTwitterConnected"
+                    (click)="publishOnTweeter(element)">
               Publish
             </button>
-            <button mat-button [disabled]="element.status != 'Draft' && !isTwitterConnected" [routerLink]="['/calendars', calendarId, 'posts', element.id, 'edit']">
+            <button mat-button [disabled]="element.status != 'Draft' && !isTwitterConnected"
+                    [routerLink]="['/calendars', calendarId, 'posts', element.id, 'edit']">
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-button color="warn">

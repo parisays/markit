@@ -28,6 +28,7 @@ export class PostListViewComponent implements OnInit {
   allCalendars: Calendar[];
   calendar: Calendar;
   calendarId: number;
+  calendarName;
   loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
@@ -63,29 +64,37 @@ export class PostListViewComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
-      console.log(this.calendarId);
+      // console.log(this.calendarId);
+
+      this.calendarService.get(this.calendarId).subscribe(value => {
+        console.log('post list view calendar service 1', value);
+        this.calendar = value as Calendar;
+        this.calendarName = (value as Calendar).name;
+      }, err => {
+        console.log('post list view calendar service error', err);
+        this.loading = false;
+      });
 
       this.postService.getCalendarPosts(this.calendarId)
         .subscribe(response => {
-          // console.log(response);
+          console.log('post list view calendar service 2', response);
           this.dataSource = response as Post[];
-          // console.log(`posts of this calendar ${this.calendarId}: `, this.dataSource);
+          console.log(this.dataSource);
           this.loading = false;
         });
     }, err => {
-      console.log(err);
+      console.log('post list view post service error', err);
       this.loading = false;
     });
 
-    this.calendarService.getAll().subscribe((response/*: any*/) => {
-      // console.log(response);
+    this.calendarService.getAll().subscribe((response) => {
       this.allCalendars = response as Calendar[];
-      this.calendar = this.allCalendars.filter(v => v.id === this.calendarId)[0];
+      // this.calendar = this.allCalendars.filter(v => v.id === this.calendarId)[0];
+      console.log('calendar is now this:', this.calendarId, this.calendar.name);
     }, err => {
       console.log(err);
     });
   }
-
 
   publishOnTweeter(post: Post) {
     console.log(post);
