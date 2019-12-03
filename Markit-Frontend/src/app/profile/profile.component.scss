@@ -1,0 +1,13 @@
+.profile{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile > * {
+    margin: auto;
+    margin-top: 3%;
+}
+
+img{
+    max-height: 200px;
+}
