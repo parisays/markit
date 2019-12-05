@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 
@@ -11,11 +12,13 @@ export class PostDetailsFormComponent implements OnInit {
 
   form: FormGroup = this.fb.group({
       subject: [''],
-      date: ['']
+      date: [''],
+      time: ['']
     }
   );
 
-  tempDate = new Date(Date.now());
+  mytime: Date = new Date();
+  minTime = new Date(Date.now());
 
   constructor(private fb: FormBuilder) {
   }

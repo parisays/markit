@@ -32,6 +32,7 @@ import { CalendarSettingsComponent } from './calendar-settings/calendar-settings
 import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatCardModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    TimepickerModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
