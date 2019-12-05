@@ -18,7 +18,6 @@ export class PostDetailsFormComponent implements OnInit {
   );
 
   mytime: Date = new Date();
-  minTime = new Date(Date.now());
 
   constructor(private fb: FormBuilder) {
   }

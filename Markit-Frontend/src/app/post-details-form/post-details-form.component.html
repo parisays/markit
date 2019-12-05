@@ -9,10 +9,13 @@
                     <mat-label>Subject</mat-label>
                     <input formControlName="subject" matInput placeholder="Subject" autofocus>
                 </mat-form-field>
-                <!-- <mat-form-field disabled appearance="outline">
-                    <mat-label>Scheduled date and time</mat-label>
-                </mat-form-field> -->
-                <timepicker [formControlName]="'time'" [min]="minTime"  mousewheel="true"></timepicker>
+                <mat-form-field appearance="outline" color="primary">
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <timepicker [formControlName]="'time'"></timepicker>
             </form>
         </div>
     </div>
