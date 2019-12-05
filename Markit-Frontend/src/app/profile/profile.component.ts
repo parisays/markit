@@ -3,6 +3,7 @@ import {AuthenticationService} from '@services';
 import {Calendar, User} from '@models';
 import {MatSnackBar} from '@angular/material';
 import {UserService} from '@app/_services/user.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -11,14 +12,34 @@ import {UserService} from '@app/_services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
+  Form: FormGroup = this.fb.group({
+    email: ['', [
+      Validators.email,
+      Validators.required
+    ]],
+    lastName: ['', Validators.required],
+    firstName: ['', Validators.required],
+  });
   image = '../../assets/images/user-logo.png'; // todo image should be replaced with image that server gives for each individual
 
   user: User;
   loading = false;
 
-  constructor(private service: UserService, private snackBar: MatSnackBar) {
+  constructor(
+    private fb: FormBuilder,
+    private service: UserService,
+    private snackBar: MatSnackBar) {
   }
 
+  get firstName(){
+    return this.Form.get('firstName');
+  }
+  get lastName(){
+    return this.Form.get('lastName');
+  }
+  get email(){
+    return this.Form.get('email');
+  }
   ngOnInit() {
     this.loading = true;
 
