@@ -12,14 +12,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
-  Form: FormGroup = this.fb.group({
-    email: ['', [
-      Validators.email,
-      Validators.required
-    ]],
-    lastName: ['', Validators.required],
-    firstName: ['', Validators.required],
-  });
+  Form: FormGroup;
   image = '../../assets/images/user-logo.png'; // todo image should be replaced with image that server gives for each individual
 
   user: User;
@@ -29,15 +22,23 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private service: UserService,
     private snackBar: MatSnackBar) {
+      this.Form  = this.fb.group({
+        email: ['', [
+          Validators.email,
+          Validators.required
+        ]],
+        lastName: ['', Validators.required],
+        firstName: ['', Validators.required],
+      });
   }
 
-  get firstName(){
+  get firstName() {
     return this.Form.get('firstName');
   }
-  get lastName(){
+  get lastName() {
     return this.Form.get('lastName');
   }
-  get email(){
+  get email() {
     return this.Form.get('email');
   }
   ngOnInit() {
@@ -45,6 +46,11 @@ export class ProfileComponent implements OnInit {
 
     this.service.getAll().subscribe((response) => {
       this.user = response as User;
+      this.Form.setValue({
+        email: this.user.email,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName
+      });
       this.loading = false;
     }, err => {
       console.log(err);
