@@ -9,5 +9,6 @@ export class Post {
 
 export enum PostStatus {
   PUBLISHED = 'Published',
-  DRAFT = 'Draft'
+  DRAFT = 'Draft',
+  SCHEDULED = 'Scheduled'
 }

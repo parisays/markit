@@ -73,7 +73,7 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  createPost(publish: boolean = false) {
+  createPost(publish: boolean = false, schedule: boolean = false) {
     this.loading = true;
 
     const postData = new FormData();
@@ -83,6 +83,9 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
     }
     postData.append('subject', this.postGeneralInfo.form.controls.subject.value);
     postData.append('text', this.postContent.form.controls.text.value);
+    if (schedule) {
+      postData.append('scheduledTime', this.postGeneralInfo.date.value);
+    }
 
     this.postService.create(postData).subscribe(
       (value: Post) => {
@@ -90,14 +93,16 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
 
         this.post = value;
         this.postId = value.id;
+
         this.snackBar.open('Post has been created successfully!', 'Dismiss', {duration: 2000});
+
         if (publish) {
           this.twitterService.publishTweet(this.post.id).subscribe(
             v => {
-              this.snackBar.open('Post has been published', 'Dismiss', { duration: 2000 });
+              this.snackBar.open('Post has been published', 'Dismiss', {duration: 2000});
               console.log(v);
             }, e => {
-              this.snackBar.open(`Failed to publish post`, 'Dismiss', { duration: 2000 });
+              this.snackBar.open(`Failed to publish post`, 'Dismiss', {duration: 2000});
               console.log(e);
             }, () => {
               this.router.navigate(['/calendars', this.calendarId, 'posts']);
@@ -115,17 +120,15 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
     );
   }
 
-  updatePost() {
+  updatePost() {  // todo patch mode update
     this.loading = true;
-
-    // const updatedPost: Post = this.post;
 
     const updatedPostData = new FormData();
     // updatedPostData.append('calendar', `${this.calendarId}`);
     if (this.postContent.selectedFile) {
       updatedPostData.append('image', this.postContent.selectedFile, this.postContent.selectedFile.name);
     }
-    updatedPostData.append('image', this.postContent.selectedFile, this.postContent.selectedFile.name);
+    updatedPostData.append('image', this.postContent.selectedFile, this.postContent.selectedFile.name); // todo what???? diff upper line
     updatedPostData.append('subject', this.postGeneralInfo.form.controls.subject.value);
     updatedPostData.append('text', this.postContent.form.controls.text.value);
 
@@ -142,6 +145,14 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
         this.snackBar.open('Post updating failed!', 'Dismiss', {duration: 1000});
       }
     );
+  }
+
+  schedulePost() {
+    if (this.postId) {
+      this.updatePost();
+    } else {
+      this.createPost(false, true);
+    }
   }
 
   publishPost() {
