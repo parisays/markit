@@ -28,34 +28,6 @@ export class PostIdeasComponent implements OnInit {
       console.log(err);
       this.loading = false;
     });
-
-    this.postIdeas = [
-      {
-        type: 'twitter',
-        label: '#Flashback\n',
-        text: 'Post an image of the early days of your brand, or even funnier, of the founder of your brand as a child!'
-      },
-      {
-        type: 'pinterest',
-        label: '#FeelGoodDay',
-        text: 'Post feel-good images or quotes related to your brand, industry or domain of expertise.'
-      },
-      {
-        type: 'facebook',
-        label: 'Quote',
-        text: 'Everybody loves a good word: delight your audience with an inspiring or funny quote, expression or idiom.'
-      },
-      {
-        type: 'twitter',
-        label: 'Miami Beach Pop Festival',
-        text: 'Miami Beach Pop Festival is proud to debut one of the most diverse, cross-genre, and collaborative music festival lineups in the world'
-      },
-      {
-        type: 'pinterest',
-        label: 'National S.T.E.M Day\n',
-        text: 'Full S.T.E.A.M. ahead! November 8 is a day meant to inspire kids to explore and pursue their interests in Science, Technology, Engineering, Art and Math. '
-      }
-    ];
   }
 
 

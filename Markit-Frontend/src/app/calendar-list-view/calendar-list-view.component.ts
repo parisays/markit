@@ -28,34 +28,5 @@ export class CalendarListViewComponent implements OnInit {
       console.log(err);
       this.loading = false;
     });
-    this.calendars = [
-      {
-        name: 'jdfljnkg'
-      },
-      {
-        name: 'jndfkajs'
-      },
-      {
-        name: 'kjdfhd'
-      },
-      {
-        name: 'jdfljnkg'
-      },
-      {
-        name: 'jndfkajs'
-      },
-      {
-        name: 'kjdfhd'
-      },
-      {
-        name: 'jdfljnkg'
-      },
-      {
-        name: 'jndfkajs'
-      },
-      {
-        name: 'kjdfhd'
-      }
-    ];
   }
 }
