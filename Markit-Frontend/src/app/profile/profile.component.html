@@ -3,7 +3,7 @@
     <form class="form-style" [formGroup]="Form">
         <mat-form-field appearance="outline">
             <mat-label>First Name</mat-label>
-            <input #FirstName value="{{this.user.firstName}}" formControlName="firstName" matInput placeholder="Enter your First Name">
+            <input #FirstName  formControlName="firstName" matInput placeholder="Enter your First Name">
             <mat-error *ngIf="firstName.touched && firstName.value == ''">First name is required!</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
@@ -18,6 +18,12 @@
             <mat-error *ngIf="!email.valid">email is not valid!</mat-error>
         </mat-form-field>
     </form>
-  <button mat-raised-button style="margin: auto;" color="primary" (click)="onUpdateProfile(FirstName.value, LastName.value, Email.value)">Save Changes!!</button>
+  <button mat-raised-button
+      style="margin: auto;"
+      color="primary"
+      (click)="onUpdateProfile(FirstName.value, LastName.value, Email.value)"
+      [disabled]="!Form.valid">
+          Save Changes!!
+  </button>
 </div>
 <mat-spinner *ngIf="loading" style="margin: auto" color="primary"></mat-spinner>
