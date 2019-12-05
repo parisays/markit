@@ -61,13 +61,17 @@ class TwitterAccountConnect(mixins.CreateModelMixin, generics.GenericAPIView):
         oauth_token = kwargs.get('oauth_token')
         oauth_verifier = kwargs.get('oauth_verifier')
         twitter_app = SocialApp.objects.get(provider='Twitter')
+        calendar_id = kwargs.get('calendar_id')
+        calendar = Calendar.objects.get(pk=calendar_id)
+        if (calendar.connectedPlatforms == 'Twitter'):
+            return Response('calendar has already connected to a twitter account.',
+                            status=status.HTTP_400_BAD_REQUEST)
         twitter_auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret,
                                            settings.TWITTER_CALLBACK_URL)
         twitter_auth.request_token = {'oauth_token' : oauth_token,
                                       'oauth_token_secret' : oauth_verifier}
         twitter_auth.get_access_token(oauth_verifier)
-        calendar_id = kwargs.get('calendar_id')
-        calendar = Calendar.objects.get(pk=calendar_id)
+        
         access_token = twitter_auth.access_token
         token_secret = twitter_auth.access_token_secret
 
@@ -104,15 +108,9 @@ class Tweet(APIView):
         auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret)
         auth.set_access_token(access_token, secret_token)
         twitter_api = tweepy.API(auth)
-        image_url = request.build_absolute_uri(PostSerializer(post).data['image'])
-        image_file = 'temp.jpg'
-        request = requests.get(image_url, stream=True)
-        if request.status_code == 200:
-            with open(image_file, 'wb') as image:
-                for chunk in request:
-                    image.write(chunk)
-            twitter_api.update_with_media(image_file, status=post.text)
-            os.remove(image_file)
+        image_path = post.image.path
+        if os.path.exists(image_path):
+            twitter_api.update_with_media(image_path, status=post.text)
         else:
             twitter_api.update_status(post.text)
         post.status = 'Published'
