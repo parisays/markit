@@ -1,10 +1,23 @@
-<div *ngIf="!loading" class="profile">
-  <img [src]="image" alt="">
-
-  <input #FirstName type="text" value="{{this.user.firstName}}">
-  <input #LastName type="text" value="{{this.user.lastName}}">
-  <input #Email type="text" value="{{this.user.email}}">
-
-  <button (click)="onUpdateProfile(FirstName.value, LastName.value, Email.value)">Save Changes!!</button>
+<div *ngIf="!loading" class="container-style mat-elevation-z5">
+  <img [src]="image" alt="" style="margin: auto;">
+    <form class="form-style" [formGroup]="Form">
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input #FirstName value="{{this.user.firstName}}" formControlName="firstName" matInput placeholder="Enter your First Name">
+            <mat-error *ngIf="firstName.touched && firstName.value == ''">First name is required!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input #LastName value="{{this.user.lastName}}" formControlName="lastName" matInput placeholder="Enter your Last Name">
+            <mat-error *ngIf="lastName.touched && lastName.value == ''">Last name is required!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input #Email value="{{this.user.email}}" formControlName="email" matInput placeholder="Enter your Email">
+            <mat-error *ngIf="email.touched && email.value == ''">Last name is required!</mat-error>
+            <mat-error *ngIf="!email.valid">email is not valid!</mat-error>
+        </mat-form-field>
+    </form>
+  <button mat-raised-button style="margin: auto;" color="primary" (click)="onUpdateProfile(FirstName.value, LastName.value, Email.value)">Save Changes!!</button>
 </div>
 <mat-spinner *ngIf="loading" style="margin: auto" color="primary"></mat-spinner>

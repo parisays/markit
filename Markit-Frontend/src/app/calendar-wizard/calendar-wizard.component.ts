@@ -98,7 +98,7 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     this.loading = true;
     const updatedCalendar: Calendar = this.calendar;
     updatedCalendar.name = this.calendarDetails.form.controls.name.value;
-    this.service.update(updatedCalendar)
+    this.service.partialUpdate(updatedCalendar.id, {name: updatedCalendar.name})
       .subscribe((value: Calendar) => {
         console.log(value);
         this.snackBar.open('Calendar updated successfully!', 'Dismiss', { duration: 1000 });
