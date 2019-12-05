@@ -43,16 +43,6 @@ export class PostListViewComponent implements OnInit {
               private route: ActivatedRoute,
               private twitter: TwitterService,
               private snackBar: MatSnackBar) {
-      // this.dataSource = [
-      //   {
-      //     text: ';lkdfhidhf;oidnfojdnfonv;jaoidfdjf odfrghrognonf oigaijf ejdfa iajeof adf o',
-      //     subject: 'dkfnjnf',
-      //     status: 'Draft',
-      //     date: '2019/08/23',
-      //     time: '14:45:33',
-      //     image: '../assets/images/sample-3.jpg'
-      //   }
-      // ]
   }
 
   get isTwitterConnected() {
