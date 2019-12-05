@@ -32,8 +32,8 @@ export class PostListViewComponent implements OnInit {
   loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
-  dataSource: Post[]; // data source is posts
-  columnsToDisplay = ['subject', 'connected-platforms', 'status'];
+  dataSource: Post[]; // data source is posts 
+  columnsToDisplay = ['subject', 'connected-platforms', 'status', 'date', 'time'];
   expandedElement: Post | null;
 
   private twitterAppData: { client_id: string, secret: string };

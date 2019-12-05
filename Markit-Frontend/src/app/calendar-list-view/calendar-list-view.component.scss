@@ -1,1 +1,14 @@
+.calendar-list{
+    overflow: auto;
+    height: 250px;
+    padding: 0 20px;
+}
 
+.calendar-list button {
+    font-size: 20px;
+    border-bottom: 2px ridge rgba(128, 128, 128, 0.089);
+    border-left: 1px rgba(128, 128, 128, 0.041) solid;
+    border-right: 1px rgba(128, 128, 128, 0.055) solid;
+    padding-left: 10px;
+    height: 50px;
+}
