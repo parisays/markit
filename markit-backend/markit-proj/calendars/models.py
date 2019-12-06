@@ -24,5 +24,12 @@ class Calendar(models.Model):
                                           null=True,
                                           blank=True)
 
+    class Meta:
+        permissions = (
+            ('can_view', 'Viewer'),
+            # ('can_edit', 'Editor'),
+            # ('can_manage', 'Manager'),
+        )
+
     def __str__(self):
         return self.name

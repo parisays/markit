@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'guardian',
 ]
 
 
@@ -73,6 +74,12 @@ REST_AUTH_SERIALIZERS = {
 REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "users.serializers.AccountRegistrationSerializer",
 }
+
+AUTHENTICATION_BACKENDS = [
+  'django.contrib.auth.backends.ModelBackend',
+  'guardian.backends.ObjectPermissionBackend',
+]
+
 
 SITE_ID = 1
 

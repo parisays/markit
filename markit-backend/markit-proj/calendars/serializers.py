@@ -46,11 +46,3 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
         return instance
 
 
-class CalendarUpdateSerializer(serializers.ModelSerializer):
-    """
-    Calendar serializer.
-    """
-    class Meta:
-        model = Calendar
-        fields = ('id', 'name', 'owner', 'collaborators', 'connectedPlatforms')
-        read_only_fields = ('id', )
