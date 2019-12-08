@@ -9,9 +9,9 @@ class CalendarForm(forms.ModelForm):
     """
     name = forms.CharField(label="Name")
     owner = forms.ModelChoiceField(label='Owner', queryset=User.objects.all(), empty_label=None)
-    collaborators = forms.ModelMultipleChoiceField(label='Collaborators',
-                                              queryset=User.objects.all(),
-                                              widget=forms.CheckboxSelectMultiple)
+    # collaborators = forms.ModelMultipleChoiceField(label='Collaborators',
+    #                                           queryset=User.objects.all(),
+    #                                           widget=forms.CheckboxSelectMultiple)
 
     # managers = forms.ModelMultipleChoiceField(label='Managers',
     #                                           queryset=User.objects.all(),
@@ -30,7 +30,7 @@ class CalendarForm(forms.ModelForm):
     class Meta:
         model = Calendar
         # fields = ('name', 'owner', 'managers', 'editors', 'viewers', 'connectedPlatforms')
-        fields = ('name', 'owner', 'collaborators', 'connectedPlatforms')
+        fields = ('name', 'owner', 'connectedPlatforms')
 
 class CalendarAdmin(admin.ModelAdmin):
     """
@@ -41,22 +41,22 @@ class CalendarAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'owner', 'connectedPlatforms')
     list_display_links = ('id', 'owner', 'connectedPlatforms')
     # ordering = ('id', 'owner', 'name', 'managers', 'editors', 'viewers', 'connectedPlatforms')
-    ordering = ('id', 'owner', 'name', 'collaborators', 'connectedPlatforms')
+    ordering = ('id', 'owner', 'name', 'connectedPlatforms')
     # list_filter = ('id', 'name', 'owner', 'managers', 'editors', 'viewers', 'connectedPlatforms')
-    list_filter = ('id', 'name', 'owner', 'collaborators', 'connectedPlatforms')
+    list_filter = ('id', 'name', 'owner', 'connectedPlatforms')
     search_fields = ('owner', 'name')
     # filter_horizontal = ('managers', 'editors', 'viewers',)
-    filter_horizontal = ('collaborators',)
+    # filter_horizontal = ('collaborators',)
 
     fieldsets = (
         # (None, {'fields': ('name', 'owner', 'managers', 'editors', 'viewers', 'connectedPlatforms',)}),
-        (None, {'fields': ('name', 'owner', 'collaborators', 'connectedPlatforms',)}),
+        (None, {'fields': ('name', 'owner', 'connectedPlatforms',)}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
             # 'fields': ('name', 'owner', 'managers', 'editors', 'viewers', 'connectedPlatforms',)}
-            'fields': ('name', 'owner', 'collaborators', 'connectedPlatforms',)}
+            'fields': ('name', 'owner', 'connectedPlatforms',)}
         ),
     )
 

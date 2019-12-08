@@ -17,8 +17,8 @@ class Calendar(models.Model):
     ]
 
     name = models.CharField(max_length=100)
-    collaborators = models.ManyToManyField(Collaborator, related_name='calendar_collaborators',
-                                           default=[], blank=True)
+    # collaborators = models.ManyToManyField(Collaborator, related_name='calendar_collaborators',
+    #                                        default=[], blank=True)
 
     # managers = models.ManyToManyField(User, related_name='calendar_managers',
     #                                   default=[], blank=True)

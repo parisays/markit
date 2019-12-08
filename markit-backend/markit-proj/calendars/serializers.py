@@ -10,11 +10,10 @@ class CalendarSerializer(serializers.ModelSerializer):
     Calendar serializer.
     """
     posts = PostSerializer(many=True, read_only=True)
-    collaborators = CollaboratorSerializer(many=True, read_only=True)
 
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connectedPlatforms')
+        fields = ('id', 'name', 'owner', 'posts', 'connectedPlatforms')
         read_only_fields = ('id', )
 
 class NestedCalendarSerializer(serializers.ModelSerializer):
@@ -22,10 +21,9 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
     Calendar serializer.
     """
     posts = PostSerializer(many=True, read_only=True)
-    collaborators = CollaboratorSerializer(many=True, read_only=True)
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'collaborators', 'connectedPlatforms')
+        fields = ('id', 'name', 'owner', 'posts', 'connectedPlatforms')
         read_only_fields = ('id', )
 
     def create(self, validated_data):
@@ -33,9 +31,9 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
         return current_calendar
 
     def update(self, instance, validated_data):
-        manage_data = validated_data.pop('managers')
-        edit_data = validated_data.pop('editors')
-        view_data = validated_data.pop('viewers')
+        # manage_data = validated_data.pop('managers')
+        # edit_data = validated_data.pop('editors')
+        # view_data = validated_data.pop('viewers')
         current_posts = (instance.posts).all()
         current_posts = list(current_posts)
         instance.name = validated_data.get('name', instance.name)
@@ -44,16 +42,17 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
 
         instance.save()
 
-        for data in manage_data:
-            manager = User.objects.filter(email=data)
-            instance.managers.add(*manager)
+        # for data in manage_data:
+        #     manager = User.objects.filter(email=data)
+        #     instance.managers.add(*manager)
 
-        for data in edit_data:
-            editor = User.objects.filter(email=data)
-            instance.editors.add(*editor)
+        # for data in edit_data:
+        #     editor = User.objects.filter(email=data)
+        #     instance.editors.add(*editor)
 
-        for data in view_data:
-            viewer = User.objects.filter(email=data)
-            instance.viewers.add(*viewer)
+        # for data in view_data:
+        #     viewer = User.objects.filter(email=data)
+        #     instance.viewers.add(*viewer)
 
         return instance
+        
