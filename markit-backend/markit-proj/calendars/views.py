@@ -1,9 +1,10 @@
+from itertools import chain
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
+from collaboration.models import Collaborator
 from rest_framework.permissions import IsAuthenticated
-from itertools import chain
 from calendars.models import Calendar
 from calendars.serializers import (
     NestedCalendarSerializer,
@@ -16,6 +17,7 @@ from .permissions import (
     EditPermission,
     ViewPermission,
 )
+from collaboration.views import CollaboratorCreateView
 
 class CalendarListCreateView(generics.ListCreateAPIView):
     """
@@ -33,16 +35,21 @@ class CalendarListCreateView(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
+        collab_view = CollaboratorCreateView.as_view()
+        collab_view(request, *args, **kwargs)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
         own_list = Calendar.objects.filter(owner=user)
         # Add calendars that user is a manager/editor/viewer of.
-        manage_list = Calendar.objects.filter(managers=user)
-        edit_list = Calendar.objects.filter(editors=user)
-        view_list = Calendar.objects.filter(viewers=user)
-        calendar_list = list(chain(own_list, manage_list, edit_list, view_list))
+        # manage_list = Calendar.objects.filter(managers=user)
+        # edit_list = Calendar.objects.filter(editors=user)
+        # view_list = Calendar.objects.filter(viewers=user)
+        collab = Collaborator.objects.filter(user=user)
+        collab_list = Calendar.objects.filter(collaborators=collab)
+        # calendar_list = list(chain(own_list, manage_list, edit_list, view_list))
+        calendar_list = list(chain(own_list, collab_list))
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)
 

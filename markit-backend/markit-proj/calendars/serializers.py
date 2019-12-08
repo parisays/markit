@@ -3,17 +3,18 @@ from rest_auth.registration.serializers import SocialAccountSerializer
 from posts.serializers import PostSerializer
 from users.models import User
 from .models import Calendar
-
+from collaboration.serializers import CollaboratorSerializer
 
 class CalendarSerializer(serializers.ModelSerializer):
     """
     Calendar serializer.
     """
     posts = PostSerializer(many=True, read_only=True)
+    collaborators = CollaboratorSerializer(many=True, read_only=True)
+
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'managers', 'editors',
-                  'viewers', 'posts', 'connectedPlatforms')
+        fields = ('id', 'name', 'owner', 'collaborators', 'posts', 'connectedPlatforms')
         read_only_fields = ('id', )
 
 class NestedCalendarSerializer(serializers.ModelSerializer):
@@ -21,10 +22,10 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
     Calendar serializer.
     """
     posts = PostSerializer(many=True, read_only=True)
+    collaborators = CollaboratorSerializer(many=True, read_only=True)
     class Meta:
         model = Calendar
-        fields = ('id', 'name', 'owner', 'managers', 'editors',
-                  'viewers', 'posts', 'connectedPlatforms')
+        fields = ('id', 'name', 'owner', 'collaborators', 'connectedPlatforms')
         read_only_fields = ('id', )
 
     def create(self, validated_data):
