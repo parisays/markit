@@ -1,12 +1,10 @@
-# import os
+import os
 from django_celery_beat.models import PeriodicTask, ClockedSchedule
-# from rest_framework.request import Request
 from rest_framework.renderers import JSONRenderer
 from celery import shared_task
 import tweepy
-# import requests
+import json
 from posts.models import Post
-# from posts.serializers import PostSerializer
 from calendars.models import Calendar
 from socials.models import SocialAccount
 
@@ -23,12 +21,14 @@ def create_tweet_task(post_id):
         name="PublishTweet",
         task="socials.tasks.publish_tweet_job",
         clocked=clocked_schedule,
-        kwargs=JSONRenderer().render(data={"post_id":str(post_id)})
+        kwargs=json.dumps({"post_id":str(post_id)})
     )
     periodic_task = PeriodicTask(**task_data)
     periodic_task.enabled = True
     periodic_task.one_off = True
     periodic_task.save()
+    post.publishTask = periodic_task
+    post.save()
 
 
 @shared_task
@@ -39,7 +39,7 @@ def publish_tweet_job(post_id):
     """
     post = Post.objects.get(pk=post_id)
     if post.status == 'Published':
-        return "Tweet has already been published."
+        return "Tweet has been published previously."
     calendar = Calendar.objects.get(pk=post.calendar.id)
     twitter_account = SocialAccount.objects.get(calendar=calendar)
     access_token = twitter_account.token
@@ -48,17 +48,10 @@ def publish_tweet_job(post_id):
     auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret)
     auth.set_access_token(access_token, secret_token)
     twitter_api = tweepy.API(auth)
-    # image_url = Request.build_absolute_uri(PostSerializer(post).data['image'])
-    # image_file = 'temp.jpg'
-    # request = requests.get(image_url, stream=True)
-    # if request.status_code == 200:
-    #     with open(image_file, 'wb') as image:
-    #         for chunk in request:
-    #             image.write(chunk)
-    #     twitter_api.update_with_media(image_file, status=post.text)
-    #     os.remove(image_file)
+    # image_path = post.image.path
+    # if os.path.exists(image_path):
+    #     twitter_api.update_with_media(image_path, status=post.text)
     # else:
-    #     twitter_api.update_status(post.text)
     twitter_api.update_status(post.text)
     post.status = 'Published'
     post.save()
