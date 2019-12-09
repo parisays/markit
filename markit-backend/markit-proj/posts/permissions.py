@@ -1,7 +1,7 @@
 from rest_framework import permissions
 from collaboration.models import Collaborator
 
-# obj is a Calendar instance
+# obj is a Post instance
 
 class OwnPermission(permissions.BasePermission):
     """
@@ -10,10 +10,11 @@ class OwnPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Checks if user is the owner of calendar or not.
         print("Check owner permission")
-        return request.user == obj.owner
+        return request.user == obj.calendar.owner
 
     def __str__(self):
         return 'Owner'
+
 
 
 class ManagePermission(permissions.BasePermission):
@@ -24,7 +25,7 @@ class ManagePermission(permissions.BasePermission):
         # Checks if user is one of the managers of the calendar.
         print("Check manager permission")
         try:
-            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
+            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj.calendar)
             return collab is not None
         except:
             return False
@@ -41,7 +42,7 @@ class EditPermission(permissions.BasePermission):
         # Checks if user is one of the editors of the calendar.
         print("Check editor permission")
         try:
-            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
+            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj.calendar)
             return collab is not None
         except:
             return False
@@ -58,7 +59,7 @@ class ViewPermission(permissions.BasePermission):
         # Checks if user is one of the viewers of the calendar.
         print("Check viewer permission")
         try:
-            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
+            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj.calendar)
             return collab is not None
         except:
             return False
