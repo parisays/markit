@@ -103,8 +103,8 @@ REST_USE_JWT = False
 TWITTER_CALLBACK_URL = 'http://127.0.0.1:4200/twitter-auth/'
 
 # Celery configurations
-CELERY_BROKER_URL = 'amqp://markit:sebackendfall19@localhost:5672/markitvhost'
-CELERY_RESULT_BACKEND = 'rpc'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

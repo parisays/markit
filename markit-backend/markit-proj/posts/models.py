@@ -9,7 +9,7 @@ class Post(models.Model):
 
     Draft = 'Draft'
     Published = 'Published'
-    Scheduled = 'Schdeuled'
+    Scheduled = 'Scheduled'
     STATUS_CHOICES = [
         (Draft, 'Draft'),
         (Published, 'Published'),

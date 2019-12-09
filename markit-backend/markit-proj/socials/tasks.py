@@ -18,7 +18,7 @@ def create_tweet_task(post_id):
     clocked_schedule.save()
 
     task_data = dict(
-        name="PublishTweet",
+        name="PublishTweet{}".format(str(post_id)),
         task="socials.tasks.publish_tweet_job",
         clocked=clocked_schedule,
         kwargs=json.dumps({"post_id":str(post_id)})
@@ -48,11 +48,11 @@ def publish_tweet_job(post_id):
     auth = tweepy.OAuthHandler(twitter_app.clientId, twitter_app.secret)
     auth.set_access_token(access_token, secret_token)
     twitter_api = tweepy.API(auth)
-    # image_path = post.image.path
-    # if os.path.exists(image_path):
-    #     twitter_api.update_with_media(image_path, status=post.text)
-    # else:
-    twitter_api.update_status(post.text)
+    image_path = post.image.path
+    if os.path.exists(image_path):
+        twitter_api.update_with_media(image_path, status=post.text)
+    else:
+        twitter_api.update_status(post.text)
     post.status = 'Published'
     post.save()
     return "Tweet sent successfully."
