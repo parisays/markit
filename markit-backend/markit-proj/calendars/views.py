@@ -43,10 +43,8 @@ class CalendarListCreateView(generics.ListCreateAPIView):
     def list(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
         own_calendar = Calendar.objects.filter(owner=user)
-        print(own_calendar)
         # Add calendars that user is a manager/editor/viewer of.
         collab_list = Collaborator.objects.filter(user=user)
-        print(collab_list)
         collab_calendar = []
         for collab in collab_list:
             collab_calendar.append(collab.calendar)
@@ -59,12 +57,11 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
     Retrieve Destroy calendar view.
     """
     permission_classes = (IsAuthenticated,)
-
     serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
 
     def update(self, request, *args, **kwargs):
-        # self.permission_classes = (IsAuthenticated, OwnPermission)
+        self.permission_classes = (IsAuthenticated, OwnPermission)
         self.serializer_class = CalendarSerializer
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
@@ -74,7 +71,7 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
         return Response(serializer.data)
 
     def destroy(self, request, *args, **kwargs):
-        # self.permission_classes = (IsAuthenticated, OwnPermission)
+        self.permission_classes = (IsAuthenticated, OwnPermission)
         self.serializer_class = NestedCalendarSerializer
         instance = self.get_object()
         self.perform_destroy(instance)
@@ -85,12 +82,17 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
                                    ManagePermission, EditPermission, ViewPermission)
         self.serializer_class = NestedCalendarSerializer
         instance = self.get_object()
+        print(instance)
         serializer = self.get_serializer(instance)
         # Append role access
-        # access = perm.get_access()
-        # data = {'access' : access}
-        # data.update(serializer.data)
-        return Response(serializer.data)
+        try:
+            collab = Collaborator.objects.filter(user=request.user).get(calendar_id=kwargs['pk'])
+            access = CollaboratorCreateView.get_role_access(collab.role)
+        except:
+            access = CollaboratorCreateView.get_role_access('Owner')
+        data = {'access' : access}
+        data.update(serializer.data)
+        return Response(data)
 
     def check_object_permissions(self, request, obj):
         """
@@ -100,36 +102,6 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
         perms = []
         for permission in self.get_permissions():
             if permission.has_object_permission(request, self, obj):
-                # perms.append(permission.__str__())
                 perms.append(permission)
-        print(perms)
         if len(perms) <= 1:
             self.permission_denied(request)
-
-    def get_object(self):
-        """
-        Returns the object the view is displaying.
-
-        You may want to override this if you need to provide non-standard
-        queryset lookups.  Eg if objects are referenced using multiple
-        keyword arguments in the url conf.
-        """
-        queryset = self.filter_queryset(self.get_queryset())
-
-        # Perform the lookup filtering.
-        lookup_url_kwarg = self.lookup_url_kwarg or self.lookup_field
-
-        assert lookup_url_kwarg in self.kwargs, (
-            'Expected view %s to be called with a URL keyword argument '
-            'named "%s". Fix your URL conf, or set the `.lookup_field` '
-            'attribute on the view correctly.' %
-            (self.__class__.__name__, lookup_url_kwarg)
-        )
-
-        filter_kwargs = {self.lookup_field: self.kwargs[lookup_url_kwarg]}
-        obj = get_object_or_404(queryset, **filter_kwargs)
-
-        # May raise a permission denied
-        self.check_object_permissions(self.request, obj)
-
-        return obj

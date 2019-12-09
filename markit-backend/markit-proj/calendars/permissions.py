@@ -43,8 +43,11 @@ class ManagePermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Checks if user is one of the managers of the calendar.
         print("Check manager permission")
-        collab = Collaborator.objects.filter(user=request.user).filter(calendar=obj)
-        return len(collab) >=1
+        try:
+            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
+            return collab is not None
+        except:
+            return False
 
     def __str__(self):
         return 'Manager'
@@ -65,8 +68,11 @@ class EditPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Checks if user is one of the editors of the calendar.
         print("Check editor permission")
-        collab = Collaborator.objects.filter(user=request.user).filter(calendar=obj)
-        return len(collab) >=1
+        try:
+            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
+            return collab is not None
+        except:
+            return False
 
     def __str__(self):
         return 'Editor'
@@ -87,8 +93,11 @@ class ViewPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Checks if user is one of the viewers of the calendar.
         print("Check viewer permission")
-        collab = Collaborator.objects.filter(user=request.user).filter(calendar=obj)
-        return len(collab) >=1
+        try:
+            collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
+            return collab is not None
+        except:
+            return False
 
     def __str__(self):
         return 'Viewer'

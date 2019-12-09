@@ -33,9 +33,9 @@ class CollaboratorCreateView(generics.ListCreateAPIView):
     serializer_class = CollaboratorSerializer
 
     def create(self, request, *args, **kwargs):
-        role = request.data['role']
-        access = self.get_role_access(role)
-        request.data.update({'access': access})
+        # role = request.data['role']
+        # access = self.get_role_access(role)
+        # request.data.update({'access': access})
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -47,11 +47,11 @@ class CollaboratorCreateView(generics.ListCreateAPIView):
         """
         Get access for each role.
         """
-        switcher = {MANAGER : [ADD_COLLABORATOR, DELETE_CALENDAR, UPDATE_CALENDAR, VIEW_CALENDAR,
-                               CREATE_POST, UPDATE_POST, VIEW_POST, DELETE_POST, POST_COMMENT,
-                               SET_PUBLISH],
-                    OWNER : [VIEW_CALENDAR, CREATE_POST, UPDATE_POST, VIEW_POST,
-                             DELETE_POST, POST_COMMENT, SET_PUBLISH],
+        switcher = {OWNER : [ADD_COLLABORATOR, DELETE_CALENDAR, UPDATE_CALENDAR, VIEW_CALENDAR,
+                             CREATE_POST, UPDATE_POST, VIEW_POST, DELETE_POST, POST_COMMENT,
+                             SET_PUBLISH],
+                    MANAGER : [VIEW_CALENDAR, CREATE_POST, UPDATE_POST, VIEW_POST,
+                               DELETE_POST, POST_COMMENT, SET_PUBLISH],
                     EDITOR : [ADD_COLLABORATOR, DELETE_CALENDAR, UPDATE_CALENDAR,
                               VIEW_CALENDAR, CREATE_POST, UPDATE_POST, VIEW_POST,
                               DELETE_POST, POST_COMMENT],

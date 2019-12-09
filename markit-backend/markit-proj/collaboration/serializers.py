@@ -6,7 +6,7 @@ class CollaboratorSerializer(serializers.ModelSerializer):
     """
     Collaborator serializer.
     """
-    access = serializers.JSONField()
+    # access = serializers.JSONField()
     class Meta:
         model = Collaborator
-        fields = ('user', 'calendar', 'role', 'access')
+        fields = ('user', 'calendar', 'role')

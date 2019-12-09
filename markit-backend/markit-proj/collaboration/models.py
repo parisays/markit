@@ -21,7 +21,7 @@ class Collaborator(models.Model):
     user = models.ForeignKey(User, related_name='collaborator_user', on_delete=models.CASCADE)
     calendar = models.ForeignKey(Calendar, related_name='collaborator_calendar', on_delete=models.CASCADE)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="", blank=True, null=True)
-    access = JSONField()
+    # access = JSONField()
 
     def __str__(self):
         return self.user.email + '|' + self.calendar.name + '|' + self.role
