@@ -18,7 +18,6 @@ kombu==4.6.6
 more-itertools==7.2.0
 oauthlib==3.1.0
 Pillow==6.2.1
-pkg-resources==0.0.0
 progressbar2==3.47.0
 psycopg2-binary==2.8.3
 PySocks==1.7.1
