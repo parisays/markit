@@ -1,7 +1,7 @@
 from django.db import models
 from jsonfield import JSONField
 from users.models import User
-
+from calendars.models import Calendar
 
 class Collaborator(models.Model):
     """
@@ -17,9 +17,11 @@ class Collaborator(models.Model):
         (Editor, 'Editor'),
         (Viewer, 'Viewer'),
     ]
-    access = JSONField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    user = models.ForeignKey(User, related_name='collaborator_user', on_delete=models.CASCADE)
+    calendar = models.ForeignKey(Calendar, related_name='collaborator_calendar', on_delete=models.CASCADE)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="", blank=True, null=True)
+    access = JSONField()
 
     def __str__(self):
-        return self.user.email + '|' + self.role
+        return self.user.email + '|' + self.calendar.name + '|' + self.role

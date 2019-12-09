@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from calendars.serializers import CalendarSerializer
 from .models import Collaborator
 
 class CollaboratorSerializer(serializers.ModelSerializer):
@@ -8,4 +9,4 @@ class CollaboratorSerializer(serializers.ModelSerializer):
     access = serializers.JSONField()
     class Meta:
         model = Collaborator
-        fields = ('access', 'user', 'role')
+        fields = ('user', 'calendar', 'role', 'access')

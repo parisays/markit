@@ -1,7 +1,6 @@
 from django.db import models
 from allauth.socialaccount.models import SocialAccount
 from users.models import User
-from collaboration.models import Collaborator
 
 class Calendar(models.Model):
     """
