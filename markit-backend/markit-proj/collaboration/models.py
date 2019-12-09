@@ -1,5 +1,5 @@
 from django.db import models
-from jsonfield import JSONField
+# from jsonfield import JSONField
 from users.models import User
 from calendars.models import Calendar
 
