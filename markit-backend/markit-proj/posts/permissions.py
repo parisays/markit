@@ -26,7 +26,7 @@ class ManagePermission(permissions.BasePermission):
         print("Check manager permission")
         try:
             collab = Collaborator.objects.filter(user=request.user).get(calendar=obj.calendar)
-            return collab is not None
+            return collab.role == str(self)
         except:
             return False
 
@@ -43,7 +43,7 @@ class EditPermission(permissions.BasePermission):
         print("Check editor permission")
         try:
             collab = Collaborator.objects.filter(user=request.user).get(calendar=obj.calendar)
-            return collab is not None
+            return collab.role == str(self)
         except:
             return False
 
@@ -60,7 +60,7 @@ class ViewPermission(permissions.BasePermission):
         print("Check viewer permission")
         try:
             collab = Collaborator.objects.filter(user=request.user).get(calendar=obj.calendar)
-            return collab is not None
+            return collab.role == str(self)
         except:
             return False
 

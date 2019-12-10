@@ -8,16 +8,17 @@ from rest_framework.permissions import IsAuthenticated
 from calendars.models import Calendar
 from calendars.serializers import CalendarSerializer
 
-ADD_COLLABORATOR = 'A'
-DELETE_CALENDAR = 'B'
-UPDATE_CALENDAR = 'C'
-VIEW_CALENDAR = 'D'
-CREATE_POST = 'E'
-UPDATE_POST = 'F'
-VIEW_POST = 'G'
-DELETE_POST = 'H'
-POST_COMMENT = 'I'
-SET_PUBLISH = 'J'
+ADD_COLLABORATOR = 'add_collaborator'
+DELETE_CALENDAR = 'delete_calendar'
+UPDATE_CALENDAR = 'update_calendar'
+VIEW_CALENDAR = 'view_calendar'
+CREATE_POST = 'create_post'
+UPDATE_POST = 'update_post'
+VIEW_POST = 'view_post'
+DELETE_POST = 'delete_post'
+POST_COMMENT = 'post_comment'
+SET_PUBLISH = 'set_publish'
+SET_PUBLISH_WITH_PERMISSION = 'set_publish_with_permission'
 
 OWNER = 'Owner'
 MANAGER = 'Manager'
@@ -52,9 +53,8 @@ class CollaboratorCreateView(generics.ListCreateAPIView):
                              SET_PUBLISH],
                     MANAGER : [VIEW_CALENDAR, CREATE_POST, UPDATE_POST, VIEW_POST,
                                DELETE_POST, POST_COMMENT, SET_PUBLISH],
-                    EDITOR : [ADD_COLLABORATOR, DELETE_CALENDAR, UPDATE_CALENDAR,
-                              VIEW_CALENDAR, CREATE_POST, UPDATE_POST, VIEW_POST,
-                              DELETE_POST, POST_COMMENT],
+                    EDITOR : [VIEW_CALENDAR, CREATE_POST, UPDATE_POST, VIEW_POST,
+                              DELETE_POST, POST_COMMENT, SET_PUBLISH_WITH_PERMISSION],
                     VIEWER : [VIEW_CALENDAR, VIEW_POST, POST_COMMENT]
                     }
 

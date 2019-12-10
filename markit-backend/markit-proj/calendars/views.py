@@ -18,6 +18,7 @@ from .permissions import (
     ViewPermission,
 )
 from collaboration.views import CollaboratorCreateView
+from users.serializers import UserAsCollaboratorSerializer
 
 class CalendarListCreateView(generics.ListCreateAPIView):
     """
@@ -82,15 +83,23 @@ class CalendarView(generics.RetrieveUpdateDestroyAPIView):
                                    ManagePermission, EditPermission, ViewPermission)
         self.serializer_class = NestedCalendarSerializer
         instance = self.get_object()
-        print(instance)
         serializer = self.get_serializer(instance)
-        # Append role access
+        # Append role and access
         try:
             collab = Collaborator.objects.filter(user=request.user).get(calendar_id=kwargs['pk'])
             access = CollaboratorCreateView.get_role_access(collab.role)
+            role = collab.role
         except:
-            access = CollaboratorCreateView.get_role_access('Owner')
-        data = {'access' : access}
+            role = 'Owner'
+            access = CollaboratorCreateView.get_role_access(role)
+        # Append collaborators
+        collab_list = Collaborator.objects.filter(calendar_id=kwargs['pk'])
+        collaborators = []
+        for collab in collab_list:
+            collaborators.append(User.objects.get(email=collab.user))
+        collaborators = UserAsCollaboratorSerializer(collaborators, many=True)
+
+        data = {'access' : access, 'role' : role, 'collaborators': collaborators.data}
         data.update(serializer.data)
         return Response(data)
 

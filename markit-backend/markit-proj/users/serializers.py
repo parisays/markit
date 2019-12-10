@@ -66,3 +66,14 @@ class CustomPasswordResetSerializer(serializers.Serializer):
             'request': request,
         }
         self.reset_form.save(**opts)
+
+class UserAsCollaboratorSerializer(serializers.ModelSerializer):
+    """
+    User as collaborator serializer.
+    """
+    # calendar = CalendarSerializer(many=True, read_only=True)
+    # calendar_collaborators = CalendarSerializer(many=True, read_only=True)
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'firstName', 'lastName')
+        read_only_fields = ('id',)
