@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'calendars',
     'posts',
     'socials',
+    'comment',
     'collaboration',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'jsonfield',
 ]
 
 

@@ -23,6 +23,7 @@ class PostCreateView(generics.CreateAPIView):
     serializer_class = PostSerializer
 
     def create(self, request, *args, **kwargs):
+        request.data.update({'comments' : []})
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -64,7 +65,7 @@ class PostListView(generics.ListAPIView):
 
 class PostView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve post view.
+    Retrieve/update/destroy post view.
     """
     permission_classes = (IsAuthenticated,)
     serializer_class = PostSerializer

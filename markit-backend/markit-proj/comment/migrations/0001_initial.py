@@ -10,17 +10,18 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('posts', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Calendar',
+            name='Comment',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('connectedPlatforms', models.CharField(blank=True, choices=[('Twitter', 'Twitter'), ('Facebook', 'Facebook'), ('Facebook and Twitter', 'Facebook and Twitter')], default='', max_length=20, null=True)),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='calendar_owner', to=settings.AUTH_USER_MODEL)),
+                ('text', models.TextField()),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='posts.Post')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comment_user', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
