@@ -38,11 +38,9 @@ class CalendarAdmin(admin.ModelAdmin):
     """
     change_form = CalendarForm
     add_form = CalendarForm
-    list_display = ('id', 'name', 'owner', 'connectedPlatforms')
-    list_display_links = ('id', 'owner', 'connectedPlatforms')
-    # ordering = ('id', 'owner', 'name', 'managers', 'editors', 'viewers', 'connectedPlatforms')
+    list_display = ('id', 'name', 'owner','connectedPlatforms')
+    list_display_links = ('name',)
     ordering = ('id', 'owner', 'name', 'connectedPlatforms')
-    # list_filter = ('id', 'name', 'owner', 'managers', 'editors', 'viewers', 'connectedPlatforms')
     list_filter = ('id', 'name', 'owner', 'connectedPlatforms')
     search_fields = ('owner', 'name')
     # filter_horizontal = ('managers', 'editors', 'viewers',)

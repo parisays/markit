@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from calendars.models import Calendar
+from socials.tasks import create_tweet_task
 from .serializers import PostSerializer
 from .models import Post
 from .permissions import (
@@ -24,12 +25,16 @@ class PostCreateView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         request.data.update({'comments' : []})
+        if request.data['publishDateTime']:
+            request.data['status'] = 'Scheduled'
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+        print(serializer.validated_data)
+        if serializer.data['status'] == 'Scheduled':
+            create_tweet_task(serializer.data['id'])
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
 
 class PostListView(generics.ListAPIView):
     """
