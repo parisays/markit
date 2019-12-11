@@ -1,67 +1,55 @@
 from rest_framework import permissions
 from collaboration.models import Collaborator
+from collaboration.consts import Access
 
 # obj is a Calendar instance
 
-class OwnPermission(permissions.BasePermission):
+class UpdateCalendarPermission(permissions.BasePermission):
     """
-    Object level permission check for owner user.
+    Check update calendar access.
     """
+    SAFE_ACCESS = [Access.EDIT_CALENDAR]
+
     def has_object_permission(self, request, view, obj):
-        # Checks if user is the owner of calendar or not.
-        print("Check owner permission")
-        return request.user == obj.owner
-
-    def __str__(self):
-        return 'Owner'
-
-
-class ManagePermission(permissions.BasePermission):
-    """
-    Object level permission check for manager collaborators.
-    """
-    def has_object_permission(self, request, view, obj):
-        # Checks if user is one of the managers of the calendar.
-        print("Check manager permission")
         try:
             collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
-            return collab.role == str(self)
+            for access in self.SAFE_ACCESS:
+                if access not in collab.role.access:
+                    return False
+            return True
         except:
             return False
 
-    def __str__(self):
-        return 'Manager'
 
+class DestroyCalendarPermission(permissions.BasePermission):
+    """
+    Check destroy calendar access.
+    """
+    SAFE_ACCESS = [Access.DELETE_CALENDAR]
 
-class EditPermission(permissions.BasePermission):
-    """
-    Object level permission check for editor collaborators.
-    """
     def has_object_permission(self, request, view, obj):
-        # Checks if user is one of the editors of the calendar.
-        print("Check editor permission")
         try:
             collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
-            return collab.role == str(self)
+            for access in self.SAFE_ACCESS:
+                if access not in collab.role.access:
+                    return False
+            return True
         except:
             return False
 
-    def __str__(self):
-        return 'Editor'
 
+class RetrieveCalendarPermission(permissions.BasePermission):
+    """
+    Check retrieve calendar access.
+    """
+    SAFE_ACCESS = [Access.VIEW_CALENDAR]
 
-class ViewPermission(permissions.BasePermission):
-    """
-    Object level permission check for viewer collaborators.
-    """
     def has_object_permission(self, request, view, obj):
-        # Checks if user is one of the viewers of the calendar.
-        print("Check viewer permission")
         try:
             collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
-            return collab.role == str(self)
+            for access in self.SAFE_ACCESS:
+                if access not in collab.role.access:
+                    return False
+            return True
         except:
             return False
-
-    def __str__(self):
-        return 'Viewer'

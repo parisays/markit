@@ -9,15 +9,15 @@ class RoleSerializer(serializers.ModelSerializer):
     access = serializers.JSONField()
     class Meta:
         model = Role
-        fields = ('name', 'access')
+        fields = ('id', 'name', 'access',)
+        read_only_fields = ('id',)
 
 
 class CollaboratorSerializer(serializers.ModelSerializer):
     """
     Collaborator serializer.
     """
-    # access = serializers.JSONField()
-    role = RoleSerializer(many=True, read_only=True)
     class Meta:
         model = Collaborator
-        fields = ('user', 'calendar', 'role')
+        fields = ('id', 'user', 'calendar', 'role')
+        read_only_fields = ('id',)
