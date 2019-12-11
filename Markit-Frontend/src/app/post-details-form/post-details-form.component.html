@@ -13,7 +13,7 @@
                     <mat-label>Date</mat-label>
                     <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" autocomplete="off">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-datepicker color="primary" #picker></mat-datepicker>
                 </mat-form-field>
                 <timepicker [formControlName]="'time'"></timepicker>
             </form>

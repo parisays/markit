@@ -22,16 +22,20 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Create Post</ng-template>
-      <div style="display: flex;margin-top: 5%">
-        <button style=" margin: 3%; margin-left: auto;" mat-raised-button color="accent" (click)="publishPost()"
-          [disabled]="canPublish">Publish
-        </button>
-        <button *ngIf="!post" style="margin: auto; margin-left: 0;" mat-raised-button color="primary"
+      <div class="finishing-buttons">
+        <button class="draft" *ngIf="!post" mat-raised-button
           (click)="createPost()">Draft
         </button>
-        <button *ngIf="!!post" style="margin: auto; margin-left: 0;" mat-raised-button color="primary"
+        <button class="draft" *ngIf="!!post" mat-raised-button color="primary"
           (click)="updatePost()">Update
-        </button></div>
+        </button>
+        <button class="schedule" mat-raised-button color="primary" (click)="publishPost()"
+          [disabled]="canPublish">Schedule
+        </button>
+        <button class="publish" mat-raised-button color="accent" (click)="publishPost()"
+          [disabled]="canPublish">Publish
+        </button> 
+      </div>
     </mat-step>
   </mat-vertical-stepper>
 </body>
