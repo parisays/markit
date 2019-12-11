@@ -103,9 +103,9 @@ REST_USE_JWT = False
 TWITTER_CALLBACK_URL = 'http://127.0.0.1:4200/twitter-auth/'
 
 # Celery configurations
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-CELERY_ACCEPT_CONTENT = ['json']
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_AMQP_TASK_RESULT_EXPIRES = 1000
@@ -151,7 +151,7 @@ DATABASES = {
         'NAME': 'markitdb',
         'USER': 'markit',
         'PASSWORD': 'sebackendfall19',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -195,9 +195,9 @@ CORS_ORIGIN_WHITELIST = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'markit/static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'markit/static')
+# ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
