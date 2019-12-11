@@ -63,7 +63,6 @@ class CalendarRetrieveView(generics.RetrieveAPIView):
     Retrieve calendar view.
     """
     permission_classes = (IsAuthenticated, RetrieveCalendarPermission,)
-
     serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
 
