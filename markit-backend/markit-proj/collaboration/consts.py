@@ -1,3 +1,5 @@
+from .models import Role
+
 class Access():
     """
     All accesses.
@@ -46,3 +48,15 @@ class DefienedRoles():
         Set access for each role.
         """
         return DefienedRoles.DEFAULT_ROLES.get(role_name, access)
+
+    # @staticmethod
+    # def create_default_roles():
+    #     """
+    #     Create default roles for the for the first time.
+    #     """
+    #     for role in DefienedRoles.DEFAULT_ROLES:
+    #         current_role = Role.objects.create(name=role,
+    #                         access=DefienedRoles.set_role_access(role_name=role, access=[]))
+    #         cu
+    
+

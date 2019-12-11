@@ -1,12 +1,13 @@
 from itertools import chain
-from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
-from collaboration.models import Collaborator
+from collaboration.consts import DefienedRoles
+from collaboration.models import Collaborator, Role
+from collaboration.serializers import RoleSerializer
+from .models import Calendar
 from rest_framework.permissions import IsAuthenticated
-from calendars.models import Calendar
-from calendars.serializers import (
+from .serializers import (
     NestedCalendarSerializer,
     CalendarSerializer,
 )
@@ -16,7 +17,6 @@ from .permissions import (
     DestroyCalendarPermission,
     RetrieveCalendarPermission
 )
-from collaboration.models import Collaborator
 
 class CalendarListCreateView(generics.ListCreateAPIView):
     """
@@ -30,23 +30,25 @@ class CalendarListCreateView(generics.ListCreateAPIView):
         user = User.objects.get(email=self.request.user)
         request.data.update({'owner' : user.id})
         request.data.update({'posts' : []})
-        # create owner collab
-        # owner_collaborator = Collaborator.objects.create(user=user,calendar=,role=)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+        # create owner collab
+        owner_role = Role.objects.get(name=DefienedRoles.OWNER)
+        currunt_calendar = Calendar.objects.get(pk=serializer.data['id'])
+        owner_collaborator = Collaborator.objects.create(user=user,
+                                                         calendar=currunt_calendar,
+                                                         role=owner_role)
+        owner_collaborator.save()
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
-        own_calendar = Calendar.objects.filter(owner=user)
-        # Add calendars that user is a manager/editor/viewer of.
         collab_list = Collaborator.objects.filter(user=user)
-        collab_calendar = []
+        calendar_list = []
         for collab in collab_list:
-            collab_calendar.append(collab.calendar)
-        calendar_list = list(chain(own_calendar, collab_calendar))
+            calendar_list.append(collab.calendar)
         serializer = self.get_serializer(calendar_list, many=True)
         return Response(serializer.data)
 
@@ -65,6 +67,17 @@ class CalendarRetrieveView(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated, RetrieveCalendarPermission,)
     serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        # add role access
+        role_access = Collaborator.objects.filter(user=request.user).get(calendar=instance)
+        role_serializer = RoleSerializer(role_access.role)
+        data = role_serializer.data
+        data.update(serializer.data)
+        data.update({'role': role_serializer.data['name']})
+        return Response(data)
 
 class CalendarDestroyView(generics.DestroyAPIView):
     """

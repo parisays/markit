@@ -23,7 +23,7 @@ class PostCreateView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         # check permission
-        calendar = Calendar.object.get(pk=request.data['calendar'])
+        calendar = Calendar.objects.get(pk=request.data['calendar'])
         self.check_object_permissions(request, calendar)
         # create post
         request.data.update({'comments' : []})

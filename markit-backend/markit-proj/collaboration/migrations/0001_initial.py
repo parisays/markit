@@ -4,6 +4,16 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import jsonfield.fields
+from collaboration.consts import DefienedRoles
+
+def create_default_roles(apps, schema_editor):
+    Role = apps.get_model("collaboration", "Role")
+    Role.objects.bulk_create([
+        Role(name=DefienedRoles.OWNER, access=DefienedRoles.DEFAULT_ROLES[DefienedRoles.OWNER]),
+        Role(name=DefienedRoles.MANAGER, access=DefienedRoles.DEFAULT_ROLES[DefienedRoles.MANAGER]),
+        Role(name=DefienedRoles.EDITOR, access=DefienedRoles.DEFAULT_ROLES[DefienedRoles.EDITOR]),
+        Role(name=DefienedRoles.VIEWER, access=DefienedRoles.DEFAULT_ROLES[DefienedRoles.VIEWER]),
+    ])
 
 
 class Migration(migrations.Migration):
@@ -33,4 +43,5 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='collaborator_user', to=settings.AUTH_USER_MODEL)),
             ],
         ),
+        migrations.RunPython(create_default_roles),
     ]

@@ -2,19 +2,24 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from users.models import User
+from posts.models import Post
 from .serializers import CommentSerializer
 from .models import Comment
-from users.models import User
+from .permissions import CommentPermission, CommentViewPermission
 
 class CommentCreateView(generics.CreateAPIView):
     """
     Create comment view.
     """
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, CommentPermission)
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
     def create(self, request, *args, **kwargs):
+        # check permission
+        post = Post.objects.get(pk=request.data['post'])
+        self.check_object_permissions(request, post)
         user = User.objects.get(email=self.request.user)
         request.data.update({'user' : user.id})
         serializer = self.get_serializer(data=request.data)
@@ -27,12 +32,14 @@ class CommentListView(generics.ListAPIView):
     """
     List comments view.
     """
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, CommentPermission)
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
     def list(self, request, *args, **kwargs):
         post_id = kwargs.get('post_id')
+        post = Post.objects.get(pk=post_id)
+        self.check_object_permissions(request, post)
         comment_list = Comment.objects.filter(post_id=post_id)
         serializer = self.get_serializer(comment_list, many=True)
         return Response(serializer.data)
@@ -41,7 +48,7 @@ class CommentView(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve/update/destroy comment view.
     """
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, CommentViewPermission)
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
 
