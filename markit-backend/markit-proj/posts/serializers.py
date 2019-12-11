@@ -7,8 +7,12 @@ class PostSerializer(serializers.ModelSerializer):
     Post serializer.
     """
     image = Base64ImageField(max_length=None, use_url=True, required=False)
-    
     class Meta:
         model = Post
-        fields = ('id', 'calendar', 'subject', 'text', 'status', 'image')
+        fields = ('id', 'calendar', 'subject', 'text', 'status', 'image', 'publishDateTime', )
         read_only_fields = ('id', )
+
+    # def validate_publishDateTime(self, value):
+    #     """
+    #     Check that the post publish time is not past.
+    #     """
