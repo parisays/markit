@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'calendars',
     'posts',
     'socials',
+    'notificationservice',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +52,22 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'channels',
 ]
+
+# Channels configurations
+ASGI_APPLICATION = 'markit.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+    },
+}
+
 
 AUTH_EMAIL_VERIFICATION = True
 
@@ -103,8 +119,8 @@ REST_USE_JWT = False
 TWITTER_CALLBACK_URL = 'http://127.0.0.1:4200/twitter-auth/'
 
 # Celery configurations
-CELERY_BROKER_URL = 'redis://redis:6379'
-CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -151,7 +167,7 @@ DATABASES = {
         'NAME': 'markitdb',
         'USER': 'markit',
         'PASSWORD': 'sebackendfall19',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
