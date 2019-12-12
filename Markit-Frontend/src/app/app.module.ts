@@ -32,6 +32,7 @@ import { CalendarSettingsComponent } from './calendar-settings/calendar-settings
 import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CollaboratorInvitationFormComponent } from './collaborator-invitation-form/collaborator-invitation-form.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ProfileComponent } from './profile/profile.component';
     PostOverviewSimpleComponent,
     HomepageComponent,
     ProfileComponent,
+    CollaboratorInvitationFormComponent,
   ],
   imports: [
     BrowserModule,
