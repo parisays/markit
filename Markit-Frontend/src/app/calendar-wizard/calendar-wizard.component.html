@@ -30,10 +30,24 @@
                 <button mat-raised-button matStepperPrevious color="primary">Back</button>
                 <button style="margin: auto; margin-right: 0;" matStepperNext
                         mat-raised-button color="primary"
-                        (click)="finish()">
-                    Finish
+                        (click)="finish()"><!--change button function its not a finish anymore-->
+                    Next
                 </button>
             </mat-toolbar>
         </mat-step>
+        <mat-step [completed]="stepComplete[1]">
+                <ng-template matStepLabel >
+                    Collaborators Invitation
+                </ng-template>
+                <app-collaborator-invitation-form></app-collaborator-invitation-form>
+                <mat-toolbar style="margin-top: 20%; display:flex;">
+                    <button mat-raised-button matStepperPrevious color="primary">Back</button>
+                    <button style="margin: auto; margin-right: 0;" matStepperNext
+                            mat-raised-button color="primary"
+                            (click)="finish()">
+                        Finish
+                    </button>
+                </mat-toolbar>
+            </mat-step>
       </mat-horizontal-stepper>
 </div>
