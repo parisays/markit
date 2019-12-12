@@ -29,11 +29,10 @@ class CustomAccountDetailsSerializer(serializers.ModelSerializer):
     """
     Custom account detail serializer.
     """
-    calendar_owner = CalendarSerializer(many=True, read_only=True)
-    calendar_collaborators = CalendarSerializer(many=True, read_only=True)
+    calendar = CalendarSerializer(many=True, read_only=True)
     class Meta:
         model = User
-        fields = ('id', 'email', 'firstName', 'lastName', 'calendar_owner', 'calendar_collaborators')
+        fields = ('id', 'email', 'firstName', 'lastName', 'calendar')
         read_only_fields = ('id',)
 
 
@@ -66,3 +65,4 @@ class CustomPasswordResetSerializer(serializers.Serializer):
             'request': request,
         }
         self.reset_form.save(**opts)
+

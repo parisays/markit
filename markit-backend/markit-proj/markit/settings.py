@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'calendars',
     'posts',
     'socials',
+    'comment',
+    'collaboration',
     'notificationservice',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'jsonfield',
     'channels',
 ]
 
@@ -88,6 +91,8 @@ REST_AUTH_SERIALIZERS = {
 REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "users.serializers.AccountRegistrationSerializer",
 }
+
+
 
 SITE_ID = 1
 
