@@ -1,5 +1,5 @@
 <div>
-  <mat-toolbar style="margin-top: 5%; margin-left: 10%; width: 80%; display: flex;">
+  <mat-toolbar class="toolbar">
     <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 5%;">
       <mat-label >
         {{this.calendarName}}
@@ -15,7 +15,12 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <a mat-raised-button color="accent" style="margin-left: auto; margin-right: 5%;"
+    <h1 style="margin:auto; font-size: 30px;">
+      <mat-icon style="padding-right: 10px;">calendar_today</mat-icon>
+      {{calendar.name}}
+      <mat-icon style="padding-left: 10px;">calendar_today</mat-icon>
+    </h1>
+    <a mat-raised-button color="accent" style="margin-right: 5%;"
        [routerLink]="['/calendars', calendarId, 'posts', 'new']">
       New Post
     </a>

@@ -1,12 +1,8 @@
 <div>
   <mat-action-list dense>
-      <h1 matHeader style="margin-left: 10px; color: rgb(16, 29, 87);">
-          <mat-icon matPrefix>date_range</mat-icon>
-          Calendars
-      </h1>
-    <div *ngIf="!loading">
+    <div class="calendar-list" *ngIf="!loading">
       <div *ngFor="let calendar of calendars">
-        <button class="calendar-listitems"
+        <button
                 mat-list-item [routerLink]="['/calendars',calendar.id,'posts'] ">
           {{calendar.name}}
         </button>
