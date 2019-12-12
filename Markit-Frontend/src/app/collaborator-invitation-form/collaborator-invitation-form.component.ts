@@ -16,7 +16,8 @@ export class CollaboratorInvitationFormComponent implements OnInit {
   });
 
   hasData = true;
-  
+  loading = false;
+  notFound = false;
   displayedColumns: string[] = ['logo', 'email', 'role'];
 
   roles = ['owner', 'manager', 'viewer', 'editor'];
