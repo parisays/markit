@@ -14,5 +14,5 @@ class Comment(models.Model):
     reply = models.ForeignKey('self', related_name='reply_to',
                               on_delete=models.CASCADE, null=True, blank=True)
 
-    # def __str__(self):
-    #     return self.user.id + '|' + self.post.subject
+    def __str__(self):
+        return self.collaborator.user.email + ' posted a comment on ' + self.post.subject
