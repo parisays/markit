@@ -1,12 +1,14 @@
 from django.db import models
 from posts.models import Post
-from users.models import User
+from collaboration.models import Collaborator
 
 class Comment(models.Model):
     """
     Comment model.
     """
-    user = models.ForeignKey(User, related_name='comment_user', on_delete=models.CASCADE)
+    collaborator = models.ForeignKey(Collaborator,
+                                     related_name='comment_collaborator',
+                                     on_delete=models.CASCADE)
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     text = models.TextField()
     reply = models.ForeignKey('self', related_name='reply_to',

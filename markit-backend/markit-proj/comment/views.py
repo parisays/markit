@@ -4,6 +4,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from users.models import User
 from posts.models import Post
+from collaboration.models import Collaborator
 from .serializers import CommentSerializer
 from .models import Comment
 from .permissions import CommentPermission, CommentViewPermission
@@ -21,7 +22,8 @@ class CommentCreateView(generics.CreateAPIView):
         post = Post.objects.get(pk=request.data['post'])
         self.check_object_permissions(request, post)
         user = User.objects.get(email=self.request.user)
-        request.data.update({'user' : user.id})
+        collaborator = Collaborator.objects.filter(user=user).get(calendar=post.calendar)
+        request.data.update({'collaborator' : collaborator.id})
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
