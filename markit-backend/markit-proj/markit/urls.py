@@ -12,6 +12,8 @@ urlpatterns = [
     path('api/v1.0/calendar/', include('calendars.urls')),
     path('api/v1.0/post/', include('posts.urls')),
     path('api/v1.0/socials/', include('socials.urls')),
+    path('api/v1.0/collaboration/', include('collaboration.urls')),
+    path('api/v1.0/comment/', include('comment.urls')),
     # password recovery url
     re_path(r'^user/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
             PasswordResetConfirmView.as_view(), name='password_reset_confirm'),

@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'calendars',
     'posts',
     'socials',
+    'comment',
+    'collaboration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +53,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'jsonfield',
 ]
 
 AUTH_EMAIL_VERIFICATION = True
@@ -72,6 +75,8 @@ REST_AUTH_SERIALIZERS = {
 REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "users.serializers.AccountRegistrationSerializer",
 }
+
+
 
 SITE_ID = 1
 
@@ -151,7 +156,7 @@ DATABASES = {
         'NAME': 'markitdb',
         'USER': 'markit',
         'PASSWORD': 'sebackendfall19',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
