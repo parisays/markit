@@ -1,6 +1,6 @@
 <div class="container-style mat-elevation-z5">
-    <h1>Forgot your pasword?</h1>
-    <p>we will send you an email to reset your password!</p>
+    <h1>Forgot your password?</h1>
+    <p>Don't worry together we will reset your password!</p>
 
     <form [formGroup]="form">
         <mat-form-field appearance="outline">
@@ -11,6 +11,6 @@
             <mat-error *ngIf="email.touched  && email.value != '' && email.invalid">email is invalid!</mat-error>
         </mat-form-field>
     </form>
-    <button mat-raised-button color="primary" [disabled]="!form.valid">Send</button>
-    
+    <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="onSubmit()">Send</button>
 </div>
+   

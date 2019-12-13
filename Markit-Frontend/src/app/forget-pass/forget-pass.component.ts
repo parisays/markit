@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators, FormGroup} from '@angular/forms';
+import {PasswordService} from '@services';
 
 @Component({
   selector: 'app-forget-pass',
@@ -15,12 +16,17 @@ export class ForgetPassComponent implements OnInit {
     ]]
   });
 
+  constructor(private fb: FormBuilder, private service: PasswordService) {
+  }
+
   get email() {
     return this.form.get('email');
   }
-  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    this.service.requestPasswordReset(this.email);
+  }
 }
