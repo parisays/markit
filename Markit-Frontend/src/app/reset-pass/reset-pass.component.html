@@ -1,0 +1,23 @@
+<div class="container-style mat-elevation-z5">
+    <h1>Reset Password</h1>
+    <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput placeholder="Enter your new password" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="password.touched && password.value == ''">password is required!</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input formControlName="confirm" matInput placeholder="Confirm the new password" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="confirm.touched && confirm.value == ''">password is required!</mat-error>
+        </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary" [disabled]="!form.valid">Reset</button>
+    
+</div>
