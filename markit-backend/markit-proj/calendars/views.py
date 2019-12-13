@@ -7,15 +7,16 @@ from collaboration.models import Collaborator, Role
 from collaboration.serializers import RoleSerializer
 from .models import Calendar
 from rest_framework.permissions import IsAuthenticated
+from users.models import User
 from .serializers import (
     NestedCalendarSerializer,
     CalendarSerializer,
 )
-from users.models import User
 from .permissions import (
     UpdateCalendarPermission,
     DestroyCalendarPermission,
-    RetrieveCalendarPermission
+    RetrieveCalendarPermission,
+    CalendarPermission
 )
 
 class CalendarListCreateView(generics.ListCreateAPIView):
@@ -56,7 +57,7 @@ class CalendarUpdateView(generics.UpdateAPIView):
     """
     Update calendar view.
     """
-    permission_classes = (IsAuthenticated, UpdateCalendarPermission,)
+    permission_classes = (IsAuthenticated, CalendarPermission,)
     serializer_class = CalendarSerializer
     queryset = Calendar.objects.all()
 
@@ -64,7 +65,7 @@ class CalendarRetrieveView(generics.RetrieveAPIView):
     """
     Retrieve calendar view.
     """
-    permission_classes = (IsAuthenticated, RetrieveCalendarPermission,)
+    permission_classes = (IsAuthenticated, CalendarPermission,)
     serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
 
@@ -83,7 +84,7 @@ class CalendarDestroyView(generics.DestroyAPIView):
     """
     Destroy calendar view.
     """
-    permission_classes = (IsAuthenticated, DestroyCalendarPermission,)
+    permission_classes = (IsAuthenticated, CalendarPermission,)
 
     serializer_class = NestedCalendarSerializer
     queryset = Calendar.objects.all()
