@@ -24,18 +24,21 @@
   <mat-step>
     <ng-template matStepLabel>Create Post</ng-template>
     <div class="finishing-buttons">
-      <button class="draft" *ngIf="!post" mat-raised-button (click)="createPost()">
-        Draft
-      </button>
-      <button class="draft" *ngIf="!!post" mat-raised-button color="primary" (click)="updatePost()">
-        Update
-      </button>
-      <button class="schedule" mat-raised-button color="primary" (click)="schedulePost()">
-        Schedule
-      </button>
-      <button class="publish" mat-raised-button color="accent" (click)="publishPost()" [disabled]="canPublish">
-        Publish
-      </button>
+      <mat-toolbar>
+        <button class="draft" *ngIf="!post && !loading" mat-raised-button (click)="createPost()">
+          Draft
+        </button>
+        <button class="draft" *ngIf="!!post && !loading" mat-raised-button color="primary" (click)="updatePost()">
+          Update
+        </button>
+        <button class="schedule" *ngIf="!loading" mat-raised-button color="primary" (click)="schedulePost()">
+          Schedule
+        </button>
+        <button class="publish" *ngIf="!loading" mat-raised-button color="accent" (click)="publishPost()" [disabled]="canPublish">
+          Publish
+        </button>
+        <mat-spinner *ngIf="loading" color="primary" style="margin:auto"></mat-spinner>
+      </mat-toolbar>
     </div>
   </mat-step>
 </mat-vertical-stepper>
