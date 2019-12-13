@@ -32,7 +32,7 @@ export class PostListViewComponent implements OnInit {
   loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
-  dataSource: Post[]; // data source is posts 
+  dataSource: Post[]; // data source is posts
   columnsToDisplay = ['subject', 'connected-platforms', 'status', 'date', 'time'];
   expandedElement: Post | null;
 
@@ -57,7 +57,7 @@ export class PostListViewComponent implements OnInit {
       // console.log(this.calendarId);
 
       this.calendarService.get(this.calendarId).subscribe(value => {
-        console.log('post list view calendar service 1', value);
+        // console.log('post list view calendar service 1', value);
         this.calendar = value as Calendar;
         this.calendarName = (value as Calendar).name;
       }, err => {
@@ -66,10 +66,10 @@ export class PostListViewComponent implements OnInit {
       });
 
       this.postService.getCalendarPosts(this.calendarId)
-        .subscribe(response => {
-          console.log('post list view calendar service 2', response);
-          this.dataSource = response as Post[];
-          console.log(this.dataSource);
+        .subscribe(postResponse => {
+          // console.log('post list view calendar service 2', postResponse);
+          this.dataSource = postResponse as Post[];
+          // console.log(this.dataSource);
           this.loading = false;
         });
     }, err => {
@@ -77,10 +77,10 @@ export class PostListViewComponent implements OnInit {
       this.loading = false;
     });
 
-    this.calendarService.getAll().subscribe((response) => {
-      this.allCalendars = response as Calendar[];
+    this.calendarService.getAll().subscribe((allCalendarsResponse) => {
+      this.allCalendars = allCalendarsResponse as Calendar[];
       // this.calendar = this.allCalendars.filter(v => v.id === this.calendarId)[0];
-      console.log('calendar is now this:', this.calendarId, this.calendar.name);
+      // console.log('calendar is now this:', this.calendarId, this.calendar.name);
     }, err => {
       console.log(err);
     });
