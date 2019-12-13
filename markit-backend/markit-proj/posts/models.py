@@ -22,7 +22,7 @@ class Post(models.Model):
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default=Draft)
     image = models.ImageField(upload_to='posts/', default='posts/postDefault.png')
     publishDateTime = models.DateTimeField(verbose_name='Publish Date and Time',
-                                           blank=True, default=None)
+                                           blank=True, null=True, default=None)
     publishTask = models.ForeignKey(PeriodicTask, on_delete=models.SET_DEFAULT,
                                     related_name='post_publish_task', null=True, default=None)
 

@@ -100,7 +100,7 @@ ACCOUNT_USER_EMAIL_FIELD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = True
 AUTH_USER_MODEL = 'users.User'
-ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_ADAPTER = 'users.adapter.CustomAccountAdapter'
 REST_USE_JWT = False
 
@@ -156,7 +156,7 @@ DATABASES = {
         'NAME': 'markitdb',
         'USER': 'markit',
         'PASSWORD': 'sebackendfall19',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
