@@ -18,6 +18,7 @@
             <mat-error *ngIf="f.password.touched && f.password.value == ''">password is required!</mat-error>
         </mat-form-field>
         <button *ngIf="!loading" [disabled]="!loginForm.valid" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Login</button>
-        <mat-spinner *ngIf="loading" color="primary"></mat-spinner>
+        <mat-spinner *ngIf="loading" color="primary" style="height: 60px;"></mat-spinner>
+        <a [routerLink]="'/'" >forgot your password?</a>
     </form>
 </div>
