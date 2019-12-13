@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import {TimepickerModule} from 'ngx-bootstrap/timepicker';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 
@@ -17,7 +17,7 @@ export class PostDetailsFormComponent implements OnInit {
     }
   );
 
-  mytime: Date = new Date();
+  postDate: Date = new Date();
 
   constructor(private fb: FormBuilder) {
   }
@@ -29,6 +29,7 @@ export class PostDetailsFormComponent implements OnInit {
   get date() {
     return this.form.get('date');
   }
+
 
   ngOnInit() {
   }
