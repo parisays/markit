@@ -52,11 +52,11 @@
         <div class="example-element-detail"
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="button-row">
-            <button mat-button [disabled]="element.status != 'Draft' || !isTwitterConnected"
+            <button mat-button [disabled]="element.status == 'Published' || !isTwitterConnected"
                     (click)="publishOnTweeter(element)">
               Publish
             </button>
-            <button mat-button [disabled]="element.status != 'Draft' && !isTwitterConnected"
+            <button mat-button [disabled]="element.status == 'Published'"
                     [routerLink]="['/calendars', calendarId, 'posts', element.id, 'edit']">
               <mat-icon>edit</mat-icon>
             </button>
