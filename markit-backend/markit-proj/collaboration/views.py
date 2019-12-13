@@ -35,7 +35,6 @@ class CollaboratorCreateView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         calendar = Calendar.objects.get(pk=request.data['calendar'])
-        print(calendar)
         self.check_object_permissions(request, calendar)
         name = request.data.pop('name', 'My Custome Role')
         access = request.data.pop('access', [])

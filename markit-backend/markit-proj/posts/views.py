@@ -27,10 +27,11 @@ class PostCreateView(generics.CreateAPIView):
         calendar = Calendar.objects.get(pk=request.data['calendar'])
         self.check_object_permissions(request, calendar)
         # create post
-        request.data.update({'comments' : []})
-        if 'publishDateTime' in request.data:
-            request.data.update({'status' : 'Scheduled'})
-        serializer = self.get_serializer(data=request.data)
+        data_query_dict = request.data.copy()
+        data_query_dict.update({'comments' : []})
+        if 'publishDateTime' in data_query_dict:
+            data_query_dict.update({'status' : 'Scheduled'})
+        serializer = self.get_serializer(data=data_query_dict)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         if serializer.data['status'] == 'Scheduled':
