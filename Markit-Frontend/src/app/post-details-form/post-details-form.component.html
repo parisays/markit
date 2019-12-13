@@ -1,23 +1,27 @@
 <div style="display: flex; flex-direction: column;">
-    <div style="display: flex;">
-        <div class="mat-elevation-z5" style="margin: 5%; height: 500px; width: 100%; overflow: scroll; background: rgba(216, 216, 216, 0.445);">
-            <app-post-ideas></app-post-ideas>
-        </div>
-        <div style="margin: 5%; height: 90%; width: 100%;">
-            <form class="form-style" [formGroup]="form">
-                <mat-form-field appearance="outline">
-                    <mat-label>Subject</mat-label>
-                    <input formControlName="subject" matInput placeholder="Subject" autofocus>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="primary">
-                    <mat-label>Date</mat-label>
-                    <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" autocomplete="off">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker color="primary" #picker></mat-datepicker>
-                </mat-form-field>
-                <timepicker [formControlName]="'time'"></timepicker>
-            </form>
-        </div>
+  <div style="display: flex;">
+    <div class="mat-elevation-z5"
+         style="margin: 5%; height: 500px; width: 100%; overflow: scroll; background: rgba(216, 216, 216, 0.445);">
+      <app-post-ideas></app-post-ideas>
     </div>
-    <button style="margin: auto" color="primary" mat-raised-button matStepperNext>Next</button>
+    <div style="margin: 5%; height: 90%; width: 100%;">
+      <form class="form-style" [formGroup]="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Subject</mat-label>
+          <input formControlName="subject" matInput placeholder="Subject" autofocus>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker" [formControlName]="'date'" placeholder="MM/DD/YYYY"
+                 autocomplete="off">
+          <!--                  [value]="postDate"-->
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker color="primary" #picker></mat-datepicker>
+        </mat-form-field>
+        <timepicker [(ngModel)]="postDate" showMeridian='' [formControlName]="'time'" minuteStep="1"></timepicker>
+        <!-- showMeridian='' => time is 24h !! hoursPlaceholder="23" minutesPlaceholder="59" -->
+      </form>
+    </div>
+  </div>
+  <button style="margin: auto" color="primary" mat-raised-button matStepperNext>Next</button>
 </div>
