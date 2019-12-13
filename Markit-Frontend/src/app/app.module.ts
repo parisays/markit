@@ -33,6 +33,7 @@ import { PostOverviewSimpleComponent } from './post-overview-simple/post-overvie
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     PostOverviewSimpleComponent,
     HomepageComponent,
     ProfileComponent,
+    ForgetPassComponent,
   ],
   imports: [
     BrowserModule,
