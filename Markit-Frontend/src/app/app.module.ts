@@ -10,14 +10,29 @@ import { MdComponentsModule } from './md-components/md-components.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SignupComponent } from './signup/signup.component';
 import {MatCardModule, MatListModule, MatProgressSpinnerModule, MatTabsModule, MatToolbarModule} from '@angular/material';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CalendarsComponent } from './calendars/calendars.component';
-import { NewCalendarComponent } from './new-calendar/new-calendar.component';
-import { PostsComponent } from './posts/posts.component';
-import { NewPostComponent } from './new-post/new-post.component';
+import { CalendarListViewComponent } from './calendar-list-view/calendar-list-view.component';
+import { PostListViewComponent } from './post-list-view/post-list-view.component';
 import { TwitterAuthComponent } from './twitter-auth/twitter-auth.component';
 import { HeaderComponent } from './header/header.component';
+import { PostDetailsFormComponent } from './post-details-form/post-details-form.component';
+import { AuthorizedHeaderComponent } from './authorized-header/authorized-header.component';
+import { UnauthorizedHeaderComponent } from './unauthorized-header/unauthorized-header.component';
+import { CalendarDetailsFormComponent } from './calendar-details-form/calendar-details-form.component';
+import { SocialAccountsConnectionComponent } from './social-accounts-connection/social-accounts-connection.component';
+import { CalendarWizardComponent } from './calendar-wizard/calendar-wizard.component';
+import { PostIdeasComponent } from './post-ideas/post-ideas.component';
+import { SocialChannelsSelectionComponent } from './social-channels-selection/social-channels-selection.component';
+import { BasePostContentComponent } from './base-post-content/base-post-content.component';
+import { PostWizardComponent } from './post-wizard/post-wizard.component';
+import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
+import { ManualTestComponent } from './manual-test/manual-test.component';
+import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
+import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { ProfileComponent } from './profile/profile.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -26,12 +41,24 @@ import { HeaderComponent } from './header/header.component';
     SignupComponent,
     DashboardComponent,
     HeaderComponent,
-    DashboardComponent,
-    CalendarsComponent,
-    NewCalendarComponent,
-    PostsComponent,
-    NewPostComponent,
-    TwitterAuthComponent
+    CalendarListViewComponent,
+    PostListViewComponent,
+    TwitterAuthComponent,
+    PostDetailsFormComponent,
+    AuthorizedHeaderComponent,
+    UnauthorizedHeaderComponent,
+    CalendarDetailsFormComponent,
+    SocialAccountsConnectionComponent,
+    CalendarWizardComponent,
+    ManualTestComponent,
+    PostIdeasComponent,
+    SocialChannelsSelectionComponent,
+    BasePostContentComponent,
+    PostWizardComponent,
+    CalendarSettingsComponent,
+    PostOverviewSimpleComponent,
+    HomepageComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +72,12 @@ import { HeaderComponent } from './header/header.component';
     MatListModule,
     MatCardModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TimepickerModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

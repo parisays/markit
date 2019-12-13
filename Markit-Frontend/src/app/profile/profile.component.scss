@@ -1,0 +1,41 @@
+body{
+    display: flex;
+}
+
+img{
+    max-height: 200px;
+    mix-blend-mode: multiply;
+    border-radius: 100px;
+}
+
+.form-style{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+.form-style > * {
+    width: 80%;
+    margin: auto;
+}
+
+.container-style{
+    display: flex;
+    flex-direction: column;
+    min-height: 450px;
+    min-width: 300px;
+    max-width: 30%;
+    margin: 5% auto auto;
+    padding: 30px;
+    background: white;
+}
+
+h1{
+    text-align: center;
+    font-size: 60px;
+}
+
+mat-spinner {
+  width: 12px;
+  height: 12px;
+}

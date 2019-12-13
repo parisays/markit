@@ -1,34 +1,44 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import {CalendarsComponent} from '@app/calendars/calendars.component';
-import {NewCalendarComponent} from '@app/new-calendar/new-calendar.component';
-import {PostsComponent} from '@app/posts/posts.component';
-import {NewPostComponent} from '@app/new-post/new-post.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './login/login.component';
+import {SignupComponent} from './signup/signup.component';
+import {CalendarListViewComponent} from '@app/calendar-list-view/calendar-list-view.component';
+import {PostListViewComponent} from '@app/post-list-view/post-list-view.component';
 import {AuthGuard} from '@app/_helpers/auth.guard';
 import {TwitterAuthComponent} from '@app/twitter-auth/twitter-auth.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {CalendarWizardComponent} from '@app/calendar-wizard/calendar-wizard.component';
+import {PostWizardComponent} from '@app/post-wizard/post-wizard.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-settings.component';
+import {ProfileComponent} from '@app/profile/profile.component';
 
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: SignupComponent },
-  { path: 'calendars/:id/create', component: NewPostComponent},
-  { path: 'calendars/create', component: NewCalendarComponent},
-  { path: 'calendars/:id', component: PostsComponent},
-  { path: 'calendars', component: CalendarsComponent},
-  // todo pathMatch:  'full'
-  // todo canActivate: [AuthGuard]
-  { path: 'twitter-auth', component: TwitterAuthComponent },
-  // { path: 'no-access', component: }
+  {path: '', component: HomepageComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: SignupComponent},
+  {path: 'twitter-auth', component: TwitterAuthComponent},
 
-  { path: '**', redirectTo: '' }// redirect to not found??
+  {path: 'calendars/:calendarId/posts/new', component: PostWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/posts/:postId/edit', component: PostWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/posts', component: PostListViewComponent, canActivate: [AuthGuard]},
+
+  {path: 'calendars/:calendarId/edit', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
+
+  {path: 'calendars/new', component: CalendarWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/wizard/details', component: CalendarWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/wizard/social-accounts', component: CalendarWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/wizard', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
+
+  {path: '**', redirectTo: ''}// redirect to not found??
+  // todo pathMatch:  'full'
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

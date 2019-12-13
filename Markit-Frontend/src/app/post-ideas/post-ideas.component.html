@@ -1,0 +1,14 @@
+<div *ngIf="!loading">
+  <div *ngFor="let idea of postIdeas">
+    <div class="ripple-container" matRipple>
+      <img name="image" mat-list-avatar style="height: 40px;" src="./assets/images/{{idea.type}}-logo.png">
+      <label for="image">
+        {{idea.label}}
+      </label>
+      <!-- <p>
+       {{idea.text}}
+      </p> -->
+    </div>
+  </div>
+</div>
+<mat-spinner *ngIf="loading" style="margin: auto" color="primary"></mat-spinner>

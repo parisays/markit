@@ -1,6 +1,46 @@
+@import "../../theme";
+
 .calendar-list{
+    display: flex;
+    flex-direction: column;
     margin: 3%;
     margin-left: 15%;
-    width: 35%;
-    background: #fff;
+    height: 400px; 
+    width: 32%;
+    background: white;
+}
+.post-ideas-style{
+    margin: 3%;
+    height: 400px; 
+    width: 32%;
+    background:white;
+}
+.top-row{
+    display: flex;
+}
+body{
+    display: flexbox;
+    flex-direction: column;
+    background: #53798b0a;
+}
+
+h1 {
+    margin-left: 20px;
+    margin-right: 20px;
+    color: $app-dark-primary;
+    border-bottom: 2px $app-light-primary double;
+}
+
+h1 mat-icon {
+    margin: 10px; font-size: 30px;
+}
+
+div{
+    position: relative;
+}
+
+div button{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }

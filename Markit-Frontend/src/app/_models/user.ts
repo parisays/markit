@@ -1,6 +1,10 @@
+import {Calendar} from '@app/_models/calendar';
+
 export class User {
-    firstName?: string;
-    lastName?: string;
-    email: string;
-    key?: string;
+  id?: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  key?: string;
+  calendars?: Calendar[];
 }

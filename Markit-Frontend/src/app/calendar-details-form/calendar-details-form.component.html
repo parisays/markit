@@ -1,0 +1,15 @@
+<div class="container-style">
+    <form class="form-style" [formGroup]="form">
+        <input style="display: none" type="file" accept="image/*" #fileInput (change)="onImageChanged($event)">
+        <button mat-fab color="accent" style="height: 100px; width: 100px;" (click)="fileInput.click()">
+            <span>Logo Image</span>
+        </button>
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input formControlName="name" matInput placeholder="Enter new calendar title" autofocus>
+            <mat-icon matSuffix>edit</mat-icon>
+            <mat-error *ngIf="title.touched && title.value == ''">title is required!</mat-error>
+        </mat-form-field>
+    </form>
+</div>
+

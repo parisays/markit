@@ -1,0 +1,11 @@
+.form-style{
+    display: flex;
+    flex-direction: column;
+}
+
+.date-time{
+    display: flex;
+}
+.date-time > *{
+    margin:auto;
+}

@@ -1,33 +1,48 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {environment} from '@environments/environment';
 import {Post} from '@models';
-import {AuthenticationService} from '@app/_services/auth.service';
+import {DataService} from './data.service';
+import {catchError} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
-  private createPostEndpoint = `${environment.apiUrl}/api/v1.0/calendar/post/`;
-  private listPostsEndpoint = `${environment.apiUrl}/api/v1.0/calendar/post/?calendar_id=/`;
+export class PostService extends DataService {
+  private readonly endpoint: string;
 
-  constructor(private http: HttpClient, private  authService: AuthenticationService) {
+  // private listPostsEndpoint = `${environment.apiUrl}/calendar/post/?calendar_id=`;
+
+  constructor(http: HttpClient) {
+    const endpoint = `${environment.apiUrl}post/`;
+    super(endpoint, http);
+    this.endpoint = endpoint;
   }
 
-  getPosts(calendarId: number) {
-    return this.http.get<Post[]>(this.listPostsEndpoint + calendarId.toString(), {
-      headers: new HttpHeaders({
-        Authorization: `Token ${this.authService.currentUserValue.key}`
-      })
-    });// todo give calendar id in the url
+  getCalendarPosts(calendarId: number) {
+    const url = `${this.endpoint}${calendarId}`;
+    return super.getAll(undefined, url);
   }
 
-  createPost(post) {
-    return this.http.post(this.createPostEndpoint, JSON.stringify((post)), {
-      headers: new HttpHeaders({
-        Authorization: `Token ${this.authService.currentUserValue.key}`
-      })
-    });
+  get(id): Observable<object> {
+    const url = this.endpoint + 'view/';
+    return super.get(id, url);
+  }
+
+  update(resource): Observable<object> {
+    const url = this.endpoint + 'edit/';
+    return super.update(resource, url);
+  }
+
+  partialUpdate(id, resource): Observable<object> {
+    const url = this.endpoint + 'edit/';
+    return super.partialUpdate(id, resource, url);
+  }
+
+  delete(id): Observable<object> {
+    const url = this.endpoint + 'delete';
+    return super.delete(id, url);
   }
 }

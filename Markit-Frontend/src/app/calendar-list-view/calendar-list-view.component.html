@@ -1,0 +1,17 @@
+<div>
+  <mat-action-list dense>
+    <div class="calendar-list" *ngIf="!loading">
+      <div *ngFor="let calendar of calendars">
+        <button
+                mat-list-item [routerLink]="['/calendars',calendar.id,'posts'] ">
+          {{calendar.name}}
+        </button>
+      </div>
+    </div>
+    <mat-spinner *ngIf="loading" style="margin: auto" color="primary"></mat-spinner>
+  </mat-action-list>
+  <div style="justify-content: flex-end;
+  display: flex; margin: 5px;">
+
+  </div>
+</div>

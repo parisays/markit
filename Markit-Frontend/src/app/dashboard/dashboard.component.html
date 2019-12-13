@@ -1,3 +1,27 @@
 <body>
-    <app-calendars *ngIf="authService.isLoggedIn()" ></app-calendars>
+    <div class="top-row">
+        <div class="calendar-list mat-elevation-z5">
+            <h1 matHeader >
+                <mat-icon matPrefix>date_range</mat-icon>
+                Calendars
+            </h1>
+            <app-calendar-list-view></app-calendar-list-view>
+            <button mat-mini-fab color="primary"
+                    routerLink="/calendars/new">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="post-ideas-style mat-elevation-z5" >
+            <h1 matHeader>
+                <mat-icon>star_border</mat-icon>
+                Post Ideas
+            </h1>
+            <div style="overflow: auto; max-height: 300px; padding: 0 20px;">
+                <app-post-ideas></app-post-ideas>
+            </div>
+        </div>
+    </div>
+    <div style="margin: auto;">
+        <app-post-overview-simple></app-post-overview-simple>
+    </div>
 </body>

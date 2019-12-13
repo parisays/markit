@@ -1,0 +1,28 @@
+<mat-toolbar class="mat-elevation-z5 toolbar">
+    <a mat-button routerLink="/" class="markit">
+        <mat-icon style="font-size: 40px;padding-right: 10px; height: 47px;">
+            bookmark
+        </mat-icon>
+        Markit
+    </a>
+    <mat-icon style="margin-right :20px; color: rgb(182, 181, 181);">contact_support</mat-icon>
+    <mat-icon style="margin-right :20px; color: rgb(182, 181, 181);">notifications</mat-icon>
+    <button 
+    color="primary"
+    mat-mini-fab
+    style="margin-right: 10%;"
+    [matMenuTriggerFor]="beforeMenu">
+    <mat-icon>
+      person_pin
+    </mat-icon>
+  </button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item routerLink="/profile">
+      Account Setting
+    </button>
+    <button
+      mat-menu-item
+      (click)="authService.logout()">Logout
+    </button>
+  </mat-menu>
+</mat-toolbar>

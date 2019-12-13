@@ -1,0 +1,35 @@
+.ripple-container {
+    cursor: pointer;
+    display: flex;
+    position: relative;
+
+    min-width: 100px;
+    min-height: 100px;
+    background: white;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+
+    border-bottom: 2px rgba(128, 128, 128, 0.233) solid;
+    border-left: 1px rgba(128, 128, 128, 0.096) solid;
+    border-top: 1px rgba(128, 128, 128, 0.096) solid;
+    border-right: 1px rgba(128, 128, 128, 0.096) solid;
+  }
+
+  .ripple-container > p {
+    width: 50%;
+    position: absolute;
+    right: 10px;
+    padding: 10px;
+  }
+  .ripple-container > * {
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+

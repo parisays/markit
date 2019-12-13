@@ -2,33 +2,36 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {environment} from '@environments/environment';
-import {Calendar} from '@models';
-import {AuthenticationService} from '@app/_services/auth.service';
-import {map} from 'rxjs/operators';
+import { DataService } from './data.service';
+import {Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
-export class CalendarService {
-  private calendarEndpoint = `${environment.apiUrl}/api/v1.0/calendar/`;
+export class CalendarService extends DataService {
+  private readonly endpoint: string;
 
-  constructor(private http: HttpClient, private  authService: AuthenticationService) {
+  constructor(http: HttpClient) {
+    const endpoint = `${environment.apiUrl}calendar/`;
+    super(endpoint, http);
+    this.endpoint = endpoint;
   }
 
-  getCalendars() {
-    return this.http.get<Calendar[]>(this.calendarEndpoint, {
-      headers: new HttpHeaders({
-        Authorization: `Token ${this.authService.currentUserValue.key}`
-      })
-    });
+  get(id): Observable<object> {
+    const url = this.endpoint + 'view/';
+    return super.get(id, url);
   }
 
-  createCalendar(calendar: Calendar) {
-    return this.http.post<Calendar>(this.calendarEndpoint, {
-      posts: [],
-      user: [+this.authService.currentUserValue]
-    }, {
-      headers: new HttpHeaders({
-        Authorization: `Token ${this.authService.currentUserValue.key}`
-      })
-    });
+  update(resource): Observable<object> {
+    const url = this.endpoint + 'edit/';
+    return super.update(resource, url);
+  }
+
+  partialUpdate(id, resource): Observable<object> {
+    const url = this.endpoint + 'edit/';
+    return super.partialUpdate(id, resource, url);
+  }
+
+  delete(id): Observable<object> {
+    const url = this.endpoint + 'delete';
+    return super.delete(id, url);
   }
 }

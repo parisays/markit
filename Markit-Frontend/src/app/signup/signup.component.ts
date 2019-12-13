@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthenticationService,
+    public authService: AuthenticationService,
     private snackBar: MatSnackBar
   ) {
     if (this.authService.currentUserValue) {
@@ -36,9 +36,9 @@ export class SignupComponent implements OnInit {
     password: ['', Validators.required],
     confirmPassword: ['', [Validators.required, SignupComponent.matchValues('password')] ]
   });
-  private returnUrl: string;
-  private error: '';
-  private reqLoading = false;
+  public returnUrl: string;
+  public error: '';
+  public reqLoading = false;
 
   hide = true;
 
@@ -78,7 +78,7 @@ export class SignupComponent implements OnInit {
         console.log(err);
         this.error = err;
         let errMsg = 'Registration failed!';
-        if (err.error) {
+        if (err.error && err.statusText === 'Bad Request') {
           errMsg = [].concat(...Object.values(err.error))[0];
         }
         this.snackBar.open(errMsg, 'Dismiss');
