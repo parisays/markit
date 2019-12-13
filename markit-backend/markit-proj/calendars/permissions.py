@@ -68,7 +68,6 @@ class RetrieveCalendarPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         try:
             collab = Collaborator.objects.filter(user=request.user).get(calendar=obj)
-            print(collab)
             for access in self.SAFE_ACCESS:
                 if access not in collab.role.access:
                     return False

@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from datetime import datetime
 from calendars.models import Calendar
 from socials.tasks import create_tweet_task
 from .serializers import PostSerializer
@@ -26,13 +27,13 @@ class PostCreateView(generics.CreateAPIView):
         calendar = Calendar.objects.get(pk=request.data['calendar'])
         self.check_object_permissions(request, calendar)
         # create post
-        request.data.update({'comments' : []})
-        if request.data['publishDateTime']:
-            request.data['status'] = 'Scheduled'
-        serializer = self.get_serializer(data=request.data)
+        data_query_dict = request.data.copy()
+        data_query_dict.update({'comments' : []})
+        if 'publishDateTime' in data_query_dict:
+            data_query_dict.update({'status' : 'Scheduled'})
+        serializer = self.get_serializer(data=data_query_dict)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        print(serializer.validated_data)
         if serializer.data['status'] == 'Scheduled':
             create_tweet_task(serializer.data['id'])
         headers = self.get_success_headers(serializer.data)
