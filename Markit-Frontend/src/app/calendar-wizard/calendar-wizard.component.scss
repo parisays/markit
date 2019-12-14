@@ -1,0 +1,13 @@
+@import "../../theme.scss";
+.header{
+    background: $app-light-primary;
+    text-align: center;
+}
+
+.header > *{
+    color: $app-dark-primary;
+}
+
+.mat-step-header .mat-step-label.mat-step-label-active{
+    font-size: 20px;
+}
