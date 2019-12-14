@@ -9,7 +9,7 @@
         <mat-step [completed]="stepComplete[0]">
             <ng-template matStepLabel>Calendar Details</ng-template>
             <app-calendar-details-form #calendar_details></app-calendar-details-form>
-            <mat-toolbar style="margin-top: 30%;">
+            <mat-toolbar style="margin-top: 15%;">
                 <button *ngIf="calendar && !loading" (click)="updateCalendar()" style="margin:auto" matStepperNext
                     mat-raised-button color="primary"><!-- todo -->
                     Next
