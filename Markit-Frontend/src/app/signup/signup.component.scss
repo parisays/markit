@@ -4,6 +4,7 @@
     margin: 5%;
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
 }
 
 .form-style > * {
@@ -24,6 +25,8 @@ h1{
     color: $app-dark-primary;
     text-align: center;
     font-size: 60px;
+    margin-block-end: 30px;
+    margin-block-start: 10px;
 }
 
 mat-spinner {
