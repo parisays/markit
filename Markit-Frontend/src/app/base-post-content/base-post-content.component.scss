@@ -1,0 +1,16 @@
+
+ @import "../../theme.scss";
+ .post-image{
+    max-height: 200px;
+    padding: 10px;
+    border: 1px dashed rgba(128, 128, 128, 0.411);
+    border-radius: 5px;
+    margin: 20px;
+  }
+
+  .file-name{
+    color: $app-normal-primary;
+    margin: 0 20px;
+  }
+
+  
