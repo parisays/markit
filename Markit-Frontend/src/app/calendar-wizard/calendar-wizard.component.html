@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z5" style="background: white;">
+<mat-toolbar class="mat-elevation-z5 header">
   <h1 style="font-size: 40px;margin:auto; margin-right: 23%;">Calendar Wizard</h1>
   <button style="float: right; margin-right: 15%; height: 70px; text-align: center;" mat-button routerLink="">
       <mat-icon style="font-size: 30px;">close</mat-icon>
@@ -9,7 +9,7 @@
         <mat-step [completed]="stepComplete[0]">
             <ng-template matStepLabel>Calendar Details</ng-template>
             <app-calendar-details-form #calendar_details></app-calendar-details-form>
-            <mat-toolbar style="margin-top: 30%;">
+            <mat-toolbar style="margin-top: 15%;">
                 <button *ngIf="calendar && !loading" (click)="updateCalendar()" style="margin:auto" matStepperNext
                     mat-raised-button color="primary"><!-- todo -->
                     Next

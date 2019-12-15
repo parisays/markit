@@ -1,11 +1,15 @@
+@import "../../theme.scss";
+
 .form-style{
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
 }
 
 .form-style > * {
     width: 80%;
     margin: auto;
+    margin-bottom: 5px;
 }
 
 .container-style{
@@ -13,11 +17,17 @@
     min-width: 300px;
     max-width: 50%;
     margin: 10% auto auto;
+    background: white;
+    padding: 3%;
+    padding-top:1%;
 }
 
 h1{
+    color: $app-dark-primary;
     text-align: center;
     font-size: 60px;
+    margin-block-end: 30px;
+    margin-block-start: 10px;
 }
 
 mat-spinner {

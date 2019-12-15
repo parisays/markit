@@ -74,3 +74,12 @@ table {
     color: $app-dark-primary;
     padding: 0px 20px;
   }
+
+  .post-image{
+    max-width: 30%;
+    max-height: 200px;
+    padding: 10px;
+    border: 1px dashed rgba(128, 128, 128, 0.411);
+    border-radius: 5px;
+    margin: 10px;
+  }
