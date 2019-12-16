@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'socials',
     'comment',
     'collaboration',
-    'notificationservice',
+    'notification',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 ]
 
 # Channels configurations
-ASGI_APPLICATION = 'markit.asgi.application'
+ASGI_APPLICATION = 'markit.routing.application'
 
 CHANNEL_LAYERS = {
     'default': {
