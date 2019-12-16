@@ -1,8 +1,8 @@
 <div>
   <mat-toolbar class="toolbar">
     <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 5%;">
-      <mat-label >
-        {{this.calendarName}}
+      <mat-label>
+        Change Calendar...
       </mat-label>
       <mat-select #selector>
         <mat-option *ngFor="let calendar of allCalendars" [value]="calendar.id" disabled="">
@@ -42,7 +42,15 @@
       <th mat-header-cell *matHeaderCellDef style="font-size: 17px;"> {{column | titlecase}} </th>
       <td mat-cell *matCellDef="let element">
         <div *ngIf="column != 'connected-platforms'" style="font-size: 17px;">
-          {{element[column]}}
+          <div *ngIf="column == 'publishDateTime'">
+            {{element[column] | date:'fullDate'}}
+            <span style="margin-left: 20px">
+              {{element[column] | date:'shortTime'}}
+            </span>
+          </div>
+          <div *ngIf="column != 'publishDateTime'">
+            {{element[column]}}
+          </div>
         </div>
         <div *ngIf="column == 'connected-platforms'">
           <img style="height: 40px;" src="../../assets/images/twitter-logo.png">
@@ -68,11 +76,11 @@
             </button>
           </div>
           <div style="display: flex; border: double 2px rgba(128, 128, 128, 0.185); padding: 10px; margin: 10px;">
-              <p style="width: 100%; font-size: 16px; margin: 20px;">
-                  {{element.text}}
-              </p>
-              <mat-divider></mat-divider>
-              <img class="post-image" [src]="element.image" alt="">
+            <p style="width: 100%; font-size: 16px; margin: 20px;">
+              {{element.text}}
+            </p>
+            <mat-divider></mat-divider>
+            <img class="post-image" [src]="element.image" alt="">
           </div>
 
         </div>
