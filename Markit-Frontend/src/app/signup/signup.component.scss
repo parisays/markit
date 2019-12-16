@@ -1,7 +1,10 @@
+@import "../../theme.scss";
+
 .form-style{
     margin: 5%;
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
 }
 
 .form-style > * {
@@ -13,12 +16,17 @@
     min-height: 620px;
     min-width: 300px;
     width: 50%;
-    margin: 10% auto auto;
+    margin: 5% auto auto;
+    background: white;
+    padding: 10px;
 }
 
 h1{
+    color: $app-dark-primary;
     text-align: center;
     font-size: 60px;
+    margin-block-end: 30px;
+    margin-block-start: 10px;
 }
 
 mat-spinner {

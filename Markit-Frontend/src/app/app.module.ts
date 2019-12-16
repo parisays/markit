@@ -33,6 +33,7 @@ import { PostOverviewSimpleComponent } from './post-overview-simple/post-overvie
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollaboratorInvitationFormComponent } from './collaborator-invitation-form/collaborator-invitation-form.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { CollaboratorInvitationFormComponent } from './collaborator-invitation-f
     MatCardModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    TimepickerModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
