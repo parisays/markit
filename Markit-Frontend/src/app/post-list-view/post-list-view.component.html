@@ -43,7 +43,10 @@
       <td mat-cell *matCellDef="let element">
         <div *ngIf="column != 'connected-platforms'" style="font-size: 17px;">
           <div *ngIf="column == 'publishDateTime'">
-            {{element[column] | date:'medium'}}
+            {{element[column] | date:'fullDate'}}
+            <span style="margin-left: 20px">
+              {{element[column] | date:'shortTime'}}
+            </span>
           </div>
           <div *ngIf="column != 'publishDateTime'">
             {{element[column]}}
