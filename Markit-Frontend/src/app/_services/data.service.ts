@@ -13,7 +13,7 @@ export abstract class DataService {
 
   getAll(params?: HttpParams, url?: string) {
     const u = url ? url : this.url;
-    return this.http.get(u, { params }).pipe(
+    return this.http.get(u, {params}).pipe(
       catchError(this.handleError)
     );
   }
@@ -48,7 +48,7 @@ export abstract class DataService {
 
   delete(id, url?: string) {
     const u = url ? url : this.url;
-    return this.http.delete(u + id + '/').pipe(
+    return this.http.delete(u + '/' + id).pipe(
       catchError(this.handleError)
     );
   }

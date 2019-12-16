@@ -17,7 +17,7 @@
     </mat-form-field>
     <h1 style="margin:auto; font-size: 30px;">
       <mat-icon style="padding-right: 10px;">calendar_today</mat-icon>
-      {{calendar.name}}
+      {{this.calendarName}}
       <mat-icon style="padding-left: 10px;">calendar_today</mat-icon>
     </h1>
     <a mat-raised-button color="accent" style="margin-right: 5%;"
@@ -29,6 +29,9 @@
     </button>
     <button mat-button [routerLink]="['/calendars', calendarId, 'edit' ]">
       <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-button (click)="deleteCalendar()">
+      <mat-icon color="warn">delete</mat-icon>
     </button>
   </mat-toolbar>
 
@@ -52,15 +55,15 @@
         <div class="example-element-detail"
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="button-row">
-            <button mat-button [disabled]="element.status != 'Draft' || !isTwitterConnected"
+            <button mat-button [disabled]="element.status == 'Published' || !isTwitterConnected"
                     (click)="publishOnTweeter(element)">
               Publish
             </button>
-            <button mat-button [disabled]="element.status != 'Draft' && !isTwitterConnected"
+            <button mat-button [disabled]="element.status == 'Published'"
                     [routerLink]="['/calendars', calendarId, 'posts', element.id, 'edit']">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-button color="warn">
+            <button mat-button color="warn" (click)="deletePost(element)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
