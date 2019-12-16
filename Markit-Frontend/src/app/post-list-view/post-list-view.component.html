@@ -24,7 +24,7 @@
         src=".././../assets/images/{{collab.role}}-logo.png" 
         alt="" *ngFor="let collab of collaborators" 
         class="collaborator mat-elevation-z3">
-
+      <span *ngIf="moreThanFour" style="font-size: 40px; margin-left: 10px;">...</span>
     </div>
     <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
     <h1 style="margin:auto; font-size: 30px;">

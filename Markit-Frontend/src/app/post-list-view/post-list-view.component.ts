@@ -36,7 +36,7 @@ export class PostListViewComponent implements OnInit {
   columnsToDisplay = ['subject', 'connected-platforms', 'status', 'publishDateTime'];
   expandedElement: Post | null;
   collaborators;
-
+  moreThanFour = false;
   private twitterAppData: { client_id: string, secret: string };
 
   constructor(private postService: PostService,
