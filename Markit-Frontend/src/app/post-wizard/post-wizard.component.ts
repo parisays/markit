@@ -77,8 +77,12 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
   createPost(publish: boolean = false, schedule: boolean = false) {
     this.loading = true;
 
-    const postData = this.createFormDataObject(schedule);
+    const postData: FormData = this.createFormDataObject(schedule);
     postData.append('calendar', `${this.calendarId}`);
+    // console.log(`post image: ${postData.get('image')}`);
+    // console.log(`post subject: ${postData.get('subject')}`);
+    // console.log(`post texy: ${postData.get('text')}`);
+    // console.log(`post date: ${postData.get('publishDateTime')}`);
 
     if (postData) {
       this.postService.create(postData).subscribe(
@@ -139,7 +143,7 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
     formData.append('text', this.postContent.form.controls.text.value);
     if (schedule) {
       if (this.standardizedTime()) {
-        console.log('final time', this.publishDateTime);
+        // console.log('final time', this.publishDateTime);
         formData.append('publishDateTime', this.publishDateTime);
       } else {
         return null;

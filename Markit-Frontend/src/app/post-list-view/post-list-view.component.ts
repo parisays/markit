@@ -41,6 +41,7 @@ export class PostListViewComponent implements OnInit {
   constructor(private postService: PostService,
               private calendarService: CalendarService,
               private route: ActivatedRoute,
+              private router: Router,
               private twitter: TwitterService,
               private snackBar: MatSnackBar) {
   }
@@ -83,6 +84,28 @@ export class PostListViewComponent implements OnInit {
       // console.log('calendar is now this:', this.calendarId, this.calendar.name);
     }, err => {
       console.log(err);
+    });
+  }
+
+  deleteCalendar() {
+    this.calendarService.delete(this.calendarId).subscribe(response => {
+      console.log(response);
+      this.snackBar.open('Calendar has been deleted successfully!', 'Dismiss', {duration: 2000});
+      this.router.navigate(['/']);
+    }, err => {
+      console.log(err);
+      this.snackBar.open('Failed to delete calendar!', 'Dismiss', {duration: 2000});
+    });
+  }
+
+  deletePost(post: Post) {
+    this.postService.delete(post.id).subscribe(response => {
+      console.log(response);
+      this.snackBar.open('Post has been deleted successfully!', 'Dismiss', {duration: 2000});
+      this.dataSource.splice(this.dataSource.indexOf(post), 1);
+    }, err => {
+      console.log(err);
+      this.snackBar.open('Failed to delete post!', 'Dismiss', {duration: 2000});
     });
   }
 
