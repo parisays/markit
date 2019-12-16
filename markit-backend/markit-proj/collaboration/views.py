@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from .models import Collaborator, Role
-from .serializers import CollaboratorSerializer, RoleSerializer
+from .serializers import CollaboratorCreateSerializer, RoleSerializer
 from rest_framework.permissions import IsAuthenticated
 from calendars.models import Calendar
 from .consts import Access, DefienedRoles
@@ -31,7 +31,7 @@ class CollaboratorCreateView(generics.CreateAPIView):
     """
     permission_classes = (IsAuthenticated, InviteCollaboratorPermission)
     queryset = Collaborator.objects.all()
-    serializer_class = CollaboratorSerializer
+    serializer_class = CollaboratorCreateSerializer
 
     def create(self, request, *args, **kwargs):
         calendar = Calendar.objects.get(pk=request.data['calendar'])
