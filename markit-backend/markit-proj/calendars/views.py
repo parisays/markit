@@ -73,8 +73,8 @@ class CalendarRetrieveView(generics.RetrieveAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         # add role access
-        role_access = Collaborator.objects.filter(user=request.user).get(calendar=instance)
-        role_serializer = RoleSerializer(role_access.role)
+        collab_obj = Collaborator.objects.filter(user=request.user).get(calendar=instance)
+        role_serializer = RoleSerializer(collab_obj.role)
         data = role_serializer.data
         data.update(serializer.data)
         data.update({'role': role_serializer.data['name']})
