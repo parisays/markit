@@ -65,9 +65,8 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+            "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
         },
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
     },
 }
 
@@ -124,8 +123,8 @@ REST_USE_JWT = False
 TWITTER_CALLBACK_URL = 'http://127.0.0.1:4200/twitter-auth/'
 
 # Celery configurations
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -172,7 +171,7 @@ DATABASES = {
         'NAME': 'markitdb',
         'USER': 'markit',
         'PASSWORD': 'sebackendfall19',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

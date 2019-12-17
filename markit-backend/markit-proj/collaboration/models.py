@@ -23,6 +23,7 @@ class Collaborator(models.Model):
                                  on_delete=models.CASCADE)
     role = models.ForeignKey(Role, related_name='collaborator_role',
                              on_delete=models.CASCADE)
+    isConfirmed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.email + ' is a ' + self.role.name + ' of ' + self.calendar.name

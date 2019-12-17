@@ -1,11 +1,11 @@
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
-from notification.routing import websocket_urlpatterns
+from notification.routing import notification_websocket_urls
 
 application = ProtocolTypeRouter({
     'websocket': AuthMiddlewareStack(
         URLRouter(
-            websocket_urlpatterns
+            notification_websocket_urls
         )
     ),
 })
