@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from calendars.models import Calendar
 from .models import Collaborator, Role
 from .serializers import CollaboratorCreateSerializer, RoleSerializer
-from .consts import DefienedRoles
+from .consts import DefinedRoles
 from .permissions import CollaboratorPermission
 
 # class RoleCreateView(generics.CreateAPIView):
@@ -44,7 +44,7 @@ class CollaboratorCreateView(generics.CreateAPIView):
             role = Role.objects.get(name=name)
         except:
             # create custom role
-            access = DefienedRoles.set_role_access(name, access)
+            access = DefinedRoles.set_role_access(name, access)
             role = Role.objects.create(name=name, access=access)
             role.save()
         request.data.update({'role':role.id})

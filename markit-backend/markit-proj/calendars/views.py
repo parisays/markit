@@ -2,7 +2,7 @@ from itertools import chain
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
-from collaboration.consts import DefienedRoles
+from collaboration.consts import DefinedRoles
 from collaboration.models import Collaborator, Role
 from collaboration.serializers import RoleSerializer
 from .models import Calendar
@@ -35,7 +35,7 @@ class CalendarListCreateView(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         # create owner collab
-        owner_role = Role.objects.get(name=DefienedRoles.OWNER)
+        owner_role = Role.objects.get(name=DefinedRoles.OWNER)
         currunt_calendar = Calendar.objects.get(pk=serializer.data['id'])
         owner_collaborator = Collaborator.objects.create(user=user,
                                                          calendar=currunt_calendar,
