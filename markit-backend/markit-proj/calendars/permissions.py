@@ -9,10 +9,10 @@ class CalendarPermission(permissions.BasePermission):
     Check calendar access.
     """
     SAFE_ACCESS = {
-        'get':Access.VIEW_CALENDAR,
-        'put':Access.EDIT_CALENDAR,
-        'patch':Access.EDIT_CALENDAR,
-        'delete':Access.DELETE_CALENDAR,
+        'get' : Access.VIEW_CALENDAR,
+        'put' : Access.EDIT_CALENDAR,
+        'patch' : Access.EDIT_CALENDAR,
+        'delete' : Access.DELETE_CALENDAR,
                 }
 
     def has_object_permission(self, request, view, obj):

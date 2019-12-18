@@ -7,7 +7,7 @@ class CollaboratorPermission(permissions.BasePermission):
     Check collaborator access.
     """
     SAFE_ACCESS = {
-        'post':Access.ADD_COLLABORATOR,
+        'post' : Access.ADD_COLLABORATOR,
                 }
 
     # obj is Calendar instane.
