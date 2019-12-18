@@ -9,9 +9,10 @@ from .serializers import PostSerializer
 from .models import Post
 from .permissions import (
     CreatePostPermission,
-    UpdatePostPermission,
-    DestroyPostPermission,
-    RetrievePostPermission,
+    # UpdatePostPermission,
+    # DestroyPostPermission,
+    # RetrievePostPermission,
+    PostPermission,
 )
 
 class PostCreateView(generics.CreateAPIView):
@@ -43,7 +44,7 @@ class PostListView(generics.ListAPIView):
     """
     List posts view.
     """
-    permission_classes = (IsAuthenticated, RetrievePostPermission)
+    permission_classes = (IsAuthenticated, PostPermission)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -61,7 +62,7 @@ class PostUpdateView(generics.UpdateAPIView):
     """
     Update post view.
     """
-    permission_classes = (IsAuthenticated, UpdatePostPermission)
+    permission_classes = (IsAuthenticated, PostPermission)
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
@@ -69,7 +70,7 @@ class PostDestroyView(generics.DestroyAPIView):
     """
     Destroy post view.
     """
-    permission_classes = (IsAuthenticated, DestroyPostPermission)
+    permission_classes = (IsAuthenticated, PostPermission)
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
@@ -77,50 +78,6 @@ class PostRetrieveView(generics.RetrieveAPIView):
     """
     Destroy post view.
     """
-    permission_classes = (IsAuthenticated, RetrievePostPermission)
+    permission_classes = (IsAuthenticated, PostPermission)
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-
-
-# class PostView(generics.RetrieveUpdateDestroyAPIView):
-#     """
-#     Retrieve/update/destroy post view.
-#     """
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = PostSerializer
-#     queryset = Post.objects.all()
-
-#     def retrieve(self, request, *args, **kwargs):
-#         self.permission_classes = (IsAuthenticated, OwnPermission, ManagePermission,
-#                                    EditPermission, ViewPermission)
-#         instance = self.get_object()
-#         serializer = self.get_serializer(instance)
-#         return Response(serializer.data)
-
-#     def update(self, request, *args, **kwargs):
-#         self.permission_classes = (IsAuthenticated, OwnPermission, ManagePermission,
-#                                    EditPermission)
-#         partial = kwargs.pop('partial', False)
-#         instance = self.get_object()
-#         serializer = self.get_serializer(instance, data=request.data, partial=partial)
-#         serializer.is_valid(raise_exception=True)
-#         self.perform_update(serializer)
-#         return Response(serializer.data)
-
-#     def destroy(self, request, *args, **kwargs):
-#         self.permission_classes = (IsAuthenticated, OwnPermission, ManagePermission,)
-#         instance = self.get_object()
-#         self.perform_destroy(instance)
-#         return Response(status=status.HTTP_204_NO_CONTENT)
-
-#     def check_object_permissions(self, request, obj):
-#         """
-#         Check if the request should be permitted for a given object.
-#         Raises an appropriate exception if the request is not permitted.
-#         """
-#         perms = []
-#         for permission in self.get_permissions():
-#             if permission.has_object_permission(request, self, obj):
-#                 perms.append(permission)
-#         if len(perms) <= 1:
-#             self.permission_denied(request)

@@ -2,12 +2,12 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
-from .models import Collaborator, Role
-from .serializers import CollaboratorCreateSerializer, RoleSerializer
 from rest_framework.permissions import IsAuthenticated
 from calendars.models import Calendar
-from .consts import Access, DefienedRoles
-from .permissions import InviteCollaboratorPermission
+from .models import Collaborator, Role
+from .serializers import CollaboratorCreateSerializer, RoleSerializer
+from .consts import DefinedRoles
+from .permissions import CollaboratorPermission
 
 # class RoleCreateView(generics.CreateAPIView):
 #     """
@@ -29,7 +29,7 @@ class CollaboratorCreateView(generics.CreateAPIView):
     """
     Create collaborator view.
     """
-    permission_classes = (IsAuthenticated, InviteCollaboratorPermission)
+    permission_classes = (IsAuthenticated, CollaboratorPermission)
     queryset = Collaborator.objects.all()
     serializer_class = CollaboratorCreateSerializer
 
@@ -44,10 +44,9 @@ class CollaboratorCreateView(generics.CreateAPIView):
             role = Role.objects.get(name=name)
         except:
             # create custom role
-            access = DefienedRoles.set_role_access(name, access)
+            access = DefinedRoles.set_role_access(name, access)
             role = Role.objects.create(name=name, access=access)
             role.save()
-        
         request.data.update({'role':role.id})
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
