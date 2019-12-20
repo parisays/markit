@@ -16,3 +16,4 @@ python /code/manage.py migrate --noinput
 # Start server
 echo "Starting server"
 python /code/manage.py runserver 0.0.0.0:8000
+
