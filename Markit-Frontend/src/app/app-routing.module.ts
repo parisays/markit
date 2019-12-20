@@ -9,7 +9,7 @@ import {TwitterAuthComponent} from '@app/twitter-auth/twitter-auth.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CalendarWizardComponent} from '@app/calendar-wizard/calendar-wizard.component';
 import {PostWizardComponent} from '@app/post-wizard/post-wizard.component';
-import { HomepageComponent } from './homepage/homepage.component';
+import {HomepageComponent} from './homepage/homepage.component';
 import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-settings.component';
 import {ProfileComponent} from '@app/profile/profile.component';
 import {ForgetPassComponent} from '@app/forget-pass/forget-pass.component';
@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'register', component: SignupComponent},
   {path: 'twitter-auth', component: TwitterAuthComponent},
   {path: 'forget-password', component: ForgetPassComponent},
-  {path: 'reset-password/:jwt', component: ResetPassComponent},
+  {path: 'reset-password/:uid/:token', component: ResetPassComponent},
 
   {path: 'calendars/:calendarId/posts/new', component: PostWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/posts/:postId/edit', component: PostWizardComponent, canActivate: [AuthGuard]},
@@ -37,12 +37,13 @@ const routes: Routes = [
   {path: 'calendars/:calendarId/wizard', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
 
   {path: '**', redirectTo: ''}// redirect to not found??
-  // todo pathMatch:  'full'
+  // todo redirect reset password urls to 'reset-password/:uid/:token'
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
 }
