@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
+from allauth.socialaccount.admin import SocialAccount, SocialApp, SocialToken
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from .models import User
@@ -86,4 +88,7 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
 
+admin.site.unregister(SocialApp)
+admin.site.unregister(SocialToken)
+admin.site.unregister(SocialAccount)
 admin.site.register(User, CustomUserAdmin)

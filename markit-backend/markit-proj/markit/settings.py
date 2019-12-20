@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'calendars',
     'posts',
     'socials',
+    'comment',
+    'collaboration',
+    'notification',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,17 +45,30 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_celery_beat',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.twitter',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'jsonfield',
+    'channels',
 ]
 
+# Channels configurations
+ASGI_APPLICATION = 'markit.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
+        },
+    },
+}
 
 
 AUTH_EMAIL_VERIFICATION = True
@@ -67,12 +83,15 @@ REST_FRAMEWORK = {
 }
 
 REST_AUTH_SERIALIZERS = {
-    "USER_DETAILS_SERIALIZER": "users.serializers.CustomAccountDetailsSerializer",
+    'USER_DETAILS_SERIALIZER': 'users.serializers.CustomAccountDetailsSerializer',
+    'PASSWORD_RESET_SERIALIZER': 'users.serializers.CustomPasswordResetSerializer',
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "users.serializers.AccountRegistrationSerializer",
 }
+
+
 
 SITE_ID = 1
 
@@ -83,7 +102,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'markitteamservice@gmail.com'
-EMAIL_HOST_PASSWORD = 'markitteam2019'
+EMAIL_HOST_PASSWORD = 'seteamfall19'
 EMAIL_HOST_USERNAME = 'markitteamservice'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -92,18 +111,24 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_EMAIL_FIELD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = True
 AUTH_USER_MODEL = 'users.User'
-ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_ADAPTER = 'users.adapter.CustomAccountAdapter'
 REST_USE_JWT = False
 
 # Twitter app credentials
-TWITTER_KEY = 'SAMuCOQzTaSza7eVU7lprNOEr'
-TWITTER_SECRET = 'vGmnvT6HpQRrNfbUb5DAsnyJeD8Q177MBqZ2pcZWHw6GET1A1u'
 TWITTER_CALLBACK_URL = 'http://127.0.0.1:4200/twitter-auth/'
+
+# Celery configurations
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_AMQP_TASK_RESULT_EXPIRES = 1000
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -144,9 +169,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'markitdb',
-        'USER': 'postgres',
+        'USER': 'markit',
         'PASSWORD': 'sebackendfall19',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -190,9 +215,9 @@ CORS_ORIGIN_WHITELIST = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'markit/static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'markit/static')
+# ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
