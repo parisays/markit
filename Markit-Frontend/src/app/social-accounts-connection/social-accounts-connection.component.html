@@ -6,7 +6,7 @@
       <img mat-list-avatar style="max-height: 30px; margin: 10px;" [src]="sac.image">
       {{sac.name}}
     </mat-list-item>
-    <button mat-raised-button color="primary" style="float: right; margin: 5px;" (click)="sac.connect(this)">Connect
+    <button [disabled]="sac.connected" mat-raised-button color="primary" style="float: right; margin: 5px;" (click)="sac.connect(this)">Connect
     </button>
   </mat-list>
 </div>

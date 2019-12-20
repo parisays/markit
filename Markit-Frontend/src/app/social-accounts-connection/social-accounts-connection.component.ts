@@ -1,9 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CalendarService, TwitterService} from '@services';
-import {ActivatedRoute} from '@angular/router';
-import {Post, PostStatus} from '@models';
-import {map} from 'rxjs/operators';
-import {throwError} from 'rxjs';
+import {Calendar} from '@models';
+
 
 @Component({
   selector: 'app-social-accounts-connection',
@@ -19,36 +17,40 @@ export class SocialAccountsConnectionComponent implements OnInit {
       image: '../assets/images/twitter-logo.png',
       name: 'Twitter',
       connect: this.connectTwitter,
+      connected: false,
     },
     {
       image: '../assets/images/facebook-logo.png',
       name: 'Facebook',
       connect: this.connectFB,
+      connected: false,
     },
     {
       image: '../assets/images/pinterest-logo.png',
       name: 'Pinterest',
       connect: this.connectPinterest,
+      connected: false
     }
   ];
 
-  constructor(private route: ActivatedRoute,
-              private twitter: TwitterService) {
+  constructor(private twitter: TwitterService,
+              private calendarService: CalendarService) {
   }
 
   ngOnInit() {
     console.log(this.calendarId, this.returnURL);
+    this.calendarService.get(this.calendarId).subscribe((res: Calendar) => {
+        this.socialAccounts[0].connected = res.connectedPlatforms.split(',').includes('Twitter');
+        this.socialAccounts[1].connected = res.connectedPlatforms.split(',').includes('Facebook');
+        this.socialAccounts[2].connected = res.connectedPlatforms.split(',').includes('Pinterest');
+    });
   }
 
   private connectTwitter(c: SocialAccountsConnectionComponent) {
-    console.log(c.calendarId);
-    console.log(c.returnURL);
     if (!c.calendarId || !c.returnURL) { return; }
-    console.log('b');
 
     c.twitter.connect(c.returnURL as string, c.calendarId as number)
       .subscribe(twitterUrl => {
-        console.log(twitterUrl);
         window.location.href = twitterUrl as string;
       }, error => {
         console.log('twitter routing failed');
@@ -56,8 +58,8 @@ export class SocialAccountsConnectionComponent implements OnInit {
       });
   }
 
-  private connectFB(c: SocialAccountsConnectionComponent) { }
+  private connectFB() { }
 
-  private connectPinterest(c: SocialAccountsConnectionComponent) { }
+  private connectPinterest() { }
 
 }
