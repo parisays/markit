@@ -5,9 +5,11 @@ export class Post {
   calendar: number;
   status: string;
   image?: string;
+  publishDateTime?: Date;
 }
 
 export enum PostStatus {
   PUBLISHED = 'Published',
-  DRAFT = 'Draft'
+  DRAFT = 'Draft',
+  SCHEDULED = 'Scheduled'
 }

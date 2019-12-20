@@ -1,0 +1,28 @@
+@import "../../theme.scss";
+
+.container-style{
+    min-height: 450px;
+    min-width: 300px;
+    max-width: 50%;
+    margin: 8% auto auto;
+    background: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+}
+
+.container-style > *{
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    color: $app-dark-primary;
+    text-align: center;
+    font-size: 60px;
+}

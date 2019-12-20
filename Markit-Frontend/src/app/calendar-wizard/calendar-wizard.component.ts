@@ -44,7 +44,7 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (this.calendarId) {
       this.service.get(this.calendarId).subscribe((value: Calendar) => {
-        console.log(value);
+        // console.log(value);
         this.calendar = value;
 
         this.isLinear = false;
@@ -83,7 +83,7 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     const cf = this.calendarDetails.form.controls;
     this.service.create({name: cf.name.value}).subscribe(
       (value: Calendar) => {
-        console.log(value);
+        // console.log(value);
         this.snackBar.open('Calendar created successfully!', 'Dismiss', { duration: 2000 });
         this.router.navigate(['calendars', value.id, 'wizard']);
       }, err => {
@@ -100,7 +100,7 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     updatedCalendar.name = this.calendarDetails.form.controls.name.value;
     this.service.partialUpdate(updatedCalendar.id, {name: updatedCalendar.name})
       .subscribe((value: Calendar) => {
-        console.log(value);
+        // console.log(value);
         this.snackBar.open('Calendar updated successfully!', 'Dismiss', { duration: 1000 });
         this.loading = false;
       }, err => {
