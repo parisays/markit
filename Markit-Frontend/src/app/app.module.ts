@@ -34,6 +34,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollaboratorInvitationFormComponent } from './collaborator-invitation-form/collaborator-invitation-form.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { ForgetPassComponent } from './forget-pass/forget-pass.component';
+import { ResetPassComponent } from './reset-pass/reset-pass.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     HomepageComponent,
     ProfileComponent,
     CollaboratorInvitationFormComponent,
+    ForgetPassComponent,
+    ResetPassComponent,
   ],
   imports: [
     BrowserModule,
