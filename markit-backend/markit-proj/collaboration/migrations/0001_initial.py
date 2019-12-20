@@ -4,15 +4,15 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import jsonfield.fields
-from collaboration.consts import DefienedRoles
+from collaboration.consts import DefinedRoles
 
 def create_default_roles(apps, schema_editor):
     Role = apps.get_model("collaboration", "Role")
     Role.objects.bulk_create([
-        Role(name=DefienedRoles.OWNER, access=DefienedRoles.DEFAULT_ROLES[DefienedRoles.OWNER]),
-        Role(name=DefienedRoles.MANAGER, access=DefienedRoles.DEFAULT_ROLES[DefienedRoles.MANAGER]),
-        Role(name=DefienedRoles.EDITOR, access=DefienedRoles.DEFAULT_ROLES[DefienedRoles.EDITOR]),
-        Role(name=DefienedRoles.VIEWER, access=DefienedRoles.DEFAULT_ROLES[DefienedRoles.VIEWER]),
+        Role(name=DefinedRoles.OWNER, access=DefinedRoles.DEFAULT_ROLES[DefinedRoles.OWNER]),
+        Role(name=DefinedRoles.MANAGER, access=DefinedRoles.DEFAULT_ROLES[DefinedRoles.MANAGER]),
+        Role(name=DefinedRoles.EDITOR, access=DefinedRoles.DEFAULT_ROLES[DefinedRoles.EDITOR]),
+        Role(name=DefinedRoles.VIEWER, access=DefinedRoles.DEFAULT_ROLES[DefinedRoles.VIEWER]),
     ])
 
 

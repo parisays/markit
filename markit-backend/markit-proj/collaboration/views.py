@@ -9,9 +9,9 @@ from notification.serializers import InvitationSerializer
 from notification.models import Invitation
 from notification.tasks import send_invitation_job
 from .models import Collaborator, Role
-from .serializers import CollaboratorSerializer, RoleSerializer
-from .consts import Access, DefienedRoles
-from .permissions import InviteCollaboratorPermission
+from .serializers import CollaboratorCreateSerializer, RoleSerializer
+from .consts import DefinedRoles
+from .permissions import CollaboratorPermission
 
 
 # class RoleCreateView(generics.CreateAPIView):
@@ -34,9 +34,9 @@ class CollaboratorCreateView(generics.CreateAPIView):
     """
     Create collaborator view.
     """
-    permission_classes = (IsAuthenticated, InviteCollaboratorPermission)
+    permission_classes = (IsAuthenticated, CollaboratorPermission)
     queryset = Collaborator.objects.all()
-    serializer_class = CollaboratorSerializer
+    serializer_class = CollaboratorCreateSerializer
 
     def create(self, request, *args, **kwargs):
         calendar = Calendar.objects.get(pk=request.data['calendar'])
@@ -72,7 +72,7 @@ class CollaboratorCreateView(generics.CreateAPIView):
 
 
 class ActivateCollaborator(APIView):
-    permission_classes = (IsAuthenticated, InviteCollaboratorPermission)
+    permission_classes = (IsAuthenticated, CollaboratorPermission)
 
     def post(self, request, token):
         invitation = get_object_or_404(Invitation, token=token)

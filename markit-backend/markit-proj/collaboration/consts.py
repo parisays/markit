@@ -16,7 +16,7 @@ class Access():
     SET_PUBLISH = 'set_publish'
     SET_PUBLISH_WITH_PERMISSION = 'set_publish_with_permission'
 
-class DefienedRoles():
+class DefinedRoles():
     """
     All roles.
     """
@@ -47,16 +47,16 @@ class DefienedRoles():
         """
         Set access for each role.
         """
-        return DefienedRoles.DEFAULT_ROLES.get(role_name, access)
+        return DefinedRoles.DEFAULT_ROLES.get(role_name, access)
 
     # @staticmethod
     # def create_default_roles():
     #     """
     #     Create default roles for the for the first time.
     #     """
-    #     for role in DefienedRoles.DEFAULT_ROLES:
+    #     for role in DefinedRoles.DEFAULT_ROLES:
     #         current_role = Role.objects.create(name=role,
-    #                         access=DefienedRoles.set_role_access(role_name=role, access=[]))
+    #                         access=DefinedRoles.set_role_access(role_name=role, access=[]))
     #         cu
     
 
