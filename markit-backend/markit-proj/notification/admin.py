@@ -14,7 +14,7 @@ class InvitationAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
     fieldsets = (
-        (None, {'fields': ('calendar', 'invited', 'inviter',)}),
+        (None, {'fields': ('calendar', 'invited', 'inviter', 'token',)}),
     )
     add_fieldsets = (
         (None, {
