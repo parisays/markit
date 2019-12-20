@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'socials',
     'comment',
     'collaboration',
+    'notification',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,21 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'corsheaders',
     'jsonfield',
+    'channels',
 ]
+
+# Channels configurations
+ASGI_APPLICATION = 'markit.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://redis:6379')],
+        },
+    },
+}
+
 
 AUTH_EMAIL_VERIFICATION = True
 

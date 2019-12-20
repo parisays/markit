@@ -127,6 +127,7 @@ dmypy.json
 
 ### django statics ###
 static/
+notification/templates/
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files

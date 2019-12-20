@@ -66,7 +66,7 @@ class CollaboratorAdmin(admin.ModelAdmin):
     filter_horizontal = ()
 
     fieldsets = (
-        (None, {'fields': ('calendar', 'user', 'role',)}),
+        (None, {'fields': ('calendar', 'user', 'role', 'isConfirmed',)}),
     )
     add_fieldsets = (
         (None, {
