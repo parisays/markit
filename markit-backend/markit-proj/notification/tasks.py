@@ -5,14 +5,14 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from notification.models import Invitation
 from collaboration.models import Collaborator
-from .serializers import InvitationSerializer
+from users.models import User
 
 
 @shared_task
 def send_invitation_job(invitation_data):
         channel_layer = get_channel_layer()
         invited = invitation_data['invited']
-        user_id = get_object_or_404(Collaborator, pk=invited).user.id
+        user_id = get_object_or_404(User, email=invited).id
         group_name = 'user_{}'.format(str(user_id))
         async_to_sync(channel_layer.group_send)(
             group_name,
