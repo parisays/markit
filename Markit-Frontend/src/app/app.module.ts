@@ -36,8 +36,12 @@ import { CollaboratorInvitationFormComponent } from './collaborator-invitation-f
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 import { ResetPassComponent } from './reset-pass/reset-pass.component';
+import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 
 @NgModule({
+  entryComponents: [
+    NotificationDialogComponent,
+  ],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -65,6 +69,7 @@ import { ResetPassComponent } from './reset-pass/reset-pass.component';
     CollaboratorInvitationFormComponent,
     ForgetPassComponent,
     ResetPassComponent,
+    NotificationDialogComponent,
   ],
   imports: [
     BrowserModule,
