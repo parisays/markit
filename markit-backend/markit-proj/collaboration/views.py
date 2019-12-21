@@ -5,11 +5,11 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from calendars.models import Calendar
 from users.models import User
-from notification.serializers import InvitationSerializer
+from notification.serializers import NotificationInvitationSerializer
 from notification.models import Invitation
 from notification.tasks import send_invitation_job
 from .models import Collaborator, Role
-from .serializers import CollaboratorCreateSerializer, RoleSerializer
+from .serializers import CollaboratorCreateSerializer, RoleSerializer, CollaboratorSerializer
 from .consts import DefinedRoles
 from .permissions import CollaboratorPermission
 
@@ -58,8 +58,9 @@ class CollaboratorCreateView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         self.create_invitation(serializer.data)
+        response_data = {'role_name':role.name, 'email':user.email, 'calendar':calendar.id}
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
 
     def create_invitation(self, collaborator_data):
         calendar = get_object_or_404(Calendar, pk=collaborator_data['calendar'])
@@ -68,7 +69,16 @@ class CollaboratorCreateView(generics.CreateAPIView):
         invitation = Invitation(calendar=calendar, inviter=inviter,
                            invited=invited)
         invitation.save()
-        send_invitation_job.delay(InvitationSerializer(invitation).data)
+        send_invitation_job.delay(NotificationInvitationSerializer(invitation).data)
+
+
+class RetreiveCollaboratorView(generics.RetrieveAPIView):
+    """
+    Retreive collaborator api view.
+    """
+    permission_classes = (IsAuthenticated,)
+    queryset = Collaborator.objects.all()
+    serializer_class = CollaboratorSerializer
 
 
 class ActivateCollaborator(APIView):
@@ -81,5 +91,4 @@ class ActivateCollaborator(APIView):
         invited.save()
         invitation.delete()
         return Response("Collaborator activated successfully", status=status.HTTP_200_OK)
-
 
