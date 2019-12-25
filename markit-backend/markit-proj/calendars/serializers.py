@@ -13,7 +13,7 @@ class CalendarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calendar
         fields = ('id', 'name', 'owner', 'posts', 'connectedPlatforms', 'collaborator_calendar')
-        read_only_fields = ('id', )
+        read_only_fields = ('id', 'owner')
 
 class NestedCalendarSerializer(serializers.ModelSerializer):
     """
@@ -24,7 +24,7 @@ class NestedCalendarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calendar
         fields = ('id', 'name', 'owner', 'posts', 'connectedPlatforms', 'collaborator_calendar')
-        read_only_fields = ('id', )
+        read_only_fields = ('id', 'owner')
 
     def create(self, validated_data):
         current_calendar = Calendar.objects.create(**validated_data)

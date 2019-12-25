@@ -57,7 +57,6 @@ class PostListView(generics.ListAPIView):
         serializer = self.get_serializer(post_list, many=True)
         return Response(serializer.data)
 
-
 class PostUpdateView(generics.UpdateAPIView):
     """
     Update post view.
