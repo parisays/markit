@@ -47,7 +47,7 @@ paths:
                   lastName:
                     type: string
                     maxLength: 50
-                  calendars:
+                  calendar:
                     type: array
                     items:
                       properties:
@@ -59,10 +59,6 @@ paths:
                           maxLength: 100
                         owner:
                           type: integer
-                        collaborators:
-                          type: array
-                          items:
-                            type: integer
                         posts:
                           type: array
                           items:
@@ -81,8 +77,33 @@ paths:
                                 enum:
                                 - Draft
                                 - Published
+                                - Scheduled
                               image:
                                 type: string
+                              comments:
+                                type: array
+                                items:
+                                  properties:
+                                    id:
+                                      type: integer
+                                      readOnly: true
+                                    post:
+                                      type: integer
+                                    collaborator:
+                                      type: integer
+                                    text:
+                                      type: string
+                                    reply:
+                                      type: integer
+                                      nullable: true
+                                  required:
+                                  - post
+                                  - collaborator
+                                  - text
+                                readOnly: true
+                              publishDateTime:
+                                type: string
+                                format: date-time
                             required:
                             - calendar
                             - subject
@@ -94,9 +115,24 @@ paths:
                           - Facebook
                           - Facebook and Twitter
                           nullable: true
-                        twitter:
-                          type: integer
-                          nullable: true
+                        collaborator_calendar:
+                          type: array
+                          items:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              user:
+                                type: integer
+                              calendar:
+                                type: integer
+                              role:
+                                type: integer
+                            required:
+                            - user
+                            - calendar
+                            - role
+                          readOnly: true
                       required:
                       - name
                       - owner
@@ -147,7 +183,7 @@ paths:
                   lastName:
                     type: string
                     maxLength: 50
-                  calendars:
+                  calendar:
                     type: array
                     items:
                       properties:
@@ -159,10 +195,6 @@ paths:
                           maxLength: 100
                         owner:
                           type: integer
-                        collaborators:
-                          type: array
-                          items:
-                            type: integer
                         posts:
                           type: array
                           items:
@@ -181,8 +213,33 @@ paths:
                                 enum:
                                 - Draft
                                 - Published
+                                - Scheduled
                               image:
                                 type: string
+                              comments:
+                                type: array
+                                items:
+                                  properties:
+                                    id:
+                                      type: integer
+                                      readOnly: true
+                                    post:
+                                      type: integer
+                                    collaborator:
+                                      type: integer
+                                    text:
+                                      type: string
+                                    reply:
+                                      type: integer
+                                      nullable: true
+                                  required:
+                                  - post
+                                  - collaborator
+                                  - text
+                                readOnly: true
+                              publishDateTime:
+                                type: string
+                                format: date-time
                             required:
                             - calendar
                             - subject
@@ -194,9 +251,24 @@ paths:
                           - Facebook
                           - Facebook and Twitter
                           nullable: true
-                        twitter:
-                          type: integer
-                          nullable: true
+                        collaborator_calendar:
+                          type: array
+                          items:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              user:
+                                type: integer
+                              calendar:
+                                type: integer
+                              role:
+                                type: integer
+                            required:
+                            - user
+                            - calendar
+                            - role
+                          readOnly: true
                       required:
                       - name
                       - owner
@@ -243,7 +315,7 @@ paths:
                   lastName:
                     type: string
                     maxLength: 50
-                  calendars:
+                  calendar:
                     type: array
                     items:
                       properties:
@@ -255,10 +327,6 @@ paths:
                           maxLength: 100
                         owner:
                           type: integer
-                        collaborators:
-                          type: array
-                          items:
-                            type: integer
                         posts:
                           type: array
                           items:
@@ -277,8 +345,33 @@ paths:
                                 enum:
                                 - Draft
                                 - Published
+                                - Scheduled
                               image:
                                 type: string
+                              comments:
+                                type: array
+                                items:
+                                  properties:
+                                    id:
+                                      type: integer
+                                      readOnly: true
+                                    post:
+                                      type: integer
+                                    collaborator:
+                                      type: integer
+                                    text:
+                                      type: string
+                                    reply:
+                                      type: integer
+                                      nullable: true
+                                  required:
+                                  - post
+                                  - collaborator
+                                  - text
+                                readOnly: true
+                              publishDateTime:
+                                type: string
+                                format: date-time
                             required:
                             - calendar
                             - subject
@@ -290,9 +383,24 @@ paths:
                           - Facebook
                           - Facebook and Twitter
                           nullable: true
-                        twitter:
-                          type: integer
-                          nullable: true
+                        collaborator_calendar:
+                          type: array
+                          items:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              user:
+                                type: integer
+                              calendar:
+                                type: integer
+                              role:
+                                type: integer
+                            required:
+                            - user
+                            - calendar
+                            - role
+                          readOnly: true
                       required:
                       - name
                       - owner
@@ -322,10 +430,6 @@ paths:
                       maxLength: 100
                     owner:
                       type: integer
-                    collaborators:
-                      type: array
-                      items:
-                        type: integer
                     posts:
                       type: array
                       items:
@@ -344,8 +448,33 @@ paths:
                             enum:
                             - Draft
                             - Published
+                            - Scheduled
                           image:
                             type: string
+                          comments:
+                            type: array
+                            items:
+                              properties:
+                                id:
+                                  type: integer
+                                  readOnly: true
+                                post:
+                                  type: integer
+                                collaborator:
+                                  type: integer
+                                text:
+                                  type: string
+                                reply:
+                                  type: integer
+                                  nullable: true
+                              required:
+                              - post
+                              - collaborator
+                              - text
+                            readOnly: true
+                          publishDateTime:
+                            type: string
+                            format: date-time
                         required:
                         - calendar
                         - subject
@@ -357,9 +486,24 @@ paths:
                       - Facebook
                       - Facebook and Twitter
                       nullable: true
-                    twitter:
-                      type: integer
-                      nullable: true
+                    collaborator_calendar:
+                      type: array
+                      items:
+                        properties:
+                          id:
+                            type: integer
+                            readOnly: true
+                          user:
+                            type: integer
+                          calendar:
+                            type: integer
+                          role:
+                            type: integer
+                        required:
+                        - user
+                        - calendar
+                        - role
+                      readOnly: true
                   required:
                   - name
                   - owner
@@ -377,18 +521,11 @@ paths:
                   maxLength: 100
                 owner:
                   type: integer
-                collaborators:
-                  type: array
-                  items:
-                    type: integer
                 connectedPlatforms:
                   enum:
                   - Twitter
                   - Facebook
                   - Facebook and Twitter
-                  nullable: true
-                twitter:
-                  type: integer
                   nullable: true
               required:
               - name
@@ -407,10 +544,6 @@ paths:
                     maxLength: 100
                   owner:
                     type: integer
-                  collaborators:
-                    type: array
-                    items:
-                      type: integer
                   posts:
                     type: array
                     items:
@@ -429,8 +562,33 @@ paths:
                           enum:
                           - Draft
                           - Published
+                          - Scheduled
                         image:
                           type: string
+                        comments:
+                          type: array
+                          items:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              post:
+                                type: integer
+                              collaborator:
+                                type: integer
+                              text:
+                                type: string
+                              reply:
+                                type: integer
+                                nullable: true
+                            required:
+                            - post
+                            - collaborator
+                            - text
+                          readOnly: true
+                        publishDateTime:
+                          type: string
+                          format: date-time
                       required:
                       - calendar
                       - subject
@@ -442,14 +600,29 @@ paths:
                     - Facebook
                     - Facebook and Twitter
                     nullable: true
-                  twitter:
-                    type: integer
-                    nullable: true
+                  collaborator_calendar:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        user:
+                          type: integer
+                        calendar:
+                          type: integer
+                        role:
+                          type: integer
+                      required:
+                      - user
+                      - calendar
+                      - role
+                    readOnly: true
                 required:
                 - name
                 - owner
           description: ''
-  /api/v1.0/calendar/{id}/:
+  /api/v1.0/calendar/view/{id}/:
     get:
       operationId: RetrieveCalendar
       parameters:
@@ -473,10 +646,6 @@ paths:
                     maxLength: 100
                   owner:
                     type: integer
-                  collaborators:
-                    type: array
-                    items:
-                      type: integer
                   posts:
                     type: array
                     items:
@@ -495,8 +664,33 @@ paths:
                           enum:
                           - Draft
                           - Published
+                          - Scheduled
                         image:
                           type: string
+                        comments:
+                          type: array
+                          items:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              post:
+                                type: integer
+                              collaborator:
+                                type: integer
+                              text:
+                                type: string
+                              reply:
+                                type: integer
+                                nullable: true
+                            required:
+                            - post
+                            - collaborator
+                            - text
+                          readOnly: true
+                        publishDateTime:
+                          type: string
+                          format: date-time
                       required:
                       - calendar
                       - subject
@@ -508,262 +702,140 @@ paths:
                     - Facebook
                     - Facebook and Twitter
                     nullable: true
-                  twitter:
-                    type: integer
-                    nullable: true
-                required:
-                - name
-                - owner
-          description: ''
-    put:
-      operationId: UpdateCalendar
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this calendar.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                name:
-                  type: string
-                  maxLength: 100
-                owner:
-                  type: integer
-                collaborators:
-                  type: array
-                  items:
-                    type: integer
-                connectedPlatforms:
-                  enum:
-                  - Twitter
-                  - Facebook
-                  - Facebook and Twitter
-                  nullable: true
-                twitter:
-                  type: integer
-                  nullable: true
-              required:
-              - name
-              - owner
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  id:
-                    type: integer
-                    readOnly: true
-                  name:
-                    type: string
-                    maxLength: 100
-                  owner:
-                    type: integer
-                  collaborators:
-                    type: array
-                    items:
-                      type: integer
-                  posts:
+                  collaborator_calendar:
                     type: array
                     items:
                       properties:
                         id:
                           type: integer
                           readOnly: true
+                        user:
+                          type: integer
                         calendar:
                           type: integer
-                        subject:
-                          type: string
-                          maxLength: 100
-                        text:
-                          type: string
-                        status:
-                          enum:
-                          - Draft
-                          - Published
-                        image:
-                          type: string
+                        role:
+                          type: integer
                       required:
+                      - user
                       - calendar
-                      - subject
-                      - text
+                      - role
                     readOnly: true
-                  connectedPlatforms:
-                    enum:
-                    - Twitter
-                    - Facebook
-                    - Facebook and Twitter
-                    nullable: true
-                  twitter:
-                    type: integer
-                    nullable: true
                 required:
                 - name
                 - owner
           description: ''
-    patch:
-      operationId: PartialUpdateCalendar
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this calendar.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                name:
-                  type: string
-                  maxLength: 100
-                owner:
-                  type: integer
-                collaborators:
-                  type: array
-                  items:
-                    type: integer
-                connectedPlatforms:
-                  enum:
-                  - Twitter
-                  - Facebook
-                  - Facebook and Twitter
-                  nullable: true
-                twitter:
-                  type: integer
-                  nullable: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  id:
-                    type: integer
-                    readOnly: true
-                  name:
-                    type: string
-                    maxLength: 100
-                  owner:
-                    type: integer
-                  collaborators:
-                    type: array
-                    items:
-                      type: integer
-                  posts:
-                    type: array
-                    items:
-                      properties:
-                        id:
-                          type: integer
-                          readOnly: true
-                        calendar:
-                          type: integer
-                        subject:
-                          type: string
-                          maxLength: 100
-                        text:
-                          type: string
-                        status:
-                          enum:
-                          - Draft
-                          - Published
-                        image:
-                          type: string
-                      required:
-                      - calendar
-                      - subject
-                      - text
-                    readOnly: true
-                  connectedPlatforms:
-                    enum:
-                    - Twitter
-                    - Facebook
-                    - Facebook and Twitter
-                    nullable: true
-                  twitter:
-                    type: integer
-                    nullable: true
-                required:
-                - name
-                - owner
-          description: ''
-    delete:
-      operationId: DestroyCalendar
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this calendar.
-        schema:
-          type: string
-      responses:
-        '204':
-          description: ''
-  /api/v1.0/post/:
+  /api/v1.0/calendar/delete/{id}/:
     get:
-      operationId: listPosts
-      parameters: []
+      operationId: RetrieveCalendar
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this calendar.
+        schema:
+          type: string
       responses:
         '200':
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  properties:
-                    id:
-                      type: integer
-                      readOnly: true
-                    calendar:
-                      type: integer
-                    subject:
-                      type: string
-                      maxLength: 100
-                    text:
-                      type: string
-                    status:
-                      enum:
-                      - Draft
-                      - Published
-                    image:
-                      type: string
-                  required:
-                  - calendar
-                  - subject
-                  - text
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 100
+                  owner:
+                    type: integer
+                  posts:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        calendar:
+                          type: integer
+                        subject:
+                          type: string
+                          maxLength: 100
+                        text:
+                          type: string
+                        status:
+                          enum:
+                          - Draft
+                          - Published
+                          - Scheduled
+                        image:
+                          type: string
+                        comments:
+                          type: array
+                          items:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              post:
+                                type: integer
+                              collaborator:
+                                type: integer
+                              text:
+                                type: string
+                              reply:
+                                type: integer
+                                nullable: true
+                            required:
+                            - post
+                            - collaborator
+                            - text
+                          readOnly: true
+                        publishDateTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - calendar
+                      - subject
+                      - text
+                    readOnly: true
+                  connectedPlatforms:
+                    enum:
+                    - Twitter
+                    - Facebook
+                    - Facebook and Twitter
+                    nullable: true
+                  collaborator_calendar:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        user:
+                          type: integer
+                        calendar:
+                          type: integer
+                        role:
+                          type: integer
+                      required:
+                      - user
+                      - calendar
+                      - role
+                    readOnly: true
+                required:
+                - name
+                - owner
           description: ''
-    post:
-      operationId: CreatePost
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                calendar:
-                  type: integer
-                subject:
-                  type: string
-                  maxLength: 100
-                text:
-                  type: string
-                status:
-                  enum:
-                  - Draft
-                  - Published
-                image:
-                  type: string
-              required:
-              - calendar
-              - subject
-              - text
+  /api/v1.0/post/{calendar_id}:
+    get:
+      operationId: RetrievePost
+      parameters:
+      - name: calendar_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -784,14 +856,39 @@ paths:
                     enum:
                     - Draft
                     - Published
+                    - Scheduled
                   image:
                     type: string
+                  comments:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        post:
+                          type: integer
+                        collaborator:
+                          type: integer
+                        text:
+                          type: string
+                        reply:
+                          type: integer
+                          nullable: true
+                      required:
+                      - post
+                      - collaborator
+                      - text
+                    readOnly: true
+                  publishDateTime:
+                    type: string
+                    format: date-time
                 required:
                 - calendar
                 - subject
                 - text
           description: ''
-  /api/v1.0/post/{id}/:
+  /api/v1.0/post/view/{id}/:
     get:
       operationId: RetrievePost
       parameters:
@@ -821,185 +918,37 @@ paths:
                     enum:
                     - Draft
                     - Published
+                    - Scheduled
                   image:
                     type: string
-                required:
-                - calendar
-                - subject
-                - text
-          description: ''
-    put:
-      operationId: UpdatePost
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this post.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                calendar:
-                  type: integer
-                subject:
-                  type: string
-                  maxLength: 100
-                text:
-                  type: string
-                status:
-                  enum:
-                  - Draft
-                  - Published
-                image:
-                  type: string
-              required:
-              - calendar
-              - subject
-              - text
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  id:
-                    type: integer
+                  comments:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        post:
+                          type: integer
+                        collaborator:
+                          type: integer
+                        text:
+                          type: string
+                        reply:
+                          type: integer
+                          nullable: true
+                      required:
+                      - post
+                      - collaborator
+                      - text
                     readOnly: true
-                  calendar:
-                    type: integer
-                  subject:
+                  publishDateTime:
                     type: string
-                    maxLength: 100
-                  text:
-                    type: string
-                  status:
-                    enum:
-                    - Draft
-                    - Published
-                  image:
-                    type: string
+                    format: date-time
                 required:
                 - calendar
                 - subject
                 - text
-          description: ''
-    patch:
-      operationId: PartialUpdatePost
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this post.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                calendar:
-                  type: integer
-                subject:
-                  type: string
-                  maxLength: 100
-                text:
-                  type: string
-                status:
-                  enum:
-                  - Draft
-                  - Published
-                image:
-                  type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  id:
-                    type: integer
-                    readOnly: true
-                  calendar:
-                    type: integer
-                  subject:
-                    type: string
-                    maxLength: 100
-                  text:
-                    type: string
-                  status:
-                    enum:
-                    - Draft
-                    - Published
-                  image:
-                    type: string
-                required:
-                - calendar
-                - subject
-                - text
-          description: ''
-    delete:
-      operationId: DestroyPost
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this post.
-        schema:
-          type: string
-      responses:
-        '204':
-          description: ''
-  /api/v1.0/socials/:
-    get:
-      operationId: listSocialAccounts
-      parameters: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  properties:
-                    id:
-                      type: integer
-                      readOnly: true
-                    provider:
-                      enum:
-                      - twitter
-                    uid:
-                      type: string
-                      maxLength: 191
-                    last_login:
-                      type: string
-                      format: date-time
-                      readOnly: true
-                    date_joined:
-                      type: string
-                      format: date-time
-                      readOnly: true
-                  required:
-                  - provider
-                  - uid
-          description: ''
-  /api/v1.0/socials/twitter/{calendar_id}/:
-    get:
-      operationId: RetrieveTwitterAccountCredential
-      parameters:
-      - name: calendar_id
-        in: path
-        required: true
-        description: ''
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema: {}
           description: ''
   /api/v1.0/socials/twitter/oauth:
     get:
@@ -1015,8 +964,14 @@ paths:
           description: ''
   /api/v1.0/socials/twitter/connect/{oauth_token}/{oauth_verifier}/{calendar_id}/:
     get:
-      operationId: RetrieveCustomTwitterAccountConnect
+      operationId: RetrieveSocialAccount
       parameters:
+      - name: oauth_verifier
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
       - name: oauth_token
         in: path
         required: true
@@ -1029,17 +984,34 @@ paths:
         description: ''
         schema:
           type: string
-      - name: oauth_verifier
-        in: path
-        required: true
-        description: ''
-        schema:
-          type: string
       responses:
         '200':
           content:
             application/json:
-              schema: {}
+              schema:
+                properties:
+                  app:
+                    type: integer
+                  provider:
+                    enum:
+                    - Twitter
+                  calendar:
+                    type: integer
+                  token:
+                    type: string
+                    description: '"oauth_token" (OAuth1) or access token (OAuth2)'
+                  tokenSecret:
+                    type: string
+                    description: '"oauth_token_secret" (OAuth1) or refresh token (OAuth2)'
+                  expireDate:
+                    type: string
+                    format: date-time
+                    nullable: true
+                required:
+                - app
+                - provider
+                - calendar
+                - token
           description: ''
   /api/v1.0/socials/twitter/tweet/{id}/:
     get:
@@ -1069,9 +1041,183 @@ paths:
                 type: array
                 items: {}
           description: ''
+  /api/v1.0/comment/{post_id}:
+    get:
+      operationId: RetrieveComment
+      parameters:
+      - name: post_id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  post:
+                    type: integer
+                  collaborator:
+                    type: integer
+                  text:
+                    type: string
+                  reply:
+                    type: integer
+                    nullable: true
+                required:
+                - post
+                - collaborator
+                - text
+          description: ''
+  /api/v1.0/comment/{id}/:
+    get:
+      operationId: RetrieveComment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this comment.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  post:
+                    type: integer
+                  collaborator:
+                    type: integer
+                  text:
+                    type: string
+                  reply:
+                    type: integer
+                    nullable: true
+                required:
+                - post
+                - collaborator
+                - text
+          description: ''
+    put:
+      operationId: UpdateComment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this comment.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                post:
+                  type: integer
+                collaborator:
+                  type: integer
+                text:
+                  type: string
+                reply:
+                  type: integer
+                  nullable: true
+              required:
+              - post
+              - collaborator
+              - text
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  post:
+                    type: integer
+                  collaborator:
+                    type: integer
+                  text:
+                    type: string
+                  reply:
+                    type: integer
+                    nullable: true
+                required:
+                - post
+                - collaborator
+                - text
+          description: ''
+    patch:
+      operationId: PartialUpdateComment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this comment.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                post:
+                  type: integer
+                collaborator:
+                  type: integer
+                text:
+                  type: string
+                reply:
+                  type: integer
+                  nullable: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  post:
+                    type: integer
+                  collaborator:
+                    type: integer
+                  text:
+                    type: string
+                  reply:
+                    type: integer
+                    nullable: true
+                required:
+                - post
+                - collaborator
+                - text
+          description: ''
+    delete:
+      operationId: DestroyComment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this comment.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
   /api/v1.0/auth/rest-auth/password_reset/:
     post:
-      operationId: CreatePasswordReset
+      operationId: CreateCustomPasswordReset
       parameters: []
       requestBody:
         content:
@@ -1094,64 +1240,6 @@ paths:
                     format: email
                 required:
                 - email
-          description: ''
-  /api/v1.0/auth/rest-auth/password/reset/confirm/{uidb64}/{token}/:
-    post:
-      operationId: CreatePasswordResetConfirm
-      parameters:
-      - name: token
-        in: path
-        required: true
-        description: ''
-        schema:
-          type: string
-      - name: uidb64
-        in: path
-        required: true
-        description: ''
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                new_password1:
-                  type: string
-                  maxLength: 128
-                new_password2:
-                  type: string
-                  maxLength: 128
-                uid:
-                  type: string
-                token:
-                  type: string
-              required:
-              - new_password1
-              - new_password2
-              - uid
-              - token
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  new_password1:
-                    type: string
-                    maxLength: 128
-                  new_password2:
-                    type: string
-                    maxLength: 128
-                  uid:
-                    type: string
-                  token:
-                    type: string
-                required:
-                - new_password1
-                - new_password2
-                - uid
-                - token
           description: ''
   /api/v1.0/auth/rest-auth/login/:
     post:
@@ -1189,7 +1277,7 @@ paths:
           description: ''
   /api/v1.0/auth/rest-auth/password/reset/:
     post:
-      operationId: CreatePasswordReset
+      operationId: CreateCustomPasswordReset
       parameters: []
       requestBody:
         content:
@@ -1401,11 +1489,183 @@ paths:
                 required:
                 - key
           description: ''
-  /api/v1.0/socials/{id}/disconnect/:
+  /api/v1.0/post/:
     post:
-      operationId: CreateSocialConnect
+      operationId: CreatePost
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                calendar:
+                  type: integer
+                subject:
+                  type: string
+                  maxLength: 100
+                text:
+                  type: string
+                status:
+                  enum:
+                  - Draft
+                  - Published
+                  - Scheduled
+                image:
+                  type: string
+                publishDateTime:
+                  type: string
+                  format: date-time
+              required:
+              - calendar
+              - subject
+              - text
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  calendar:
+                    type: integer
+                  subject:
+                    type: string
+                    maxLength: 100
+                  text:
+                    type: string
+                  status:
+                    enum:
+                    - Draft
+                    - Published
+                    - Scheduled
+                  image:
+                    type: string
+                  comments:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        post:
+                          type: integer
+                        collaborator:
+                          type: integer
+                        text:
+                          type: string
+                        reply:
+                          type: integer
+                          nullable: true
+                      required:
+                      - post
+                      - collaborator
+                      - text
+                    readOnly: true
+                  publishDateTime:
+                    type: string
+                    format: date-time
+                required:
+                - calendar
+                - subject
+                - text
+          description: ''
+  /api/v1.0/collaboration/:
+    post:
+      operationId: CreateCollaborator
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                user:
+                  type: integer
+                calendar:
+                  type: integer
+                role:
+                  type: integer
+              required:
+              - user
+              - calendar
+              - role
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  user:
+                    type: integer
+                  calendar:
+                    type: integer
+                  role:
+                    type: integer
+                required:
+                - user
+                - calendar
+                - role
+          description: ''
+  /api/v1.0/comment/:
+    post:
+      operationId: CreateComment
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                post:
+                  type: integer
+                collaborator:
+                  type: integer
+                text:
+                  type: string
+                reply:
+                  type: integer
+                  nullable: true
+              required:
+              - post
+              - collaborator
+              - text
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  post:
+                    type: integer
+                  collaborator:
+                    type: integer
+                  text:
+                    type: string
+                  reply:
+                    type: integer
+                    nullable: true
+                required:
+                - post
+                - collaborator
+                - text
+          description: ''
+  /user/password/reset/confirm/{uidb64}/{token}/:
+    post:
+      operationId: CreatePasswordResetConfirm
       parameters:
-      - name: id
+      - name: uidb64
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: token
         in: path
         required: true
         description: ''
@@ -1416,48 +1676,462 @@ paths:
           application/json:
             schema:
               properties:
-                access_token:
+                new_password1:
                   type: string
-                code:
+                  maxLength: 128
+                new_password2:
                   type: string
+                  maxLength: 128
+                uid:
+                  type: string
+                token:
+                  type: string
+              required:
+              - new_password1
+              - new_password2
+              - uid
+              - token
       responses:
         '200':
           content:
             application/json:
               schema:
                 properties:
-                  access_token:
+                  new_password1:
                     type: string
-                  code:
+                    maxLength: 128
+                  new_password2:
                     type: string
+                    maxLength: 128
+                  uid:
+                    type: string
+                  token:
+                    type: string
+                required:
+                - new_password1
+                - new_password2
+                - uid
+                - token
           description: ''
-  /api/v1.0/socials/rest-auth/twitter/connect/:
-    post:
-      operationId: CreateTwitterConnect
-      parameters: []
+  /api/v1.0/calendar/edit/{id}/:
+    put:
+      operationId: UpdateCalendar
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this calendar.
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
             schema:
               properties:
-                access_token:
+                name:
                   type: string
-                token_secret:
-                  type: string
+                  maxLength: 100
+                owner:
+                  type: integer
+                connectedPlatforms:
+                  enum:
+                  - Twitter
+                  - Facebook
+                  - Facebook and Twitter
+                  nullable: true
               required:
-              - access_token
-              - token_secret
+              - name
+              - owner
       responses:
         '200':
           content:
             application/json:
               schema:
                 properties:
-                  access_token:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
                     type: string
-                  token_secret:
-                    type: string
+                    maxLength: 100
+                  owner:
+                    type: integer
+                  posts:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        calendar:
+                          type: integer
+                        subject:
+                          type: string
+                          maxLength: 100
+                        text:
+                          type: string
+                        status:
+                          enum:
+                          - Draft
+                          - Published
+                          - Scheduled
+                        image:
+                          type: string
+                        comments:
+                          type: array
+                          items:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              post:
+                                type: integer
+                              collaborator:
+                                type: integer
+                              text:
+                                type: string
+                              reply:
+                                type: integer
+                                nullable: true
+                            required:
+                            - post
+                            - collaborator
+                            - text
+                          readOnly: true
+                        publishDateTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - calendar
+                      - subject
+                      - text
+                    readOnly: true
+                  connectedPlatforms:
+                    enum:
+                    - Twitter
+                    - Facebook
+                    - Facebook and Twitter
+                    nullable: true
+                  collaborator_calendar:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        user:
+                          type: integer
+                        calendar:
+                          type: integer
+                        role:
+                          type: integer
+                      required:
+                      - user
+                      - calendar
+                      - role
+                    readOnly: true
                 required:
-                - access_token
-                - token_secret
+                - name
+                - owner
+          description: ''
+    patch:
+      operationId: PartialUpdateCalendar
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this calendar.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  maxLength: 100
+                owner:
+                  type: integer
+                connectedPlatforms:
+                  enum:
+                  - Twitter
+                  - Facebook
+                  - Facebook and Twitter
+                  nullable: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  name:
+                    type: string
+                    maxLength: 100
+                  owner:
+                    type: integer
+                  posts:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        calendar:
+                          type: integer
+                        subject:
+                          type: string
+                          maxLength: 100
+                        text:
+                          type: string
+                        status:
+                          enum:
+                          - Draft
+                          - Published
+                          - Scheduled
+                        image:
+                          type: string
+                        comments:
+                          type: array
+                          items:
+                            properties:
+                              id:
+                                type: integer
+                                readOnly: true
+                              post:
+                                type: integer
+                              collaborator:
+                                type: integer
+                              text:
+                                type: string
+                              reply:
+                                type: integer
+                                nullable: true
+                            required:
+                            - post
+                            - collaborator
+                            - text
+                          readOnly: true
+                        publishDateTime:
+                          type: string
+                          format: date-time
+                      required:
+                      - calendar
+                      - subject
+                      - text
+                    readOnly: true
+                  connectedPlatforms:
+                    enum:
+                    - Twitter
+                    - Facebook
+                    - Facebook and Twitter
+                    nullable: true
+                  collaborator_calendar:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        user:
+                          type: integer
+                        calendar:
+                          type: integer
+                        role:
+                          type: integer
+                      required:
+                      - user
+                      - calendar
+                      - role
+                    readOnly: true
+                required:
+                - name
+                - owner
+          description: ''
+  /api/v1.0/post/edit/{id}/:
+    put:
+      operationId: UpdatePost
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this post.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                calendar:
+                  type: integer
+                subject:
+                  type: string
+                  maxLength: 100
+                text:
+                  type: string
+                status:
+                  enum:
+                  - Draft
+                  - Published
+                  - Scheduled
+                image:
+                  type: string
+                publishDateTime:
+                  type: string
+                  format: date-time
+              required:
+              - calendar
+              - subject
+              - text
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  calendar:
+                    type: integer
+                  subject:
+                    type: string
+                    maxLength: 100
+                  text:
+                    type: string
+                  status:
+                    enum:
+                    - Draft
+                    - Published
+                    - Scheduled
+                  image:
+                    type: string
+                  comments:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        post:
+                          type: integer
+                        collaborator:
+                          type: integer
+                        text:
+                          type: string
+                        reply:
+                          type: integer
+                          nullable: true
+                      required:
+                      - post
+                      - collaborator
+                      - text
+                    readOnly: true
+                  publishDateTime:
+                    type: string
+                    format: date-time
+                required:
+                - calendar
+                - subject
+                - text
+          description: ''
+    patch:
+      operationId: PartialUpdatePost
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this post.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                calendar:
+                  type: integer
+                subject:
+                  type: string
+                  maxLength: 100
+                text:
+                  type: string
+                status:
+                  enum:
+                  - Draft
+                  - Published
+                  - Scheduled
+                image:
+                  type: string
+                publishDateTime:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  calendar:
+                    type: integer
+                  subject:
+                    type: string
+                    maxLength: 100
+                  text:
+                    type: string
+                  status:
+                    enum:
+                    - Draft
+                    - Published
+                    - Scheduled
+                  image:
+                    type: string
+                  comments:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        post:
+                          type: integer
+                        collaborator:
+                          type: integer
+                        text:
+                          type: string
+                        reply:
+                          type: integer
+                          nullable: true
+                      required:
+                      - post
+                      - collaborator
+                      - text
+                    readOnly: true
+                  publishDateTime:
+                    type: string
+                    format: date-time
+                required:
+                - calendar
+                - subject
+                - text
+          description: ''
+  /api/v1.0/post/delete/{id}/:
+    delete:
+      operationId: DestroyPost
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this post.
+        schema:
+          type: string
+      responses:
+        '204':
           description: ''

@@ -19,7 +19,7 @@ class CollaboratorSerializer(serializers.ModelSerializer):
     role = RoleSerializer()
     class Meta:
         model = Collaborator
-        fields = ('id', 'user', 'calendar', 'role')
+        fields = ('id', 'user', 'calendar', 'role', 'isConfirmed',)
         read_only_fields = ('id',)
 
 class CollaboratorCreateSerializer(serializers.ModelSerializer):
