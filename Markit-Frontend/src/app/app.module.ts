@@ -40,6 +40,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { CommentComponent } from './comment/comment.component';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
+import { PostPreviewComponent } from './post-preview/post-preview.component';
 
 registerLocaleData(en);
 
@@ -71,6 +72,7 @@ registerLocaleData(en);
     ForgetPassComponent,
     ResetPassComponent,
     CommentComponent,
+    PostPreviewComponent,
   ],
   imports: [
     BrowserModule,

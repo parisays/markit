@@ -1,0 +1,11 @@
+.comments{
+    display: flex;
+    margin: auto;
+    background: white;
+    width: 80%;
+}
+
+.comments > *{
+    width: 80%;
+    margin: auto;
+}
