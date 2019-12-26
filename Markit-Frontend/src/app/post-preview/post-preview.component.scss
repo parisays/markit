@@ -1,88 +1,98 @@
-.comments{
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    background: white;
-    width: 60%;
-    margin-bottom: 100px;
+.comments {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background: white;
+  width: 60%;
+  margin-bottom: 100px;
 }
 
-.comments > *{
-    width: 80%;
-    margin: auto;
+.comments > * {
+  width: 80%;
+  margin: auto;
 }
 
 .post-preview.twitter {
-    font-family: 'Helvetica';
-    padding: 15px;
-    background: white;
-    border: 1px solid #e1e8ed;
-    margin: 0 auto;
-    padding: 20px;
-    max-width: 602px;
-    position: relative;
-    margin: 3% auto;
+  font-family: 'Helvetica';
+  padding: 15px;
+  background: white;
+  border: 1px solid #e1e8ed;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 602px;
+  position: relative;
+  margin: 3% auto;
 }
 
 .post-preview.twitter .details {
-    margin-left: 20px;
-    margin-bottom: 10px;
-    min-height: 50px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  min-height: 50px;
 }
 
 div {
-    display: block;
+  display: block;
 }
 
 .post-preview.twitter .details .name {
-    color: #292f33;
-    font-weight: bold;
+  color: #292f33;
+  font-weight: bold;
 }
+
 * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
 .post-preview .details li {
-    list-style-type: none;
+  list-style-type: none;
 }
+
 .post-preview.twitter .details .username {
-    color: #8899a6;
-    font-size: 13px;
+  color: #8899a6;
+  font-size: 13px;
 }
+
 .post-preview .copy {
-    word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .post-preview.twitter .image-container {
-    margin-left: 55px;
-    clear: both;
+  margin-left: 55px;
+  clear: both;
 }
+
 .post-preview.twitter .image-container img {
-    border-radius: 5px;
+  border-radius: 5px;
+  width: 100%;
 }
 
 .post-preview.twitter .actions {
-    clear: left;
+  clear: left;
 }
+
 .col-xs-3 {
-    width: 25%;
+  width: 25%;
 }
+
 .row {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: row;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
 }
+
 .row * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: auto;
 }
-.preview-container{
-    padding: 30px;
-    background: rgba(255, 255, 255, 0.63); 
-    margin: 3% auto; 
-    width: 60%;
-    border: dashed 1px rgba(128, 128, 128, 0.438);
+
+.preview-container {
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.63);
+  margin: 3% auto;
+  width: 60%;
+  border: dashed 1px rgba(128, 128, 128, 0.438);
 }

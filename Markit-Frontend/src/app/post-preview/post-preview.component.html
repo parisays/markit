@@ -1,26 +1,26 @@
-<div 
+<div
 class="preview-container" >
     <div style="margin: auto; text-align: center;">
         <h3>Twitter Desktop Preview</h3>
         <span>
-            {{post.date | date:'fullDate'}}
+            {{post.publishDateTime | date:'fullDate'}}
             <span style="margin-left: 20px">
-                {{post.date | date:'shortTime'}}
+                {{post.publishDateTime | date:'shortTime'}}
             </span>
         </span>
     </div>
     <div class="post-preview twitter mat-elevation-z4">
-        <nz-avatar style="position: absolute; left: 20p; top: 22px;" 
-            [nzShape]="'square'" 
-            [nzSize]="50" 
-            [nzIcon]="'user'" 
+        <nz-avatar style="position: absolute; left: 20px; top: 22px;"
+            [nzShape]="'square'"
+            [nzSize]="50"
+            [nzIcon]="'user'"
             nzSrc="../../assets/images/user-logo.png">
         </nz-avatar>
         <div class="details">
             <ul>
                 <li>
-                    <span class="name">{{post.name}}</span>
-                    <span class="username"> @<span>{{post.name}}</span></span>
+                    <span class="name">Author</span>
+                    <span class="username"> @<span>Author</span></span>
                     • 1h
                 </li>
                 <li>
