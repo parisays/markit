@@ -39,6 +39,7 @@ import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { CommentComponent } from './comment/comment.component';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
 
 registerLocaleData(en);
 
@@ -87,6 +88,7 @@ registerLocaleData(en);
     TimepickerModule.forRoot(),
     NgZorroAntdModule,
     FormsModule,
+    NzCommentModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

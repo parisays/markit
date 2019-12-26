@@ -1,1 +1,33 @@
-<p>comment works!</p>
+<ng-template #commentTemplateRef let-comment="comment">
+    <nz-comment [nzAuthor]="comment.author">
+      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="comment.avatar"></nz-avatar>
+      <nz-comment-content>
+        <p>{{ comment.content }}</p>
+      </nz-comment-content>
+      <nz-comment-action>Reply to</nz-comment-action>
+      <nz-comment-action>Edit</nz-comment-action>
+      <nz-comment-action>Remove</nz-comment-action>
+      <ng-container *ngIf="comment.children && comment.children.length">
+        <ng-template ngFor let-child [ngForOf]="comment.children">
+          <ng-template [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: child }">
+          </ng-template>
+        </ng-template>
+      </ng-container>
+    </nz-comment>
+</ng-template>
+
+<ng-template [ngTemplateOutlet]="commentTemplateRef" *ngFor="let d of data" [ngTemplateOutletContext]="{ comment: d }"> </ng-template>
+
+<nz-comment>
+    <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+    <nz-comment-content>
+      <nz-form-item>
+        <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+      </nz-form-item>
+      <nz-form-item>
+        <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
+          Add Comment
+        </button>
+      </nz-form-item>
+    </nz-comment-content>
+  </nz-comment>
