@@ -41,6 +41,7 @@ import en from '@angular/common/locales/en';
 import { CommentComponent } from './comment/comment.component';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
 registerLocaleData(en);
 
@@ -91,6 +92,7 @@ registerLocaleData(en);
     NgZorroAntdModule,
     FormsModule,
     NzCommentModule,
+    NzAvatarModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

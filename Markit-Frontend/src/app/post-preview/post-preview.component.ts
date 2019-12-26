@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostPreviewComponent implements OnInit {
 
+  post = {
+    name: 'test',
+    text: 'We supply a series of design principles, practical patterns and high quality design resources' +
+    '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+    image: '../../assets/images/sample-3.jpg',
+    date: new Date(Date.now()),
+  };
+
   constructor() { }
 
   ngOnInit() {
