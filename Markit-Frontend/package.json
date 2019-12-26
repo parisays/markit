@@ -24,6 +24,7 @@
     "bootstrap": "^4.4.1",
     "fsevents": "^2.1.1",
     "hammerjs": "^2.0.8",
+    "ng-zorro-antd": "^8.5.2",
     "ngx-bootstrap": "^5.2.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
