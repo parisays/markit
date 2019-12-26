@@ -1,8 +1,8 @@
 <ng-template #commentTemplateRef let-comment="comment">
-    <nz-comment [nzAuthor]="comment.author">
-      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="comment.avatar"></nz-avatar>
+    <nz-comment [nzAuthor]="comment.collaborator">
+      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="userAvatar"></nz-avatar>
       <nz-comment-content>
-        <p>{{ comment.content }}</p>
+        <p>{{ comment.text }}</p>
       </nz-comment-content>
       <nz-comment-action>Reply to</nz-comment-action>
       <nz-comment-action>Edit</nz-comment-action>
@@ -16,16 +16,16 @@
     </nz-comment>
 </ng-template>
 
-<ng-template [ngTemplateOutlet]="commentTemplateRef" *ngFor="let d of data" [ngTemplateOutletContext]="{ comment: d }"> </ng-template>
+<ng-template [ngTemplateOutlet]="commentTemplateRef" *ngFor="let d of comments" [ngTemplateOutletContext]="{ comment: d }"> </ng-template>
 
 <nz-comment>
-    <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+    <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="userAvatar"></nz-avatar>
     <nz-comment-content>
       <nz-form-item>
         <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
       </nz-form-item>
       <nz-form-item>
-        <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
+        <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="createComment()">
           Add Comment
         </button>
       </nz-form-item>
