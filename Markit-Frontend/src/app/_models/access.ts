@@ -1,7 +1,7 @@
 export enum Access {
   ADD_COLLABORATOR = 'add_collaborator',
 
-  DELETE_COLLABORATOR = 'delete_calendar',
+  DELETE_CALENDAR = 'delete_calendar',
   EDIT_CALENDAR = 'edit_calendar',
 
   CREATE_POST = 'create_post',
