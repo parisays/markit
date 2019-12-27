@@ -16,7 +16,7 @@ export class CommentComponent implements OnInit {
   comments: Comment[];
   loading = false;
   user: User;
-  userAvatar: '../../assets/images/user-logo.png';
+  userAvatar: '../../assets/images/user-512.png';
 
 
   submitting = false;
@@ -31,7 +31,6 @@ export class CommentComponent implements OnInit {
   ngOnInit() {
     this.userService.getAll().subscribe((response) => {
       this.user = response as User;
-      console.log(`this is user:`, this.user);
     }, err => {
       console.log(err);
     });

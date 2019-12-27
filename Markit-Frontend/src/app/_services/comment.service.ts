@@ -15,7 +15,7 @@ export class CommentService extends DataService {
   }
 
   getPostComments(postId: number) {
-    const url = `${this.endpoint}${postId}`;
+    const url = `${this.endpoint}list/${postId}/`;
     return super.getAll(undefined, url);
   }
 }

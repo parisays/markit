@@ -1,5 +1,5 @@
 <ng-template #commentTemplateRef let-comment="comment">
-    <nz-comment [nzAuthor]="comment.collaborator">
+    <nz-comment nzAuthor="{{comment.firstName}} {{comment.lastName}}">
       <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="userAvatar"></nz-avatar>
       <nz-comment-content>
         <p>{{ comment.text }}</p>

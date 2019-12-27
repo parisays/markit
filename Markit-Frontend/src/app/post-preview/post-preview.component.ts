@@ -30,7 +30,7 @@ export class PostPreviewComponent implements OnInit {
       this.postService.get(this.postId)
         .subscribe(postResponse => {
           this.post = postResponse as Post;
-          console.log('this is post that was retrieved', this.post);
+          // console.log('this is post that was retrieved', this.post);
           this.loading = false;
         });
     }, err => {

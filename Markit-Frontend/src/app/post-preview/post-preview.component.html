@@ -1,5 +1,4 @@
-<div
-class="preview-container" >
+<div class="preview-container" *ngIf="!loading">
     <div style="margin: auto; text-align: center;">
         <h3>Twitter Desktop Preview</h3>
         <span>
@@ -51,6 +50,7 @@ class="preview-container" >
         </div>
     </div>
 </div>
+<mat-spinner *ngIf="loading" style="margin: auto" color="primary"></mat-spinner>
 <div class="comments mat-elevation-z4">
     <h5 style="color: gray; margin-left: 30px; margin-top: 30px;">Comments:</h5>
     <app-comment></app-comment>
