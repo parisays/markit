@@ -1,0 +1,47 @@
+@import "../../theme.scss";
+.post-card{
+    display: flex;
+    width: 200px;
+    flex-direction: row;
+    margin: 5px auto;
+    min-height: 50px;
+    padding: 5px;
+}
+* {
+    margin: auto 10px;
+}
+
+li {
+    list-style-type: none;
+    margin: 0;
+}
+
+ul{
+    padding-inline-start: 0px;
+}
+
+.icon-color{
+    color: $app-normal-primary;
+}
+ant-fullcalendar-fullscreen ant-fullcalendar-content{
+    height: 120px;
+}
+.toolbar {
+    margin-top: 5%;
+    margin-left: 10%;
+    width: 80%;
+    display: flex;
+    background: $app-light-primary;
+    border-radius: 5px;
+  }
+
+  .select{
+    height: 63px;
+    font-size: 15px;
+    margin-left: 5%;
+  }
+  
+  h1{
+    color: $app-dark-primary;
+    padding: 0px 20px;
+  }
