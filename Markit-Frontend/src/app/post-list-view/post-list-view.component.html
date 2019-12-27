@@ -38,8 +38,8 @@
       New Post
     </a>
     <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
-    <button mat-button disabled>
-      <mat-icon>library_books</mat-icon>
+    <button mat-button [routerLink]="['/calendars', calendarId, 'calendar-view' ]">
+      <mat-icon>calendar_today</mat-icon>
     </button>
     <button mat-button [routerLink]="['/calendars', calendarId, 'edit' ]">
       <mat-icon>settings</mat-icon>

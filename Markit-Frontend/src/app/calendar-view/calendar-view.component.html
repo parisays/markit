@@ -37,8 +37,8 @@
       New Post
     </a>
     <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
-    <button mat-button disabled>
-      <mat-icon>library_books</mat-icon>
+    <button mat-button [routerLink]="['/calendars', calendarId, 'posts']">
+      <mat-icon>view_list</mat-icon>
     </button>
     <button mat-button [routerLink]="['/calendars', calendarId, 'edit' ]">
       <mat-icon>settings</mat-icon>
@@ -48,13 +48,13 @@
     </button>
   </mat-toolbar>
 
-<div class="mat-elevation-z1" style="width: 90%; margin: 2% auto; background: rgba(255, 255, 255, 0.74);">
+<div class="mat-elevation-z1" style="width: 95%; margin: 2% auto; background: rgba(255, 255, 255, 0.74);">
     <nz-calendar>
         <ul *nzDateCell="let date" class="events">
             <li *ngFor="let post of posts">
                 <div *ngIf="isInTrueDate(date, post.publishDateTime)" class="mat-elevation-z3 post-card ripple-container" matRipple>
                     <i nz-icon nzType="twitter" nzTheme="outline" class="icon-color"></i>
-                    <a style="word-wrap: break-word; width: 70px;">{{post.title}}</a>
+                    <a style="word-wrap: break-word; width: 70px;">{{post.subject}}</a>
                     <span>{{ post.publishDateTime | date:'shortTime' }}</span>
                 </div>
             </li>

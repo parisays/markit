@@ -1,7 +1,7 @@
 @import "../../theme.scss";
 .post-card{
     display: flex;
-    width: 200px;
+    width: 150px;
     flex-direction: row;
     margin: 5px auto;
     min-height: 50px;
@@ -64,3 +64,11 @@ ul{
     padding: 5px;
   }
 
+  button{
+    margin: auto 0;
+    padding: 0;
+  }
+
+  mat-icon{
+    width: 32px;
+  }
