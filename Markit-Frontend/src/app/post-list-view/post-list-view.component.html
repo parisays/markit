@@ -88,6 +88,9 @@
             <button mat-button color="warn" [disabled]="!access.canDeletePost" (click)="deletePost(element)">
               <mat-icon>delete</mat-icon>
             </button>
+            <button mat-button [routerLink]="['/calendars', calendarId, 'posts', element.id ,'preview']">
+              <img style="width: 30px;" src="../../assets/images/preview-icon.png" alt="">
+            </button>
           </div>
           <div style="display: flex; border: double 2px rgba(128, 128, 128, 0.185); padding: 10px; margin: 10px;">
             <p style="width: 100%; font-size: 16px; margin: 20px;">
