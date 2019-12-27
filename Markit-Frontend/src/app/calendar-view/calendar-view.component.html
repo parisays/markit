@@ -54,8 +54,8 @@
             <li *ngFor="let post of posts">
                 <div *ngIf="isInTrueDate(date, post.publishDateTime)" class="mat-elevation-z3 post-card ripple-container" matRipple>
                     <i nz-icon nzType="twitter" nzTheme="outline" class="icon-color"></i>
-                    <a style="word-wrap: break-word; width: 70px;">{{post.subject}}</a>
-                    <span>{{ post.publishDateTime | date:'shortTime' }}</span>
+                    <span style="width: 70px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; text-align: center; margin-left: 10px;">{{post.subject}}</span>
+                    <span style="text-align: center;">{{ post.publishDateTime | date:'shortTime' }}</span>
                 </div>
             </li>
         </ul>
