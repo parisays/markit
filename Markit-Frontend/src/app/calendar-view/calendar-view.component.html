@@ -5,7 +5,7 @@
       </mat-label>
       <mat-select #selector>
         <mat-option *ngFor="let calendar of allCalendars" [value]="calendar.id" disabled="">
-          <button [routerLink]="['/calendars', calendar.id, 'posts']" (click)="selector.close()" mat-button>
+          <button [routerLink]="['/calendars', calendar.id, 'calendar-view']" (click)="selector.close()" mat-button>
             <mat-icon color="accent">
               arrow_forward
             </mat-icon>
@@ -47,7 +47,7 @@
       <mat-icon color="warn">delete</mat-icon>
     </button>
   </mat-toolbar>
-  
+
 <div class="mat-elevation-z1" style="width: 90%; margin: 2% auto; background: rgba(255, 255, 255, 0.74);">
     <nz-calendar>
         <ul *nzDateCell="let date" class="events">
