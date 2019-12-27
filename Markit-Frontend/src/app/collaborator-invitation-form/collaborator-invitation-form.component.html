@@ -15,7 +15,7 @@
                 </mat-option>
               </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="accent" (click)="onInvite()">Invite</button>
+        <button mat-raised-button color="accent" [disabled]="!access.canAddCollaborator" (click)="onInvite()">Invite</button>
     </form>
     <mat-error *ngIf="notFound && !loading">The invitation failed! We couldn't find user!</mat-error>
     <mat-spinner *ngIf="loading" style="height: 50px;"></mat-spinner>
