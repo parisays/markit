@@ -16,7 +16,7 @@ export class CommentComponent implements OnInit {
   comments: Comment[];
   loading = false;
   user: User;
-  userAvatar: '../../assets/images/user-512.png';
+  userAvatar = '../../assets/images/user-512.png';
 
 
   submitting = false;
