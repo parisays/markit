@@ -1,4 +1,4 @@
-import {Post} from '@app/_models/';
+import {Access, Post} from '@app/_models/';
 import {Collaborator} from '@app/_models/';
 
 export class Calendar {
@@ -10,4 +10,5 @@ export class Calendar {
   posts: Post[];
   connectedPlatforms: string;
   role: string;
+  access?: Access[];
 }
