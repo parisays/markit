@@ -1,7 +1,7 @@
 <nz-calendar>
     <ul *nzDateCell="let date" class="events">
         <li *ngFor="let post of posts">
-            <div *ngIf="isInTrueDate(date, post.date)" class="mat-elevation-z3 post-card">
+            <div *ngIf="isInTrueDate(date, post.date)" class="mat-elevation-z3 post-card ripple-container" matRipple>
                 <i nz-icon nzType="twitter" nzTheme="outline" class="icon-color"></i>
                 <a style="word-wrap: break-word; width: 70px;">{{post.title}}</a>
                 <span>{{ post.date | date:'shortTime' }}</span>

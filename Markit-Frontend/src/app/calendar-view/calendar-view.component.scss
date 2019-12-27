@@ -6,6 +6,7 @@
     margin: 5px auto;
     min-height: 50px;
     padding: 5px;
+    background: white;
 }
 * {
     margin: auto 10px;
@@ -23,9 +24,19 @@ ul{
 .icon-color{
     color: $app-normal-primary;
 }
-ant-fullcalendar-fullscreen ant-fullcalendar-content{
-    height: 120px;
-}
+
+.ripple-container {
+    cursor: pointer;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
 .toolbar {
     margin-top: 5%;
     margin-left: 10%;
@@ -45,3 +56,4 @@ ant-fullcalendar-fullscreen ant-fullcalendar-content{
     color: $app-dark-primary;
     padding: 0px 20px;
   }
+
