@@ -1,11 +1,63 @@
-<nz-calendar>
-    <ul *nzDateCell="let date" class="events">
-        <li *ngFor="let post of posts">
-            <div *ngIf="isInTrueDate(date, post.date)" class="mat-elevation-z3 post-card ripple-container" matRipple>
-                <i nz-icon nzType="twitter" nzTheme="outline" class="icon-color"></i>
-                <a style="word-wrap: break-word; width: 70px;">{{post.title}}</a>
-                <span>{{ post.date | date:'shortTime' }}</span>
-            </div>
-        </li>
-    </ul>
-</nz-calendar>
+<mat-toolbar class="toolbar">
+    <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 1%;">
+      <mat-label>
+        Change Calendar...
+      </mat-label>
+      <mat-select #selector>
+        <mat-option *ngFor="let calendar of allCalendars" [value]="calendar.id" disabled="">
+          <button [routerLink]="['/calendars', calendar.id, 'posts']" (click)="selector.close()" mat-button>
+            <mat-icon color="accent">
+              arrow_forward
+            </mat-icon>
+          </button>
+          {{calendar.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+    <div>
+      <img 
+        matTooltip="{{collab.name}}"
+        matTooltipPosition="above"
+        matTooltipHideDelay="1000"
+        src=".././../assets/images/{{collab.role}}-logo.png" 
+        alt="" *ngFor="let collab of collaborators" 
+        class="collaborator mat-elevation-z3">
+      <span *ngIf="moreThanFour" style="font-size: 40px; margin-left: 10px;">...</span>
+    </div>
+    <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+    <h1 style="margin:auto; font-size: 30px;">
+      <mat-icon style="padding-right: 10px;">calendar_today</mat-icon>
+      {{this.calendarName}}
+      <mat-icon style="padding-left: 10px;">calendar_today</mat-icon>
+    </h1>
+    <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+    <a mat-raised-button color="accent"
+       [routerLink]="['/calendars', calendarId, 'posts', 'new']">
+      New Post
+    </a>
+    <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+    <button mat-button disabled>
+      <mat-icon>library_books</mat-icon>
+    </button>
+    <button mat-button [routerLink]="['/calendars', calendarId, 'edit' ]">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-button (click)="deleteCalendar()">
+      <mat-icon color="warn">delete</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+<div class="mat-elevation-z1" style="width: 90%; margin: 2% auto; background: rgba(255, 255, 255, 0.74);">
+    <nz-calendar>
+        <ul *nzDateCell="let date" class="events">
+            <li *ngFor="let post of posts">
+                <div *ngIf="isInTrueDate(date, post.publishDateTime)" class="mat-elevation-z3 post-card ripple-container" matRipple>
+                    <i nz-icon nzType="twitter" nzTheme="outline" class="icon-color"></i>
+                    <a style="word-wrap: break-word; width: 70px;">{{post.title}}</a>
+                    <span>{{ post.publishDateTime | date:'shortTime' }}</span>
+                </div>
+            </li>
+        </ul>
+    </nz-calendar>
+</div>
