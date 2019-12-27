@@ -11,6 +11,10 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatRippleModule, MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   exports: [
@@ -25,7 +29,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatRippleModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatExpansionModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatTooltipModule
   ]
 })
 export class MdComponentsModule { }
