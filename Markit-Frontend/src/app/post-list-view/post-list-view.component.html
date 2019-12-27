@@ -28,9 +28,9 @@
     </div>
     <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
     <h1 style="margin:auto; font-size: 30px;">
-      <mat-icon style="padding-right: 10px;">calendar_today</mat-icon>
+      <mat-icon style="padding-right: 10px;width: 32px;">calendar_today</mat-icon>
       {{this.calendarName}}
-      <mat-icon style="padding-left: 10px;">calendar_today</mat-icon>
+      <mat-icon style="padding-left: 10px; width: 32px;">calendar_today</mat-icon>
     </h1>
     <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
     <button mat-raised-button color="accent" [disabled]="!access.canCreatePost"
@@ -38,8 +38,8 @@
       New Post
     </button>
     <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
-    <button mat-button disabled>
-      <mat-icon>library_books</mat-icon>
+    <button mat-button [routerLink]="['/calendars', calendarId, 'calendar-view' ]">
+      <mat-icon>calendar_today</mat-icon>
     </button>
     <button mat-button [disabled]="!access.canEditCalendar" [routerLink]="['/calendars', calendarId, 'edit' ]">
       <mat-icon>settings</mat-icon>
