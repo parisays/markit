@@ -1,3 +1,5 @@
+@import "../../theme.scss";
+
 .comments {
   display: flex;
   flex-direction: column;
@@ -95,4 +97,10 @@ div {
   margin: 3% auto;
   width: 60%;
   border: dashed 1px rgba(128, 128, 128, 0.438);
+}
+
+.status{
+  color: $app-dark-accent;
+  font-size: 20px;
+  margin-left: 3px;
 }

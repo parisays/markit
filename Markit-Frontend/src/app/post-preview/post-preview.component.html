@@ -1,7 +1,8 @@
 <div class="preview-container" *ngIf="!loading">
-    <div style="margin: auto; text-align: center;">
+    <div style="margin: auto; text-align: center; display: flex; flex-direction: column;">
         <h3>Twitter Desktop Preview</h3>
-        <span>
+        <span class="status">{{post.status}}</span>
+        <span style="font-size: 15px; color: gray; margin-top: 10px;" >
             {{post.publishDateTime | date:'fullDate'}}
             <span style="margin-left: 20px">
                 {{post.publishDateTime | date:'shortTime'}}
