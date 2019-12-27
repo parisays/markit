@@ -6,9 +6,9 @@
     <mat-icon style="font-size: 30px;">close</mat-icon>
   </button>
 </mat-toolbar>
-<mat-vertical-stepper 
+<mat-vertical-stepper
   linear
-  style="margin: 10%; margin-top: 1%; border: rgba(204, 201, 201, 0.103); border-style: groove;" 
+  style="margin: 10%; margin-top: 1%; border: rgba(204, 201, 201, 0.103); border-style: groove;"
   #stepper>
   <mat-step>
     <ng-template matStepLabel>Post Details</ng-template>
@@ -26,16 +26,21 @@
     <ng-template matStepLabel>Create Post</ng-template>
     <div class="finishing-buttons">
       <mat-toolbar>
-        <button class="draft" *ngIf="!post && !loading" mat-raised-button (click)="createPost()">
+        <button class="draft" mat-raised-button *ngIf="!post && !loading" [disabled]="!access.canCreatePost"
+                (click)="createPost()">
           Draft
         </button>
-        <button class="draft" *ngIf="!!post && !loading" mat-raised-button color="primary" (click)="updatePost()">
+        <button class="draft" mat-raised-button color="primary" *ngIf="!!post && !loading"
+                [disabled]="!access.canEditPost" (click)="updatePost()">
           Update
         </button>
-        <button class="schedule" *ngIf="!loading" mat-raised-button color="primary" (click)="schedulePost()">
+        <button class="schedule" mat-raised-button color="primary" *ngIf="!loading"
+                [disabled]="(!!post && !access.canEditPost) || (!post && !access.canCreatePost)"
+                (click)="schedulePost()">
           Schedule
         </button>
-        <button class="publish" *ngIf="!loading" mat-raised-button color="accent" (click)="publishPost()" [disabled]="canPublish">
+        <button class="publish" mat-raised-button color="accent" *ngIf="!loading"
+                [disabled]="!access.canSetPublish || canPublish" (click)="publishPost()">
           Publish
         </button>
         <mat-spinner *ngIf="loading" color="primary" style="margin:auto"></mat-spinner>

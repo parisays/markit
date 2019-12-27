@@ -25,6 +25,11 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
   post: Post = null;
   loading = false;
   publishDateTime = '';
+  access = {
+    canCreatePost: false,
+    canEditPost: false,
+    canSetPublish: false,
+  };
 
   constructor(private location: Location,
               private route: ActivatedRoute,
