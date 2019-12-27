@@ -3,6 +3,7 @@ import { Calendar, Post } from '@models';
 import { PostService, CalendarService } from '@services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { Collaborator } from '@app/_models/collaborator';
 
 @Component({
   selector: 'app-calendar-view',
@@ -18,10 +19,17 @@ export class CalendarViewComponent implements OnInit {
   loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
-  dataSource: Post[]; // data source is posts
-  collaborators;
+  collaborators: Collaborator[];
   moreThanFour = false;
   posts;
+  access = {
+    canDeleteCalendar: false,
+    canEditCalendar: true,
+    canCreatePost: false,
+    canEditPost: true,
+    canDeletePost: false,
+    canSetPublish: false,
+  };
 
   isInTrueDate(date1: Date, date2): boolean {
     const date = new Date(date2);
@@ -35,24 +43,7 @@ export class CalendarViewComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private snackBar: MatSnackBar) {
-    this.collaborators = [
-      {
-        name: 'test1',
-        role: 'Manager'
-      },
-      {
-        name: 'test2',
-        role: 'Editor'
-      },
-      {
-        name: 'test3',
-        role: 'Owner'
-      },
-      {
-        name: 'test4',
-        role: 'Viewer'
-      },
-    ];
+
   }
 
   get isTwitterConnected() {
@@ -66,10 +57,12 @@ export class CalendarViewComponent implements OnInit {
       this.calendarId = +params.get('calendarId');
       // console.log(this.calendarId);
 
-      this.calendarService.get(this.calendarId).subscribe(value => {
+      this.calendarService.get(this.calendarId).subscribe(calendarResonse => {
         // console.log('post list view calendar service 1', value);
-        this.calendar = value as Calendar;
-        this.calendarName = (value as Calendar).name;
+        this.calendar = calendarResonse as Calendar;
+        this.calendarName = (calendarResonse as Calendar).name;
+        this.collaborators = this.calendar.collaborator_calendar;
+        console.log(`this is collaborators of this calendar`, this.collaborators);
       }, err => {
         console.log('post list view calendar service error', err);
         this.loading = false;
