@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthenticationService, CalendarService, PostService} from '@services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Post, PostStatus, Calendar} from '@models';
+import {Post, PostStatus, Calendar, Collaborator} from '@models';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TwitterService} from '@services';
 import {map} from 'rxjs/operators';
@@ -35,8 +35,16 @@ export class PostListViewComponent implements OnInit {
   dataSource: Post[]; // data source is posts
   columnsToDisplay = ['subject', 'connected-platforms', 'status', 'publishDateTime'];
   expandedElement: Post | null;
-  collaborators;
+  collaborators: Collaborator[];
   moreThanFour = false;
+  access = {
+    canDeleteCalendar: false,
+    canEditCalendar: true,
+    canCreatePost: false,
+    canEditPost: true,
+    canDeletePost: false,
+    canSetPublish: false,
+  };
   private twitterAppData: { client_id: string, secret: string };
 
   constructor(private postService: PostService,
@@ -45,24 +53,24 @@ export class PostListViewComponent implements OnInit {
               private router: Router,
               private twitter: TwitterService,
               private snackBar: MatSnackBar) {
-                this.collaborators = [
-                  {
-                    name: 'test1',
-                    role: 'Manager'
-                  },
-                  {
-                    name: 'test2',
-                    role: 'Editor'
-                  },
-                  {
-                    name: 'test3',
-                    role: 'Owner'
-                  },
-                  {
-                    name: 'test4',
-                    role: 'Viewer'
-                  },
-                ];
+    // this.collaborators = [
+    //   {
+    //     name: 'test1',
+    //     role: 'Manager'
+    //   },
+    //   {
+    //     name: 'test2',
+    //     role: 'Editor'
+    //   },
+    //   {
+    //     name: 'test3',
+    //     role: 'Owner'
+    //   },
+    //   {
+    //     name: 'test4',
+    //     role: 'Viewer'
+    //   },
+    // ];
   }
 
   get isTwitterConnected() {
@@ -76,10 +84,12 @@ export class PostListViewComponent implements OnInit {
       this.calendarId = +params.get('calendarId');
       // console.log(this.calendarId);
 
-      this.calendarService.get(this.calendarId).subscribe(value => {
+      this.calendarService.get(this.calendarId).subscribe(calendarResonse => {
         // console.log('post list view calendar service 1', value);
-        this.calendar = value as Calendar;
-        this.calendarName = (value as Calendar).name;
+        this.calendar = calendarResonse as Calendar;
+        this.calendarName = (calendarResonse as Calendar).name;
+        this.collaborators = this.calendar.collaborator_calendar;
+        console.log(`this is collaborators of this calendar`, this.collaborators);
       }, err => {
         console.log('post list view calendar service error', err);
         this.loading = false;
