@@ -32,6 +32,7 @@ import { CalendarSettingsComponent } from './calendar-settings/calendar-settings
 import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CollaboratorInvitationFormComponent } from './collaborator-invitation-form/collaborator-invitation-form.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ForgetPassComponent } from './forget-pass/forget-pass.component';
 import { ResetPassComponent } from './reset-pass/reset-pass.component';
@@ -42,10 +43,14 @@ import { CommentComponent } from './comment/comment.component';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 
 registerLocaleData(en);
 
 @NgModule({
+  entryComponents: [
+    NotificationDialogComponent,
+  ],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -70,10 +75,12 @@ registerLocaleData(en);
     PostOverviewSimpleComponent,
     HomepageComponent,
     ProfileComponent,
+    CollaboratorInvitationFormComponent,
     ForgetPassComponent,
     ResetPassComponent,
     CommentComponent,
     PostPreviewComponent,
+    NotificationDialogComponent,
   ],
   imports: [
     BrowserModule,

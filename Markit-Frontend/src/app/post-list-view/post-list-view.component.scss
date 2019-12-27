@@ -83,3 +83,11 @@ table {
     border-radius: 5px;
     margin: 10px;
   }
+
+  .collaborator{
+    height: 50px;
+    border: solid 3px $app-normal-primary;
+    border-radius: 50%;
+    margin: 3px;
+    padding: 5px;
+  }

@@ -35,7 +35,8 @@ export class PostListViewComponent implements OnInit {
   dataSource: Post[]; // data source is posts
   columnsToDisplay = ['subject', 'connected-platforms', 'status', 'publishDateTime'];
   expandedElement: Post | null;
-
+  collaborators;
+  moreThanFour = false;
   private twitterAppData: { client_id: string, secret: string };
 
   constructor(private postService: PostService,
@@ -44,6 +45,24 @@ export class PostListViewComponent implements OnInit {
               private router: Router,
               private twitter: TwitterService,
               private snackBar: MatSnackBar) {
+                this.collaborators = [
+                  {
+                    name: 'test1',
+                    role: 'Manager'
+                  },
+                  {
+                    name: 'test2',
+                    role: 'Editor'
+                  },
+                  {
+                    name: 'test3',
+                    role: 'Owner'
+                  },
+                  {
+                    name: 'test4',
+                    role: 'Viewer'
+                  },
+                ];
   }
 
   get isTwitterConnected() {
