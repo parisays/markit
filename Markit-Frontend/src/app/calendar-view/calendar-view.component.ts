@@ -21,7 +21,7 @@ export class CalendarViewComponent implements OnInit {
   selectedCalendar: Calendar;
   collaborators: Collaborator[];
   moreThanFour = false;
-  posts;
+  posts: Post[];
   access = {
     canDeleteCalendar: false,
     canEditCalendar: true,
