@@ -3,3 +3,6 @@ export * from './calendar';
 export * from './post';
 export * from './postIdea';
 export * from './comment';
+export * from './access';
+export * from './collaborator';
+export * from './role';

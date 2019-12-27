@@ -18,9 +18,14 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
   loading = false;
   calendar: Calendar = null;
   isLinear = true;
-  stepComplete = [false, false];
+  stepComplete = [false, false, false];
   isDetailsFormValid = false;
   calendarId: number;
+  access = {
+    canEditCalendar: false,
+    canAddCollaborator: false,
+  };
+
   get returnUrl() {
     return this.calendar ? `calendars/${this.calendar.id}/wizard/social-accounts` : null;
   }
@@ -48,13 +53,16 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
         this.calendar = value;
 
         this.isLinear = false;
-        this.stepComplete = [true, true]; // TODO bug : social-accounts route
+        this.stepComplete = [true, true, true]; // TODO bug : social-accounts route
 
         if (this.location.isCurrentPathEqualTo(`/calendars/${this.calendar.id}/wizard/details`)) {
           this.stepper.selectedIndex = 0;
         }
         if (this.location.isCurrentPathEqualTo(`/calendars/${this.calendar.id}/wizard/social-accounts`)) {
           this.stepper.selectedIndex = 1;
+        }
+        if (this.location.isCurrentPathEqualTo(`/calendars/${this.calendar.id}/wizard/collaborators`)) {
+          this.stepper.selectedIndex = 2;
         }
 
         this.stepper.animationDone.subscribe(() => {
@@ -84,11 +92,11 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     this.service.create({name: cf.name.value}).subscribe(
       (value: Calendar) => {
         // console.log(value);
-        this.snackBar.open('Calendar created successfully!', 'Dismiss', { duration: 2000 });
+        this.snackBar.open('Calendar created successfully!', 'Dismiss', {duration: 2000});
         this.router.navigate(['calendars', value.id, 'wizard']);
       }, err => {
         this.loading = false;
-        this.snackBar.open('Calendar creation failed!', 'Dismiss', { duration: 2000 });
+        this.snackBar.open('Calendar creation failed!', 'Dismiss', {duration: 2000});
         console.log(err);
       }
     );
@@ -100,19 +108,20 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     updatedCalendar.name = this.calendarDetails.form.controls.name.value;
     this.service.partialUpdate(updatedCalendar.id, {name: updatedCalendar.name})
       .subscribe((value: Calendar) => {
-        // console.log(value);
-        this.snackBar.open('Calendar updated successfully!', 'Dismiss', { duration: 1000 });
-        this.loading = false;
-      }, err => {
-        this.loading = false;
-        this.snackBar.open('Calendar updating failed!', 'Dismiss', { duration: 1000 });
-        console.log(err);
-      }
-    );
-}
+          // console.log(value);
+          this.snackBar.open('Calendar updated successfully!', 'Dismiss', {duration: 1000});
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.snackBar.open('Calendar updating failed!', 'Dismiss', {duration: 1000});
+          console.log(err);
+        }
+      );
+  }
 
   finish() {
     this.updateCalendar();
     this.router.navigate(['calendars', this.calendar.id, 'posts']);
   }
 }
+

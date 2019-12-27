@@ -36,6 +36,7 @@ const routes: Routes = [
   {path: 'calendars/new', component: CalendarWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/wizard/details', component: CalendarWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/wizard/social-accounts', component: CalendarWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/wizard/collaborators', component: CalendarWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/wizard', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
 
   {path: '**', redirectTo: ''}// redirect to not found??
