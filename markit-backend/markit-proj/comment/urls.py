@@ -7,6 +7,6 @@ from .views import (
 
 urlpatterns = [
     url(r'^$', CommentCreateView.as_view(), name='create-comment'),
-    url(r'^(?P<post_id>\d+)/$', CommentListView.as_view(), name='list-coment'),
-    url(r'^(?P<pk>\d+)/$', CommentView.as_view(), name='detail-comment'),
+    url(r'^list/(?P<post_id>\d+)/$', CommentListView.as_view(), name='list-coment'),
+    url(r'^detail/(?P<pk>\d+)/$', CommentView.as_view(), name='detail-comment'),
 ]
