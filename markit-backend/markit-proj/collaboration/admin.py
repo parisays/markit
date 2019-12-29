@@ -36,7 +36,7 @@ class RoleAdmin(admin.ModelAdmin):
         ),
     )
 
-class ColaboratorForm(forms.ModelForm):
+class CollaboratorForm(forms.ModelForm):
     """
     Admin page collaborator form.
     """
@@ -57,8 +57,8 @@ class CollaboratorAdmin(admin.ModelAdmin):
     """
     Custom collaborator admin page.
     """
-    change_form = ColaboratorForm
-    add_form = ColaboratorForm
+    change_form = CollaboratorForm
+    add_form = CollaboratorForm
     list_display = ('id', 'calendar', 'user', 'role',)
     ordering = ('id', 'user', 'calendar', 'role',)
     list_filter = ('user', 'calendar', 'role',)

@@ -35,7 +35,6 @@ class CustomAccountDetailsSerializer(serializers.ModelSerializer):
         fields = ('id', 'email', 'firstName', 'lastName', 'calendar')
         read_only_fields = ('id',)
 
-
 class CustomPasswordResetSerializer(serializers.Serializer):
     """
     Password reset serializer.
