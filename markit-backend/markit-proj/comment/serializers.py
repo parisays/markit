@@ -2,7 +2,7 @@ from rest_framework import serializers
 from collaboration.serializers import CollaboratorSerializer
 from .models import Comment
 
-class CommentCreateSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     """
     Comment serializer.
     """
@@ -12,7 +12,7 @@ class CommentCreateSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', )
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentDetailSerializer(serializers.ModelSerializer):
     """
     Comment serializer.
     """

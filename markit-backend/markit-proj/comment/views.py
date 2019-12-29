@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from users.models import User
 from posts.models import Post
 from collaboration.models import Collaborator
-from .serializers import CommentSerializer, CommentCreateSerializer
+from .serializers import CommentDetailSerializer, CommentSerializer
 from .models import Comment
 from .permissions import CommentPermission, CommentViewPermission
 
@@ -15,7 +15,7 @@ class CommentCreateView(generics.CreateAPIView):
     """
     permission_classes = (IsAuthenticated, CommentPermission)
     queryset = Comment.objects.all()
-    serializer_class = CommentCreateSerializer
+    serializer_class = CommentSerializer
 
     def create(self, request, *args, **kwargs):
         # check permission
@@ -36,7 +36,7 @@ class CommentListView(generics.ListAPIView):
     """
     permission_classes = (IsAuthenticated, CommentPermission)
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    serializer_class = CommentDetailSerializer
 
     def list(self, request, *args, **kwargs):
         post_id = kwargs.get('post_id')
@@ -47,6 +47,14 @@ class CommentListView(generics.ListAPIView):
         return Response(serializer.data)
 
 class CommentView(generics.RetrieveDestroyAPIView):
+    """
+    Retrieve/update/destroy comment view.
+    """
+    permission_classes = (IsAuthenticated, CommentViewPermission)
+    queryset = Comment.objects.all()
+    serializer_class = CommentDetailSerializer
+
+class CommentUpdateView(generics.UpdateAPIView):
     """
     Retrieve/update/destroy comment view.
     """

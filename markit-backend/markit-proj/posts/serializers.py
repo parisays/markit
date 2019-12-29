@@ -2,14 +2,14 @@ from rest_framework import serializers
 from django_celery_beat.models import ClockedSchedule, PeriodicTask
 from .models import Post
 from .Base64Image import Base64ImageField
-from comment.serializers import CommentSerializer
+from comment.serializers import CommentDetailSerializer
 
 class PostSerializer(serializers.ModelSerializer):
     """
     Post serializer.
     """
     image = Base64ImageField(max_length=None, use_url=True, required=False)
-    comments = CommentSerializer(many=True, read_only=True)
+    comments = CommentDetailSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
