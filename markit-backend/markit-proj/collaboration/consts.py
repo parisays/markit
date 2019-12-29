@@ -1,5 +1,6 @@
 from .models import Role
 
+
 class Access():
     """
     All accesses.
@@ -15,6 +16,7 @@ class Access():
     POST_COMMENT = 'post_comment'
     SET_PUBLISH = 'set_publish'
     SET_PUBLISH_WITH_PERMISSION = 'set_publish_with_permission'
+
 
 class DefinedRoles():
     """
