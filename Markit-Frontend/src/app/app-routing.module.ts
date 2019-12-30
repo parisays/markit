@@ -14,6 +14,7 @@ import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-setting
 import {ProfileComponent} from '@app/profile/profile.component';
 import {ForgetPassComponent} from '@app/forget-pass/forget-pass.component';
 import {ResetPassComponent} from '@app/reset-pass/reset-pass.component';
+import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'calendars/:calendarId/posts/new', component: PostWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/posts/:postId/edit', component: PostWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/posts', component: PostListViewComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/calendar-view', component: CalendarViewComponent, canActivate: [AuthGuard]},
 
   {path: 'calendars/:calendarId/edit', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
 

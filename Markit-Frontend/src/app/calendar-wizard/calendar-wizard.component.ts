@@ -100,19 +100,20 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     updatedCalendar.name = this.calendarDetails.form.controls.name.value;
     this.service.partialUpdate(updatedCalendar.id, {name: updatedCalendar.name})
       .subscribe((value: Calendar) => {
-        // console.log(value);
-        this.snackBar.open('Calendar updated successfully!', 'Dismiss', { duration: 1000 });
-        this.loading = false;
-      }, err => {
-        this.loading = false;
-        this.snackBar.open('Calendar updating failed!', 'Dismiss', { duration: 1000 });
-        console.log(err);
-      }
-    );
-}
+          // console.log(value);
+          this.snackBar.open('Calendar updated successfully!', 'Dismiss', {duration: 1000});
+          this.loading = false;
+        }, err => {
+          this.loading = false;
+          this.snackBar.open('Calendar updating failed!', 'Dismiss', {duration: 1000});
+          console.log(err);
+        }
+      );
+  }
 
   finish() {
     this.updateCalendar();
     this.router.navigate(['calendars', this.calendar.id, 'posts']);
   }
 }
+

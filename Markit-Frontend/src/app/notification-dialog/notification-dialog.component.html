@@ -1,0 +1,10 @@
+<mat-list>
+  <mat-list-item *ngFor="let notif of data">
+    <h3 matLine> New invitation! </h3>
+    <p matLine> You've been invited to calendar {{notif.calendar}} </p>
+    <div matLine>
+      <button mat-raised-button color="primary" (click)="onAccept(notif.token)">Accept</button>
+      <button mat-raised-button color="accent" (click)="onReject(notif.token)">Reject</button>
+    </div>
+  </mat-list-item>
+</mat-list>
