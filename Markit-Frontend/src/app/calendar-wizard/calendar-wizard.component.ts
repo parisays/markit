@@ -22,8 +22,8 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
   isDetailsFormValid = false;
   calendarId: number;
   access = {
-    canEditCalendar: false,
-    canAddCollaborator: false,
+    canEditCalendar: true,
+    canAddCollaborator: true,
   };
 
   get returnUrl() {

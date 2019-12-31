@@ -38,12 +38,12 @@ export class PostListViewComponent implements OnInit {
   collaborators: Collaborator[];
   moreThanFour = false;
   access = {
-    canDeleteCalendar: false,
+    canDeleteCalendar: true,
     canEditCalendar: true,
-    canCreatePost: false,
+    canCreatePost: true,
     canEditPost: true,
-    canDeletePost: false,
-    canSetPublish: false,
+    canDeletePost: true,
+    canSetPublish: true,
   };
   private twitterAppData: { client_id: string, secret: string };
 
