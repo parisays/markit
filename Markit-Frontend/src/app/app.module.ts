@@ -47,6 +47,7 @@ import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 registerLocaleData(en);
+import { NotificationDialogComponent } from './notification-dialog/notification-dialog.component';
 
 @NgModule({
   entryComponents: [

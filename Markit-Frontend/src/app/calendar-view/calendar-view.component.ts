@@ -43,7 +43,6 @@ export class CalendarViewComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private snackBar: MatSnackBar) {
-
   }
 
   get isTwitterConnected() {
