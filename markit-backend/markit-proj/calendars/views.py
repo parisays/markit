@@ -29,14 +29,11 @@ class CalendarListCreateView(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
-        print(user)
         request.data.update({'owner' : user.id})
         request.data.update({'posts' : []})
-        print(request.data)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        print(serializer.data)
         # create owner collab
         owner_role = Role.objects.get(name=DefinedRoles.OWNER)
         currunt_calendar = Calendar.objects.get(pk=serializer.data['id'])
