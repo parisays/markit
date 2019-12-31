@@ -24,7 +24,7 @@ class CollaboratorCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         calendar = Calendar.objects.get(pk=request.data['calendar'])
         self.check_object_permissions(request, calendar)
-        user = User.objects.get(pk=request.data['user'])
+        user = User.objects.get(email=request.data['email'])
         # check collaborator object duplication
         try:
             collab_duplicate = Collaborator.objects.filter(user=user).get(calendar=calendar)
@@ -42,7 +42,7 @@ class CollaboratorCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=serializer_data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        self.create_invitation(serializer.data)
+        # self.create_invitation(serializer.data)
         response_data = {'role_name':role.name, 'email':user.email, 'calendar':calendar.id}
         headers = self.get_success_headers(serializer.data)
         return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
