@@ -8,7 +8,7 @@
     padding: 5px;
     background: white;
 }
-* {
+.post-card * {
     margin: auto;
 }
 
@@ -37,7 +37,8 @@ ul{
     -webkit-tap-highlight-color: transparent;
   }
 
-.toolbar {
+
+  .toolbar {
     margin-top: 5%;
     margin-left: 10%;
     width: 80%;
@@ -56,19 +57,19 @@ ul{
     color: $app-dark-primary;
     padding: 0px 20px;
   }
+
+  button{
+    margin: auto 0;
+  }
+
+  mat-icon{
+    width: 32px;
+  }
+
   .collaborator{
     height: 50px;
     border: solid 3px $app-normal-primary;
     border-radius: 50%;
     margin: 3px;
     padding: 5px;
-  }
-
-  button{
-    margin: auto 0;
-    padding: 0;
-  }
-
-  mat-icon{
-    width: 32px;
   }

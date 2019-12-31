@@ -14,6 +14,7 @@ import {CalendarSettingsComponent} from '@app/calendar-settings/calendar-setting
 import {ProfileComponent} from '@app/profile/profile.component';
 import {ForgetPassComponent} from '@app/forget-pass/forget-pass.component';
 import {ResetPassComponent} from '@app/reset-pass/reset-pass.component';
+import {PostPreviewComponent} from '@app/post-preview/post-preview.component';
 import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
 
   {path: 'calendars/:calendarId/posts/new', component: PostWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/posts/:postId/edit', component: PostWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/posts/:postId/preview', component: PostPreviewComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/posts', component: PostListViewComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/calendar-view', component: CalendarViewComponent, canActivate: [AuthGuard]},
 
@@ -36,6 +38,7 @@ const routes: Routes = [
   {path: 'calendars/new', component: CalendarWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/wizard/details', component: CalendarWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/wizard/social-accounts', component: CalendarWizardComponent, canActivate: [AuthGuard]},
+  {path: 'calendars/:calendarId/wizard/collaborators', component: CalendarWizardComponent, canActivate: [AuthGuard]},
   {path: 'calendars/:calendarId/wizard', redirectTo: 'calendars/:calendarId/wizard/details', canActivate: [AuthGuard]},
 
   {path: '**', redirectTo: ''}// redirect to not found??
