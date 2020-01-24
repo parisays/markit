@@ -7,6 +7,7 @@ from .views import (
     PostRetrieveView,
     PostDestroyView,
     PostUpdateView,
+    PostDashboardView,
 )
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     url(r'^edit/(?P<pk>\d+)/$', PostUpdateView.as_view(), name='edit-post'),
     url(r'^view/(?P<pk>\d+)/$', PostRetrieveView.as_view(), name='view-post'),
     url(r'^delete/(?P<pk>\d+)/$', PostDestroyView.as_view(), name='delete-post'),
+    url(r'^dashboard/$', PostDashboardView.as_view(), name='dashboard-post'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
