@@ -47,6 +47,7 @@ import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { PostStatusComponent } from './post-status/post-status.component';
+import { QuickLinksComponent } from './quick-links/quick-links.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -85,6 +86,8 @@ registerLocaleData(en);
     PostPreviewComponent,
     CalendarViewComponent,
     NotificationDialogComponent,
+    PostStatusComponent,
+    QuickLinksComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,12 +8,14 @@
     height: 400px; 
     width: 32%;
     background: white;
+    padding: 10px;
 }
 .post-ideas-style{
     margin: 3%;
     height: 400px; 
     width: 32%;
     background:white;
+    padding: 10px;
 }
 .top-row{
     display: flex;
@@ -25,6 +27,14 @@
     height: 400px;
     width: 32%;
     background: white;
+    padding: 10px;
+}
+
+.quick-link{
+    margin: 0 3%;
+    height: 400px; 
+    width: 32%;
+    background:white;
     padding: 10px;
 }
 
@@ -41,11 +51,6 @@ h1 {
     border-bottom: 2px $app-light-primary double;
 }
 
-h1 mat-icon {
-    margin: 10px; 
-    font-size: 40px;
-}
-
 div{
     position: relative;
 }
@@ -54,4 +59,8 @@ div button{
     position: absolute;
     right: 10px;
     bottom: 10px;
+}
+
+h1 i{
+    vertical-align: 5px;
 }
