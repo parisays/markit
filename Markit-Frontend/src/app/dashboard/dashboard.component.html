@@ -21,7 +21,15 @@
             </div>
         </div>
     </div>
-    <div style="margin: auto;">
-        <app-post-overview-simple></app-post-overview-simple>
+    <div class="top-row">
+        <div class="post-status mat-elevation-z5">
+            <h1 matHeader >
+                <!-- <mat-icon matPrefix>bar_chart</mat-icon> -->
+                <i style="font-size: 30px; height: 40px;" nz-icon nzType="rise" nzTheme="outline"></i>
+                Posts Status
+            </h1>
+            <app-post-status></app-post-status>
+        </div>
+
     </div>
 </body>
