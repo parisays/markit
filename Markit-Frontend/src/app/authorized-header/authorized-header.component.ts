@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '@services';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import {WebSocketSubject} from 'rxjs/src/internal/observable/dom/WebSocketSubjec
   styleUrls: ['./authorized-header.component.scss']
 })
 export class AuthorizedHeaderComponent implements OnInit {
+  @ViewChild('notification', {static: false}) Notification: NotificationDialogComponent;
 
   ws = webSocket('');
   notifs: Notification[] = [];
@@ -32,15 +33,12 @@ export class AuthorizedHeaderComponent implements OnInit {
     });
   }
 
-  showNotifs() {
-    const ndRef = this.notifDialog.open(NotificationDialogComponent, {
-      width: '400px',
-      data: this.notifs
-    });
+  clickMe(): void {
+    this.visible = false;
+  }
 
-    ndRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  showNotifs() {
+    this.Notification.data = this.notifs;
   }
 }
 
