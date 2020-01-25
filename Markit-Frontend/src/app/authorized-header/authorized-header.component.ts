@@ -17,6 +17,8 @@ export class AuthorizedHeaderComponent implements OnInit {
 
   ws = webSocket('');
   notifs: Notification[] = [];
+  visible: boolean;
+  count = 5;
 
   constructor(
     public authService: AuthenticationService,
@@ -38,6 +40,8 @@ export class AuthorizedHeaderComponent implements OnInit {
   }
 
   showNotifs() {
+    // this.count++;
+    console.log('show notif button clicked!' + this.count);
     this.Notification.data = this.notifs;
   }
 }

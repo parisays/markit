@@ -6,6 +6,7 @@
         Markit
     </a>
     <mat-icon style="margin-right :20px; color: rgb(182, 181, 181);">contact_support</mat-icon>
+    <nz-badge [nzCount]="count" [nzOverflowCount]="99" [nzStyle]="{ backgroundColor: '#ee8780' }">
       <button 
       class="notifbutton" 
       nz-popover 
@@ -19,6 +20,7 @@
       (click)="showNotifs()">
           <mat-icon>notifications</mat-icon>
       </button>
+    </nz-badge>
     <button
     color="primary"
     mat-mini-fab

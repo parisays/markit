@@ -28,7 +28,6 @@ import { PostWizardComponent } from './post-wizard/post-wizard.component';
 import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
 import { ManualTestComponent } from './manual-test/manual-test.component';
 import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
-import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollaboratorInvitationFormComponent } from './collaborator-invitation-form/collaborator-invitation-form.component';
@@ -75,7 +74,6 @@ registerLocaleData(en);
     BasePostContentComponent,
     PostWizardComponent,
     CalendarSettingsComponent,
-    PostOverviewSimpleComponent,
     HomepageComponent,
     ProfileComponent,
     CollaboratorInvitationFormComponent,
