@@ -29,8 +29,13 @@ class CalendarListCreateView(generics.ListCreateAPIView):
 
     def create(self, request, *args, **kwargs):
         user = User.objects.get(email=self.request.user)
+        _mutable = request.data._mutable
+        # set to mutable
+        request.data._mutable = True
         request.data.update({'owner' : user.id})
         request.data.update({'posts' : []})
+        # set mutable flag back
+        request.data._mutable = _mutable
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
