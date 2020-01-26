@@ -24,7 +24,7 @@ class CollaboratorCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         calendar = Calendar.objects.get(pk=request.data['calendar'])
         self.check_object_permissions(request, calendar)
-        user = User.objects.get(pk=request.data['user'])
+        user = User.objects.get(email=request.data['email'])
         # check collaborator object duplication
         try:
             collab_duplicate = Collaborator.objects.filter(user=user).get(calendar=calendar)

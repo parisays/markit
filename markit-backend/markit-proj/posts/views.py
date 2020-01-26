@@ -4,6 +4,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
 from calendars.models import Calendar
+from collaboration.models import Collaborator
+from users.models import User
 from socials.tasks import create_tweet_task
 from .serializers import PostSerializer
 from .models import Post
@@ -52,8 +54,10 @@ class PostListView(generics.ListAPIView):
         calendar_id = kwargs.get('calendar_id')
         calendar = Calendar.objects.get(id=calendar_id)
         post_list = Post.objects.filter(calendar=calendar)
-        for post in post_list:
-            self.check_object_permissions(request, post)
+        if post_list.count() > 0:
+            self.check_object_permissions(request, post_list[0])
+        # for post in post_list:
+        #     self.check_object_permissions(request, post)
         serializer = self.get_serializer(post_list, many=True)
         return Response(serializer.data)
 
@@ -80,3 +84,25 @@ class PostRetrieveView(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated, PostPermission)
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+
+class PostDashboardView(generics.ListAPIView):
+    """
+    Dashboard posts view.
+    """
+    permission_classes = (IsAuthenticated, )
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def list(self, request, *args, **kwargs):
+        user = User.objects.get(email=self.request.user)
+        collab_list = Collaborator.objects.filter(user=user)
+        draft = 0
+        scheduled = 0
+        published = 0
+        for collab in collab_list:
+            post_list = Post.objects.filter(calendar=collab.calendar)
+            draft += post_list.filter(status='Draft').count()
+            scheduled += post_list.filter(status='Scheduled').count()
+            published += post_list.filter(status='Published').count()
+        data = {'Draft': draft, 'Scheduled': scheduled, 'Published': published}
+        return Response(data)
