@@ -73,3 +73,18 @@ ul{
     margin: 3px;
     padding: 5px;
   }
+
+  .month{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .month div{
+    font-size: 18px;
+    margin: 5px;
+  }
+
+  i{
+    vertical-align: 2px;
+    color: $app-dark-accent;
+  }
