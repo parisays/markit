@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {CollaborationService} from '@app/_services/collaboration.service';
 import {MatSnackBar} from '@angular/material';
+import {CalendarService} from '@services';
 
 @Component({
   selector: 'app-collaborator-invitation-form',
@@ -23,13 +24,16 @@ export class CollaboratorInvitationFormComponent implements OnInit {
   loading = false;
   notFound = false;
   displayedColumns: string[] = ['logo', 'email', 'role'];
-  access = {canAddCollaborator: false};
+  access = {
+    canAddCollaborator: false
+  };
   roles = ['Owner', 'Manager', 'Viewer', 'Editor'];
 
   collaborators: { email: string, role_name: string }[] = [];
 
   constructor(private fb: FormBuilder,
               private collaborationService: CollaborationService,
+              private calendarService: CalendarService,
               private snackBar: MatSnackBar) {
   }
 
@@ -38,6 +42,14 @@ export class CollaboratorInvitationFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.calendarId) {
+      this.calendarService.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+          this.access.canAddCollaborator = accObj.canAddCollaborator;
+        }, err => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   onInvite() {
