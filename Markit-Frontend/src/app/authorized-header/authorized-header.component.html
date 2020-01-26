@@ -6,11 +6,25 @@
         Markit
     </a>
     <mat-icon style="margin-right :20px; color: rgb(182, 181, 181);">contact_support</mat-icon>
-    <mat-icon style="margin-right :20px; color: rgb(182, 181, 181);" (click)="showNotifs()">notifications</mat-icon>
+    <nz-badge [nzCount]="count" [nzOverflowCount]="99" [nzStyle]="{ backgroundColor: '#ee8780' }">
+      <button 
+      class="notifbutton" 
+      nz-popover 
+      nzPopoverTitle="Notifications"
+      [(nzVisible)]="visible"
+      nzPopoverPlacement="bottomRight"
+      nzPopoverTrigger="click" 
+      [nzPopoverContent]="contentTemplate"
+      color="primary" 
+      mat-mini-fab
+      (click)="showNotifs()">
+          <mat-icon>notifications</mat-icon>
+      </button>
+    </nz-badge>
     <button
     color="primary"
     mat-mini-fab
-    style="margin-right: 10%;"
+    style="margin-right: 10%; margin-left: 20px;"
     [matMenuTriggerFor]="beforeMenu">
     <mat-icon>
       person_pin
@@ -26,3 +40,7 @@
     </button>
   </mat-menu>
 </mat-toolbar>
+
+<ng-template #contentTemplate>
+  <app-notification-dialog></app-notification-dialog>
+</ng-template>

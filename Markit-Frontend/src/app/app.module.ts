@@ -28,7 +28,6 @@ import { PostWizardComponent } from './post-wizard/post-wizard.component';
 import {AuthInterceptor} from '@app/_helpers/auth.interceptor';
 import { ManualTestComponent } from './manual-test/manual-test.component';
 import { CalendarSettingsComponent } from './calendar-settings/calendar-settings.component';
-import { PostOverviewSimpleComponent } from './post-overview-simple/post-overview-simple.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CollaboratorInvitationFormComponent } from './collaborator-invitation-form/collaborator-invitation-form.component';
@@ -46,6 +45,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { PostStatusComponent } from './post-status/post-status.component';
+import { QuickLinksComponent } from './quick-links/quick-links.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -73,7 +74,6 @@ registerLocaleData(en);
     BasePostContentComponent,
     PostWizardComponent,
     CalendarSettingsComponent,
-    PostOverviewSimpleComponent,
     HomepageComponent,
     ProfileComponent,
     CollaboratorInvitationFormComponent,
@@ -84,6 +84,8 @@ registerLocaleData(en);
     PostPreviewComponent,
     CalendarViewComponent,
     NotificationDialogComponent,
+    PostStatusComponent,
+    QuickLinksComponent,
   ],
   imports: [
     BrowserModule,

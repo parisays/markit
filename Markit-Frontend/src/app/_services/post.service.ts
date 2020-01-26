@@ -26,6 +26,11 @@ export class PostService extends DataService {
     return super.getAll(undefined, url);
   }
 
+  getPostsStatusCount() {
+    const url = `${this.endpoint}dashboard/`;
+    return super.getAll(undefined, url);
+  }
+
   get(id): Observable<object> {
     const url = this.endpoint + 'view/';
     return super.get(id, url);

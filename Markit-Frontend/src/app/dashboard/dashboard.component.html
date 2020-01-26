@@ -2,7 +2,7 @@
     <div class="top-row">
         <div class="calendar-list mat-elevation-z5">
             <h1 matHeader >
-                <mat-icon matPrefix>date_range</mat-icon>
+                <i nz-icon nzType="calendar" nzTheme="outline"></i>
                 Calendars
             </h1>
             <app-calendar-list-view></app-calendar-list-view>
@@ -11,17 +11,30 @@
                 <mat-icon>add</mat-icon>
             </button>
         </div>
+        <div class="post-status mat-elevation-z5">
+            <h1 matHeader >
+                <i nz-icon nzType="rise" nzTheme="outline"></i>
+                Posts Status
+            </h1>
+            <app-post-status></app-post-status>
+        </div>
+    </div>
+    <div class="top-row">
         <div class="post-ideas-style mat-elevation-z5" >
             <h1 matHeader>
-                <mat-icon>star_border</mat-icon>
+                <i nz-icon nzType="bulb" nzTheme="outline"></i>
                 Post Ideas
             </h1>
-            <div style="overflow: auto; max-height: 300px; padding: 0 20px;">
+            <div style="overflow: auto; height: 300px; padding: 0 20px;">
                 <app-post-ideas></app-post-ideas>
             </div>
         </div>
-    </div>
-    <div style="margin: auto;">
-        <app-post-overview-simple></app-post-overview-simple>
+        <div class="quick-link mat-elevation-z5">
+            <h1 matHeader >
+                <i nz-icon nzType="link" nzTheme="outline"></i>
+                Quick Links
+            </h1>
+            <app-quick-links></app-quick-links>
+        </div>
     </div>
 </body>

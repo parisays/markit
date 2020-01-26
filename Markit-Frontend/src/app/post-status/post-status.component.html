@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="draft">
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+        <span>Draft:</span>
+        <i *ngIf="loading" class="number" nz-icon nzType="loading" nzTheme="outline"></i>
+        <span *ngIf="!loading" class="number">{{data.Draft}}</span>
+    </div>
+    <div class="published">
+        <i nz-icon nzType="check" nzTheme="outline"></i>
+        <span>Published:</span>
+        <i *ngIf="loading" class="number" nz-icon nzType="loading" nzTheme="outline"></i>
+        <span *ngIf="!loading" class="number">{{data.Published}}</span>
+    </div>
+    <div class="scheduled">
+        <i nz-icon nzType="clock-circle" nzTheme="outline"></i>
+        <span>Scheduled:</span>
+        <i *ngIf="loading" class="number" nz-icon nzType="loading" nzTheme="outline"></i>
+        <span *ngIf="!loading" class="number">{{data.Scheduled}}</span>
+    </div>
+</div>
