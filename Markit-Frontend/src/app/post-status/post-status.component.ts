@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '@services';
+import { PostsStatusCount } from '@models';
 
 @Component({
   selector: 'app-post-status',
@@ -7,15 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostStatusComponent implements OnInit {
 
-  data = {
-    Draft : 1,
-    Scheduled : 5,
-    Published : 0
-  };
+  loading = false;
+  data: PostsStatusCount = {Draft: 0, Published: 0, Scheduled: 0};
 
-  constructor() { }
+  constructor(private service: PostService) { }
 
   ngOnInit() {
+    this.loading = true;
+
+    this.service.getPostsStatusCount().subscribe((response/*: any*/) => {
+      // console.log(response);
+      this.data = response as PostsStatusCount;
+      this.loading = false;
+    }, err => {
+      console.log('post status view error');
+      console.log(err);
+      this.loading = false;
+    });
   }
 
 }
