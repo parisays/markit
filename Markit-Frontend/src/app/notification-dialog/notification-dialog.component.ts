@@ -10,14 +10,51 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./notification-dialog.component.scss']
 })
 export class NotificationDialogComponent implements OnInit {
+
+  data: Notification[];
   constructor(
-    public dialogRef: MatDialogRef<NotificationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Notification[],
     private collaborationService: CollaborationService,
     private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
+    // this.data = [
+    //   {
+    //     type: 'notif',
+    //     calendar: 7478723,
+    //     token: 'jhdf',
+    //     invited: 3840,
+    //     inviter: 3749327,
+    //   },
+    //   {
+    //     type: 'notif',
+    //     calendar: 7478723,
+    //     token: 'jhdf',
+    //     invited: 3840,
+    //     inviter: 3749327,
+    //   },
+    //   {
+    //     type: 'notif',
+    //     calendar: 7478723,
+    //     token: 'jhdf',
+    //     invited: 3840,
+    //     inviter: 3749327,
+    //   },
+    //   {
+    //     type: 'notif',
+    //     calendar: 7478723,
+    //     token: 'jhdf',
+    //     invited: 3840,
+    //     inviter: 3749327,
+    //   },
+    //   {
+    //     type: 'notif',
+    //     calendar: 7478723,
+    //     token: 'jhdf',
+    //     invited: 3840,
+    //     inviter: 3749327,
+    //   }
+    // ];
   }
 
   onAccept(token: string) {
@@ -29,14 +66,11 @@ export class NotificationDialogComponent implements OnInit {
     }, err => {
       console.log(err);
       this.snackBar.open('Operation failed', 'Dismiss', {duration : 2000});
-    }, () => {
-      this.dialogRef.close();
     });
   }
 
   onReject(token: string) {
     // TODO remove notif
     this.data.splice(this.data.findIndex(n => n.token === token));
-    this.dialogRef.close();
   }
 }
