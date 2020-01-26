@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {CollaborationService} from '@app/_services/collaboration.service';
 import {MatSnackBar} from '@angular/material';
 
@@ -23,16 +23,19 @@ export class CollaboratorInvitationFormComponent implements OnInit {
   loading = false;
   notFound = false;
   displayedColumns: string[] = ['logo', 'email', 'role'];
-
+  access = {canAddCollaborator: false};
   roles = ['Owner', 'Manager', 'Viewer', 'Editor'];
 
   collaborators: { email: string, role_name: string }[] = [];
 
   constructor(private fb: FormBuilder,
               private collaborationService: CollaborationService,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar) {
+  }
 
-  get f() { return this.form.controls; }
+  get f() {
+    return this.form.controls;
+  }
 
   ngOnInit() {
   }

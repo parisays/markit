@@ -1,0 +1,75 @@
+@import "../../theme.scss";
+.post-card{
+    display: flex;
+    width: 150px;
+    flex-direction: row;
+    margin: 5px auto;
+    min-height: 50px;
+    padding: 5px;
+    background: white;
+}
+.post-card * {
+    margin: auto;
+}
+
+li {
+    list-style-type: none;
+    margin: 0;
+}
+
+ul{
+    padding-inline-start: 0px;
+}
+
+.icon-color{
+    color: $app-normal-primary;
+}
+
+.ripple-container {
+    cursor: pointer;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+
+  .toolbar {
+    margin-top: 5%;
+    margin-left: 10%;
+    width: 80%;
+    display: flex;
+    background: $app-light-primary;
+    border-radius: 5px;
+  }
+
+  .select{
+    height: 63px;
+    font-size: 15px;
+    margin-left: 5%;
+  }
+  
+  h1{
+    color: $app-dark-primary;
+    padding: 0px 20px;
+  }
+
+  button{
+    margin: auto 0;
+  }
+
+  mat-icon{
+    width: 32px;
+  }
+
+  .collaborator{
+    height: 50px;
+    border: solid 3px $app-normal-primary;
+    border-radius: 50%;
+    margin: 3px;
+    padding: 5px;
+  }

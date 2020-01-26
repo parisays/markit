@@ -5,4 +5,7 @@ export class Collaborator {
   user: number;
   calendar: number;
   role: Role;
+  firstName: string;
+  lastName: string;
+  email: string;
 }

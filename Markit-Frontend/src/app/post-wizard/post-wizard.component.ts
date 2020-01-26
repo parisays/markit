@@ -25,6 +25,11 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
   post: Post = null;
   loading = false;
   publishDateTime = '';
+  access = {
+    canCreatePost: true,
+    canEditPost: true,
+    canSetPublish: true,
+  };
 
   constructor(private location: Location,
               private route: ActivatedRoute,
@@ -56,9 +61,13 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
 
       if (this.postId) {
         this.postService.get(this.postId).subscribe((postResonse: Post) => {
-          // console.log(postResonse);
+          // console.log(`this is the post:`, postResonse);
           this.post = postResonse;
+          const scheduledtime = new Date(this.post.publishDateTime);
+
           this.postGeneralInfo.form.controls.subject.setValue(this.post.subject);
+          this.postGeneralInfo.form.controls.date.setValue(scheduledtime);
+          this.postGeneralInfo.form.controls.time.setValue(scheduledtime);
           this.postContent.form.controls.text.setValue(this.post.text);
           this.postContent.imageUrl = this.post.image;
           this.postChannels.connectedPlatforms = this.calendar.connectedPlatforms.split('/');
@@ -106,7 +115,6 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
       );
     }
   }
-
 
   updatePost(publish: boolean = false, schedule: boolean = false) {
     this.loading = true;
