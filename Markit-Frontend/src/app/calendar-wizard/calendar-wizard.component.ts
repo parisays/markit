@@ -22,12 +22,15 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
   isDetailsFormValid = false;
   calendarId: number;
   access = {
-    canEditCalendar: true,
-    canAddCollaborator: true,
+    canEditCalendar: false,
   };
 
   get returnUrl() {
     return this.calendar ? `calendars/${this.calendar.id}/wizard/social-accounts` : null;
+  }
+
+  get closeUrl() {
+    return this.calendar ? `calendars/${this.calendar.id}/posts` : `/`;
   }
 
   constructor(private location: Location,
@@ -44,10 +47,32 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     }
 
     this.calendarId = +this.route.snapshot.paramMap.get('calendarId');
+    if (this.calendarId) {
+      this.service.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+          this.access.canEditCalendar = accObj.canEditCalendar;
+          if (!this.access.canEditCalendar) {
+            this.router.navigate(['calendars', this.calendarId, 'posts']);
+          }
+        }, err => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   ngAfterViewInit() {
     if (this.calendarId) {
+      this.service.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+          this.access.canEditCalendar = accObj.canEditCalendar;
+          this.access.canEditCalendar = false;
+          if (!this.access.canEditCalendar) {
+            this.router.navigate(['calendars', this.calendarId, 'posts']);
+          }
+        }, err => {
+          console.log(err);
+        }
+      );
+
       this.service.get(this.calendarId).subscribe((value: Calendar) => {
         // console.log(value);
         this.calendar = value;
@@ -71,6 +96,9 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
           }
           if (this.stepper.selectedIndex === 1) {
             this.location.go(`/calendars/${this.calendar.id}/wizard/social-accounts`);
+          }
+          if (this.stepper.selectedIndex === 2) {
+            this.location.go(`/calendars/${this.calendar.id}/wizard/collaborators`);
           }
         });
 

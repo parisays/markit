@@ -48,7 +48,7 @@ export class CalendarService extends DataService {
   }
 
 
-  private mapAccess(backAcc: string[]): object {
+  private mapAccess(backAcc: string[]): any {
     const accessObj = {
       canAddCollaborator: false,
       canEditCalendar: false,

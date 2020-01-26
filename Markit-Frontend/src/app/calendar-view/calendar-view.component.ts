@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Calendar, Post } from '@models';
-import { PostService, CalendarService } from '@services';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
-import { Collaborator } from '@app/_models/collaborator';
+import {Component, OnInit} from '@angular/core';
+import {Calendar, Post} from '@models';
+import {PostService, CalendarService} from '@services';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
+import {Collaborator} from '@app/_models/collaborator';
 
 @Component({
   selector: 'app-calendar-view',
@@ -24,9 +24,9 @@ export class CalendarViewComponent implements OnInit {
   posts: Post[];
   access = {
     canDeleteCalendar: false,
-    canEditCalendar: true,
+    canEditCalendar: false,
     canCreatePost: false,
-    canEditPost: true,
+    canEditPost: false,
     canDeletePost: false,
     canSetPublish: false,
   };
@@ -34,8 +34,8 @@ export class CalendarViewComponent implements OnInit {
   isInTrueDate(date1: Date, date2): boolean {
     const date = new Date(date2);
     return date1.getDate() === date.getDate()
-        && date1.getMonth() === date.getMonth()
-        && date1.getFullYear() === date.getFullYear();
+      && date1.getMonth() === date.getMonth()
+      && date1.getFullYear() === date.getFullYear();
   }
 
   constructor(private postService: PostService,
@@ -54,14 +54,25 @@ export class CalendarViewComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
-      // console.log(this.calendarId);
+
+      this.calendarService.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+          this.access.canDeleteCalendar = accObj.canDeleteCalendar;
+          this.access.canEditCalendar = accObj.canEditCalendar;
+          this.access.canCreatePost = accObj.canCreatePost;
+          this.access.canEditPost = accObj.canEditPost;
+          this.access.canDeletePost = accObj.canDeletePost;
+          this.access.canSetPublish = accObj.canSetPublish;
+        }, err => {
+          console.log(err);
+        }
+      );
 
       this.calendarService.get(this.calendarId).subscribe(calendarResonse => {
         // console.log('post list view calendar service 1', value);
         this.calendar = calendarResonse as Calendar;
         this.calendarName = (calendarResonse as Calendar).name;
         this.collaborators = this.calendar.collaborator_calendar;
-        console.log(`this is collaborators of this calendar`, this.collaborators);
+        // console.log(`this is collaborators of this calendar`, this.collaborators);
       }, err => {
         console.log('post list view calendar service error', err);
         this.loading = false;
