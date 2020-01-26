@@ -26,9 +26,9 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
   loading = false;
   publishDateTime = '';
   access = {
-    canCreatePost: true,
-    canEditPost: true,
-    canSetPublish: true,
+    canCreatePost: false,
+    canEditPost: false,
+    canSetPublish: false,
   };
 
   constructor(private location: Location,
@@ -58,6 +58,15 @@ export class PostWizardComponent implements OnInit, AfterViewInit {
     this.calendarService.get(this.calendarId).subscribe((calendarResponse: Calendar) => {
       // console.log('calendar: ', calendarResponse);
       this.calendar = calendarResponse;
+
+      this.calendarService.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+          this.access.canCreatePost = accObj.canCreatePost;
+          this.access.canEditPost = accObj.canEditPost;
+          this.access.canSetPublish = accObj.canSetPublish;
+        }, err => {
+          console.log(err);
+        }
+      );
 
       if (this.postId) {
         this.postService.get(this.postId).subscribe((postResonse: Post) => {
