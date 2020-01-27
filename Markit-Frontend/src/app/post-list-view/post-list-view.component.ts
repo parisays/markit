@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectorRef} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthenticationService, CalendarService, PostService} from '@services';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,7 +7,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TwitterService} from '@services';
 import {map} from 'rxjs/operators';
 import {throwError} from 'rxjs';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar, MatTableDataSource} from '@angular/material';
 import {environment} from '@environments/environment';
 
 @Component({
@@ -32,7 +32,8 @@ export class PostListViewComponent implements OnInit {
   loading = false;
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
-  dataSource: Post[]; // data source is posts
+  // dataSource: Post[]; // data source is posts
+  dataSource = new MatTableDataSource<Post>();
   columnsToDisplay = ['subject', 'connected-platforms', 'status', 'publishDateTime'];
   expandedElement: Post | null;
   collaborators: Collaborator[];
@@ -52,7 +53,8 @@ export class PostListViewComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private twitter: TwitterService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private changeDetector: ChangeDetectorRef) {
 
   }
 
@@ -92,7 +94,7 @@ export class PostListViewComponent implements OnInit {
       this.postService.getCalendarPosts(this.calendarId)
         .subscribe(postResponse => {
           // console.log('post list view calendar service 2', postResponse);
-          this.dataSource = postResponse as Post[];
+          this.dataSource.data = postResponse as Post[];
           // console.log(this.dataSource);
           this.loading = false;
         });
@@ -125,7 +127,10 @@ export class PostListViewComponent implements OnInit {
     this.postService.delete(post.id).subscribe(response => {
       console.log(response);
       this.snackBar.open('Post has been deleted successfully!', 'Dismiss', {duration: 2000});
-      this.dataSource.splice(this.dataSource.indexOf(post), 1);
+      const d = this.dataSource.data;
+      d.splice(d.indexOf(post), 1);
+      this.dataSource.data = d;
+      this.changeDetector.detectChanges();
     }, err => {
       console.log(err);
       this.snackBar.open('Failed to delete post!', 'Dismiss', {duration: 2000});

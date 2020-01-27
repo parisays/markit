@@ -13,35 +13,6 @@ import { filter } from 'rxjs/operators';
 export class NotificationService {
   ws = webSocket('');
   notifs: Notification[] = [
-    {
-      id: 1,
-      type: 'invitation',
-      title: 'New Invitation!',
-      text: 'You\'ve been invited to calendar cal2',
-      additionalData: {
-        token: 'fasdf'
-      }
-    },
-    {
-      id: 2,
-      type: 'comment',
-      title: 'New Comment!',
-      text: '[username] commented on post [post title]',
-      additionalData: {
-        calendarId: 12,
-        postId: 414
-      }
-    },
-    {
-      id: 3,
-      type: 'edit_post',
-      title: 'Post Edit',
-      text: '[username] edited post [post title]',
-      additionalData: {
-        calendarId: 122,
-        postId: 4114
-      }
-    },
   ];
 
   notifsSubject: BehaviorSubject<Notification[]>;
@@ -55,7 +26,7 @@ export class NotificationService {
     const wsUrl = `ws://194.5.193.99:8000/ws/notification/${this.authService.currentUserValue.key}/`;
     this.ws = webSocket(wsUrl);
     this.ws.pipe(
-      filter((d: Notification) => d.additionalData.notif_creator === this.authService.currentUserValue.email)
+      filter((d: Notification) => d.additionalData.notif_creator !== this.authService.currentUserValue.email)
     ).subscribe((d: Notification) => {
       const nf = this.notifsSubject.getValue();
       nf.push(d);
@@ -68,7 +39,7 @@ export class NotificationService {
   }
 
   seenNotification(notifId: number): void {
-    this.http.post(`${this.seenEndpoint}${notifId}`, { }).subscribe(d => {
+    this.http.post(`${this.seenEndpoint}${notifId}/`, { }).subscribe(d => {
       const nf = this.notifsSubject.getValue();
       nf.splice(nf.findIndex(n => n.id === notifId), 1);
       this.notifsSubject.next(nf);
