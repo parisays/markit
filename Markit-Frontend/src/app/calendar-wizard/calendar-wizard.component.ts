@@ -64,17 +64,6 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (this.calendarId) {
-      this.service.getMyAccess(this.calendarId).subscribe((accObj: any) => {
-          this.access.canEditCalendar = accObj.canEditCalendar;
-          this.access.canEditCalendar = false;
-          if (!this.access.canEditCalendar) {
-            this.router.navigate(['calendars', this.calendarId, 'posts']);
-          }
-        }, err => {
-          console.log(err);
-        }
-      );
-
       this.service.get(this.calendarId).subscribe((value: Calendar) => {
         // console.log(value);
         this.calendar = value;
