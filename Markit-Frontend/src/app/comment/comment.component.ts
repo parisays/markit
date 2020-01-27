@@ -71,7 +71,9 @@ export class CommentComponent implements OnInit {
       collaborator: this.user.id,
       text: this.inputValue,
     };
-    console.log(`comment data:`, commentData);
+    // console.log(`comment data:`, commentData);
+
+    this.comments.splice(this.comments.length -   1, 0, commentData); // check whether it is added in the right place
 
     this.commentService.create(commentData).subscribe(
       (value: Comment) => {
@@ -79,6 +81,7 @@ export class CommentComponent implements OnInit {
         this.snackBar.open('Comment posted successfully!', 'Dismiss', {duration: 2000});
       }, err => {
         this.loading = false;
+        this.comments.splice(this.comments.length -   1 , 1); // check whether it is deleted from the right place
         this.snackBar.open('Comment creation failed!', 'Dismiss', {duration: 2000});
         console.log(err);
       }
