@@ -42,8 +42,8 @@ class CollaboratorCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=serializer_data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        self.create_invitation(serializer.data)
         response_data = {'role_name':role.name, 'email':user.email, 'calendar':calendar.id}
+        create_invitation_task.delay(serializer.data)
         headers = self.get_success_headers(serializer.data)
         return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
 
@@ -59,15 +59,7 @@ class CollaboratorCreateView(generics.CreateAPIView):
             role.save()
         return role
 
-    def create_invitation(self, collaborator_data):
-        calendar = get_object_or_404(Calendar, pk=collaborator_data['calendar'])
-        inviter = get_object_or_404(Collaborator, user__email=self.request.user, calendar=calendar)
-        invited = get_object_or_404(Collaborator, pk=collaborator_data['id'])
-        invitation = Invitation(calendar=calendar, inviter=inviter,
-                           invited=invited)
-        invitation.save()
-        send_invitation_job.delay(NotificationInvitationSerializer(invitation).data)
-
+    
 class RetreiveCollaboratorView(generics.RetrieveAPIView):
     """
     Retreive collaborator api view.
@@ -86,18 +78,3 @@ class ActivateCollaborator(APIView):
         invited.save()
         invitation.delete()
         return Response("Collaborator activated successfully", status=status.HTTP_200_OK)
-
-# class RoleCreateView(generics.CreateAPIView):
-#     """
-#     Create role view.
-#     """
-#     permission_classes = (IsAuthenticated, )
-#     queryset = Role.objects.all()
-#     serializer_class = RoleSerializer
-
-#     def create(self, request, *args, **kwargs):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         self.perform_create(serializer)
-#         headers = self.get_success_headers(serializer.data)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
