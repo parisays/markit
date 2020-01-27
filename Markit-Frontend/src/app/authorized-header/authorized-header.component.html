@@ -1,16 +1,30 @@
-<mat-toolbar class="mat-elevation-z5" style="background: white;">
-  <a mat-button color="primary" routerLink="/" style="font-size: 40px;margin: auto; margin-left: 7%;">
-    <mat-icon>
-      bookmark
-    </mat-icon>
-    Markit
-  </a>
-  <mat-icon style="margin-right :20px; color: dimgrey;">contact_support</mat-icon>
-  <mat-icon style="margin-right :20px; color: dimgrey;">notifications</mat-icon>
-  <button
-    mat-mini-fab
+<mat-toolbar class="mat-elevation-z5 toolbar">
+    <a mat-button routerLink="/" class="markit">
+        <mat-icon style="font-size: 40px;padding-right: 10px; height: 47px;">
+            bookmark
+        </mat-icon>
+        Markit
+    </a>
+    <mat-icon style="margin-right :20px; color: rgb(182, 181, 181);">contact_support</mat-icon>
+    <nz-badge [nzCount]="count" [nzOverflowCount]="99" [nzStyle]="{ backgroundColor: '#ee8780' }">
+      <button 
+      class="notifbutton" 
+      nz-popover 
+      nzPopoverTitle="Notifications"
+      [(nzVisible)]="visible"
+      nzPopoverPlacement="bottomRight"
+      nzPopoverTrigger="click" 
+      [nzPopoverContent]="contentTemplate"
+      color="primary" 
+      mat-mini-fab
+      (click)="showNotifs()">
+          <mat-icon>notifications</mat-icon>
+      </button>
+    </nz-badge>
+    <button
     color="primary"
-    style="margin-right: 10%;"
+    mat-mini-fab
+    style="margin-right: 10%; margin-left: 20px;"
     [matMenuTriggerFor]="beforeMenu">
     <mat-icon>
       person_pin
@@ -26,3 +40,7 @@
     </button>
   </mat-menu>
 </mat-toolbar>
+
+<ng-template #contentTemplate>
+  <app-notification-dialog></app-notification-dialog>
+</ng-template>

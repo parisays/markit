@@ -8,8 +8,13 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatStepperModule} from '@angular/material/stepper';
-import {MatRippleModule} from '@angular/material/core';
+import {MatRippleModule, MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   exports: [
@@ -22,7 +27,13 @@ import {MatSelectModule} from '@angular/material/select';
     MatMenuModule,
     MatStepperModule,
     MatRippleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatTooltipModule
   ]
 })
 export class MdComponentsModule { }

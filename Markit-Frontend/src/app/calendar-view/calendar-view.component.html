@@ -1,0 +1,77 @@
+<mat-toolbar class="toolbar">
+  <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 1%;">
+    <mat-label>
+      Change Calendar...
+    </mat-label>
+    <mat-select #selector>
+      <mat-option *ngFor="let calendar of allCalendars" [value]="calendar.id" disabled="">
+        <button [routerLink]="['/calendars', calendar.id, 'posts']" (click)="selector.close()" mat-button>
+          <mat-icon color="accent">
+            arrow_forward
+          </mat-icon>
+        </button>
+        {{calendar.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+  <div>
+    <img
+      matTooltip="{{collab.firstName}} {{collab.lastName}}"
+      matTooltipPosition="above"
+      matTooltipHideDelay="1000"
+      src=".././../assets/images/{{collab.role.name}}-logo.png"
+      alt="" *ngFor="let collab of collaborators"
+      class="collaborator mat-elevation-z3">
+    <span *ngIf="moreThanFour" style="font-size: 40px; margin-left: 10px;">...</span>
+  </div>
+  <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+  <h1 style="margin:auto; font-size: 30px;">
+    <mat-icon style="padding-right: 10px;width: 32px;">calendar_today</mat-icon>
+    {{this.calendarName}}
+    <mat-icon style="padding-left: 10px; width: 32px;">calendar_today</mat-icon>
+  </h1>
+  <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+  <button mat-raised-button color="accent" [disabled]="!access.canCreatePost"
+          [routerLink]="['/calendars', calendarId, 'posts', 'new']">
+    New Post
+  </button>
+  <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+  <button mat-button [routerLink]="['/calendars', calendarId, 'posts']">
+    <mat-icon>view_list</mat-icon>
+  </button>
+  <button mat-button [disabled]="!access.canEditCalendar" [routerLink]="['/calendars', calendarId, 'edit' ]">
+    <mat-icon>settings</mat-icon>
+  </button>
+  <button mat-button color="warn" [disabled]="!access.canDeleteCalendar" (click)="deleteCalendar()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="mat-elevation-z1" style="width: 95%; margin: 2% auto; background: rgba(255, 255, 255, 0.74);">
+    <nz-calendar>
+        <ul *nzDateCell="let date" class="events">
+            <li *ngFor="let post of posts">
+                <div *ngIf="isInTrueDate(date, post.publishDateTime)" 
+                      class="mat-elevation-z3 post-card ripple-container" 
+                      matRipple
+                      [routerLink]="['/calendars', calendarId, 'posts', post.id ,'preview']">
+                    <i nz-icon nzType="twitter" nzTheme="outline" class="icon-color"></i>
+                    <span style="width: 70px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; text-align: center; margin-left: 10px;">{{post.subject}}</span>
+                    <span style="text-align: center;">{{ post.publishDateTime | date:'shortTime' }}</span>
+                </div>
+            </li>
+        </ul>
+        <ng-container *nzMonthCell="let month">
+          <div class="month">
+            <span *ngFor="let post of posts">
+              <div *ngIf="isInTrueMonth(month, post.publishDateTime)">
+                <i *ngIf="post.status === 'Scheduled'" nz-icon nzType="clock-circle" nzTheme="outline"></i>
+                <i *ngIf="post.status === 'Published'" nz-icon nzType="check-circle" nzTheme="outline"></i>
+                  {{post.subject}}
+              </div>
+            </span>
+          </div>
+        </ng-container>
+    </nz-calendar>
+</div>

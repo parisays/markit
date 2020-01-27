@@ -1,0 +1,62 @@
+@import "../../theme.scss";
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container > *{
+    margin: 5px 0;
+    display: flex;
+    height: 90px;
+    width: 100%;
+    border-radius: 5px;
+    position: relative;
+}
+.container > * i{
+    margin: auto 10px;
+    font-size: 30px;
+}
+.container > * span{
+    margin: auto 10px;
+    font-size: 18px;
+}
+
+.draft{
+    border: 1px solid rgba(202, 202, 202, 0.514);
+    background-color: rgba(202, 202, 202, 0.199);
+}
+.draft i{
+    color: gray;
+}
+.draft span{
+    color: rgb(75, 75, 75);
+}
+
+.published{
+    border: 1px solid $app-normal-primary;
+    background-color: $app-light-primary;
+}
+.published i{
+    color: $app-normal-primary;
+}
+.published span{
+    color: $app-dark-primary;
+}
+
+.scheduled{
+    border: 1px solid $app-normal-accent;
+    background-color: $app-light-accent;
+}
+.scheduled i{
+    color: $app-normal-accent;
+}
+.scheduled span{
+    color: $app-dark-accent;
+}
+
+.number{
+    position: absolute;
+    right: 30px;
+    top: 32px;
+}

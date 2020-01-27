@@ -1,8 +1,8 @@
 <div>
-  <mat-toolbar style="margin-top: 5%; margin-left: 10%; width: 80%; display: flex;">
-    <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 5%;">
-      <mat-label >
-        {{this.calendarName}}
+  <mat-toolbar class="toolbar">
+    <mat-form-field appearance="outline" style="height: 63px; font-size: 15px; margin-left: 1%;">
+      <mat-label>
+        Change Calendar...
       </mat-label>
       <mat-select #selector>
         <mat-option *ngFor="let calendar of allCalendars" [value]="calendar.id" disabled="">
@@ -15,15 +15,37 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <a mat-raised-button color="accent" style="margin-left: auto; margin-right: 5%;"
-       [routerLink]="['/calendars', calendarId, 'posts', 'new']">
+    <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+    <div>
+      <img
+        matTooltip="{{collab.firstName}} {{collab.lastName}}"
+        matTooltipPosition="above"
+        matTooltipHideDelay="1000"
+        src=".././../assets/images/{{collab.role.name}}-logo.png"
+        alt="" *ngFor="let collab of collaborators"
+        class="collaborator mat-elevation-z3">
+      <span *ngIf="moreThanFour" style="font-size: 40px; margin-left: 10px;">...</span>
+    </div>
+    <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+    <h1 style="margin:auto; font-size: 30px;">
+      <mat-icon style="padding-right: 10px;width: 32px;">calendar_today</mat-icon>
+      {{this.calendarName}}
+      <mat-icon style="padding-left: 10px; width: 32px;">calendar_today</mat-icon>
+    </h1>
+    <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+    <button mat-raised-button color="accent" [disabled]="!access.canCreatePost"
+            [routerLink]="['/calendars', calendarId, 'posts', 'new']">
       New Post
-    </a>
-    <button mat-button disabled>
-      <mat-icon>library_books</mat-icon>
     </button>
-    <button mat-button [routerLink]="['/calendars', calendarId, 'edit' ]">
+    <mat-divider [vertical]="true" style="height: 50px; margin: 10px;"></mat-divider>
+    <button mat-button [routerLink]="['/calendars', calendarId, 'calendar-view' ]">
+      <mat-icon>calendar_today</mat-icon>
+    </button>
+    <button mat-button [disabled]="!access.canEditCalendar" [routerLink]="['/calendars', calendarId, 'edit' ]">
       <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-button color="warn" [disabled]="!access.canDeleteCalendar" (click)="deleteCalendar()">
+      <mat-icon>delete</mat-icon>
     </button>
   </mat-toolbar>
 
@@ -31,10 +53,18 @@
          [dataSource]="dataSource" multiTemplateDataRows
          class="mat-elevation-z8">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <th mat-header-cell *matHeaderCellDef style="font-size: 17px;"> {{column | titlecase}} </th>
       <td mat-cell *matCellDef="let element">
-        <div *ngIf="column != 'connected-platforms'">
-          {{element[column]}}
+        <div *ngIf="column != 'connected-platforms'" style="font-size: 17px;">
+          <div *ngIf="column == 'publishDateTime'">
+            {{element[column] | date:'fullDate'}}
+            <span style="margin-left: 20px">
+              {{element[column] | date:'shortTime'}}
+            </span>
+          </div>
+          <div *ngIf="column != 'publishDateTime'">
+            {{element[column]}}
+          </div>
         </div>
         <div *ngIf="column == 'connected-platforms'">
           <img style="height: 40px;" src="../../assets/images/twitter-logo.png">
@@ -47,23 +77,27 @@
         <div class="example-element-detail"
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="button-row">
-            <button mat-button [disabled]="element.status != 'Draft' || !isTwitterConnected"
+            <button mat-button [disabled]="element.status == 'Published' || !isTwitterConnected"
                     (click)="publishOnTweeter(element)">
               Publish
             </button>
-            <button mat-button [disabled]="element.status != 'Draft' && !isTwitterConnected"
+            <button mat-button [disabled]="element.status == 'Published' || !access.canEditPost"
                     [routerLink]="['/calendars', calendarId, 'posts', element.id, 'edit']">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-button color="warn">
+            <button mat-button color="warn" [disabled]="!access.canDeletePost" (click)="deletePost(element)">
               <mat-icon>delete</mat-icon>
             </button>
+            <button mat-button [routerLink]="['/calendars', calendarId, 'posts', element.id ,'preview']">
+              <img style="width: 30px;" src="../../assets/images/preview-icon.png" alt="">
+            </button>
           </div>
-          <div style="display: flex;">
-            <img style="max-width: 30%; max-height: 200px;" [src]="element.image" alt="">
-            <p style="width: 100%;">
+          <div style="display: flex; border: double 2px rgba(128, 128, 128, 0.185); padding: 10px; margin: 10px;">
+            <p style="width: 100%; font-size: 16px; margin: 20px;">
               {{element.text}}
             </p>
+            <mat-divider></mat-divider>
+            <img class="post-image" [src]="element.image" alt="">
           </div>
 
         </div>

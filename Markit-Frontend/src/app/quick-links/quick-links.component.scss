@@ -1,0 +1,46 @@
+
+button{
+    font-size: 20px;
+    height: 60px;
+}
+
+button i{
+    font-size: 30px;
+    vertical-align: 0;
+    margin: 0;
+}
+
+span{
+    font-size: 20px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.container > *{
+    border: 1px solid rgba(201, 201, 201, 0.596);
+    border-radius: 5px;
+    background-color: rgba(201, 201, 201, 0.075);
+    width: 100%;
+    margin: 10px 0;
+}
+
+.follow-us{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 220px;
+}
+.follow-us > *{
+    margin: 10px 20px 0 20px;
+}
+
+.about-us{
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+}
+.about-us *{
+    margin: auto;
+}

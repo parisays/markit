@@ -1,0 +1,16 @@
+@import "../../theme.scss";
+
+.toolbar {
+    background: $app-dark-primary;
+}
+
+.markit{
+    font-size: 40px;
+    margin: auto;
+    margin-left: 7%;
+    color: $app-light-primary;
+    text-shadow: -2px -2px $app-normal-primary;
+}
+.notifbutton{
+    background: $app-dark-primary;
+}

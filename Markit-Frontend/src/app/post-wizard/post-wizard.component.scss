@@ -1,0 +1,38 @@
+@import "../../theme.scss";
+
+.finishing-buttons {
+    display: flex;
+    margin: auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.finishing-buttons > * {
+    font-size: 20px;
+    height: 40px;
+}
+
+.publish {
+    margin: auto;
+    margin-left: 0;
+}
+
+.draft {
+    margin: auto;
+    margin-right: 0;
+    background: $app-dark-primary;
+    color: white;
+}
+
+.schedule {
+    margin: 0 5%;
+}
+
+.header{
+    background: $app-light-primary;
+    text-align: center;
+}
+
+.header > *{
+    color: $app-dark-primary;
+}

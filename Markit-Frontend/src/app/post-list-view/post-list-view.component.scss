@@ -1,7 +1,9 @@
+@import "../../theme.scss";
+
 table {
     width: 80%;
     margin: 10%;
-    margin-top: 0%;
+    margin-top: 1%;
   }
   
   tr.example-detail-row {
@@ -51,4 +53,41 @@ table {
   
   .button-row > *{
     float: right;
+  }
+
+  .toolbar {
+    margin-top: 5%;
+    margin-left: 10%;
+    width: 80%;
+    display: flex;
+    background: $app-light-primary;
+    border-radius: 5px;
+  }
+
+  .select{
+    height: 63px;
+    font-size: 15px;
+    margin-left: 5%;
+  }
+  
+  h1{
+    color: $app-dark-primary;
+    padding: 0px 20px;
+  }
+
+  .post-image{
+    max-width: 30%;
+    max-height: 200px;
+    padding: 10px;
+    border: 1px dashed rgba(128, 128, 128, 0.411);
+    border-radius: 5px;
+    margin: 10px;
+  }
+
+  .collaborator{
+    height: 50px;
+    border: solid 3px $app-normal-primary;
+    border-radius: 50%;
+    margin: 3px;
+    padding: 5px;
   }

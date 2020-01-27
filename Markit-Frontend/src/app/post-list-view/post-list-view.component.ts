@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthenticationService, CalendarService, PostService} from '@services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Post, PostStatus, Calendar} from '@models';
+import {Post, PostStatus, Calendar, Collaborator} from '@models';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TwitterService} from '@services';
 import {map} from 'rxjs/operators';
@@ -33,16 +33,27 @@ export class PostListViewComponent implements OnInit {
   returnUrl = `calendars/${this.calendarId}/posts`;
   selectedCalendar: Calendar;
   dataSource: Post[]; // data source is posts
-  columnsToDisplay = ['subject', 'connected-platforms', 'status'];
+  columnsToDisplay = ['subject', 'connected-platforms', 'status', 'publishDateTime'];
   expandedElement: Post | null;
-
+  collaborators: Collaborator[];
+  moreThanFour = false;
+  access = {
+    canDeleteCalendar: false,
+    canEditCalendar: false,
+    canCreatePost: false,
+    canEditPost: false,
+    canDeletePost: false,
+    canSetPublish: false,
+  };
   private twitterAppData: { client_id: string, secret: string };
 
   constructor(private postService: PostService,
               private calendarService: CalendarService,
               private route: ActivatedRoute,
+              private router: Router,
               private twitter: TwitterService,
               private snackBar: MatSnackBar) {
+
   }
 
   get isTwitterConnected() {
@@ -54,22 +65,35 @@ export class PostListViewComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
-      // console.log(this.calendarId);
 
-      this.calendarService.get(this.calendarId).subscribe(value => {
-        console.log('post list view calendar service 1', value);
-        this.calendar = value as Calendar;
-        this.calendarName = (value as Calendar).name;
+      this.calendarService.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+          this.access.canDeleteCalendar = accObj.canDeleteCalendar;
+          this.access.canEditCalendar = accObj.canEditCalendar;
+          this.access.canCreatePost = accObj.canCreatePost;
+          this.access.canEditPost = accObj.canEditPost;
+          this.access.canDeletePost = accObj.canDeletePost;
+          this.access.canSetPublish = accObj.canSetPublish;
+        }, err => {
+          console.log(err);
+        }
+      );
+
+      this.calendarService.get(this.calendarId).subscribe(calendarResonse => {
+        // console.log('post list view calendar service 1', value);
+        this.calendar = calendarResonse as Calendar;
+        this.calendarName = (calendarResonse as Calendar).name;
+        this.collaborators = this.calendar.collaborator_calendar;
+        // console.log(`this is collaborators of this calendar`, this.collaborators);
       }, err => {
         console.log('post list view calendar service error', err);
         this.loading = false;
       });
 
       this.postService.getCalendarPosts(this.calendarId)
-        .subscribe(response => {
-          console.log('post list view calendar service 2', response);
-          this.dataSource = response as Post[];
-          console.log(this.dataSource);
+        .subscribe(postResponse => {
+          // console.log('post list view calendar service 2', postResponse);
+          this.dataSource = postResponse as Post[];
+          // console.log(this.dataSource);
           this.loading = false;
         });
     }, err => {
@@ -77,12 +101,34 @@ export class PostListViewComponent implements OnInit {
       this.loading = false;
     });
 
-    this.calendarService.getAll().subscribe((response) => {
-      this.allCalendars = response as Calendar[];
+    this.calendarService.getAll().subscribe((allCalendarsResponse) => {
+      this.allCalendars = allCalendarsResponse as Calendar[];
       // this.calendar = this.allCalendars.filter(v => v.id === this.calendarId)[0];
-      console.log('calendar is now this:', this.calendarId, this.calendar.name);
+      // console.log('calendar is now this:', this.calendarId, this.calendar.name);
     }, err => {
       console.log(err);
+    });
+  }
+
+  deleteCalendar() {
+    this.calendarService.delete(this.calendarId).subscribe(response => {
+      console.log(response);
+      this.snackBar.open('Calendar has been deleted successfully!', 'Dismiss', {duration: 2000});
+      this.router.navigate(['/']);
+    }, err => {
+      console.log(err);
+      this.snackBar.open('Failed to delete calendar!', 'Dismiss', {duration: 2000});
+    });
+  }
+
+  deletePost(post: Post) {
+    this.postService.delete(post.id).subscribe(response => {
+      console.log(response);
+      this.snackBar.open('Post has been deleted successfully!', 'Dismiss', {duration: 2000});
+      this.dataSource.splice(this.dataSource.indexOf(post), 1);
+    }, err => {
+      console.log(err);
+      this.snackBar.open('Failed to delete post!', 'Dismiss', {duration: 2000});
     });
   }
 

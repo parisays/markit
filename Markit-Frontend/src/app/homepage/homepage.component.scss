@@ -1,8 +1,18 @@
-body{
+@import "../../theme.scss";
+
+div{
     display: flex;
     flex-direction: column;
     text-align: center;
+    height: 90%;
 }
-body > *{
-    margin: auto;
+div > *{
+    margin: 60px auto;
+}
+
+h1 {
+    color: $app-normal-primary;
+}
+img {
+    mix-blend-mode: multiply;
 }

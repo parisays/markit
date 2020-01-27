@@ -1,4 +1,4 @@
-<body style="display: flex; flex-direction: column;margin-top: 5%">
+<body style="display: flex; flex-direction: column;margin-top: 5%; background: white;">
 <form style="margin: auto; display: flex; flex-direction: column;" [formGroup]="form">
   <mat-form-field style="width: 500px" appearance="outline">
     <mat-label>Content</mat-label>
@@ -21,8 +21,8 @@
       <mat-icon color="gray">library_books</mat-icon>
     </button>
   </div>
-  <img [src]="imageUrl" height="200" *ngIf="imageUrl">
-  <span style="margin-top: 50px; color: #3f51b5">{{imageName}}</span>
+  <img [src]="imageUrl" *ngIf="imageUrl" class="post-image">
+  <span class="file-name">{{imageName}}</span>
 </form>
 
 <div style="display: flex; margin-top: 5%">

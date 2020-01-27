@@ -1,23 +1,67 @@
+@import "../../theme";
+
 .calendar-list{
     display: flex;
     flex-direction: column;
     margin: 3%;
     margin-left: 15%;
     height: 400px; 
-    width: 32%; 
-    overflow: scroll; 
-    background: rgba(216, 216, 216, 0.164);
+    width: 32%;
+    background: white;
+    padding: 10px;
 }
 .post-ideas-style{
-    margin: 3%;
-    height: 400px; 
+    margin: 0 3%;
+    margin-left: 15%;
+    height: 400px;
     width: 32%;
-    background: rgba(216, 216, 216, 0.164);
+    background:white;
+    padding: 10px;
+    overflow: auto;
 }
 .top-row{
     display: flex;
 }
+
+.post-status{
+    margin: 3%;
+    height: 400px; 
+    width: 32%;
+    background: white;
+    padding: 10px;
+}
+
+.quick-link{
+    margin: 0 3%;
+    height: 400px; 
+    width: 32%;
+    background:white;
+    padding: 10px;
+}
+
 body{
-    display: flex;
+    display: flexbox;
     flex-direction: column;
+    background: #53798b0a;
+}
+
+h1 {
+    margin-left: 20px;
+    margin-right: 20px;
+    color: $app-dark-primary;
+    border-bottom: 2px $app-light-primary double;
+}
+
+div{
+    position: relative;
+}
+
+div button{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+h1 i{
+    vertical-align: 5px;
 }

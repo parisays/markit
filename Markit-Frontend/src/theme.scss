@@ -1,0 +1,85 @@
+@import "~@angular/material/_theming";
+
+@include mat-core();
+$app-normal-primary: #156187;
+$app-light-primary: #d5e0e7;
+$app-dark-primary: #14354d;
+
+$app-normal-accent: #ee8780;
+$app-light-accent: #f8a7a193;
+$app-dark-accent: #993a36;
+
+
+
+$app-primary-color: (
+  50: #ebf2f5,
+  100: #e0f5ff,
+  200: #a6d1e4,
+  300: #599ac5,
+  400: #407ea7,
+  500: $app-normal-primary,
+  600: #0d4f70,
+  700: #064463,
+  800: $app-dark-primary,
+  900: #01314e,
+  A100: #599ac5,
+  A200: #0d4f70,
+  A400: #064463,
+  A700: #062e4b,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$app-accent-color: (
+  50: #faebea,
+  100: #fadedc,
+  200: #fac4c0,
+  300: $app-light-accent,
+  400: #f78c84,
+  500: $app-normal-accent,
+  600: #d6665e,
+  700: #ca5c54,
+  800: #bb4945,
+  900: $app-dark-accent,
+  A100: #f8a7a1,
+  A200: #f27970,
+  A400: #ca5c54,
+  A700: #993a36,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$app-primary: mat-palette($app-primary-color, 500, 300, 800);
+$app-accent: mat-palette($app-accent-color, 500, 300, 900);
+
+$app-theme: mat-light-theme($app-primary, $app-accent);
+
+@include angular-material-theme($app-theme);

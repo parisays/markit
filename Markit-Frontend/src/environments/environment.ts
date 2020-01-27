@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://markit.pythonanywhere.com/api/v1.0/'
+  apiUrl: 'http://194.5.193.99:8000/api/v1.0/'
+  // apiUrl: 'http://markit.pythonanywhere.com/api/v1.0/'
 };
 
 /*
