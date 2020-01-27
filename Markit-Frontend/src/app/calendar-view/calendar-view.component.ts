@@ -37,6 +37,11 @@ export class CalendarViewComponent implements OnInit {
       && date1.getMonth() === date.getMonth()
       && date1.getFullYear() === date.getFullYear();
   }
+  isInTrueMonth(date1: Date, date2): boolean {
+    const date = new Date(date2);
+    return date1.getMonth() === date.getMonth()
+        && date1.getFullYear() === date.getFullYear();
+  }
 
   constructor(private postService: PostService,
               private calendarService: CalendarService,
