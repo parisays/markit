@@ -1,8 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Notification} from '@app/authorized-header/authorized-header.component';
 import {CollaborationService} from '@app/_services/collaboration.service';
 import {MatSnackBar} from '@angular/material';
+import {BehaviorSubject, Observer} from 'rxjs';
+import {Notification} from '@app/_models/notification';
+import {NotificationService} from '@app/_services/notification.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-notification-dialog',
@@ -11,66 +14,45 @@ import {MatSnackBar} from '@angular/material';
 })
 export class NotificationDialogComponent implements OnInit {
 
+  // dataSubject: BehaviorSubject<Notification[]> = new BehaviorSubject<Notification[]>([]);
   data: Notification[];
+
   constructor(
     private collaborationService: CollaborationService,
-    private snackBar: MatSnackBar) {
-  }
-
-  ngOnInit() {
-    // this.data = [
-    //   {
-    //     type: 'notif',
-    //     calendar: 7478723,
-    //     token: 'jhdf',
-    //     invited: 3840,
-    //     inviter: 3749327,
-    //   },
-    //   {
-    //     type: 'notif',
-    //     calendar: 7478723,
-    //     token: 'jhdf',
-    //     invited: 3840,
-    //     inviter: 3749327,
-    //   },
-    //   {
-    //     type: 'notif',
-    //     calendar: 7478723,
-    //     token: 'jhdf',
-    //     invited: 3840,
-    //     inviter: 3749327,
-    //   },
-    //   {
-    //     type: 'notif',
-    //     calendar: 7478723,
-    //     token: 'jhdf',
-    //     invited: 3840,
-    //     inviter: 3749327,
-    //   },
-    //   {
-    //     type: 'notif',
-    //     calendar: 7478723,
-    //     token: 'jhdf',
-    //     invited: 3840,
-    //     inviter: 3749327,
-    //   }
-    // ];
-  }
-
-  onAccept(token: string) {
-    this.collaborationService.activate(token).subscribe(res => {
-      console.log(res);
-      this.snackBar.open('Successfully added to calendar', 'Dismiss', {duration : 2000});
-      // TODO remove notif
-      this.data.splice(this.data.findIndex(n => n.token === token));
-    }, err => {
-      console.log(err);
-      this.snackBar.open('Operation failed', 'Dismiss', {duration : 2000});
+    private snackBar: MatSnackBar,
+    private notificationService: NotificationService,
+    private router: Router) {
+    this.notificationService.getNotifications().subscribe(n => {
+      console.log(n);
+      this.data = n;
     });
   }
 
-  onReject(token: string) {
-    // TODO remove notif
-    this.data.splice(this.data.findIndex(n => n.token === token));
+  ngOnInit() {
+
+  }
+
+  onAccept(notifId: number, token: string) {
+    this.collaborationService.activate(token).subscribe(res => {
+      console.log(res);
+      this.snackBar.open('Successfully added to calendar', 'Dismiss', {duration: 2000});
+      this.notificationService.seenNotification(notifId);
+    }, err => {
+      console.log(err);
+      this.snackBar.open('Operation failed', 'Dismiss', {duration: 2000});
+    });
+  }
+
+  onReject(notifId: number) {
+    this.notificationService.seenNotification(notifId);
+  }
+
+  onCheckPost(notifId: number, calendarId: number, postId: number) {
+    this.router.navigate(['calendars', calendarId, 'posts', postId, 'preview']);
+    this.notificationService.seenNotification(notifId);
+  }
+
+  onSeen(notifId: number) {
+    this.notificationService.seenNotification(notifId);
   }
 }

@@ -1,31 +1,59 @@
 <div class="container">
   <ul>
     <li *ngFor="let notif of data">
-      <div class="card mat-elevation-z2">
-        <h5 matLine> New invitation! </h5>
+      <div class="card mat-elevation-z2" *ngIf="notif.type === 'invitation'">
+        <h5 matLine> {{ notif.title }} </h5>
         <mat-divider></mat-divider>
         <div class="massage">
-          <span matLine> You've been invited to calendar {{notif.calendar}}! </span>
+          <span matLine> {{ notif.text }} </span>
         </div>
-        <!-- <mat-divider></mat-divider> -->
         <div matLine>
-          <button 
-            class="accept"
-            mat-raised-button 
-            color="primary" 
-            (click)="onAccept(notif.token)">
-              <i style="vertical-align: 3px;" nz-icon nzType="like" nzTheme="outline"></i>
-              Accept
+          <button class="accept" mat-raised-button color="primary"
+                  (click)="onAccept(notif.id, notif.additionalData.token)">
+            <i style="vertical-align: 3px;" nz-icon nzType="like" nzTheme="outline"></i>
+            Accept
           </button>
-          <button 
-            class="reject"
-            mat-raised-button 
-            color="accent" 
-            (click)="onReject(notif.token)">
-              <i nz-icon nzType="dislike" nzTheme="outline"></i>
-              Reject
+          <button class="reject" mat-raised-button color="accent" (click)="onReject(notif.additionalData.token)">
+            <i nz-icon nzType="dislike" nzTheme="outline"></i>
+            Reject
           </button>
-          <button mat-button class="close">
+          <button mat-button class="close" (click)="onSeen(notif.id)">
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="card mat-elevation-z2" *ngIf="notif.type === 'comment'">
+        <h5 matLine> {{ notif.title }} </h5>
+        <mat-divider></mat-divider>
+        <div class="massage">
+          <span matLine> {{ notif.text }} </span>
+        </div>
+        <div matLine>
+          <button class="accept" mat-raised-button color="primary"
+                  (click)="onCheckPost(notif.id, notif.additionalData.calendarId, notif.additionalData.postId)">
+            <i style="vertical-align: 3px;" nz-icon nzTheme="outline"></i>
+            Check
+          </button>
+          <button mat-button class="close" (click)="onSeen(notif.id)">
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="card mat-elevation-z2" *ngIf="notif.type === 'edit_post'">
+        <h5 matLine> {{ notif.title }} </h5>
+        <mat-divider></mat-divider>
+        <div class="massage">
+          <span matLine> {{ notif.text }} </span>
+        </div>
+        <div matLine>
+          <button class="accept" mat-raised-button color="primary"
+                  (click)="onCheckPost(notif.id, notif.additionalData.calendarId, notif.additionalData.postId)">
+            <i style="vertical-align: 3px;" nz-icon nzTheme="outline"></i>
+            Check
+          </button>
+          <button mat-button class="close" (click)="onSeen(notif.id)">
             <i nz-icon nzType="close" nzTheme="outline"></i>
           </button>
         </div>
