@@ -26,7 +26,7 @@ export class NotificationService {
     const wsUrl = `ws://194.5.193.99:8000/ws/notification/${this.authService.currentUserValue.key}/`;
     this.ws = webSocket(wsUrl);
     this.ws.pipe(
-      filter((d: Notification) => d.additionalData.notif_creator === this.authService.currentUserValue.email)
+      filter((d: Notification) => d.additionalData.notif_creator !== this.authService.currentUserValue.email)
     ).subscribe((d: Notification) => {
       const nf = this.notifsSubject.getValue();
       nf.push(d);
