@@ -62,5 +62,16 @@
                 </div>
             </li>
         </ul>
+        <ng-container *nzMonthCell="let month">
+          <div class="month">
+            <span *ngFor="let post of posts">
+              <div *ngIf="isInTrueMonth(month, post.publishDateTime)">
+                <i *ngIf="post.status === 'Scheduled'" nz-icon nzType="clock-circle" nzTheme="outline"></i>
+                <i *ngIf="post.status === 'Published'" nz-icon nzType="check-circle" nzTheme="outline"></i>
+                  {{post.subject}}
+              </div>
+            </span>
+          </div>
+        </ng-container>
     </nz-calendar>
 </div>
