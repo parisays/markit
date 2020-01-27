@@ -5,6 +5,7 @@ import {map, timeout} from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@models';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -13,7 +14,7 @@ export class AuthenticationService {
     private loginEndpoint = `${environment.apiUrl}auth/rest-auth/login/`;
     private registerEndpoint = `${environment.apiUrl}auth/rest-auth/registration/`;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -47,6 +48,7 @@ export class AuthenticationService {
     logout(): void {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+        this.router.navigate(['/']);
     }
 
     isLoggedIn(): boolean {
