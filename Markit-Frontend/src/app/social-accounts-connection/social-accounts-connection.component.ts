@@ -38,16 +38,20 @@ export class SocialAccountsConnectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.calendarId, this.returnURL);
-    this.calendarService.get(this.calendarId).subscribe((res: Calendar) => {
+    // console.log(this.calendarId, this.returnURL);
+    if (this.calendarId) {
+      this.calendarService.get(this.calendarId).subscribe((res: Calendar) => {
         this.socialAccounts[0].connected = res.connectedPlatforms.split(',').includes('Twitter');
         this.socialAccounts[1].connected = res.connectedPlatforms.split(',').includes('Facebook');
         this.socialAccounts[2].connected = res.connectedPlatforms.split(',').includes('Pinterest');
-    });
+      });
+    }
   }
 
   private connectTwitter(c: SocialAccountsConnectionComponent) {
-    if (!c.calendarId || !c.returnURL) { return; }
+    if (!c.calendarId || !c.returnURL) {
+      return;
+    }
 
     c.twitter.connect(c.returnURL as string, c.calendarId as number)
       .subscribe(twitterUrl => {
@@ -58,8 +62,10 @@ export class SocialAccountsConnectionComponent implements OnInit {
       });
   }
 
-  private connectFB() { }
+  private connectFB() {
+  }
 
-  private connectPinterest() { }
+  private connectPinterest() {
+  }
 
 }

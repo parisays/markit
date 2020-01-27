@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Calendar, Post, User} from '@models';
 import {ActivatedRoute} from '@angular/router';
-import {CommentService, PostService} from '@services';
+import {CalendarService, CommentService, PostService} from '@services';
 import {MatSnackBar} from '@angular/material';
 import {UserService} from '@app/_services/user.service';
 import {Comment} from '@app/_models/comment';
@@ -13,17 +13,20 @@ import {Comment} from '@app/_models/comment';
 })
 export class CommentComponent implements OnInit {
   postId: number;
+  calendarId: number;
   comments: Comment[];
   loading = false;
   user: User;
   userAvatar = '../../assets/images/user-512.png';
-
-
+  access = {
+    canPostComment: false,
+  };
   submitting = false;
   inputValue = '';
 
   constructor(private route: ActivatedRoute,
               private commentService: CommentService,
+              private calendarService: CalendarService,
               private userService: UserService,
               private snackBar: MatSnackBar) {
   }
@@ -38,6 +41,14 @@ export class CommentComponent implements OnInit {
     this.loading = true;
 
     this.route.paramMap.subscribe(params => {
+      this.calendarId = +params.get('calendarId');
+      this.calendarService.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+          this.access.canPostComment = accObj.canPostComment;
+        }, err => {
+          console.log(err);
+        }
+      );
+
       this.postId = +params.get('postId');
 
       this.commentService.getPostComments(this.postId)
