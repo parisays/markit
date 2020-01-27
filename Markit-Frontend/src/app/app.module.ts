@@ -42,6 +42,7 @@ import { CommentComponent } from './comment/comment.component';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { PostPreviewComponent } from './post-preview/post-preview.component';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+
 import { CalendarViewComponent } from './calendar-view/calendar-view.component';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -79,6 +80,8 @@ registerLocaleData(en);
     CollaboratorInvitationFormComponent,
     ForgetPassComponent,
     ResetPassComponent,
+    CommentComponent,
+    PostPreviewComponent,
     NotificationDialogComponent,
     CommentComponent,
     PostPreviewComponent,

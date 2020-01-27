@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthenticationService } from '@services';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {AuthenticationService} from '@services';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {NotificationDialogComponent} from '@app/notification-dialog/notification-dialog.component';
-import { webSocket } from 'rxjs/webSocket';
-import {WebSocketSubject} from 'rxjs/src/internal/observable/dom/WebSocketSubject';
+import {webSocket} from 'rxjs/webSocket';
+import {Notification} from '@app/_models/notification';
+import { NotificationService } from '@app/_services/notification.service';
 
 @Component({
   selector: 'app-authorized-header',
@@ -15,41 +16,33 @@ import {WebSocketSubject} from 'rxjs/src/internal/observable/dom/WebSocketSubjec
 export class AuthorizedHeaderComponent implements OnInit {
   @ViewChild('notification', {static: false}) Notification: NotificationDialogComponent;
 
-  ws = webSocket('');
-  notifs: Notification[] = [];
   visible: boolean;
-  count = 5;
+  count = 0;
 
   constructor(
     public authService: AuthenticationService,
-    private http: HttpClient,
-    private router: Router,
-    private notifDialog: MatDialog) { }
+    private notificationService: NotificationService) {
+      this.notificationService.getNotifications().subscribe(c => {
+        this.count = c.length;
+      });
+  }
 
   ngOnInit() {
-    const wsUrl = `ws://178.63.149.140:8000/ws/notification/${this.authService.currentUserValue.key}/`;
-    this.ws = webSocket(wsUrl);
-    this.ws.subscribe((notif: Notification) => {
-      console.log('notif', notif);
-      this.notifs.push(notif);
-    });
+    // this.ws.subscribe((notif: Notification) => {
+    //   console.log('notif', notif);
+    //   this.notifs.push(notif);
+    //   // this.notifs.next(this.notifs.getValue().concat([notif]));
+    // });
   }
 
   clickMe(): void {
-    this.visible = false;
+    // this.visible = false;
   }
 
   showNotifs() {
     // this.count++;
-    console.log('show notif button clicked!' + this.count);
-    this.Notification.data = this.notifs;
+    // console.log('show notif button clicked!' + this.count);
+    // this.Notification.dataSubject.next(this.notifs);
   }
 }
 
-export interface Notification {
-  type: string;
-  token: string;
-  invited: number;
-  inviter: number;
-  calendar: number;
-}
