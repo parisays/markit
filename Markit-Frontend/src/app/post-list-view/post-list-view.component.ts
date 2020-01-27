@@ -38,12 +38,12 @@ export class PostListViewComponent implements OnInit {
   collaborators: Collaborator[];
   moreThanFour = false;
   access = {
-    canDeleteCalendar: true,
-    canEditCalendar: true,
-    canCreatePost: true,
-    canEditPost: true,
-    canDeletePost: true,
-    canSetPublish: true,
+    canDeleteCalendar: false,
+    canEditCalendar: false,
+    canCreatePost: false,
+    canEditPost: false,
+    canDeletePost: false,
+    canSetPublish: false,
   };
   private twitterAppData: { client_id: string, secret: string };
 
@@ -65,14 +65,25 @@ export class PostListViewComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.calendarId = +params.get('calendarId');
-      // console.log(this.calendarId);
+
+      this.calendarService.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+          this.access.canDeleteCalendar = accObj.canDeleteCalendar;
+          this.access.canEditCalendar = accObj.canEditCalendar;
+          this.access.canCreatePost = accObj.canCreatePost;
+          this.access.canEditPost = accObj.canEditPost;
+          this.access.canDeletePost = accObj.canDeletePost;
+          this.access.canSetPublish = accObj.canSetPublish;
+        }, err => {
+          console.log(err);
+        }
+      );
 
       this.calendarService.get(this.calendarId).subscribe(calendarResonse => {
         // console.log('post list view calendar service 1', value);
         this.calendar = calendarResonse as Calendar;
         this.calendarName = (calendarResonse as Calendar).name;
         this.collaborators = this.calendar.collaborator_calendar;
-        console.log(`this is collaborators of this calendar`, this.collaborators);
+        // console.log(`this is collaborators of this calendar`, this.collaborators);
       }, err => {
         console.log('post list view calendar service error', err);
         this.loading = false;
