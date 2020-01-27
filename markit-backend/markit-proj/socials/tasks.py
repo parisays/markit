@@ -8,7 +8,7 @@ from posts.models import Post
 from calendars.models import Calendar
 from socials.models import SocialAccount
 
-
+@shared_task
 def create_tweet_task(post_id):
     """
     Create a django celery beat PeriodicTask with ClockedSchedule for each post.

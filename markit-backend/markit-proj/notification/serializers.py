@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from .models import Invitation
+from .models import (
+    Invitation,
+    PostNotification,
+    CommentNotification,
+)
+
 
 class InvitationSerializer(serializers.ModelSerializer):
     """
@@ -11,23 +16,31 @@ class InvitationSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 
-class InvitationListingCollaboratorField(serializers.RelatedField):
+class NotificationListingCollaboratorField(serializers.RelatedField):
     def to_representation(self, value):
         return value.user.email
 
 
-class InvitationListingCalendarField(serializers.RelatedField):
+class NotificationListingCalendarField(serializers.RelatedField):
     def to_representation(self, value):
         return value.name
+
+class NotificationListingPostField(serializers.RelatedField):
+    def to_representation(self, value):
+        return value.subject
+
+class NotificationListingCommentField(serializers.RelatedField):
+    def to_representation(self, value):
+        return value.collaborator.user.email
 
 
 class CalendarInvitationSerializer(serializers.ModelSerializer):
     """
     Calendar Invitation serializer.
     """
-    invited = InvitationListingCollaboratorField(read_only=True)
-    inviter = InvitationListingCollaboratorField(read_only=True)
-    calendar = InvitationListingCalendarField(read_only=True)
+    invited = NotificationListingCollaboratorField(read_only=True)
+    inviter = NotificationListingCollaboratorField(read_only=True)
+    calendar = NotificationListingCalendarField(read_only=True)
     class Meta:
         model = Invitation
         fields = ('id', 'calendar', 'invited', 'inviter',)
@@ -38,10 +51,36 @@ class NotificationInvitationSerializer(serializers.ModelSerializer):
     """
     Calendar Invitation serializer.
     """
-    invited = InvitationListingCollaboratorField(read_only=True)
-    inviter = InvitationListingCollaboratorField(read_only=True)
-    calendar = InvitationListingCalendarField(read_only=True)
+    invited = NotificationListingCollaboratorField(read_only=True)
+    inviter = NotificationListingCollaboratorField(read_only=True)
+    calendar = NotificationListingCalendarField(read_only=True)
     class Meta:
         model = Invitation
         fields = ('id', 'calendar', 'invited', 'inviter', 'token',)
+        read_only_fields = ('id',)
+
+
+class NotificationPostNotificationSerializer(serializers.ModelSerializer):
+    """
+    Post notification serializer.
+    """
+    # calendar = NotificationListingCalendarField(read_only=True)
+    # post = NotificationListingPostField(read_only=True)
+    # editor = NotificationListingCollaboratorField(read_only=True)
+    class Meta:
+        model = PostNotification
+        fields = ('id', 'calendar', 'post', 'editor',)
+        read_only_fields = ('id',)
+
+
+class NotificationCommentNotificationSerializer(serializers.ModelSerializer):
+    """
+    Post notification serializer.
+    """
+    # calendar = NotificationListingCalendarField(read_only=True)
+    # post = NotificationListingPostField(read_only=True)
+    # comment = NotificationListingCommentField(read_only=True)
+    class Meta:
+        model = CommentNotification
+        fields = ('id', 'calendar', 'post', 'comment',)
         read_only_fields = ('id',)

@@ -7,13 +7,11 @@ from calendars.models import Calendar
 from collaboration.models import Collaborator
 from users.models import User
 from socials.tasks import create_tweet_task
+from notification.tasks import create_post_notification_task
 from .serializers import PostSerializer
 from .models import Post
 from .permissions import (
     CreatePostPermission,
-    # UpdatePostPermission,
-    # DestroyPostPermission,
-    # RetrievePostPermission,
     PostPermission,
 )
 
@@ -38,7 +36,8 @@ class PostCreateView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         if serializer.data['status'] == 'Scheduled':
-            create_tweet_task(serializer.data['id'])
+            create_tweet_task.delay(serializer.data['id'])
+        # create_post_notification_task.delay(serializer.data)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
@@ -68,6 +67,22 @@ class PostUpdateView(generics.UpdateAPIView):
     permission_classes = (IsAuthenticated, PostPermission)
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+        post_notification_data = serializer.data.copy()
+        post_notification_data['user'] = self.request.user.id
+        create_post_notification_task.delay(post_notification_data)
+        return Response(serializer.data)
 
 class PostDestroyView(generics.DestroyAPIView):
     """

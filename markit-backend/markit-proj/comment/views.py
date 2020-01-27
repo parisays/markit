@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from users.models import User
 from posts.models import Post
 from collaboration.models import Collaborator
+from notification.tasks import create_comment_notification_task
 from .serializers import CommentDetailSerializer, CommentSerializer
 from .models import Comment
 from .permissions import CommentPermission, CommentViewPermission
@@ -28,6 +29,7 @@ class CommentCreateView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
+        create_comment_notification_task.delay(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 class CommentListView(generics.ListAPIView):

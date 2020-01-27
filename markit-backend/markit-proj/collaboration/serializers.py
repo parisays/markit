@@ -1,14 +1,6 @@
 from rest_framework import serializers
 from .models import Collaborator, Role
 
-# class UserCollaboratorSerializer(serializers.ModelSerializer):
-#     """
-#     Custom account detail serializer.
-#     """
-#     class Meta:
-#         model = User
-#         fields = ('id', 'email', 'firstName', 'lastName')
-#         read_only_fields = ('id',)
 
 class RoleSerializer(serializers.ModelSerializer):
     """
@@ -19,6 +11,7 @@ class RoleSerializer(serializers.ModelSerializer):
         model = Role
         fields = ('id', 'name', 'access',)
         read_only_fields = ('id',)
+
 
 class CollaboratorSerializer(serializers.ModelSerializer):
     """
@@ -33,6 +26,7 @@ class CollaboratorSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'firstName', 'lastName',
                   'email', 'calendar', 'role', 'isConfirmed',)
         read_only_fields = ('id',)
+
 
 class CollaboratorCreateSerializer(serializers.ModelSerializer):
     """
