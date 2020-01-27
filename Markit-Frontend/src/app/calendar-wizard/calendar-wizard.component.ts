@@ -45,34 +45,25 @@ export class CalendarWizardComponent implements OnInit, AfterViewInit {
     if (this.location.isCurrentPathEqualTo(`/calendars/new`)) {
       return;
     }
-
-    this.calendarId = +this.route.snapshot.paramMap.get('calendarId');
-    if (this.calendarId) {
-      this.service.getMyAccess(this.calendarId).subscribe((accObj: any) => {
-          this.access.canEditCalendar = accObj.canEditCalendar;
-          if (!this.access.canEditCalendar) {
-            this.router.navigate(['calendars', this.calendarId, 'posts']);
+    this.route.paramMap.subscribe(params => {
+      this.calendarId = +params.get('calendarId');
+      if (this.calendarId) {
+        this.service.getMyAccess(this.calendarId).subscribe((accObj: any) => {
+            this.access.canEditCalendar = accObj.canEditCalendar;
+            if (!this.access.canEditCalendar) {
+              this.router.navigate(['calendars', this.calendarId, 'posts']);
+            }
+          }, err => {
+            console.log(err);
           }
-        }, err => {
-          console.log(err);
-        }
-      );
-    }
+        );
+      }
+    });
+    // this.calendarId = +this.route.snapshot.paramMap.get('calendarId');
   }
 
   ngAfterViewInit() {
     if (this.calendarId) {
-      this.service.getMyAccess(this.calendarId).subscribe((accObj: any) => {
-          this.access.canEditCalendar = accObj.canEditCalendar;
-          this.access.canEditCalendar = false;
-          if (!this.access.canEditCalendar) {
-            this.router.navigate(['calendars', this.calendarId, 'posts']);
-          }
-        }, err => {
-          console.log(err);
-        }
-      );
-
       this.service.get(this.calendarId).subscribe((value: Calendar) => {
         // console.log(value);
         this.calendar = value;
