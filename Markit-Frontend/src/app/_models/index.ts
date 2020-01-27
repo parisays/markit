@@ -7,3 +7,4 @@ export * from './access';
 export * from './collaborator';
 export * from './role';
 export * from './notification';
+export * from './postsStatusCount';
