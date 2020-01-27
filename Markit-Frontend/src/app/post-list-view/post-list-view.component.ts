@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectorRef} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthenticationService, CalendarService, PostService} from '@services';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -52,7 +52,8 @@ export class PostListViewComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private twitter: TwitterService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private changeDetectorRefs: ChangeDetectorRef) {
 
   }
 
@@ -126,6 +127,7 @@ export class PostListViewComponent implements OnInit {
       console.log(response);
       this.snackBar.open('Post has been deleted successfully!', 'Dismiss', {duration: 2000});
       this.dataSource.splice(this.dataSource.indexOf(post), 1);
+      this.changeDetectorRefs.detectChanges();
     }, err => {
       console.log(err);
       this.snackBar.open('Failed to delete post!', 'Dismiss', {duration: 2000});
